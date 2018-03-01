@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>单身狗</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/activity/singleDog/css/found.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="found">
+				<input type="text" placeholder="这里是名字" />
+				<a><img src="/activity/singleDog/imgs/foundicon.png"/></a>	
+			</div>
+				
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/singleDog/openAuthority/ifJoinSingleDog",{
+				},function(data) {
+					if(data==3){
+						window.location.href="foundinfo.html"
+					}
+				})
+				$('.found a').click(function(){
+					//if(!(/[\u4E00-\u9FA5]{1,10}/.test($('.found input').val()))){
+					if($('.found input').val() == ''){
+						alert("名称不能为空");
+						return false;
+					}
+					if($('.found input').val().length > 10){
+						alert("名称不能超过10个字符");
+						return false;
+					}
+					ajax.post(api.baseServerUrl + "/singleDog/openAuthority/joinSingleDog",{
+						"dogCircleName":$('.found input').val()
+					},function(data) {
+						window.location.href="foundinfo.html?id="+data
+					})
+					
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,200 @@
+.balance{
+	width: 100%;
+	margin-bottom: 1.25rem;
+}
+.balance .address{
+    padding: 0.234375rem 0.3125rem 0.234375rem 1.09375rem;
+	background:#48505A url(/imgs/gouwuche/jiesuan-Location－hui.png?t=20161117) no-repeat 0.3125rem center;
+	background-size: 0.359375rem 0.546875rem;
+	color: #bcbcbc;
+}
+.balance .address p:first-child{
+	color: #f7f7f7;
+	line-height: 0.875rem
+}
+.balance .address p:first-child span{
+	margin-left: 0.859375rem;
+}
+.balance .address p:last-child{
+	font-size: 0.3125rem;
+	color: #f7f7f7;
+	width: 8.28125rem;
+	letter-spacing: 0.03125rem;
+	line-height: 0.5rem;
+}
+.crowdfunding{
+	background: #fff; 
+	margin-top: 0.3125rem;
+	padding-bottom: 0.3125rem;
+}
+.crowdfunding p{
+	height: 1.0625rem; 
+	line-height: 1.0625rem; 
+	border: 1px solid #e5e5e5; 
+	padding: 0 0.3125rem;
+}
+.crowdfunding input{
+	width: 8.4375rem;
+	height: 0.9375rem;
+	padding: 0 0.4375rem;
+	background: #F1EDEE;
+	outline: none;
+	border:0;
+	margin: 0.3125rem auto 0;
+	display: block;
+	border-radius: 0.125rem
+}
+
+.balance .method{
+	background: #fff;
+	margin-top: 0.3125rem;
+}
+.balance .method ul li{
+	border-bottom: 0.015625rem solid #e5e5e5;
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+	padding: 0 0.3125rem;
+}
+.balance .method ul li:last-child{
+	border-bottom: 0;
+}
+.balance .method ul li p:nth-child(1){
+	float: left;
+}
+.balance .method ul li p:nth-child(1) span{
+	color: #fa2f3e;
+	margin-left: 0.390625rem;
+}
+.balance .method ul li p:nth-child(2){
+	float: right;
+}
+.balance .method ul li p:nth-child(2) span{
+	margin-left: 0.25rem;
+}
+.balance .method ul li a{
+	float: right;
+	display: block;
+}
+.balance .payment{
+	height:0.75rem;
+	padding: 0.265625rem 0.3125rem;
+	margin-top: 0.3125rem;
+	background: #fff;
+}
+.balance .payment>p{
+	line-height: 0.75rem;
+	float: left;
+}
+.balance .payment .price{
+	float: right;
+}
+.balance .payment .price div{
+	height: 0.75rem;
+	border:1px solid #e5e5e5;
+	border-radius: 0.125rem;
+	float: left;
+}
+.balance .payment .price p{
+	float: right;
+    line-height: 0.78125rem;
+    color: #fa2f3e;
+    margin-left: 0.234375rem;
+}
+.balance .payment .price div a{
+	display: block;
+	float: left;
+	width: 0.8125rem;
+	height: 0.75rem;
+}
+.balance .payment .price div .jian{
+	background: url(/crowdfunding/imgs/bangTA-－@2x.png?t=20161117) no-repeat center;
+	background-size: 0.296875rem 0.046875rem
+}
+.balance .payment .price div .jia{
+	background: url(/crowdfunding/imgs/bangTA-＋@2x.png?t=20161117) no-repeat center;
+	background-size: 0.28125rem 0.28125rem
+}
+.balance .payment .price div input{
+	display: block;
+	float: left;
+	line-height: 0.75rem;
+	text-align: center;
+	width: 1.125rem;
+	font-size: 0.40625rem;
+	border:0;
+	background: none;
+	outline: none;
+	border-left: 1px solid #e5e5e5;
+	border-right: 1px solid #e5e5e5;
+}
+.balance .balance-total{
+	background: #fff;
+	margin-top: 0.3125rem;
+	padding: 0 0.3125rem;
+	text-align: right;
+	height: 2.1875rem;
+	line-height: 1.09375rem;
+}
+.balance .balance-total p span{
+	display: inline-block;
+	min-width: 0.90625rem;
+	color: #fa2f3e;
+}
+.balance .balance-total p:first-child{
+	border-bottom: 0.015625rem solid #e5e5e5
+}
+/*优惠券*/
+#yhq{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #fff;
+	display: none;
+	height: 100%;
+    overflow: scroll;
+}
+.coupon ul{
+	margin: 0.3125rem auto 0;
+	width: 9.140625rem;
+}
+.coupon ul li{
+	height: 2.171875rem;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin-bottom: 0.3125rem;
+	overflow: hidden;
+}
+.coupon ul li .left{
+	width: 2.5625rem;
+	line-height: 2.171875rem;
+	font-size: 0.546875rem;
+	text-align: center;
+	color: #fff;
+	margin-right: 0.234375rem;
+	float: left;
+	overflow: hidden;
+    height: 2.171875rem;
+}
+.coupon ul li .left span{
+	font-size: 0.9375rem;
+}
+.coupon ul li .right{
+	float: left;
+	padding-top: 0.3125rem
+}
+.coupon ul li .right p{
+	font-size: 0.3125rem;
+	line-height: 0.5rem;
+}
+.coupon ul li .right span{
+	display: inline-block;
+	width: 1.6875rem;
+	color: #9c9c9c;
+}
+.coupon .use li{
+	background-image:  url(/imgs/personal/youhuizhan-beijing1.png?t=20161117);
+}
+.coupon .used li{
+	background-image:  url(/imgs/personal/youhuizhan-beijing.png?t=20161117);
+}

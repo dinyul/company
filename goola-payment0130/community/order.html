@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>我的订单</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/order.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	
+	<div class="order body">
+		<div class="order-top" id="allKindsCount">
+			
+			
+		</div>
+		<div class="order-list" id="orderInfo">
+			
+		</div>
+		<div class="bg"></div>
+		<div class="xiugaishijian">
+			<p>请选择发货时间</p>
+			<b class="shijian"></b>
+			<input type="date"  />
+			<a class="queding">确定</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/community/js/order/order.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="dot/tmpl" id="allKindsCountTmpl">
+		<a id="1" class="default checked">全部</a>
+		<a id="2">待付款<span>{{=it.nopay}}</span></a>
+		<a id="3">待发货<span>{{=it.nosend}}</span></a>
+		<a id="4">待收货<span>{{=it.noget}}</span></a>
+		<a id="5">待评价<span>{{=it.noComment}}</span></a>
+		<div class="clear"></div>
+	</script>
+	<script type="dot/tmpl" id="orderInfoTmpl">
+		{{~it.data :data:i}}
+			<div class="order-content">
+				<div class="order-details">
+				<div class="order-number">
+					<p>订单号：{{=data.orderCode}}
+					{{? data.serviceStatus == 1}}
+					<span>待付款</span>
+					{{?? data.serviceStatus == 6}}
+					<span>待发货</span>
+					{{?? data.serviceStatus == 2}}
+					<span>待收货</span>
+					{{?? data.serviceStatus == 5 && data.isBuyerEvaluate == 2}}
+					<span>待评价</span>
+					{{?? data.serviceStatus == 5 && data.isBuyerEvaluate == 1}}
+					<span>已评价</span>
+					{{?? data.serviceStatus == 8}}
+					<span>地址未确认</span>
+					{{?}}
+					</p>
+				</div>
+				{{~data.children:provider:j}}
+					<ul>
+						<div class="title xiangqing">
+							<p {{?provider.providerIsShop==1}}style="background-image: url(/imgs/gouwuche/gouwuche-dianpu1.png?t=20161117);"{{?}}><a {{?provider.providerIsShop==1}}href="../shop/shop.html?providerId={{=provider.providerId}}"{{?}}>{{=provider.providerName}}</a><br/><span>子订单号：{{=provider.orderCode}}</span></p>
+						</div>
+						{{?provider.orderType==7}}
+						<div class="fahuo-time">
+							<p>收货时间：<span class="fahuoshijian">{{=(provider.deliveryTime).split(' ')[0]}}</span></p>
+						</div>
+						{{??}}
+						{{?provider.deliverType==1}}
+							{{? provider.serviceStatus == 1 || provider.serviceStatus == 6}}
+							<div class="fahuo-time" id="{{=provider.orderId}}">
+								<p>发货时间：<span class="fahuoshijian">{{? provider.choosedSendTime}}{{=getFormatDate(provider.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(provider.createTime).split(' ')[0]}}{{?}}</span><a class="xiugai"></a></p>
+							</div>
+							{{?? provider.serviceStatus == 2}}
+							<div class="fahuo-time">
+								<p>发货时间：<span class="fahuoshijian">{{? provider.choosedSendTime}}{{=getFormatDate(provider.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(provider.createTime).split(' ')[0]}}{{?}}</span></p>
+							</div>
+							{{?}}
+						{{??provider.deliverType==2 && provider.orgDeliverType==1}}
+						<div class="fahuo-time">
+							<p>送货时间：<span class="fahuoshijian">{{? provider.choosedSendTime}}{{=getFormatDate(provider.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(provider.createTime).split(' ')[0]}}{{?}}</span></p>
+						</div>
+						{{??provider.deliverType==2 && provider.orgDeliverType==2}}
+						<div class="fahuo-time">
+							<p>自提时间：<span class="fahuoshijian">{{? provider.choosedSendTime}}{{=getFormatDate(provider.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(provider.createTime).split(' ')[0]}}{{?}}</span></p>
+						</div>
+						{{?}}
+						{{?}}
+						{{~provider.orderItems:goods:k}}
+							<li class="xiangqing">
+								<img src="{{=it.picUrl}}{{=goods.goodsPhoto}}">
+								<div>
+									<h3>{{=goods.goodsName}}</h3>
+									{{?goods.specifications}}
+									<p>{{=goods.specifications}}</p>
+									{{?}}
+									<b>¥<span>{{=goods.goodsPrice}}</span></b>
+									<span>x{{=goods.goodsCount}}</span>
+								</div>
+								
+							</li>
+						{{~}}
+						{{? data.serviceStatus == 2 || data.serviceStatus == 5 }}
+						<a class="order-cancel wuliu" href="../logistics/wuliu.html?expressCode={{=provider.expressNumber}}&address={{=data.receiverAddress}}">查看物流</a>
+						{{?}}
+						<div class="clear"></div>
+					</ul>
+				{{~}}
+				</div>
+				<div class="order-payment" id="{{=data.orderId}}">
+					<p>实付款：<span>¥{{=(data.orderPrice).toFixed(2)}}</span></p>
+					{{? data.serviceStatus == 1}}
+					<a class="order-confirm" href="../payment/community/querenzhifu.html?orderId={{=data.orderId}}">去支付</a>
+					<a class="order-cancel offOrder">取消订单</a>
+					{{?? data.serviceStatus == 6}}
+					<a class="order-confirm cuidan">催单</a>
+					{{?? data.serviceStatus == 2}}
+					<a class="order-confirm confirm">确认收货</a>
+					{{?? data.serviceStatus == 5 && data.isBuyerEvaluate == 2}}
+					<a class="order-cancel" href="../shangpin/pingjia.html?orderId={{=data.orderId}}">去评价</a>
+					<a class="order-confirm" href="../index.html">去逛逛</a>
+					{{?? data.serviceStatus == 5 && data.isBuyerEvaluate == 1}}
+					<a class="order-confirm" href="../index.html">再逛逛</a>
+					{{?? data.serviceStatus == 8}}
+					<a class="order-cancel" href="../giftcard/giftShare.html?giftKey={{=data.giftKey}}&type=3">自己收礼</a>
+					<a class="order-confirm share" id="share" href="../giftcard/giftShare.html?giftKey={{=data.giftKey}}&type=2">转发订单</a>
+					
+					{{?}}
+				</div>
+			</div>
+		{{~}}
+		
+	</script>
+
+</body>
+</html>

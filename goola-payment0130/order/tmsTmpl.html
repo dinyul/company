@@ -1,0 +1,34 @@
+		<div class="mode">
+			<div class="fanhui">
+				<span id="fanhui"></span>
+				<p>选择配送方式</p>
+			</div>
+			<div class="peisong tms-check" orgDeliverType="1">
+				<p><b style="font-weight: normal;">站点配送</b><span class="carriage">运费 ¥ 0</span><a style="display: none;"></a></p>
+			</div>
+			<div class="ziti tms-check" orgDeliverType="2">
+				<div class="ziti-title" >
+					<p><b style="font-weight: normal;">上门自提</b><span class="carriage">运费 ¥ 0</span><a style="display: none;"></a></p>
+				</div>
+				<ul class="ziti-content">
+					
+				</ul>
+				<script type="dot/tmpl" id="ziti-content">
+					<li>
+						<p>自提地址：</p>
+						<span>{{=it.orgAddress}}</span>
+					</li>
+					<li>
+						<p>联系电话：</p>
+						<span>{{=it.orgPhone}}</span>
+					</li>
+					<li>
+						<h3>选择自提时，请与门店员工协商自提时间 </h3>
+						{{?it.orgOpenTime!='undefined'}}
+						<p>代办点营业时间：</p>
+						<span>{{=it.orgOpenTime}}</span>
+						{{?}}
+					</li>
+				</script>
+			</div>
+		</div>

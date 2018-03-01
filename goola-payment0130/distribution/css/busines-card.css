@@ -1,0 +1,260 @@
+
+.no-card p{
+	text-align: center;
+	margin-top: 4.5rem;
+}
+.no-card a{
+	display: block;
+	width: 3.75rem;
+	height: 1.09375rem;
+	margin: 1.0625rem auto 0;
+	background: #fa2f3e;
+	color: #fff;
+	text-align: center;
+	line-height: 1.09375rem;
+	font-size: 0.375rem;
+	border-radius: 0.125rem
+}
+.buscard div{
+	background: #fff;
+	border-bottom:1px solid #e5e5e5;
+}
+.buscard div img{
+	display: block;
+	width: 9.40625rem;
+	margin: 0 auto
+}
+.buscard div .title{
+	padding: 0.625rem 0.3125rem 0.34375rem
+}
+.buscard div .tishi{
+	text-align: center;
+	padding: 0.390625rem 0;
+	color: #ccc
+}
+.buscard a{
+	display: block;
+	width: 3.515625rem;
+	height: 1.09375rem;
+	text-align: center;
+	line-height: 1.09375rem;
+	background: #fa2f3e;
+	color: #fff;
+	font-size: 0.375rem;
+	border-radius: 0.125rem;
+	margin: 0.53125rem auto 0.75rem
+}
+.addcard .add-name{
+	padding-top: 0.3125rem;
+	position: relative;
+}
+.addcard .add-name input{
+	height: 1.09375rem;
+	background: #fff;
+	padding:0 0.3125rem;
+	width: 9.375rem;
+	border:none;
+	outline: none;
+	color: #fa2f3e
+}
+.addcard .add-name input::-webkit-input-placeholder{
+	color: #fa2f3e
+}
+.addcard .add-name input:-moz-placeholder{
+	color: #fa2f3e
+}
+.addcard .add-name input::-moz-placeholder{
+	color: #fa2f3e
+}
+.addcard .add-name input:-ms-input-placeholder{
+	color: #fa2f3e
+}
+.addcard .add-name .del{
+	width: 0.34375rem;
+	position: absolute;
+	top: 0.6875rem;
+	right: 0.3125rem
+}
+.addcard .add-name p{
+	padding-left: 0.3125rem;
+	margin: 0.1875rem 0;
+	color: #999
+}
+.addcard .card-info{
+	margin-top: 0.3125rem
+}
+.addcard .card-info .userinfo p,.addcard .templet p{
+	background:#F7F7F7;
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+	padding-left: 0.3125rem;
+}
+.addcard .card-info .userinfo ul{
+	background: #fff;
+}
+.addcard .card-info .userinfo ul li{
+	border-top: 1px solid #e5e5e5;
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+	font-size: 0.375rem;
+	color: #1b1b1b;
+	padding-left: 0.3125rem;
+	position: relative;
+}
+.addcard .card-info .userinfo ul li a{
+	display: block;
+	position: absolute;
+	width: 1.5625rem;
+	height: 1.0625rem;
+	right: 0;
+	top: 0;
+}
+.addcard .card-info .userinfo ul li a img{
+	width: 0.484375rem;
+	height: 0.3125rem;
+	margin-left: 0.765625rem
+}
+.addcard .card-info .qrcode{
+	background: #fff;
+	padding:0.3125rem;
+	margin-top: 0.3125rem;
+	text-align: center;
+    position: relative;
+}
+.addcard .card-info .qrcode .code-img{
+	width: 3.9375rem;
+	height: 3.9375rem;
+	margin: 0 auto;
+}
+.addcard .card-info .qrcode p{
+	position: absolute;
+	top: 0.3125rem;
+	left: 0.3125rem
+}
+.addcard .templet{
+	margin-top: 0.3125rem;
+	margin-bottom: 1.5625rem
+}
+.addcard .templet div{
+	padding: 0.28125rem 0 0.546875rem 1.25rem;
+	background:#fff;
+	overflow: hidden;
+}
+.addcard .templet div img{
+	width: 3.28125rem;
+	height: 4.53125rem;
+	border: 0.046875rem solid #fff;
+	float: left;
+	display: block;
+	margin: 0 0.75rem 0.3125rem 0;
+}
+.addcard .templet div .choiced{
+	border: 0.046875rem solid #fa2f3e;
+}
+.addcard-bottom{
+	height: 1.5625rem;
+	width: 100%;
+	background: rgba(0,0,0,0.4);
+	position: fixed;
+	bottom: 0;
+	left: 0;
+	z-index: 2
+}
+.addcard-bottom a{
+	display: block;
+	width: 3.78125rem;
+	height: 1.09375rem;
+	border-radius: 0.125rem;
+	line-height: 1.09375rem;
+	text-align: center;
+	font-size: 0.375rem;
+	color: #fff;
+	float: left;
+	margin: 0.234375rem 0 0 0.828125rem
+}
+.addcard-bottom a:first-child{
+	background: #2E2E2E
+}
+.addcard-bottom a:last-child{
+	background: #fa2f3e
+}
+.preview{
+	background: rgba(0,0,0,0.4);
+	padding-top: 0.546875rem;
+	display: none;
+	height: 100%
+}
+.preview .createimg{
+	width: 9.40625rem;
+	height: 13.125rem;
+	margin: 0 auto 2.1875rem;
+	position: relative;
+}
+.preview .createimg .createBg{
+	width: 100%;
+	position: absolute;
+	top: 0;
+	height: 13.125rem;
+	z-index: 1
+}
+.preview .createimg .head{
+	text-align: center;
+	padding-top: 3.796875rem;
+	position: relative;
+	z-index: 5
+}
+.preview .createimg .head img{
+	width: 1.625rem;
+	height: 1.625rem;
+	border-radius: 1.625rem;
+	border:0.046875rem solid #fa2f3e;
+	overflow: hidden;
+}
+.preview .createimg .head p{
+	font-weight: bold;
+	margin-top: 0.3125rem
+}
+.preview .createimg .preview-info{
+	margin-top:1.46875rem;
+	padding:0 1.0rem;
+	overflow: hidden;
+	position: relative;
+	z-index: 5
+}
+.preview .createimg .preview-info ul{
+	float: left;
+}
+.preview .createimg .preview-info ul li{
+	height: 0.765625rem;
+	line-height: 0.765625rem;
+	margin-bottom: 0.390625rem;
+	padding-left: 1.078125rem;
+	background-repeat: no-repeat;
+	background-size: 0.765625rem 0.765625rem;
+	background-position: left;
+	font-size: 0.40625rem;
+	font-weight: bold;
+}
+.preview .createimg .preview-info .erweima{
+	float: right;
+	width: 1.90625rem;
+}
+.preview .createimg .preview-info .erweima .code-img{
+	margin-bottom: 0.21875rem;
+	height: 1.90625rem;
+	width: 1.90625rem;
+}
+.preview .createimg .preview-info .erweima p{
+	text-align: center;
+	color: #fa2f3e;
+	margin-bottom: 0.09375rem
+}
+.preview .addcard-bottom{
+	background: none;
+}
+.code-img{
+	overflow: hidden;
+}
+.code-img canvas{
+	width: 100%
+}

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>个人中心</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/payment/zhifuchenggong.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/gerenzhongxin2.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/rack-shopping-bottom.css">
+	</head>
+	<body>
+		<div class="content2 body">
+		
+			<div class="content2-user">
+			</div>
+			
+			<div class="content2-message">
+				
+			</div>
+			<div class="rankinglist" style="display: none;">
+				<div class="title" style="text-align: center;">
+					<a style="font-family: PingFangSC-Regular;font-size: 0.5625rem;color: #555555;">更好甄选商品推荐</a>
+				</div>
+				<ul class="list"></ul>	
+			</div>
+		</div>
+		
+		<div class="bottom2">
+			<a href="javascript:;" class="shouye">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/menu2.png"/>
+			</a>
+			<a href="/payment/rack-shopping.html" class="gouwuche">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/shopcart1.png"/>
+				<div class="gwc" id="selectedTotal">
+					<span id="goodsCount"></span>
+				</div>
+			</a>
+			<a href="/mobilerack/gerenzhongxin2.html">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/my2.png"/>
+			</a>
+		</div>
+		<script id="userInfoTmpl" type="dot/tmpl">
+			<div class="userimg">
+				<img src="{{=it.data.photo}}" alt="" />
+				<a>{{=it.commonweal.shelvesSalePublicBenefitLevel.publicBenefitLevel}}</a>
+			</div>
+			<div class="info">
+				<h3 class="content2-name" style="display: none;">{{=it.data.wxName}}</h3>
+				<a class="content2-btn" href="../login/denglu.html" style="display: none;">登陆</a>
+				<p>还差{{?(it.commonweal.shelvesSalePublicBenefitLevel.publicBenefitValue)-(it.commonweal.publicValue)>0}}{{=(it.commonweal.shelvesSalePublicBenefitLevel.publicBenefitValue)-(it.commonweal.publicValue)}}{{??}}0{{?}}公益值升级到{{=it.commonweal.nextShelvesSalePublicBenefitLevel}}</p>
+				<div><p><a style="width:{{=(it.commonweal.publicValue)/(it.commonweal.shelvesSalePublicBenefitLevel.publicBenefitValue)*100}}%"></a></p><span>{{=it.commonweal.publicValue}}/{{=it.commonweal.shelvesSalePublicBenefitLevel.publicBenefitValue}}</span></div>
+			</div>
+			<a class="code">捐赠编号 {{=it.commonweal.volunteerCode}}</a>
+		</script>
+		<script id="enterpriseInfoTmpl" type="dot/tmpl">
+			<div class="enterprise">
+					<p class="content2-message-a">企业</p>
+					<p class="content2-message-b">{{=it.name}}</p>
+				</div>
+				<div class="balance">
+					<p class="content2-message-a">企业余额</p>
+					<p class="content2-message-price">{{=it.enterpriseBalance}}</p>
+				</div>
+				<div class="coupon1">
+					<p class="content2-message-a">优惠券</p>
+					<p class="content2-message-price"></p>
+				</div>
+		</script>
+		<script type="dot/tmpl" id="list">
+			{{~it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					<div class="goodslist">
+						<div class="goodsimg" style="padding-top: 0;">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}"/>
+						</div>
+						<h3>{{=data.goodsName}}</h3>
+						<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+						<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+					</div>
+				</li>
+			{{~}}
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/mobilerack/js/car.js?t=20161117"></script>
+		<script src="/mobilerack/js/main.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax,address){
+				$(".shouye").click(function(){
+					if (getCookie("shopId")) {
+						window.location.href="/mobilerack/mobilerack.html?shopId=" + getCookie("shopId");
+					} else {
+						window.location.href="/mobilerack/mobilerack-shop.html";
+					}
+				})
+				rankinglist()
+				function rankinglist(){
+					ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+						
+					},function(data) {
+						if(data!='' && data!=undefined && data!=null && data.length!=0){
+							$('.rankinglist').show()
+							var obj = {data:data,picUrl:api.picUrl}
+							util.render("#list",obj,".rankinglist .list")
+							$('.rankinglist li').click(function(){
+								window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+							})
+						}
+						
+					})
+				}
+				ajax.post(api.baseServerUrl + "/shop/getStaffInfo",{
+					shopId:getCookie("shopId")
+				},function(data) {
+					var data1=data.user
+					ajax.post(api.baseServerUrl + "/publicBenefit/openAuthority/findPublicLevelbyVolunteerId",{
+					},function(data) {
+						var commonweal=data
+						var obj = {data:data1,commonweal:commonweal}
+						util.render("#userInfoTmpl",obj,".content2-user");
+						$('.content2-name').show()
+						$('.code').css('background','#bf3d3e')
+					})
+					if (data.enterpriseInfo) {
+						data.enterpriseInfo.enterpriseBalance = '¥' + data.enterpriseInfo.enterpriseBalance;
+						util.render("#enterpriseInfoTmpl",data.enterpriseInfo,".content2-message");
+					} else {
+						data.enterpriseInfo = new Object();
+						data.enterpriseInfo.name = '尚不是企业员工';
+						data.enterpriseInfo.enterpriseBalance = '尚不是企业员工';
+						util.render("#enterpriseInfoTmpl",data.enterpriseInfo,".content2-message");
+					}
+					ajax.post(api.baseServerUrl + "/user/getUserInfo",{
+					},function(data) {
+						$('.coupon1 .content2-message-price').html(data.userCouponCount+'张')
+					})
+					$('.content2-message').delegate('.coupon1','click',function(){
+						window.location.href="/user/youhuizhan.html?type=1"
+					})
+					
+				}, function(data) {
+					ajax.post(api.baseServerUrl + "/publicBenefit/openAuthority/findPublicLevelbyVolunteerId",{
+					},function(data) {
+						var user = new Object();
+						user.wxName='昵称';
+						user.photo = '/imgs/payment/rack-shopping/gerenzhongxin2/icon4/默认头像.png';
+						var commonweal=data
+						var obj = {data:user,commonweal:commonweal}
+						util.render("#userInfoTmpl",obj,".content2-user");
+						$('.content2-btn').show()
+					})
+					
+					var enterpriseInfo = new Object();
+					enterpriseInfo.name='未登录';
+					enterpriseInfo.enterpriseBalance='未登录';
+					util.render("#enterpriseInfoTmpl",enterpriseInfo,".content2-message");
+					$('.coupon1 .content2-message-price').html('未登录')
+					$('.content2-btn').show()
+					$('.content2-message-b').css('color','#999')
+					$('.content2-message-price').css('color','#999')
+				})
+				
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+		
+	</body>
+</html>

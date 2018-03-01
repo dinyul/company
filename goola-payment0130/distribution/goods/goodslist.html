@@ -1,0 +1,138 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好商城</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/distribution/css/goods.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="goods goodslist">
+				<div class="shop-top" id="{{=data.providerId}}"></div>
+				<script id="shop-top" type="dot/tmpl">
+					<div style="overflow: hidden;height: 2.1875rem;position: relative;">
+						<div class="shophead blur" style="background-image: url({{=it.head}});">
+							<div style="width: 100%;height: 2.1875rem;background: rgba(0,0,0,0.3);"></div>
+						</div>
+					</div>
+					<div class="topcontent">
+						<img src="{{=it.photo}}" />
+						<h2>{{=(it.wxName)}}小店</h2>
+					</div>
+				</script>
+				<nav></nav>
+				<script id="nav" type="dot/tmpl">
+					<ul>
+						<a id="" class="checked">全部</a>
+						{{~it:data:i}}
+						<a id="{{=data.categoryId}}">{{=data.categoryName}}</a>
+						{{~}}
+					</ul>
+				</script>
+				<ul class="dist-goodslist"></ul>
+				<script id="dist-goodslist" type="dot/tmpl">
+					{{~it.data:data:i}}
+					{{?data!='' && data!=undefined &&　data!=null}}
+					<li>
+						<div class="dist-goodsinfo">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+							<h2>{{=data.goodsName}}</h2>
+							<h3>{{=data.specifications}}</h3>
+							<p>¥{{=(data.preferentialPrice).toFixed(2)}}<span>已售<a>{{=data.salesCount}}</a>件</span></p>
+							<a href="../../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}">立即购买</a>
+							<div class="clear"></div>
+						</div>
+					</li>
+					{{?}}
+					{{~}}
+				</script>
+				<a style="display: block;width: 1.625rem;height: 1.40625rem;position: fixed;bottom: 0.78125rem;right: 0;" href="../../index.html"><img src="/distribution/imgs/goshopping.png"/></a>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script type="text/javascript">
+			(function(api, util, ajax){
+				var from = util.getUrlParams("from");
+				
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.database').find('li').length>=total){
+							$('.none').show()
+							
+						}else if(pageNo>=pageTotal){
+							$('.none').show()
+							
+						}else{
+							pageNo=pageNo+1
+							goodsList($('nav').find('.checked').attr('id'),pageNo,20)
+						}
+						
+						
+					}
+				});
+				
+				
+				
+				
+				ajax.post(api.baseServerUrl + " /distribution/getProfitGoodsCategoryList",{
+				},function(data) {
+						util.render("#nav", data, "nav");
+						var width=0
+					$('nav').find('a').each(function(){
+						width+=Number($(this).outerWidth())
+					})
+					$('nav ul').css('width',(width/$(window).width()*10+($('nav').find('a').length-1)*0.578125)+0.2+'rem')
+						goodsList('',1,20)
+					});
+				
+				
+				function goodsList(categoryId,pageNo,pageSize){
+					ajax.post(api.baseServerUrl + "/distribution/getProfitGoodsList",{
+						"categoryId":categoryId,'pageNo':pageNo,'pageSize':pageSize,"from":from
+					},function(data) {
+						if($('.shop-top').html()==''|| $('.shop-top').html()==undefined || $('.shop-top').html()==null){
+							util.render("#shop-top", data, ".shop-top");
+						}
+						total=data.totalCount
+						pageTotal=parseInt(total/pageSize)+1
+						var obj={data:data.goodsList,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#dist-goodslist').html());
+						var html = doTtmpl(obj);
+						$('.dist-goodslist').append(html)
+						
+					});
+				}
+				$('nav').delegate('a','click',function(){
+					$('nav').find('a').removeClass('checked')
+					$(this).addClass('checked')
+					goodsList($(this).attr('id'))
+					$('.dist-goodslist').html('')
+					pageNo=1
+					goodsList($(this).attr('id'),1,20)
+				})
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>搜索</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/search/search.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	<div class="body">
+		<div class="input">
+			<input type="text" placeholder="请输入商品名称" maxlength="30"/>
+			<a>搜索</a>
+		</div>
+		<div class="history">
+			<h3>搜索历史<span>清除历史</span></h3>
+			<ul></ul>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script>
+		(function(api, util, ajax){
+			if(localStorage.getItem('search')!=null && localStorage.getItem('search')!=undefined && localStorage.getItem('search')!=''){
+				var list=localStorage.getItem('search').split(',')
+				for(var i=0;i<list.length;i++){
+					if(list[i]!=' '&& list[i]!='' && i<10){
+						$('.history ul').append('<li>'+list[i]+'</li>')
+					}
+				}
+			}
+			
+			
+	
+			$('.input a').click(function(){
+				var arr=''
+				var name
+				name = $('input').val().replace(/\uD83C[\uDF00-\uDFFF]|\uD83D[\uDC00-\uDE4F]/g, "");
+				$('input').val(name)
+				if($('input').val().replace(/\s/g,"")==''){
+					alert('搜索内容为空')
+					$('input').val('')
+					return false;
+				}
+				if(localStorage.getItem('search')!=null && localStorage.getItem('search')!=undefined && localStorage.getItem('search')!=''){
+					arr=localStorage.getItem('search').replace($('input').val()+',','')
+					arr=$('input').val()+','+arr
+				}else{
+					arr=$('input').val()+','+arr
+				}
+				localStorage.setItem('search',arr)
+				window.location.href="result.html?name="+$('input').val()
+			})
+			$('.history h3 span').click(function(){
+				alert('历史记录已清除')
+				localStorage.setItem('search','')
+				$('.history ul').find('li').remove()
+			})
+			$('.history li').click(function(){
+				arr=localStorage.getItem('search').replace($(this).html()+',','')
+				arr=$(this).html()+','+arr
+				localStorage.setItem('search',arr)
+				window.location.href="result.html?name="+$(this).html()
+				
+			})
+			
+			
+		})(goola.api, goola.util, goola.ajax);
+	</script>
+</body>
+</html>

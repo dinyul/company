@@ -1,0 +1,367 @@
+
+.gouwuche-content ul{
+	margin-top: 0.28125rem;
+}
+.gouwuche-content{
+	margin-bottom: 2.8125rem;
+}
+.gouwuche-content ul .gouwuche-title{
+	background: #fff;
+	height: 1.40625rem;
+	padding-left: 0.375rem;
+	line-height: 1.40625rem;
+	margin-bottom: 0.0625rem;
+}
+.gouwuche-content ul .gouwuche-title .btn{
+	float: left;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-top: 0.46875rem;
+	background: url(/imgs/gouwuche/gouwuche-meixuan.png) no-repeat;
+	background-size: 0.5rem 0.5rem;
+	border-radius: 0.56375rem;
+	overflow: hidden;
+}
+.gouwuche-content ul .gouwuche-title .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-content ul .gouwuche-title .checked{
+	background: url(/imgs/gouwuche/gouwuche-yixuan.png?t=20161117) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-content ul .gouwuche-title p{
+	float: left;
+	margin-left: 0.359375rem;
+	padding-left: 0.65625rem;
+	background: url(/imgs/gouwuche/gouwuche-dianpu.png?t=20161117) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+}
+.gouwuche-content ul li{
+	margin-bottom: 0.0625rem;
+	padding:0.328125rem 0.25rem;
+	position: relative;
+	background: #fff
+}
+.gouwuche-content ul li:last-child{
+	margin-bottom:0;
+}
+.gouwuche-content ul li .btn{
+	float: left;
+	width: 0.46875rem;
+	height: 0.46875rem;
+	margin-top: 0.921875rem;
+	background: url(/mobilerack/imgs/notselected_icon.png) no-repeat;
+	background-size: 0.46875rem 0.46875rem;
+	border-radius: 0.56375rem;
+	overflow: hidden;
+}
+.gouwuche-content ul li .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-content ul li .checked{
+	background: url(/mobilerack/imgs/pitchon_icon.png) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-content ul li .img{
+	float: left;
+	width: 2.5rem;
+	height: 2.3125rem;
+	margin: 0 0.3125rem 0 0.15625rem;
+	overflow: hidden;
+}
+.gouwuche-content ul li .img img{
+	width: 2.5rem;
+	height: 2.3125rem;
+}
+.gouwuche-content ul li .container{
+	float: left;
+	width: 3.984375rem
+}
+.gouwuche-content ul li .container-title{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#333;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.gouwuche-content ul li .container-norm{
+	font-family: PingFangSC-Medium;
+    font-size: 0.3125rem;
+    color: #666;
+    margin-top: 0.46875rem;
+}
+
+.gouwuche-content ul li .container-pay{
+	font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fa2f3e;
+    margin-top: 0.625rem;
+}
+.gouwuche-content ul li .container-pay span:first-of-type{
+	font-family: PingFangSC-Medium;
+    font-size: 0.46875rem;
+    margin-left: 0.078125rem;
+}
+.delete{
+	width: 1.25rem;
+    height: 1.25rem;
+    background: url(/mobilerack/imgs/delete_icon.png) no-repeat 0.65625rem 0.3125rem;
+    background-size: 0.28125rem 0.359375rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.num-choice{
+	width: 2.0625rem;
+    height: 0.6875rem;
+    position: absolute;
+    bottom: 0.3125rem;
+    right: 0.3125rem;
+    background: url(/mobilerack/imgs/add.png) no-repeat;
+    background-size: 100%
+
+}
+.num-choice span{
+	display: inline-block;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size: 0.375rem;
+    color: #333;
+    float: left;
+    height: 0.6875rem;
+    line-height: 0.6875rem;
+	width: 0.59375rem
+}
+.num-choice .count-input{
+	width: 0.875rem
+}
+.gouwuche-bottom{
+	width: 100%;
+	position: fixed;
+	bottom: 1.5rem;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid #eeeeee;
+	height: 1.328125rem;
+    background: #fff;
+}
+.gouwuche-bottom .total,.gouwuche-bottom .payment{
+	height: 1.25rem;
+	line-height: 1.25rem;
+	text-align: center;
+}
+.gouwuche-bottom .all-btn{
+	width: 2.34375rem;
+	float: left;
+	background: #fff;
+	height: 1.359375rem
+}
+.gouwuche-bottom .all-btn .btn{
+	float: left;
+	width: 0.46875rem;
+	height: 0.46875rem;
+	margin: 0.4375rem 0.359375rem 0 0.375rem;
+	background: url(/mobilerack/imgs/notselected_icon.png) no-repeat;
+	background-size: 0.46875rem 0.46875rem;
+	border-radius: 0.56375rem;
+	overflow: hidden; 
+}
+.gouwuche-bottom .all-btn p{
+	float: left;
+	height: 1.328125rem;
+	line-height: 1.328125rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#333;
+}
+.gouwuche-bottom .all-btn .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-bottom .all-btn .checked{
+	background: url(/mobilerack/imgs/pitchon_icon.png) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-bottom .total{
+	background: #fff;
+    width: 3.125rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: left;
+}
+.gouwuche-bottom .total p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.gouwuche-bottom .total span{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#fa2f3e;
+}
+.gouwuche-bottom .total span span{
+	font-family: PingFangSC-Regular;
+    font-size: 0.53125rem;
+    margin-left: 0.15625rem;
+}
+
+.gouwuche-bottom .choice-payment{
+	width: 4.375rem;
+    height: 1.328125rem;
+    float: right;
+}
+.gouwuche-bottom .choice-payment a{
+	float: right;
+    width: 2.1875rem;
+    height: 1.328125rem;
+	background:#fa2f3e;
+	color: #fff;
+	text-align: center;
+	line-height: 1.328125rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+}
+.gouwuche-bottom .choice-payment .scanQRCode{
+	background: #1b1a1f;
+}
+#fullCart_4{
+	text-align: center;
+}
+#fullCart_4 img{
+	width: 3.3125rem;
+	margin: 1.875rem 0 0.46875rem 0;
+}
+#fullCart_4 a{
+	display: block;
+	width:1.875rem;
+	height: 0.78125rem;
+	margin:1.25rem auto 0;
+	font-size:0.375rem;
+	background: #bf3d3e;
+	color: #fff;
+	line-height: 0.78125rem;
+	border-radius: 0.09375rem;
+}
+
+/*优惠券*/
+#yhq{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #EEEEEE;
+	display: none;
+	height: 100%;
+    overflow: scroll;
+}
+.coupon ul{
+	margin: 0.3125rem auto 0;
+}
+.coupon ul>img{
+	display: block;
+	width: 3.3125rem;
+	height: 2.046875rem;
+	margin: 0 auto;
+	padding-top: 1.71875rem
+}
+.coupon ul>p{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	margin-top: 0.890625rem;
+	text-align: center;
+	font-weight: bold;
+}
+.coupon ul li{
+	height: 2.359375rem;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin: 0 auto 0.3125rem;
+	overflow: hidden;
+	width: 9.40625rem;
+	background-image:  url(/imgs/personal/youhuizhan-beijing.png?t=20161117);
+}
+.coupon ul li .left{
+	width: 2.140625rem;
+    font-size: 0.546875rem;
+    text-align: center;
+    color: #fff;
+    margin-right: 0.515625rem;
+    float: left;
+    overflow: hidden;
+    height: 2.359375rem;
+}
+.coupon ul li .left h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#ffffff;
+	padding-top: 0.484375rem;
+	margin-bottom: 0.21875rem
+}
+.coupon ul li .left h3 span{
+	font-family:PingFangSC-Medium;
+	font-size:0.71875rem;
+}
+.coupon ul li .left p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+}
+.coupon ul li .right{
+	float: left;
+	padding-top: 0.484375rem;
+	width: 4.265625rem;
+}
+.coupon ul li .right h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin-bottom: 0.296875rem
+}
+.coupon ul li .right p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#4a4a4a;
+	margin-bottom: 0.109375rem
+}
+.coupon ul li .btn{
+	width: 2.4375rem;
+    float: left;
+    height: 2.359375rem;
+    position: relative;
+}
+.coupon ul li .btn img{
+	display: block;
+	margin: 0.25rem 0 0 0.203125rem;
+	width: 1.875rem;
+	height: 1.875rem
+}
+.coupon ul li .btn a{
+	display: block;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	line-height:0.46875rem;
+	width: 1.125rem;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem;
+	height: 0.9375rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -0.46875rem;
+	margin-left: -0.5625rem
+}

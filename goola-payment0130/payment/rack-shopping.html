@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>购物车</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/jiesuan2.css"/>
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/rack-shopping-bottom.css">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/shopping.css"/>
+	</head>
+	<body>
+		<div class="body">
+			<div id="container">
+				<div id="gwc" style="display:block">
+					<div class="gouwuche-content" id="cartInfo">
+						<div class="mb10 abcd" id="fullCart_1" style="display: none;"></div>
+						<div id="fullCart_4" style="display: none;">
+							<img src="/imgs/gouwuche/no-goods.png" />
+							<p>购物车空荡荡的</p>
+							<a class="scanQRCode">扫一扫</a>
+						</div>
+					</div>
+					<div class="bg"></div>
+					<div class="address-firm">
+						<div class="address-firm-title">
+							<p>确认删除此商品？</p>
+						</div>
+						<div class="address-firm-list">
+							<p style="display:none"></p>
+							<p class="cancel cancelGoods">取消</p>
+							<p class="confirm deleteGoods">确定</p>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="gouwuche-bottom" id="total" style="display: none;">
+						<div class="all-btn">
+							<div class="btn checked" >
+								<input type="checkbox" class="goods-check GoodsCheckall" checked='true' />
+							</div>
+							<p>全选</p>
+						</div>
+						<div class="total all-total"></div>
+						<script type="dot/tmpl" id="totalTmpl">
+							<p><span>¥<span class="shop-total-amount" id="totalPrice_2">{{=(it.orderPrice).toFixed(2)}}</span></span></p>
+						</script>
+						<div class="choice-payment">
+							<a class="scanQRCode">继续扫码</a>
+							<a class="payment">去支付</a>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="bottom2">
+						<a href="javascript:;" class="shouye">
+							<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/menu2.png"/>
+						</a>
+						<a href="/payment/rack-shopping.html" class="gouwuche">
+							<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/shopcart2.png"/>
+							<div class="gwc" id="selectedTotal">
+								<span id="goodsCount"></span>
+							</div>
+						</a>
+						<a href="/mobilerack/gerenzhongxin2.html">
+							<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/my1.png"/>
+						</a>
+					</div>
+					<script id="cartTmpl" type="dot/tmpl">
+						{{? it}} {{~it :data:i}}
+						<ul class="one-shop">
+							{{~data.goodsList :goods:j}}
+							<li class="one-goods" id="{{=goods.goodsId}}">
+								<div class="btn checked" id="{{=goods.goodsId}}">
+									<input type="checkbox" class="goods-check GoodsCheck" checked='true' />
+								</div>
+								<div class="goodsmessage" style="float: left;">
+									<div class="img">
+										<img src="{{=picUrl}}{{=goods.goodsPhoto}}">
+									</div>
+									<div class="container">
+										<p class="container-title">{{=goods.goodsName}}</p>
+										<p class="container-norm">{{=goods.specifications}}</p>
+										<p class="container-pay">¥<span class="price shop-total-amount GoodsPrice">
+											<a id="{{=goods.goodsId}}p">{{=(goods.goodsPrice).toFixed(2)}}</a></span>
+											{{? goods.goodsLabel}}
+											<span class="biaoqian">{{=goods.goodsLabel}}</span>
+											{{?}}
+										</p>
+									</div>
+									<div class="clear"></div>
+								</div>
+								<div class="clear"></div>
+								<div class="delete"></div>
+								<div class="num-choice">
+								<span class="reduce minus"></span>
+								<span class="count-input am-num-text {{=goods.goodsId}}c" id="{{=goods.goodsId}}c">{{=goods.goodsCount}}</span>
+								<span class="add plus" activityType="{{=goods.activityType}}" maxFsCount="{{=goods.maxFsCount}}"></span>
+								</div>
+							</li>
+							{{~}}
+						</ul>
+						{{~}} {{?}}
+					</script>
+					
+			</div>
+			<div id="jiesuan" class="jiesuan" style="display:none">
+				<div class="fanhui">
+					<span id="fanhui"></span>
+					<p>确认订单</p>
+				</div>
+				<div class="content2">
+					
+				</div>
+				<div id="bottomjiesuan">
+				
+				</div>	
+				<div class="bottompay bottom" id="bottompay">
+					<p>立即支付</p>
+				</div>
+			</div>
+			<script id="goodsTmpl" type="dot/tmpl">
+						{{? it}} {{~it :data:i}}
+							{{~data.goodsList :goods:j}}
+							<div class="content2a">
+								<a href="#">
+									<img src="{{=picUrl}}{{=goods.goodsPhoto}}" alt="">
+								</a>
+								
+								<div class="content2b">
+									<p class="content2b-a">{{=goods.goodsName}}</p>
+									<p class="content2b-b">{{=goods.specifications}}</p>
+									<p class="content2bc">
+										<span class="content2b-price">{{=(goods.goodsPrice).toFixed(2)}}</span>
+										<span class="content2b-num">x{{=goods.goodsCount}}</span>
+									</p>
+								</div>
+							</div>
+							{{~}}
+						{{~}} {{?}}
+			</script>
+			<script id="jiesuanTmpl" type="dot/tmpl">
+			{{? it.isLogin == false}}
+				{{? it.isEnterpriseStaff==true}}
+				<div class="content2c">
+					<span class="content2c-pay">企业支付：<b>￥{{=(it.staffQuotaBalance).toFixed(2)}}</b></span>
+					<a href="javascript:;" class="login">
+						<img  class="imga" src="{{? it.src}} {{=it.src}} {{??}}/imgs/payment/jiesuan2/icon2/617871071494316514.png{{?}}" alt="">
+					</a>
+				</div>
+				{{?}}
+			{{??}}
+			<div class="content2cb">
+				<span class="content2c-pay">企业支付</span>
+				<a href="/login/denglu.html" class="login">
+					<img src="/imgs/payment/jiesuan2/icon2/599597138012273167.png" alt="">
+				</a>
+			</div>
+			{{?}}
+			<div class="content2d">
+				<p class="content2d-a">
+					<span class="content2c-price">商品价格</span>
+					<span class="content2c-pay">¥{{=(it.savePrice).toFixed(2)}}</span>
+				</p>
+				{{? it.isEnterpriseStaff==true}}
+				<p class="content2d-a">
+					<span class="content2c-price">企业支付{{?it.isEnterpriseBalanceEnough == '0'}}(企业余额不足){{??it.isStaffBalanceEnough == '0'}}(个人余额不足){{??}}{{?}}</span>
+					<span class="content2c-pay">¥-{{=(it.useEnterpriseBalance).toFixed(2)}}</span>
+				</p>
+				{{?}}
+				<p class="content2d-a" style="position: relative;">
+					<span class="content2c-price">优惠券</span>
+					{{? it.isLogin == false}}
+					<span class="content2c-pay use-coupon"></span>
+					{{??}}
+					<a href="/login/denglu.html" class="login" style="width: 1.96875rem;height: 0.625rem;display: block;right: 0;top: -0.0625rem;position: absolute;">
+						<img src="/imgs/payment/jiesuan2/icon2/599597138012273167.png" alt="">
+					</a>
+					{{?}}
+				</p>
+			</div>
+			<div class="content2e">
+				<p class="content2e-a">
+					<span class="content2e-price">需付款</span>
+					<span class="content2e-pay">¥{{=Number(it.orderPrice).toFixed(2)}}</span>
+				</p>
+			</div>		
+			</script>
+		</div>
+		</div>
+		<!-- 优惠券 -->
+		<div id="yhq" class="coupon">
+			<div class="fanhui" style="border-bottom:1px solid #e5e5e5" >
+				<span id="fanhui"></span>
+				<p>我的优惠站</p>
+			</div>
+			<ul class="use" id="couponInfo" style="padding-bottom: 1rem;">
+			</ul>
+		</div>
+		<script id="couponInfoTmpl" type="dot/tmpl">
+			{{~it :data:i}}
+			<li>
+				<div class="left" id="{{=data.userCouponId}}">
+					<h3>¥<span>{{=data.preferentialPrice}}</span></h3>
+					{{?data.limitPrice}}
+					<p>满{{=data.limitPrice}}使用</p>
+					{{?}}
+				</div>
+				<div class="right">
+					<h3>{{=data.couponName}}</h3>
+					{{?data.categoryName}}
+					<p>1、限制{{=data.categoryName}}</p>
+					{{??}}
+					<p>1、无限制</p>
+					{{?}}
+					<p>2、{{=data.endTime}}</a></p>
+				</div>
+				<div class="btn">
+					<a>立即<br/>使用</a>
+				</div>
+				<div class="clear"></div>
+			</li>
+			{{~}}
+
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=201710111749"></script>
+		<script src="/mobilerack/js/car.js?t=201710111749"></script>
+		<script src="/mobilerack/js/main.js?t=201710111749"></script>
+		<script src="/lib/layer.js?t=20161117"></script>
+		<script src="/mobilerack/js/scanQRCode.js?t=201710111854"></script>
+		<script src="/mobilerack/js/shopping.js?t=201710111749"></script>
+	</body>
+
+</html>

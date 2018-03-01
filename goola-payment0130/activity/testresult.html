@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>吃货</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/activity/test.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="testresult">
+				<div class="testresult-content"></div>
+				<script id="testresult-content" type="dot/tmpl">
+					<div class="top">
+						<div class="title">
+							<h2>{{=it.data.sameFoodieCreator.foodieTitle}}</h2>
+							{{?it.data.sameFoodieCreator.foodieTitle=="博爱睿智的吃货"}}
+							<p>你喜欢尝试各种美食，具有一颗博爱的胸襟和聪慧的头脑</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="罗曼蒂克的吃货"}}
+							<p>你像水果一样充满浪漫主义色彩</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="颜值爆表的吃货"}}
+							<p>水果是天然的美容营养品，你是朋友中的颜值担当</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="断舍离的吃货"}}
+							<p>喜欢吃干果的的人做事干脆果断，不拖泥带水</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="外表高冷、内心逗比的吃货"}}
+							<p>你的外表像干果一样拒人于千里之外，其实内心住着一个捣蛋</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="锲而不舍的吃货"}}
+							<p>卤味集色香味等优点于一身，让吃货对其穷追不舍</p>
+							{{??it.data.sameFoodieCreator.foodieTitle=="胆识过人的吃货"}}
+							<p>喜欢吃卤味的人抱着吃遍天下卤味的决心，勇敢而富有见识</p>
+							{{?}}
+						</div>
+						<p>点击标签立即购买、送礼</p>
+					</div>
+					<ul class="label" style="padding-left: 0.8rem;">
+						{{~it.data.sameFoodieCreator.foodieMarks.split(','):data:i}}
+						<li><a href="../shangpin/shangpinxiangqing.html?goodsId={{=data}}"><img src="../imgs/activity/test/biaoqian{{=data}}.png" class="labelimg"/></a></li>
+						{{~}}
+						<div class="clear"></div>
+					</ul>
+					<div class="result">
+						<h3>和我属性最接近的吃货</h3>
+						{{?it.data.topPercentList.length>0}}
+						<ul class="result-list">
+							{{~it.data.topPercentList:list:l}}
+							{{?l<3}}
+							<li>
+								<img class="headimg" src="{{=list.sameFoodie.wechatHead}}" />
+								<p>{{=list.sameFoodie.wechatName}}<span>相似度{{=list.percent}}%</span></p>
+								<h3>{{=list.sameFoodie.foodieTitle}}</h3>
+								<div class="clear"></div>
+								<ul class="label">
+									{{~list.sameFoodie.foodieMarks.split(','):label1:k}}
+									<li><a href="../shangpin/shangpinxiangqing.html?goodsId={{=label1}}"><img src="../imgs/activity/test/biaoqian{{=label1}}.png" class="labelimg"/></a></li>
+									{{~}}
+									<div class="clear"></div>
+								</ul>
+							</li>
+							{{?}}
+							{{~}}
+						</ul>
+						{{??}}
+						<p>还没有人来参与...</p>
+						{{?}}
+					</div>
+					<div class="result">
+						<h3>最受欢迎的吃货标签</h3>
+						{{?it.data.topCountList.length>0}}
+						<ul class="shareresult-list">
+							{{~it.data.topCountList:label2:h}}
+							<li>
+								<p>我的朋友中有{{=label2.percent}}%的人和我拥有同一个标签</p>
+								<a href="../shangpin/shangpinxiangqing.html?goodsId={{=label2.markId}}">
+									<img src="../imgs/activity/test/biaoqian{{=label2.markId}}.png" class="labelimg" />
+								</a>
+							</li>
+							{{~}}
+						</ul>
+						{{??}}
+						<p>还没有人来参与...</p>
+						{{?}}
+					</div>
+					<div class="result">
+						<h3>所有朋友的吃货等级</h3>
+						{{?it.data.topPercentList.length>0}}
+						<ul class="result-list">
+							{{~it.data.topPercentList:list:l}}
+							<li>
+								<img class="headimg" src="{{=list.sameFoodie.wechatHead}}" />
+								<p>{{=list.sameFoodie.wechatName}}<span>相似度{{=list.percent}}%</span></p>
+								<h3>{{=list.sameFoodie.foodieTitle}}</h3>
+								<div class="clear"></div>
+								<ul class="label">
+									{{~list.sameFoodie.foodieMarks.split(','):label1:k}}
+									<li><a href="../shangpin/shangpinxiangqing.html?goodsId={{=label1}}"><img src="../imgs/activity/test/biaoqian{{=label1}}.png" class="labelimg"/></a></li>
+									{{~}}
+									<div class="clear"></div>
+								</ul>
+							</li>
+							{{~}}
+						</ul>
+						{{??}}
+						<p>还没有人来参与...</p>
+						{{?}}
+					</div>
+				</script>
+				<img src="/imgs/activity/test/bottom.png" />
+			</div>
+			<div class="result-bottom">
+				<a href="http://wx.goola.cn/activity/coupon.html?redPacketUserId=8e6286995e4543f6948c678583c35afc"><img src="/imgs/activity/test/result-btn1.png"/></a>
+				<a class="testsharebtn"><img src="/imgs/activity/test/result-btn2.png"/></a>
+				<div class="clear"></div>
+			</div>
+			<div class="sharebg">
+				<img src="/imgs/activity/test/share-bg.png" />
+				<a>知道啦</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+			(function(api,util,ajax){
+				
+				var creatorId=util.getUrlParams('id')
+				
+				ajax.post(api.baseServerUrl + "/foodie/openAuthority/resultList",{
+						"id":creatorId
+				},function(data) {
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#testresult-content",obj,".testresult-content")
+						$(document).ready(function(){
+						    $(".labelimg").on("load",function(){
+						       
+						        $(this).css('width',$(this).width()/75+'rem')
+						    });
+						});
+					})
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),"想知道谁是你的吃货同道吗？","我跟我朋友喜欢吃的东西90%都一样，快来测测你跟我的匹配度吧！","http://" + document.domain + "/activity/testShare.html?id="+creatorId,"http://" + document.domain +"/imgs/activity/test/share.png");
+				$('.testsharebtn').click(function(){
+					if(isWeiXin()){
+						$('.sharebg').show()
+						wxShare(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),"想知道谁是你的吃货同道吗？","我跟我朋友喜欢吃的东西90%都一样，快来测测你跟我的匹配度吧！","http://" + document.domain + "/activity/testShare.html?id="+creatorId,"http://" + document.domain +"/imgs/activity/test/share.png");
+					}else if( browser.versions.ios || browser.versions.android){
+						if(!isWeiXin()){
+							toShare("想知道谁是你的吃货同道吗？","我跟我朋友喜欢吃的东西90%都一样，快来测测你跟我的匹配度吧！","http://" + document.domain + "/activity/testShare.html?id="+creatorId,"http://" + document.domain +"/imgs/activity/test/share.png");
+						}
+					}
+						
+				})
+				$('.sharebg a').click(function(){
+					$('.sharebg').hide()
+				})
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

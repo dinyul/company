@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>事业合伙人</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/index.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="dist">
+				<div class="dist-top"></div>
+				<script id="dist-top" type="dot/tmpl">
+					<h3>当前余额（元）<a href="handbook.html">新手帮助</a></h3>
+					<h2><a href="order/haomi.html" style="display: block;color: #fa2f3e;">¥{{=Number(it.moneyValue).toFixed(2)}}<span>{{=it.moneyPoints}}好米</span></a></h2>
+					<a href="deposit/apply.html">去提现</a>
+					<ul>
+						<li>
+							<p>¥{{=Number(it.weekPointsMoneyValue).toFixed(2)}}</p>
+							<p>本周收益</p>
+						</li>
+						<li>
+							<p>¥{{=Number(it.sumPointsMoneyValue).toFixed(2)}}</p>
+							<p>累计收益</p>
+						</li>
+						<li>
+							<p>¥{{=Number(it.unBalancePointsValue).toFixed(2)}}</p>
+							<p>未结算收益</p>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</script>
+				<ul class="dist-list">
+					<a style="display: block;" href="goods/goodsShare.html">
+						<li style="background-image: url(/distribution/imgs/dist-icon1.png);">
+							<h3>推广商品</h3>
+							<p>查看和推广商品</p>
+						</li>
+					</a>
+					<a style="display: block;" href="team/myteam.html">
+						<li style="background-image: url(/distribution/imgs/dist-icon2.png);">
+							<h3>我的团队</h3>
+							<p>查看团队信息</p>
+						</li>
+					</a>
+					<a style="display: block;" href="order/order.html">
+						<li style="background-image: url(/distribution/imgs/dist-icon3.png);">
+							<h3>我的订单</h3>
+							<p class="ordernum"></p>
+						</li>
+					</a>
+					<a style="display: block;" href="../shop/myShop.html">
+						<li style="background-image: url(/distribution/imgs/dist-icon4.png);">
+							<h3>超级店铺</h3>
+							<p>上传商品销售</p>
+						</li>
+					</a>
+					<a style="display: block;" href="rankinglist/rankinglist.html">
+						<li style="background-image: url(/distribution/imgs/dist-icon5.png);">
+							<h3>区域排行</h3>
+							<p>当前业绩排行</p>
+						</li>
+					</a>
+					<div class="clear"></div>
+				</ul>
+				<div class="dist-goods">
+					<h2>推广商品推荐<a href="goods/goodsShare.html">查看全部</a></h2>
+					<ul class="dist-goodslist"></ul>
+					<script id="dist-goodslist" type="dot/tmpl">
+						{{~it.data:data:i}}
+						{{?data!='' && data!=undefined &&　data!=null}}
+						<li id="{{=data.goodsId}}">
+							<div class="dist-goodsinfo">
+								<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+								<h2>{{=data.goodsName}}</h2>
+								<h3>{{=data.goodsName}}</h3>
+								<p>¥{{=(data.preferentialPrice).toFixed(2)}}<span>已售<a>{{=data.salesCount}}</a>件</span></p>
+								<h4>收益：¥<span>{{=(data.distributionProfit).toFixed(2)}}</span></h4>
+								<div class="clear"></div>
+							</div>
+							<div class="dist-goodsshare" id="{{=data.goodsId}}">
+								<div class="shareweixin"><p>微信分享</p></div>
+								<div class="shareeweima"><p>二维码分享</p></div>
+							</div>
+						</li>
+						{{?}}
+						{{~}}
+					</script>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script type="text/javascript">
+			(function(api, util, ajax){
+				var expandCode
+				initUserCenter();
+				goodsList()
+				function initUserCenter(){
+					ajax.post(api.baseServerUrl + "/distribution/userCenter",{
+					},function(data) {
+						util.render("#dist-top", data, ".dist-top");
+						$('.ordernum').html(data.expendOrderCount+'单')
+					});
+				}
+				$('.alert .cancel').click(function(){
+					$('.alert').hide()
+					$('.bg').hide()
+				})
+				function goodsList(){
+					ajax.post(api.baseServerUrl + "/distribution/getProfitGoodsList",{
+						"isIndex":1
+					},function(data) {
+						var obj={data:data.goodsList,picUrl:api.picUrl}
+						util.render("#dist-goodslist", obj, ".dist-goodslist");
+						expandCode=data.expandCode
+					});
+				}
+				$('.dist-goodslist').delegate('.shareweixin','click',function(){
+					window.location.href="../../shangpin/shangpinxiangqing.html?goodsId="+$(this).parent().attr('id')+"&type=dis&expandCode="+expandCode
+				})
+				$('.dist-goodslist').delegate('.shareeweima','click',function(){
+					window.location.href="goods/shareinfo.html?goodsId="+$(this).parent().attr('id')+"&expandCode="+expandCode
+				})
+				
+				/*ajax.post(api.baseServerUrl + "/userCard/selectUserCard",{
+					},function(data) {
+						if(data==undefined||data==null||data==""){
+							$('.bg').show()
+							$('.alert').show()
+						}
+					});*/
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

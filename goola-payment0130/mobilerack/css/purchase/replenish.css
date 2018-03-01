@@ -1,0 +1,94 @@
+
+.apply-list{
+	margin-top: 0.03125rem
+}
+.apply-list li{
+	margin-bottom: 0.03125rem;
+	padding: 0.3125rem 0.46875rem;
+	background: #fff;
+}
+.apply-list li img{
+	float: left;
+	width: 2.8125rem;
+	height: 2.8125rem;
+	margin-top: 0.25rem;
+	margin-right: 0.3125rem;
+}
+.apply-list li div:first-of-type{
+	width: 5.9375rem;
+	float: left;
+}
+.apply-list li div h2{
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+	line-height: 0.5rem;
+	margin-bottom: 0.1875rem
+}
+.apply-list li div h2 a{
+	width: 4.625rem;
+	display: inline-block;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.apply-list li div h2 span{
+	float: right;
+	color: #C53F40;
+	font-size: 0.375rem
+}
+.apply-list li div p{
+	margin-bottom: 0.21875rem;
+	font-family: PingFangSC-Regular;
+	font-size: 0.375rem;
+	color: #8D8D8D;
+}
+.apply-list li div p a{
+	color: #313131;
+}
+.apply-list li div p span{
+	float: right;
+}
+.apply-list li div h5{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+	margin-top: 0.4375rem;
+	line-height: 0.75rem;
+	display: block;
+}
+.apply-list li div h5 a{
+	display: block;
+	border:1px solid #dbdbdb;
+	border-radius:1.5625rem;
+	width:2.78125rem;
+	height:0.71875rem;
+	float: right;
+	overflow: hidden;
+}
+.apply-list li div h5 a span{
+	float: left;
+	display: block;
+	width: 0.875rem;
+	height: 0.71875rem;
+	line-height: 0.71875rem
+}
+.apply-list li div h5 a input{
+	width: 1.03125rem;
+	text-align: center;
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	background: #fff;
+	border:0;
+	height: 0.71875rem;
+	line-height: 0.71875rem;
+	float: left;
+}
+.apply-list li div h5 a span:nth-of-type(1){
+	background: url(/mobilerack/imgs/purchase/jian.png) no-repeat center center;
+	background-size: 0.25rem 0.25rem
+}
+.apply-list li div h5 a span:nth-of-type(2){
+	background: url(/mobilerack/imgs/purchase/jia.png) no-repeat center center;
+	background-size: 0.25rem 0.25rem
+}

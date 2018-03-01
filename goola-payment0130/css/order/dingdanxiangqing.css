@@ -1,0 +1,425 @@
+
+.details .receiving,.details .personal,.details .balance{
+	margin-top: 0.28125rem;
+}
+.details .information{
+	background:#4a4a4a;
+}
+.details .commodity{
+	margin-top: 0.3125rem;
+}
+.details .information ul{
+	padding: 0.46875rem 0.34375rem
+}
+.details .information ul li{
+	height: 0.4375rem;
+	line-height: 0.4375rem;
+	margin-bottom: 0.46875rem;
+	padding-left: 0.6875rem
+}
+.details .information ul li:first-child{
+	background: url(/imgs/zhifu/zhifu-icon1.png) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem
+}
+.details .information ul li:nth-child(2){
+	background: url(/imgs/zhifu/zhifu-icon2.png) no-repeat left center;
+	background-size: 0.4375rem 0.390625rem
+}
+.details .information ul li:last-child{
+	margin-bottom: 0;
+	background: url(/imgs/zhifu/zhifu-icon3.png) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem
+}
+.details .information ul li p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	line-height: 0.4375rem;
+}
+.details .information ul li span{
+	font-size: 0.375rem
+}
+.details .personal{
+	padding: 0.46875rem 0 0.46875rem 1.03125rem;
+	background:#fff url(/imgs/zhifu/zhifu-location.png) no-repeat 0.34375rem center;
+	background-size: 0.4375rem 0.421875rem
+}
+.details .personal p{
+	margin-bottom:0.234375rem; 	
+}
+.details .personal-title{
+	float: left;
+	width: 1.96875rem;
+}
+.details .personal-content{
+	width: 8.765625rem
+}
+.details .personal-content p{
+	font-family:.PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.details .personal-content p span{
+	margin-left: 0.8125rem
+}
+.details .personal-content a{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#4a4a4a;
+	line-height:0.40625rem;
+	margin-top: 0.28125rem
+}
+.details .commodity-title,.details .balance-title{
+	height: 0.78125rem;
+	line-height: 0.78125rem;
+	padding-left: 1.0rem;	
+}
+.details .commodity-title{
+	background: url(/imgs/zhifu/zhifu-icon4.png) no-repeat 0.34375rem center;
+	background-size: 0.4375rem 0.4375rem
+}
+.details .commodity-title p,.details .balance-title p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+}
+.details .commodity-name{
+	height: 1.40625rem;
+	border-bottom: 1px solid #e5e5e5;
+	line-height: 1.40625rem;
+}
+.details .commodity-name p{
+	background: url(/imgs/gouwuche/gouwuche-dianpu.png?t=20161117) no-repeat left center;
+	background-size: 0.4375rem 0.40625rem;
+	padding-left: 0.6875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.details .commodity-list{
+	padding: 0.125rem 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+.details .commodity-list p{
+	overflow: hidden;
+    height: 1.40625rem;
+    line-height: 1.40625rem;
+    font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	font-weight: bold;
+}
+.details .commodity-list p span:first-child{
+	display: inline-block;
+	width: 5.65625rem;
+	float: left;
+	margin-right: 0.3125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.details .commodity-list p span:nth-child(2){
+	float: left;
+	width: 2.5rem;
+	text-align: right;
+}
+.details .commodity-list p span:last-child{
+	float: right;
+	color: #4a4a4a;
+}
+.details .commodity-wuliu{
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+}
+.details .commodity-wuliu a{
+	float: right;
+	display: inline-block;
+	width: 0.78125rem;
+	text-align: right;
+	color: #1b1b1b;
+}
+.details .balance-title{
+	background: url(/imgs/zhifu/zhifu-icon5.png) no-repeat 0.34375rem center;
+	background-size: 0.375rem 0.4375rem
+}
+.details .balance-list{
+	background: #fff;
+	padding: 0 0.34375rem
+}
+.details .balance-list p{
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	border-bottom: 1px solid #eee;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.details .balance-list p span{
+	float: right;
+	font-family:PingFangSC-Medium;
+	color:#fa2f3e;
+}
+.fahuo-time{
+	height: 1.40625rem;
+    line-height: 1.40625rem;
+    position: relative;
+}
+.fahuo-time p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.fahuo-time p a{
+	float: right;
+	color:#9b9b9b;
+}
+.fahuo-time span {
+    width: 40%;
+    display: block;
+    position: absolute;
+    right: -0.234375rem;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat right center;
+    background-size: 0.15625rem 0.3125rem;
+    height: 1.40625rem;
+    top: 0;
+}
+.ziti{
+	padding:0 0.5rem 0 0.3125rem;
+}
+.ziti p:first-child{
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+}
+.ziti p:first-child span{
+	float: right;
+}
+.ziti p:last-child{
+	font-size: 0.3125rem;
+	padding-left: 1.875rem;
+	line-height: 0.40625rem;
+	padding-bottom: 0.390625rem
+}
+.xiugaishijian{
+	width: 6.875rem;
+    background: #fff;
+    position: fixed;
+    top: 4.0625rem;
+    left: 50%;
+    margin-left: -3.4375rem;
+    border-radius: 0.15625rem;
+    display: none;
+	z-index: 99;
+}
+.xiugaishijian p{
+	height: 1.09375rem;
+    line-height: 1.09375rem;
+    text-align: center;
+    border-bottom: 0.015625rem solid #e5e5e5;
+}
+.xiugaishijian input{
+    width: 4.0625rem;
+    display: block;
+    border: 0;
+    padding-left: 0.625rem;
+    height: 0.9375rem;
+    outline: none;
+    line-height: 0.9375rem;
+    position: absolute;
+    left: 1.09375rem;
+    z-index: 99;
+    top: 1.5625rem;
+	opacity: 0;
+}
+.xiugaishijian b{
+	font-size: 0.375rem;
+	width: 4.0625rem;
+    font-weight: normal;
+    display: block;
+    border: 0;
+    padding-left: 0.625rem;
+    height: 0.9375rem;
+    outline: none;
+    line-height: 0.9375rem;
+    position: absolute;
+    left: 1.09375rem;
+    z-index: 9;
+    top: 1.5625rem;
+    background: #F7F7F7 url(/imgs/muji/choice.png?t=20161117) no-repeat 4.0rem center;
+    background-size: 0.359375rem 0.21875rem;
+}
+.xiugaishijian a{
+	display: block;
+	width: 2.5rem;
+	height: 0.9375rem;
+	background: #fa2f3e;
+	text-align: center;
+	font-size: 0.375rem;
+	line-height: 0.9375rem;
+	color: #fff;
+	margin: 1.90625rem auto 0.46875rem;
+	border-radius: 0.125rem
+}
+.details .balance{
+	margin-bottom: 1.25rem
+}
+.details-bottom{
+	width: 100%;
+	height: 1.25rem;
+	position: fixed;
+	bottom: 0;
+	background: rgba(0,0,0,0.4);
+}
+.details-bottom a{
+    text-align: center;
+    background:#fa2f3e;
+    display: block;
+    font-size: 0.375rem;
+    color: #fff;
+}
+.details-bottom .one{
+	width: 100%;
+	height: 1.25rem;
+	line-height: 1.25rem;
+}
+.details-bottom .left,.details-bottom .right{
+	height: 1.25rem;
+    line-height: 1.25rem;
+    width: 50%;	
+}
+.details-bottom .left{
+	float: left;
+	background:#1b1a1f;
+}
+.details-bottom .right{
+	float: right;
+	
+}
+/*退款*/
+.charge{
+	margin-top: 0.28125rem;
+	background: #fff
+}
+.charge li{
+	padding: 0.34375rem;
+}
+.charge li img{
+	float: left;
+	width: 3.125rem;
+	height: 3.125rem;
+}
+.charge li .right{
+	float: left;
+	margin-left: 0.546875rem;
+	height: 3.125rem;
+}
+.charge li .right h3{
+	line-height: 0.65625rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    font-weight: bold;
+}
+.charge li .right p{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	margin-top: 1.796875rem
+}
+.reason{
+	margin-top: 0.28125rem;
+	background: #fff;
+	padding: 0 0.34375rem;
+	margin-bottom: 1.25rem
+}
+.reason>p{
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	padding-left: 0.703125rem;
+	border-bottom: 2px solid #eee;
+	background: url(/imgs/chargeback/icon2.png) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem
+}
+.reason select{
+	width: 100%;
+	height: 1.40625rem;
+	outline: none;
+	border:0;
+	background: #fff url(/imgs/chargeback/jiantou.png) no-repeat right center;
+	background-size:0.390625rem 0.484375rem; 
+	appearance:none;
+    -moz-appearance:none;
+    -webkit-appearance:none;
+    font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.reason select option{
+	width: 9.3125rem;
+	background: #fff;
+	height: 1.40625rem;
+	outline: none;
+}
+.reason textarea{
+	padding: 0.46875rem 0;
+	background: #fff;
+	outline: none;
+	line-height: 0.46875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	border:0;
+	height: 1.921875rem;
+	resize:none;
+	display: none;
+	border-top: 2px solid #eee;
+}
+.chargeopen{
+	background:#ffffff;
+	box-shadow:0 0 0.15625rem 0 rgba(0,0,0,0.20);
+	border-radius:0.078125rem;
+	width:7.34375rem;
+	height:4.75rem;
+	position: fixed;
+	top:50%;
+	left: 50%;
+	margin-top: -2.375rem;
+	margin-left: -3.671875rem;
+	display: none;
+}
+.chargeopen h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	text-align: center;
+	padding:0.625rem;
+	font-weight: bold;
+}
+.chargeopen p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height:0.4375rem;
+	padding: 0 0.671875rem;
+}
+.chargeopen a{
+	display: block;
+	background:#1b1a1f;
+	border-radius:0.0625rem;
+	width:2.5rem;
+	height:0.9375rem;
+	float: left;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#ffffff;
+	line-height: 0.9375rem;
+	text-align: center;
+	margin:0.625rem 0.234375rem 0 0.703125rem;
+}
+.chargeopen a:last-child{
+	background:#fa2f3e;
+}

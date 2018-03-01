@@ -1,0 +1,223 @@
+.top{
+    width: 100%;
+    height: 1.171875rem;
+    background: #fff
+}
+.top .location{
+    float: left;
+    margin:0 0.34375rem 0 0.34375rem;
+}
+.top .location a{
+    font-family:PingFangSC-Medium;
+    font-size:0.3125rem;
+    color:#4a4a4a;
+    line-height: 1.171875rem;
+    height: 1.171875rem;
+    display: block;
+}
+.top .location a span{
+    display: inline-block;
+    padding-right: 0.3125rem;
+    background: url(/shop/imgs/icon.png) no-repeat right center;
+    background-size: 0.15625rem 0.3125rem;
+    font-weight: bold;
+}
+.seckill-nav{
+	height: 1.625rem;
+    background: #f5f5f5;
+    width: 100%;
+}
+
+.seckill-nav li{
+	float: left;
+	width: 2.0rem;
+	text-align: center;
+	height: 1.625rem;
+}
+.seckill-nav li h3{
+	font-weight: bold;
+    font-size: 0.4375rem;
+    margin: 0.34375rem 0 0.25rem 0;
+    font-family: PingFangSC-Medium;
+    line-height: 0.375rem;
+    color: #4a4a4a;
+}
+.seckill-nav li .js{
+	color:#9b9b9b
+}
+.seckill-nav li p{
+	font-size: 0.3125rem;
+    color: #9b9b9b;
+}
+.seckill-nav .checked{
+	background: url(/imgs/seckill/checked.png) no-repeat center bottom;
+	background-size: 0.375rem 0.1875rem
+}
+.seckill-nav .checked h3,.seckill-nav .checked p{
+	color: #FA2F3E
+}
+
+.seckill-list .sl-title{
+	font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #4a4a4a;
+    line-height: 0.3125rem;
+    text-align: center;
+    padding-top: 0.53125rem;
+    background: #fff;
+}
+.seckill-list .sl-title span{
+	font-family: PingFangSC-Light;
+    /* letter-spacing: 0.078125rem; */
+}
+.seckill-list ul li{
+	padding: 0.78125rem 0.328125rem 0.78125rem 0.34375rem;
+    height: 3.125rem;
+    position: relative;
+    background: #fff;
+    margin-bottom: 0.15625rem
+}
+.seckill-list ul li .sl-goods{
+	width: 3.125rem;
+    float: left;
+    height: 3.125rem;
+    margin-right: 0.34375rem;
+    position: relative;
+}
+.seckill-list ul li .sl-goods a{
+	display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    background: #c7a994;
+    padding: 0.078125rem 0.109375rem 0.078125rem 0.125rem;
+    font-size: 0.3125rem;
+    color: #ffffff;
+    line-height: 0.3125rem;
+    text-align: left;
+}
+.seckill-list ul li .sl-goods .sl-icon{
+	width: 1.875rem;
+    height: 1.875rem;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    margin-left: -0.9375rem;
+    margin-top: -0.9375rem;
+}
+.seckill-list ul li .sl-message{
+	float: left;
+	width: 5.859375rem;
+	height: 3.125rem
+}
+.seckill-list ul li .sl-message h3{
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    margin: 0.09375rem 0 0.15625rem;
+    height: 0.46875rem;
+    line-height: 0.46875rem;
+}
+.seckill-list ul li .sl-message .message{
+	font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #c7a994;
+    line-height: 0.3125rem;
+    margin-bottom: 0.78125rem;
+}
+.seckill-list ul li .sl-message .sl-price{
+	float: left;
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #fa2f3e;
+    line-height: 0.3125rem;
+    margin-right: 0.28125rem;
+}
+.seckill-list ul li .sl-message .sl-price span{
+	font-family: PingFangSC-Medium;
+    font-size: 0.5rem;
+    color: #fa2f3e;
+    line-height: 0.40625rem;
+    text-align: left;
+}
+.seckill-list ul li .sl-message .sl-oldprice{
+	text-decoration: line-through;
+    font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #9b9b9b;
+    line-height: 0.3125rem;
+    text-align: left;
+    position: relative;
+    top: 0.09375rem;
+}
+.seckill-list ul li .sl-btn{
+	position: absolute;
+    right: 0.34375rem;
+    bottom: 0.78125rem;
+}
+.seckill-list ul li .sl-btn p{
+	text-align: center;
+	color: #FF9C36;
+	margin:1.71875rem 0 0.21875rem 0;
+	font-size: 0.3125rem
+}
+.seckill-list ul li .sl-btn a{
+	display: block;
+	width: 2.15625rem;
+    height: 0.90625rem;
+}
+.seckill-list ul li .sl-jd{
+    border-radius: 0.078125rem;
+    width: 3.40625rem;
+    height: 0.46875rem;
+    margin-top: 0.53125rem;
+    position: relative;
+    box-sizing:border-box;
+}
+.seckill-list ul li .sl-jd div{
+	background: #fa2f3e;
+    width: 50%;
+    height: 0.40625rem;
+}
+.seckill-list ul li .sl-jd p{
+	font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    line-height: 0.3125rem;
+    text-align: center;
+    position: absolute;
+    width: 3.34375rem;
+    height: 0.3125rem;
+    left: 0;
+    top: 50%;
+    margin-top: -0.15625rem;
+}
+.seckill-list ul li .sl-jd-jxz{
+	background: rgba(250,47,61,0.50);
+    border: 0.03125rem solid #fa2f3e;
+}
+.seckill-list ul li .sl-jd-jxz p{
+	color: #ffffff;
+}
+.seckill-list ul li .sl-jd-jxz img{
+	width: 2.359375rem;
+    height: 0.734375rem;
+    position: absolute;
+    top: -0.3125rem;
+    left: 0.15625rem;
+}
+.seckill-list ul li .sl-jd-yjs{
+	background:#eeeeee;
+	border: 0.03125rem solid #eeeeee;
+}
+.seckill-list ul li .sl-jd-yjs p{
+	color:#9b9b9b;
+}
+.seckill-list ul li .sl-jd-wks{
+	background: #eeeeee;
+}
+.seckill-list ul li .sl-jd-wks p{
+	color:#fa2f3e;
+}

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>亚健康茶套装</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			body>a{
+				display: block;
+			}
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<img  class="lazy" data-original="../imgs/subject/sub-health/sub-health-01.jpg?v1"/>
+			<div class="zhuanti-top">
+				<div class="choice">
+					<ul>
+						<span>请选择您要的商品：</span>
+						<li goods="1859" price='199.00' class="xuanze">礼盒装</li>
+						<li goods="1850" price='68.00'>今天有雾霾吗</li>
+						<li goods="1837" price='68.00'>你把湿气给了谁</li>
+						<li goods="1851" price='68.00'>眼保健操现在开始</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="price">¥<span>199.00</span></div>
+				<div class="buy">加入购物车</div>
+				<div class="clear"></div>
+			</div>
+			<img class="lazy" data-original="../imgs/subject/sub-health/sub-health-02.png?v1"/>
+			<a href="../shangpin/shangpinxiangqing.html?goodsId=1850" style="display: block;"><img class="lazy" data-original="../imgs/subject/sub-health/sub-health-03.png?v2" /></a>
+			<a href="../shangpin/shangpinxiangqing.html?goodsId=1837" style="display: block;"><img class="lazy" data-original="../imgs/subject/sub-health/sub-health-04.png?v2" /></a>
+			<a href="../shangpin/shangpinxiangqing.html?goodsId=1851" style="display: block;"><img class="lazy" data-original="../imgs/subject/sub-health/sub-health-05.png?v2" /></a>
+			<img class="lazy" data-original="../imgs/subject/sub-health/sub-health-06.png?v2" />
+			<img class="lazy" data-original="../imgs/subject/sub-health/sub-health-07.png?v2" />
+			<img class="lazy" data-original="../imgs/subject/sub-health/sub-health-08.png?v1" />
+			<img class="lazy" data-original="../imgs/subject/sub-health/sub-health-09.png?v1" />
+			<img class="lazy" data-original="../imgs/subject/yimacha/yima_img-13.jpg?v1" />
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			$(function() {
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 800
+				});
+				(function(api,util,ajax){
+					var title="亚健康茶套装-科学搭配喝出健";
+					var description="精心研制的三种中药草本茶，科学搭配喝出健康"
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/sub-health-share.png");
+				})(goola.api,goola.util,goola.ajax)
+			});
+
+				$('.choice ul li').click(function(){
+					$('.choice ul li').removeClass('xuanze')
+					$(this).addClass('xuanze')
+					$('.price span').html($(this).attr('price'))
+				})
+		
+				$('.buy').click(function(){
+					var goodsId=$('.choice').find('.xuanze').attr('goods');
+					var goodsPrice=$('.choice').find('.xuanze').attr('price')
+					console.log(goodsId)
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.buy','click', addCart);
+				})
+			
+		
+			function addCart(event) {
+				var a=$(this).offset().top-$(document).scrollTop();
+				
+				var offset = $('#selectedTotal').offset(), flyer = $('<img class="u-flyer" src="../imgs/shouye-gouwuche.png"/>');
+				var endTop=$('#selectedTotal').offset().top-$(document).scrollTop()
+				
+				flyer.fly({
+				    start: {
+				        left: event.pageX,
+				        top: a
+				    },
+				    end: {
+				        left: offset.left,
+				        top: endTop,
+				        width: 0,
+				        height: 0
+				    }
+				});
+				}
+		</script>
+		
+	</body>
+</html>

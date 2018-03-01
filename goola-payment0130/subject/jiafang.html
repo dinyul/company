@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>家纺</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			body>a{
+				display: block;
+			}
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="nut-list" goodsId="2621">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2621">
+				<img class="lazy" data-original="../imgs/subject/jiafang/01.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2671">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2671">
+				<img class="lazy" data-original="../imgs/subject/jiafang/02.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2633">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2633">
+				<img class="lazy" data-original="../imgs/subject/jiafang/04.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2419">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2419">
+				<img class="lazy" data-original="../imgs/subject/jiafang/05.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2422">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2422">
+				<img class="lazy" data-original="../imgs/subject/jiafang/06.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2377">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2377">
+				<img class="lazy" data-original="../imgs/subject/jiafang/07.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2601">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2601">
+				<img class="lazy" data-original="../imgs/subject/jiafang/09.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2696">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2696">
+				<img class="lazy" data-original="../imgs/subject/jiafang/10.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2429">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2429">
+				<img class="lazy" data-original="../imgs/subject/jiafang/11.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2424">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2424">
+				<img class="lazy" data-original="../imgs/subject/jiafang/12.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			
+			<img class="lazy" data-original="../imgs/subject/yimacha/yima_img-13.jpg?v1" />
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 800
+				});
+				var title="【更好甄选】家居家纺——品牌制造商直供";
+				var description="MUJI制造商丨五星级酒店特供 丨大牌工厂直供"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/jiafang/share.jpg");
+				$('.nut-buy').click(function(){
+					var goodsId=$(this).parent().attr('goodsId');
+					//var goodsPrice=$(this).parent().find('i').text()
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.nut-buy','click', addCart);
+				})
+				
+				
+				})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

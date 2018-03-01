@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好甄选-社群</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/index.css?t=2017" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+	<link rel="stylesheet" type="text/css" href="/community/css/base.css" />
+	<link rel="stylesheet" type="text/css" href="/community/css/index.css" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		.swiper-container-horizontal>.tuan-pagination{width: 9.3125rem;height: 0.125rem;left: 0.34375rem;top: 8.390625rem;
+		    border-bottom: 0.03125rem solid #EEEEEE;border-radius: 0.15625rem;overflow: hidden;background: #fff;
+		}
+	</style>
+</head>
+<body>
+	<div class="body" style="margin-bottom: 1.53125rem;">
+		<div class="swiper-container">
+			<div class="swiper-wrapper banner">
+				
+			</div>
+			<div class="swiper-pagination"></div>
+		</div>
+		<ul class="com-nav"></ul>
+		<script id="com-nav" type="dot/tmpl">
+			{{~it.data.indexModuleActivityList:data:i}}
+				<li>
+					<a style="display: block;" href="{{=data.url}}">
+						<img src="{{=picUrl}}{{=data.banner}}"/>
+						<p>{{=data.name}}</p>
+					</a>
+				</li>
+			{{~}}
+			<div class="clear"></div>
+		</script>
+		<div id="module"></div>
+		
+	</div>
+	<ul class="community-bottom">
+		<li onclick="window.location.href='/community/index.html'">
+			<img src="/community/imgs/home1.png" />
+			<a style="color:#fa2f3e;">社群首页</a>
+		</li>
+		<li onclick="window.location.href='/community/fenlei/fenlei.html'">
+			<img src="/community/imgs/goods.png" />
+			<a>更好商品</a>
+		</li>
+		<li onclick="window.location.href='/community/about.html'">
+			<img src="/community/imgs/about.png" />
+			<a>关于社群</a>
+		</li>
+		<li onclick="window.location.href='/community/gouwuche/gouwuche.html'">
+			<img src="/community/imgs/car.png" />
+			<a>购物车</a>
+		</li>
+		<li onclick="window.location.href='/community/user-center.html'">
+			<img src="/community/imgs/center.png" />
+			<a>代理中心</a>
+		</li>
+	</ul>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.2.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=201708161331" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Geocoder"></script>
+	<script type="text/javascript" src="/community/js/index.js?t=201709082005"></script>
+	<script src="/community/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/community/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/community/js/gouwuche/main.js?t=20161117"></script>	
+	<script id="bannerTmpl" type="dot/tmpl">
+		{{~ it.data.indexModuleActivityList :data:i}}
+			<div class="swiper-slide"><a href="{{=data.url}}" id="banner{{=i}}" onclick="_hmt.push(['_trackEvent', 'banner', 'click', '{{=(i+1)}}'])"><img src="{{=picUrl}}{{=data.banner}}"/></a></div>
+		{{~}}
+	</script>
+	<script id="moduleTmpl" type="dot/tmpl">
+	{{~ it.data:data:i}}
+	{{?data.moduleContentType==1}}
+		{{? data.indexModuleActivityList.length != 0}}
+			<div class="content">
+				{{? data.banner && data.url}}
+					<a href="{{=data.url}}" style="margin-top: -0.015625rem" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=(i+1)}}'])"><img class="lazy" data-original="{{=picUrl}}{{=data.banner}}" style="display: block;"/></a>
+				{{?? data.banner}}
+					<a style="margin-top: -0.015625rem"><img class="lazy" data-original="{{=picUrl}}{{=data.banner}}" style="display: block;"/></a>
+				{{?}}
+				<div class="goodsImg">
+					{{? data.viewStyle==1}}
+						{{~ data.indexModuleActivityList:goods:j}}
+						<div style="position: relative;" class="recommend-content" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+							<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])">
+								<img class="lazy" data-original='{{=picUrl}}{{=goods.banner}}' />
+								<h3>{{=goods.goods.goodsName}}</h3>
+								<div>
+									<p>供货价：¥{{=Number(goods.goods.price).toFixed(2)}}</p>
+									<p>零售价：<span>¥{{=Number(goods.goods.preferentialPrice).toFixed(2)}}</span></p>
+									<p>佣金：<span>¥</span><b>{{=Number(goods.goods.profit).toFixed(2)}}</b></p>
+									<div class="clear"></div>
+								</div>
+							</a>
+							
+							{{?goods.buttonImg}}
+							<a class="emption" title="点击购买"><img src="{{=picUrl}}{{=goods.buttonImg}}"/></a>
+							{{?}}
+						</div>
+						{{~}}
+					{{?? data.viewStyle==2}}
+						{{~ data.indexModuleActivityList:goods:j}}
+						<div class="recommend-left two-column" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+							<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])">
+								{{?goods.type==2}}
+								<img src="{{=picUrl}}{{=goods.goods.cartPhoto}}"/>
+								{{?goods.shareTitle}}
+								<h2>{{=goods.shareTitle}}</h2>
+								{{??}}
+								<h2>{{=goods.goods.goodsName}}</h2>
+								{{?}}
+								{{?goods.shareDesc}}
+								<p>{{=goods.shareDesc}}</p>
+								{{??}}
+								<p>{{=goods.goods.goodsDesc}}</p>
+								{{?}}
+								<h3>¥{{=(goods.goods.preferentialPrice)}}</h3>
+								{{??}}
+								<img class="lazy" data-original='{{=picUrl}}{{=goods.banner}}' />
+								{{?}}
+							</a>
+							
+						</div>
+						{{~}}
+						<div class="clear"></div>
+					{{?? data.viewStyle==3}}
+						{{~ data.indexModuleActivityList:goods:j}}
+							{{? j==0}}
+							<div style="position: relative;" class="recommend-content" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+								<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])"><img class="lazy" data-original='{{=picUrl}}{{=goods.banner}}' /></a>
+								{{?goods.buttonImg}}
+								<a class="emption" title="点击购买"><img src="{{=picUrl}}{{=goods.buttonImg}}"/></a>
+								{{?}}
+							</div>
+							{{??}}
+							<div class="recommend-right two-column" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+								<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])">
+									{{?goods.type==2}}
+									<img src="{{=picUrl}}{{=goods.goods.cartPhoto}}"/>
+									{{?goods.shareTitle}}
+									<h2>{{=goods.shareTitle}}</h2>
+									{{??}}
+									<h2>{{=goods.goods.goodsName}}</h2>
+									{{?}}
+									{{?goods.shareDesc}}
+									<p>{{=goods.shareDesc}}</p>
+									{{??}}
+									<p>{{=goods.goods.goodsDesc}}</p>
+									{{?}}
+									<h3>¥{{=(goods.goods.preferentialPrice)}}</h3>
+									{{??}}
+									<img class="lazy" data-original='{{=picUrl}}{{=goods.banner}}' />
+									{{?}}
+								</a>
+							</div>
+							{{?}}
+						{{~}}
+						<div class="clear"></div>
+					{{??data.viewStyle==4}}
+					<div class="content-slide swiper-scroll">
+						<ul class="swiper-wrapper">
+							{{~ data.indexModuleActivityList:goods:j}}
+							<li class="swiper-slide" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+								<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])"><img src="{{=picUrl}}{{=goods.banner}}" /></a>
+								{{?goods.type==2}}
+								<p>已售出<span>{{=goods.salesCount}}</span>件</p>
+								{{?}}
+							</li>
+							{{~}}
+							<div class="clear"></div>
+						</ul>
+					</div>
+					{{??data.viewStyle==5}}
+					<div class="recommend-three">
+						{{~ data.indexModuleActivityList:goods:j}}
+						<div textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+							<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])"><img src="{{=picUrl}}{{=goods.banner}}" /></a>
+						</div>
+						{{~}}
+						
+					</div>
+					{{??data.viewStyle==6}}
+					<div class="scroll swiper-scroll">
+						<ul class="swiper-wrapper">
+							{{~ data.indexModuleActivityList:goods:j}}
+							<li class="swiper-slide" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+								<a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])">
+									<img src="{{=picUrl}}{{=goods.goods.cartPhoto}}"/>
+									<h2>{{=goods.goods.goodsName}}</h2>
+									<p>供货价：¥{{=Number(goods.goods.price).toFixed(2)}}</p>
+									<p>零售价：<span>¥{{=Number(goods.goods.preferentialPrice).toFixed(2)}}</span></p>
+									<p>佣金：<span>¥</span><b>{{=Number(goods.goods.profit).toFixed(2)}}</b></p>
+								</a>
+							</li>
+							{{~}}
+						</ul>
+					</div>
+					{{??data.viewStyle==7}}
+					<div class="swiper-container-content" style="position: relative;">
+						<div class="swiper-wrapper banner">
+							{{~ data.indexModuleActivityList:goods:j}}
+								<div class="swiper-slide" textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}"><a class="bannerImg" onclick="_hmt.push(['_trackEvent', 'module', 'click', '{{=goods.banner}}'])"><img class="lazy" data-original='{{=picUrl}}{{=goods.banner}}' /></a></div>
+							{{~}}
+						</div>
+						<div class="swiper-pagination"></div>
+					</div>
+					{{?}}
+				</div>
+			</div>
+		{{?}}
+	{{?}}
+	{{~}}
+	</script>
+</body>
+</html>

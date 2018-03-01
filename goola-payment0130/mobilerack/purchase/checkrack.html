@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>店铺列表</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<style>
+			.purlist_list li span{
+				margin-right: 0.78125rem;color: #fa2f3e;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body">
+			<ul class="purlist_list" style="margin-bottom: 1.328125rem;"></ul>
+			<div class="bottom" style="background: #d4aa70;">
+				<p>扫描货架二维码</p>
+			</div>
+			<script id="purlist_list" type="dot/tmpl">
+				<li class="all" id="{{~it:data:i}}{{=data.id}},{{~}}" style="display: none;">全部<a></a></li>
+				{{~it:data:i}}
+					<li id="{{=data.id}}">{{=data.name}}<a></a></li>
+				{{~}}
+			</script>
+			<script id="purlist_list1" type="dot/tmpl">
+				<li class="all" id="{{~it.data:data:i}}{{=data.id}},{{~}}" style="display: none;">全部<a></a></li>
+				{{~it.data:data:i}}
+					{{?it.type=="replenish2"}}
+					<li id="{{=data.id}}">{{=data.name}}<span>{{?data.showInfo==0}}待补货{{??data.showInfo==1}}待审核{{?}}</span><a></a></li>
+					{{?? it.type=="backlibrary3"}}
+					<li id="{{=data.id}}">{{=data.name}}<span>{{?data.showInfo==3}}待回库{{??data.showInfo==4}}待审核{{?}}</span><a></a></li>
+					{{?}}
+				{{~}}
+			</script>
+			<script id="purlist_list2" type="dot/tmpl">
+				<li class="all" id="{{~it.data:data:i}}{{=data.id}},{{~}}" style="display: none;">全部<span>{{=Number(it.price).toFixed(2)}}</span><a></a></li>
+				{{~it.data:data:i}}
+					<li id="{{=data.id}}">{{=data.name}}<span>{{=Number(data.shelvesGatherPrice).toFixed(2)}}</span><a></a></li>
+				{{~}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var type=util.getUrlParams("type");
+				var price=util.getUrlParams("price")
+				if(type=="replenish2"){
+					ajax.post(api.mobileServerUrl+"/shopWX/shopWXRefillTotalInfo/findShopListForRecords",{
+					},function(data){
+						var obj={data:data,type:"replenish2"}
+						util.render("#purlist_list1", obj, ".purlist_list");
+					})
+				}else if(type=="backlibrary3"){
+					ajax.post(api.mobileServerUrl+"/shopWX/returnVoucher/findReturnShopList",{
+					},function(data){
+						var obj={data:data,type:"backlibrary3"}
+						util.render("#purlist_list1", obj, ".purlist_list");
+					})
+				}else if(price!='' && price!=null && price!=undefined){
+					var queryType
+					if(type=="sales-today"){
+						queryType=1
+					}else if(type=="sales-month"){
+						queryType=2
+					}else if(type=="salesgoods"){
+						queryType=3
+					}else if(type=="damage"){
+						queryType=4
+					}else if(type=="replenish-week"){
+						queryType=5
+					}else if(type=="replenish-month"){
+						queryType=6
+					}
+					ajax.post(api.mobileServerUrl+"/betterConvenience/findShopList",{
+						"queryType":queryType
+					},function(data){
+						var obj={data:data,price:price}
+						util.render("#purlist_list2", obj, ".purlist_list");
+						if(type=="sales1" || type=="sales2" || type=="sales-month" || type=="sales-today" || type=="replenish-week" || type=="replenish-month" || type=="damage"){
+							$('.all').css('display','block')
+						}
+					})
+				}else{
+					ajax.post(api.mobileServerUrl+"/betterConvenience/findShopList",{
+					},function(data){
+						util.render("#purlist_list", data, ".purlist_list");
+						if(type=="sales1" || type=="sales2" || type=="sales-month" || type=="sales-today" || type=="replenish-week" || type=="replenish-month" || type=="damage"){
+							$('.all').css('display','block')
+						}
+					})
+				}
+				
+				$('.purlist_list').delegate('li','click',function(){
+					if($(this).hasClass('all')){
+						loc("shopId="+$(this).attr('id').substring(0,$(this).attr('id').length-1))
+					}else{
+						loc("shopId="+$(this).attr('id'))
+					}
+					
+				})
+				$('.purchase-bottom').click(function(){
+					scanQRCode(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"))
+				})
+				function scanQRCode(theajax, serverUrl, url) {
+					
+					theajax.post(serverUrl + "/shop/getLocationConfig",{
+						url:url
+					},function(data) {
+						wx.config({
+							debug: false,
+							appId: data.appid,
+							timestamp: data.timeStamp,
+							nonceStr: data.nonceStr,
+							signature: data.signature,
+							jsApiList: ['scanQRCode']
+						});
+						wx.ready(function () {
+							wx.scanQRCode({ 
+							    needResult : 1, 
+							    scanType : [ "qrCode" ], 
+							    success : function(res) { 
+							    	if(res.resultStr.split('?')[1]!=undefined && res.resultStr.split('?')[1]!=null && res.resultStr.split('?')[1]!=''){
+							    		var arry=new Array()
+										$('.purlist_list').find('li').each(function(){
+											arry.push(Number($(this).attr('shopId')))
+										})
+										if(arry.indexOf(Number(res.resultStr.split('?')[1].split('=')[1]))<0){
+							    			alert('该货架不是补货单的目标货架，请重新确认')
+							    		}else{
+							    			loc(res.resultStr.split('?')[1]+"&id="+id)
+							    		}
+							    	}else{
+							    		alert('请扫描货架上的二维码')
+							    	}
+							   		
+							    }, 
+							    fail : function(res) { 
+								    console.log(res) 
+								    alert(JSON.stringify(res)+" 3"); 
+								    setCookie('jsDebug','scanQRCode error',60/24/60)
+							 
+							    } 
+							  			
+							});
+						})
+					})
+				}
+				
+				function loc(href){
+					if(type=="replenish1"){
+						window.location.href="/mobilerack/purchase/replenish/apply.html?"+href
+					}else if(type=="replenish2"){
+						window.location.href="/mobilerack/purchase/replenish/record.html?"+href
+					}else if(type=="sales1"){
+						window.location.href="/mobilerack/purchase/sales/record.html?"+href
+					}else if(type=="sales2"){
+						window.location.href="/mobilerack/purchase/sales/ranking.html?"+href
+					}else if(type=="shop"){
+						window.location.href="/mobilerack/purchase/shopmanage/ercode.html?"+href
+					}else if(type=="damage"){
+						window.location.href="/mobilerack/purchase/goodslist/damage.html?"+href
+					}else if(type=="sales-month" || type=="sales-today"){
+						window.location.href="/mobilerack/purchase/goodslist/sale-record.html?"+href+"&type="+type
+					}else if(type=='salesgoods'){
+						window.location.href="/mobilerack/purchase/goodslist/salesgoods.html?"+href
+					}else if(type=="replenish-week" || type=="replenish-month"){
+						window.location.href="/mobilerack/purchase/goodslist/replenish.html?"+href+"&type="+type
+					}else if(type=="goodsmanage"){
+						window.location.href="/mobilerack/purchase/goodsmanage/list.html?"+href
+					}else if(type=="backlibrary1" || type=="backlibrary2"){
+						window.location.href="/mobilerack/purchase/backlibrary/apply.html?"+href+"&type="+type
+					}else if(type=="backlibrary3"){
+						window.location.href="/mobilerack/purchase/backlibrary/record.html?"+href
+					}
+					
+					
+				}
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

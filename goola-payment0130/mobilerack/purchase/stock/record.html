@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>站点库存</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-search">
+				<input placeholder="商品名称查询" />
+				<p>查询</p>
+			</div>
+			<div class="record">
+				
+			</div>
+			<script id="record" type="dot/tmpl">
+				{{?it.data || it.data.length>0}}
+				{{~it.data:items:i}}
+				<ul class="list">
+					<li>
+						<img src="{{=it.picUrl}}{{=items.cartPhoto}}" />
+						<div>
+							<h2>{{=items.goodsName}}</h2>
+							<p>{{=items.specifications}}</p>
+							{{?items.cardType==20}}
+							<p style="margin-top: 0.65625rem;">货损量：{{=items.ullageCount}}</p>
+							{{??items.cardType==19}}
+							<p style="margin-top: 0.65625rem;">盈余量：{{=items.ullageCount}}</p>
+							{{?}}
+						</div>
+					</li>
+					<p>{{=getFormatDate(items.createDate)}}</p>
+				</ul>
+				{{~}}
+				{{??}}
+				<div class="none">
+					<img src="/mobilerack/imgs/purchase/kong.png" />
+					<p>没有货损记录</p>
+				</div>
+				{{?}}
+				
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var orgSotckCheckMonth=util.getUrlParams("orgSotckCheckMonth")
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				record('',pageNo,20)
+				$('.purchase-search p').click(function(){
+					$('.record').html('')
+					pageNo=1
+					record($('.purchase-search input').val(),pageNo,20)
+					$(window).on('scroll', doSth)
+				})
+				function record(goodsName,pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/findOrgStockCheckMonthRecord",{
+						"orgSotckCheckMonth":orgSotckCheckMonth,"goodsName":goodsName,
+						"pageNo":pageNo,"pageSize":pageSize
+					},function(data){
+						total=data.total
+						pageTotal=parseInt(total/pageSize)+1
+						var obj={data:data.rows,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#record').html());
+						var html = doTtmpl(obj);
+						$('.record').append(html)
+					})
+				}
+				$(window).on('scroll', doSth)
+				function doSth() {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.record').find('ul').length>=total){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						pageNo=pageNo+1
+						record($('.purchase-search input').val(),pageNo,20)
+					}
+				}
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

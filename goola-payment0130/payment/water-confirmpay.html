@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/payment/querenzhifu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="payment confirmpay">
+				<div class="zhifu-top"></div>
+				<div class="zhifu-info"></div>
+				<div class="goods"></div>
+				<ul class="list"></ul>
+				<div class="confirm-total"></div>
+				
+			</div>
+			
+			<script id="zhifu-top" type="dot/tmpl">
+				{{?it.dataStatus==2}}
+				<p>订单状态：<span>已取消</span></p>
+				<p>订单编号：{{=it.chargeCode}}</p>
+				{{??}}
+				<p>订单状态：<span>{{?it.data.chargeStatus==1}}已付款{{??it.data.chargeStatus==2}}未付款{{??it.data.chargeStatus==3}}已取消{{?}}</span></p>
+				<p>订单编号：{{=it.data.chargeCode}}</p>
+				<h3>剩余支付时间<br/><a id="time">30分钟00秒</a></h3>
+				{{?}}
+			</script>
+			<script id="zhifu-info" type="dot/tmpl">
+				<h3>{{=it.customName}}</h3>
+				<p>{{=it.contactPerson}}<span>{{=it.shopUserPhone}}</span></p>
+				<p>{{=it.provinceName}}{{=it.cityName}}{{=it.districtName}}{{=it.contactAddress}}</p>
+			</script>
+			<script id="goods" type="dot/tmpl">
+				<img src="{{=it.picUrl}}{{=it.data.cartPhoto}}" />
+				<h2>{{=it.data.goodsName}}</h2>
+				<p>品牌：{{=it.data.goodsBrand}}</p>
+				<p>规格：{{=it.data.specifications}}</p>
+			</script>
+			<script id="list" type="dot/tmpl">
+				<li>桶装水<span>X{{=it.data.goodsCount}}</span><span>¥{{=it.data.goodsPrice}}</span></li>
+				<li>空桶押金<span>X{{=it.data.battlesCount}}</span><span>¥{{=it.data.depositPrice}}</span></li>
+				<p>是否开具发票<span>已开</span></p>
+			</script>
+			<script id="confirm-total" type="dot/tmpl">
+				<h3>商品总价<span>¥{{=it.data.receivePrice.toFixed(2)}}</span></h3>
+			</script>
+			
+			
+			<div class="bottom">
+				<p>去付款</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var customChargeLogId = util.getUrlParams("customChargeLogId");
+				
+				var orderCode
+				ajax.post(api.baseServerUrl + "/scm/getScmUser",{
+					
+				},function(data) {
+					util.render("#zhifu-info", data, ".zhifu-info");
+				});
+				ajax.post(api.baseServerUrl + "/scm/getCustomChargeLogById",{
+					"customChargeLogId":customChargeLogId
+				},function(data) {
+					var obj = {data:data,picUrl:api.picUrl}
+					util.render("#zhifu-top", obj, ".zhifu-top");
+					util.render("#goods", obj, ".goods");
+					util.render("#list", obj, ".list");
+					util.render("#confirm-total", obj, ".confirm-total");
+					startCountDown(data.createTime)
+					orderCode=data.chargeCode
+				});
+				
+				$('.bottom').click(function(){
+					if(isWeiXin()){
+						payOrder(customChargeLogId);
+					}else{
+						toPay(customChargeLogId);
+					}
+				})
+		
+		function payOrder(orderId) {
+			ajax.post(api.baseServerUrl + "/scm/payCustomChargeLog",{
+				"customChargeLogId":orderId,"url":encodeURI(location.href.split('#')[0])	
+			},function(data) {
+				wx.config({
+					debug: false,
+					appId: data[0].appid,
+					timestamp: data[0].timeStamp,
+					nonceStr: data[0].nonceStr,
+					signature: data[0].signature,
+					jsApiList: ['chooseWXPay']
+				});
+				wx.ready(function () {
+					wx.chooseWXPay({
+						timestamp: data[1].timeStamp , 
+						nonceStr: data[1].nonceStr, 
+						package: data[1].packageWithPrepayId , 
+						signType: data[1].signType, 
+						paySign: data[1].paySign, 
+						success: function (res) {
+							confirmOrder(orderId)
+						}
+					});
+				})			
+			})
+		}
+		//确认订单
+		function confirmOrder(orderId){
+			ajax.post(api.baseServerUrl + "/scm/confirmCustomChargeLog",{
+				"customChargeLogId":orderId	
+			},function(data) {
+				window.location.href="./zhifuchenggong.html?zhifutype=5";
+			})
+		}		
+				
+		function GetRTime(){
+			var NowTime = new Date();
+			var t =EndTime - NowTime.getTime();
+			if(t <= 0){
+				var data={orderCode:orderCode,dataStatus:2};
+				util.render("#zhifu-top", data, ".zhifu-top");
+			}else{
+				var d=Math.floor(t/1000/60/60/24);
+				if(d<10){
+					d='0'+d
+				}
+				var h=Math.floor(t/1000/60/60%24);
+				if(h<10){
+					h="0"+h
+				}
+				var m=Math.floor(t/1000/60%60);
+				if(m<10){
+					m='0'+m
+				}
+				var s=Math.floor(t/1000%60);
+				if(s<10){
+					s='0'+s
+				}
+				$("#time").html(m+"分"+s+"秒");
+			}
+		}
+		//开始倒计时
+		function startCountDown(time){
+			EndTime =Number(time)+1800000
+			console.log(EndTime)
+			setInterval(GetRTime,0);
+		}
+				
+				
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

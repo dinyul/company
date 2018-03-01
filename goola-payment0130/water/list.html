@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="watertop">
+				<p>我的订单</p>
+				<ul>
+					<li id="1" style="background-image: url(/water/imgs/order1.png);">全部</li>
+					<li id="3" style="background-image: url(/water/imgs/order2.png);">待发货</li>
+					<li id="4" style="background-image: url(/water/imgs/order3.png);">待收货</li>
+					<li id="5" style="background-image: url(/water/imgs/order4.png);">已收货</li>
+				</ul>
+			</div>
+			<ul class="waterlist">
+				<li><a href="userinfo.html"><p style="background-image: url(/water/imgs/icon3.png);">基本信息</p></a></li>
+				<li><a href="goodslist.html"><p style="background-image: url(/water/imgs/icon2.png);">商品订购</p></a></li>
+				<li><a href="balance.html"><p style="background-image: url(/water/imgs/icon5.png);">我要叫水</p></a></li>
+				<li><a href="record.html"><p style="background-image: url(/water/imgs/icon4.png);">充值/退订记录</p></a></li>
+			</ul>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+		(function(api, util, ajax){
+			$('.watertop li').click(function(){
+				window.location.href="orderlist.html?type="+$(this).attr('id')
+			})
+		})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

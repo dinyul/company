@@ -1,0 +1,79 @@
+.input{
+	height: 1.171875rem;
+	background: #c7a994
+}
+.input input{
+	width: 6.671875rem;
+	height: 0.765625rem;
+	outline: none;
+	border:0;
+	background: #fff;
+	margin: 0.203125rem 0.46875rem 0.203125rem 0.34375rem;
+	border-radius: 0.078125rem;
+	padding-left: 0.296875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	float: left;
+	line-height: 0.765625rem;
+}
+.input input::-webkit-input-placeholder { 
+color: #9b9b9b; 
+} 
+.input input:-moz-placeholder { 
+color: #9b9b9b; 
+} 
+.input input::-moz-placeholder {
+color: #9b9b9b; 
+} 
+.input input:-ms-input-placeholder { 
+color: #9b9b9b; 
+} 
+.input a{
+	display: block;
+	float: left;
+	background:#fa2f3e;
+	border-radius:0.078125rem;
+	width:1.890625rem;
+	height:0.765625rem;
+	margin-top: 0.203125rem;
+	text-align: center;
+	line-height: 0.765625rem;
+	color: #fff;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+}
+.history{
+	margin-top: 0.0625rem;
+	background: #fff;
+	padding: 0.9375rem 0.34375rem 0
+}
+.history h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+	margin-bottom: 0.484375rem
+}
+.history h3 span{
+	float: right;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	background: url(/imgs/search/del.png) no-repeat left center;
+	background-size: 0.25rem 0.3125rem;
+	padding-left: 0.5625rem;
+	margin-top: 0.125rem
+}
+.history ul{
+	overflow: hidden;
+}
+.history ul li{
+	float: left;
+	padding: 0.265625rem 0.515625rem;
+	background:#f5f5f5;
+	border-radius:0.0625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.421875rem;
+	color:#4a4a4a;
+	margin: 0 0.5625rem 0.4375rem 0
+}

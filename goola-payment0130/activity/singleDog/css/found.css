@@ -1,0 +1,411 @@
+.found{
+	width: 100%;
+	height: 16.078125rem;
+	background: url(/activity/singleDog/imgs/found.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.found input{
+	font-family:PingFangSC-Medium;
+	font-size:0.453333rem;
+	color:#4a4a4a;
+	position: absolute;
+	text-align: center;
+	top: 11.693333rem;
+    left: 2.266667rem;
+    width: 5.666667rem;
+    height: 0.96875rem;
+    background: #fff;
+    border: 0;
+    font-weight: bold;
+    line-height: 0.96875rem;
+}
+.found a{
+	display: block;
+	position: absolute;
+	left: 2.578125rem;
+	bottom: 0.328125rem;
+	width: 4.53125rem;
+	height: 2.8125rem
+}
+.info{
+	width: 10.0rem;
+	height: 16.078125rem;
+	background: url(/activity/singleDog/imgs/info-bg.png) no-repeat;
+	background-size: 100%;
+	position:relative;
+}
+.info .title{
+	padding: 1.0625rem 0 0 1.671875rem;
+	overflow: hidden;
+}
+.info .title img{
+	float: left;
+	width: 1.15625rem;
+	height: 1.15625rem;
+	border-radius: 100%;
+	margin-right: 0.3125rem
+}
+.info .title h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#4a4a4a;
+}
+.info .title p{
+	font-family:PingFangSC-Medium;
+	font-size:0.40625rem;
+	color:#9b9b9b;
+	margin-top: 0.234375rem
+}
+.info .title h3{
+	margin: 0.9375rem 0 0 2.1875rem;
+    color: #ECA100;
+    font-weight: bold;
+    font-size: 0.34375rem;
+    font-family: PingFangSC-Medium;
+}
+.info .icon1{
+	position: absolute;
+    width: 2.76rem;
+    height: 1.773333rem;
+    left: 0.213333rem;
+    top: 5.013333rem;
+    z-index: 2
+}
+.info .dog{
+	position: absolute;
+	width: 2.546667rem;
+    height: 3.106667rem;
+    left: 1.706667rem;
+    top: 2.746667rem;
+    z-index: 1
+}
+.info .talk{
+	position: absolute;
+	width: 3.16rem;
+	height: 0.96rem;
+	left: 3.693333rem;
+	top: 3.6rem;
+	background: url(/activity/singleDog/imgs/icon1.png) no-repeat;
+	background-size: 100%;
+	opacity: 0;
+	animation: myfirst 6s infinite;
+	-moz-animation: myfirst 6s infinite;	/* Firefox */
+	-webkit-animation: myfirst 6s infinite;	/* Safari 和 Chrome */
+	-o-animation: myfirst 6s infinite;	
+}
+.info .talk p{
+	font-size: 0.28rem;
+    width: 2.373333rem;
+    padding: 0.186667rem 0 0 0.56rem;
+    text-align: center;
+    line-height: 0.346667rem;
+    color: #977A4E;
+}
+@keyframes myfirst
+{
+0% {opacity: 0;}
+17% {opacity:1;}
+66%  {opacity: 1}
+84% {opacity: 0;}
+100% {opacity: 0;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+0% {opacity: 0;}
+17% {opacity:1;}
+66%  {opacity: 1}
+84% {opacity: 0;}
+100% {opacity: 0;}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+0% {opacity: 0;}
+17% {opacity:1;}
+66%  {opacity: 1}
+84% {opacity: 0;}
+100% {opacity: 0;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+0% {opacity: 0;}
+17% {opacity:1;}
+66%  {opacity: 1}
+84% {opacity: 0;}
+100% {opacity: 0;}
+}
+.info .content{
+    height: 11.15625rem;
+    position: absolute;
+    width: 100%;
+    overflow: hidden;
+    top: 4.875rem
+}
+.info .content div{
+	position: absolute;
+	width: 2.578125rem
+}
+.info .content div p{
+	background: url(/activity/singleDog/imgs/infoicon.png) no-repeat;
+	background-size: 100%;
+	width: 2.1875rem;
+	height: 0.828125rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.34375rem;
+	color:#4a4a4a;
+	text-align: center;
+    line-height: 0.59375rem;
+    position: relative;
+    z-index: 2
+}
+.foundinfo .message1{
+	background: #fff;
+	text-align: center;
+	padding-bottom: 0.390625rem
+}
+.foundinfo .message1>img{
+	width: 4.953125rem;
+	height: 0.46875rem;
+	margin: 0.53125rem 0 0.359375rem 0
+}
+.foundinfo .message1 a{
+	display: block;
+	width: 7.078125rem;
+	height: 1.375rem;
+	margin: 0 auto;
+}
+.foundinfo .message2{
+	background: #fff;
+	padding-top: 0.390625rem
+}
+.foundinfo .message2>a{
+	display: block;
+	width: 7.078125rem;
+	height: 1.375rem;
+	margin:0 auto 
+}
+.list{
+	margin-top: 0.625rem;
+	padding: 0 0.15625rem
+}
+.list h2{
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.list table{
+	margin-top: 0.46875rem;
+	border-collapse:collapse; 
+	border-spacing:0px 0.46875rem;
+	width: 9.6875rem
+}
+.list table thead{
+	border-bottom:2px solid #d9d9d9;
+}
+.list table thead td{
+	font-family:PingFangSC-Medium;
+	font-size:0.40625rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	text-align: center;
+	padding-bottom: 0.15625rem;
+}
+.list table tbody tr td{
+	padding-top: 0.46875rem
+}
+.list table td:first-of-type{
+	width: 1.3125rem;	
+	text-align: center;
+}
+.list table td:first-of-type img{
+	width: 1.15625rem;
+	height: 1.15625rem;
+	border-radius: 100%
+}
+.list table td:nth-of-type(2){
+	width: 2.125rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#4a4a4a;
+}
+.list table td:nth-of-type(3){
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#4a4a4a;
+	line-height: 0.506667rem;
+    width: 4.328125rem;
+    text-align: center;
+}
+.list table td:nth-of-type(4){
+	width: 1.375rem;
+}
+.list table td a{
+	display: block;
+    text-align: center;
+    vertical-align: middle;
+    color: #edb23d;
+    font-size: 0.34375rem;
+    border: 1px solid #edb23d;
+    border-radius: 0.046875rem;
+    width: 1.21875rem;
+    height: 0.59375rem;
+    line-height: 0.59375rem;
+    float: right;
+}
+.list>p{
+	text-align: center;
+	margin-top: 0.40625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#9b9b9b;
+	padding-bottom: 0.46875rem
+}
+.shareopen{
+	position: fixed;
+	left: 0;
+	top: 0;
+	width: 100%;
+	z-index: 99;
+	display: none;
+}
+.shareopen a{
+	display: block;
+    position: absolute;
+    left: 50%;
+    top: 10.59375rem;
+    width: 7.3125rem;
+    height: 1.421875rem;
+    margin-left: -3.65625rem;
+}
+.share{
+	width: 100%;
+	height: 16.078125rem;
+	background: url(/activity/singleDog/imgs/0010.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.share h2{	
+	position: absolute;
+	top: 9.859375rem;
+	left: 1.796875rem;
+    width: 6.40625rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#ffffff;
+	text-align:center;
+	line-height: 0.5625rem;
+}
+.share a{
+	display: block;
+	position: absolute;
+}
+.share a:first-of-type{
+	width: 4.53125rem;
+	height: 2.8125rem;
+	left: 0.375rem;
+	bottom: 0.6875rem;
+}
+.share a:last-of-type{
+	width: 4.171875rem;
+	height: 2.765625rem;
+	right: 0.34375rem;
+	bottom: 0.734375rem;
+}
+.join .info{
+	margin-bottom: 5.1875rem
+}
+.declaration{
+	background: #fff;
+	padding:0.46875rem 0 0.25rem 0 ;
+	position: fixed;
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    z-index: 999
+}
+.declaration>p{
+	padding: 0 0.265625rem 0 0.453125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#9b9b9b;
+}
+.declaration textarea{
+	background:#eeeeee;
+	border-radius:0.046875rem;
+	width:9.375rem;
+	height:1.984375rem;
+	margin: 0.46875rem auto 0.734375rem;
+	display: block;
+	border:0;
+	resize:none;
+	outline: none;
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#4a4a4a;
+	padding: 0.28125rem 0.3125rem;
+	box-sizing:border-box;
+	line-height: 0.46875rem
+}
+.declaration textarea::-webkit-textarea-placeholder { 
+color: #9b9b9b; 
+} 
+.declaration textarea:-moz-placeholder { 
+color: #9b9b9b; 
+} 
+.declaration textarea::-moz-placeholder {
+color: #9b9b9b; 
+} 
+.declaration textarea:-ms-textarea-placeholder { 
+color: #9b9b9b; 
+} 
+.declaration a{
+	display: block;
+	width: 2.296875rem;
+	height: 0.9375rem;
+	float: left;
+	margin: 0 3.109375rem 0 1.09375rem;
+}
+.declaration a:last-of-type{
+	margin: 0
+}
+.joininfo .message2{
+	background: #fff;
+	padding-top: 0.390625rem
+}
+.joininfo .message2>a{
+	display: block;
+	width: 7.078125rem;
+	height: 1.375rem;
+	margin: 0 auto 0.625rem
+}
+.joininfo,.foundinfo{
+	margin-bottom: 1.375rem
+}
+.joinbottom{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1.375rem;
+	background:#f7f0db;
+}
+.joinbottom>img{
+	float: left;
+	display: block;
+	width: 6.34375rem;
+	height: 0.484375rem;
+	margin: 0.453125rem 0.546875rem 0 0.5rem;
+}
+.joinbottom a{
+	display: block;
+	float: left;
+	width: 2.296875rem;
+	height: 0.9375rem;
+	margin-top: 0.21875rem
+}

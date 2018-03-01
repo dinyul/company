@@ -1,0 +1,147 @@
+body{
+	padding-bottom: 1.4rem;
+}
+.pingjia-content{
+	width: 100%;
+	background: #F1EDEE;
+}
+.pingjia-content ul{
+	background: #fff;
+}
+.pingjia-content ul li{
+	padding: 0.234375rem 0.3125rem 0 0.3125rem;
+	border-bottom: 1px solid #e5e5e5;
+}
+.pingjia-content ul li h2{
+	font-size: 0.375rem;
+	line-height: 0.78125rem;
+	margin-bottom: 0.15625rem;
+}
+.pingjia-content ul li h2 img{
+	width: 0.78125rem;
+	height: 0.78125rem;
+	margin-right: 0.28125rem;
+	vertical-align: middle;
+}
+.pingjia-content ul li h2 .date{
+	float: right;
+	font-size: 0.28125rem;
+	line-height: 0.78125rem;
+	font-size: 0.28125rem;
+	color:#bcbcbc;
+	letter-spacing: 0.046875rem;
+}
+.pingjia-content ul li p span{
+	display: inline-block;
+	width: 0.3125rem;
+	height: 0.28125rem;
+	background: url(/imgs/shangpin/shangpinxaingqing-xing-hui.png?t=20161117) no-repeat;
+	background-size:100% ;
+	margin-right: 0.125rem;
+}
+.pingjia-content ul li p .btn{
+	background: url(/imgs/shangpin/shangpinxaingqing-xing-huang.png?t=20161117) no-repeat;
+	background-size:100% ;
+}
+.pingjia-content ul li p{
+	font-size: 0.3125rem;
+	line-height: 0.46875rem;
+	margin-top: 0.15625rem;
+}
+.pingjia-content ul li p.pf{
+	padding-bottom: .2rem;
+}
+.bottom{
+	width: 100%;
+	height: 1.25rem;
+	background: #fa2f3e;
+	line-height: 1.25rem;
+	text-align: center;
+	color: #fff;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	z-index: 10;
+}
+.bottom .gwc{
+	width: 1.328125rem;
+	height: 1.328125rem;
+	background: url(/imgs/shouye-gouwuche.png?t=20161117) no-repeat;
+	background-size: 100%;
+	position: fixed;
+	right: 0.3125rem;
+	bottom: 1.546875rem;
+}
+.bottom .gwc .num{
+	width: 0.3125rem;
+	height: 0.3125rem;
+	border-radius: 0.3125rem;
+	background: #fa2f3e;
+	position: absolute;
+	top: 0.375rem;
+	right: 0.3125rem;
+	line-height: 0.3125rem;
+	text-align: center;
+	font-size: 0.21875rem;
+	color: #fff;
+}
+
+.pingjia-content .hd_nav{
+	height: 1.173333rem;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	box-shadow: inset 0 -1px 0 0 #DBDBDB;
+	background:#FFFFFF;
+}
+
+.pingjia-content .hd_nav div{
+	flex: 1;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	font-family: PingFangSC-Regular;
+	font-size: .373333rem;
+	color: #313131;
+}
+
+.pingjia-content .hd_nav div.select{
+	color: #D4AA70;
+	position:relative;
+}
+
+.pingjia-content .hd_nav div.select:after{
+	content: " ";
+	position: absolute;
+	bottom: 0;
+	left: 1.7rem;
+	width: 1.6rem;
+	height: .06rem;
+	background: #D4AA70;
+}
+
+.pingjia-content .chase_evaluate_title,.pingjia-content .evaluate_content{
+	font-family: PingFangSC-Regular;
+	font-size: .32rem;
+	color: #313131;
+	line-height: .32rem;
+	margin: 0;
+}
+
+.pingjia-content .chase_evaluate_title{
+	color: #c53f40;
+}
+
+.pingjia-content .evaluate_content{
+	padding: .266667rem 0;
+	line-height: .4rem;
+}
+
+.pingjia-content .evaluate_content1{
+    padding-top: 0;
+}
+
+
+
+

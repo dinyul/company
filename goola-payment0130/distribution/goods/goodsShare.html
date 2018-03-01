@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>事业合伙人</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/distribution/css/team.css" />
+		<link rel="stylesheet" type="text/css" href="/distribution/css/goods.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="goods">
+				<div class="shop-top"></div>
+				<script id="shop-top" type="dot/tmpl">
+					<div style="overflow: hidden;height: 2.1875rem;position: relative;">
+						<div class="shophead blur" style="background-image: url({{=it.photo}});">
+							<div style="width: 100%;height: 2.1875rem;background: rgba(0,0,0,0.3);"></div>
+						</div>
+					</div>
+					<div class="topcontent">
+						<img src="{{=it.photo}}" class="headimg"/>
+						<h2 class="name">{{=it.wxName}}小店</h2>
+						<a><img src="../imgs/Shape.png"/></a>
+					</div>
+				</script>
+				<nav></nav>
+				<script id="nav" type="dot/tmpl">
+					<ul>
+						<a id="" class="checked">全部</a>
+						{{~it:data:i}}
+						<a id="{{=data.categoryId}}">{{=data.categoryName}}</a>
+						{{~}}
+					</ul>
+				</script>
+				<ul class="dist-goodslist"></ul>
+				<script id="dist-goodslist" type="dot/tmpl">
+					{{~it.data:data:i}}
+					{{?data!='' && data!=undefined &&　data!=null}}
+					<li>
+						<div class="dist-goodsinfo">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+							<h2>{{=data.goodsName}}</h2>
+							<h3>{{=data.specifications}}</h3>
+							<p>¥{{=(data.preferentialPrice).toFixed(2)}}<span>已售<a>{{=data.salesCount}}</a>件</span></p>
+							<h4>收益：¥<span>{{=(data.distributionProfit).toFixed(2)}}</span></h4>
+							<div class="clear"></div>
+						</div>
+						<div class="dist-goodsshare" id="{{=data.goodsId}}">
+							<div class="shareweixin"><p>微信分享</p></div>
+							<div class="shareeweima"><p>二维码分享</p></div>
+						</div>
+					</li>
+					{{?}}
+					{{~}}
+				</script>
+				
+				<div class="join">
+					<div class="content">
+						<div class="code" id="createimg">
+							<h2></h2>
+							<div id="code"></div>
+						</div>
+						<div class="joinbg"></div>
+						<p>长按图片保存或转发</p>
+						<a><img src="/distribution/imgs/close.png"/></a>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/distribution/static/jquery-plugin/jquery.qrcode.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/html2canvas.min.js"></script>
+		<script type="text/javascript">
+			(function(api, util, ajax){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.database').find('li').length>=total){
+							$('.none').show()
+							/*$(window).unbind('scroll')
+							return false*/
+						}else if(pageNo>=pageTotal){
+							$('.none').show()
+							/*$(window).unbind('scroll')
+							return false*/
+						}else{
+							pageNo=pageNo+1
+							goodsList($('nav').find('.checked').attr('id'),pageNo,20)
+						}
+						
+						
+					}
+				});
+				
+				
+				
+				var expandCode
+				ajax.post(api.baseServerUrl + "/distribution/getProfitGoodsCategoryList",{
+				},function(data) {
+					util.render("#nav", data, "nav");
+					var width=0
+					$('nav').find('a').each(function(){
+						width+=Number($(this).outerWidth())
+					})
+					$('nav ul').css('width',(width/$(window).width()*10+($('nav').find('a').length-1)*0.578125)+0.2+'rem')
+					
+					goodsList('',1,20)
+				});
+				//goodsList('',1,20)
+				
+				
+				
+				$('.shop-top').delegate('.topcontent a','click',function(){
+					$("#code").qrcode(
+							{width:150,height:150,correctLevel:0,text:"http://"+ document.domain +"/distribution/goods/goodslist.html?expandCode="+expandCode+"&from=1"});
+					$('.join').css('display','block')
+					if($('.code').find('img').length>0){
+						main.html2Canvas()
+					}
+					
+				})
+				$('.join .content a').click(function(){
+					$('.join').css('display','none')
+				})
+				
+				function goodsList(categoryId,pageNo,pageSize){
+					ajax.post(api.baseServerUrl + "/distribution/getProfitGoodsList",{
+						"categoryId":categoryId,'pageNo':pageNo,'pageSize':pageSize
+					},function(data) {
+						if($('.shop-top').html()==''|| $('.shop-top').html()==undefined || $('.shop-top').html()==null){
+							util.render("#shop-top", data, ".shop-top");
+							$('.code h2').html('<img src="'+$('.headimg').attr('src').replace("http://wx.qlogo.cn","//"+window.location.host)+'" />'+$('.name').html())
+						}
+						
+						total=data.totalCount
+						pageTotal=parseInt(total/pageSize)+1
+						/*if( total<=20){
+							$('.none').show()
+						}*/
+						var obj={data:data.goodsList,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#dist-goodslist').html());
+						var html = doTtmpl(obj);
+						$('.dist-goodslist').append(html)
+						
+						expandCode=data.expandCode
+						ajax.post(api.baseServerUrl + "/shop/getShareInfo",{
+						},function(data) {
+							shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.title,data.content,"http://"+ document.domain+"/distribution/goods/goodslist.html?expandCode="+expandCode+"&from=1","http://"+ document.domain +api.picUrl + data.photo);
+						});
+					});
+				}
+				$('nav').delegate('a','click',function(){
+					$('nav').find('a').removeClass('checked')
+					$(this).addClass('checked')
+					$('.dist-goodslist').html('')
+					pageNo=1
+					goodsList($(this).attr('id'),1,20)
+				})
+				$('.dist-goodslist').delegate('.shareweixin','click',function(){
+					window.location.href="../../shangpin/shangpinxiangqing.html?goodsId="+$(this).parent().attr('id')+"&type=dis&expandCode="+expandCode
+				})
+				$('.dist-goodslist').delegate('.shareeweima','click',function(){
+					window.location.href="shareinfo.html?goodsId="+$(this).parent().attr('id')+"&expandCode="+expandCode
+				})
+				
+				var main = {
+	        init:function(){
+	            main.setListener();
+	        },
+	        //设置监听事件
+	        setListener:function(){
+	        	/*window.onload=function(){
+	        		main.html2Canvas();
+	        	}*/
+	        	var btnShare = document.getElementById("createimg");
+	            btnShare.onclick = function(){
+	                main.html2Canvas();
+	            }
+	           
+	        },
+	        //获取像素密度
+	        getPixelRatio:function(context){
+	            var backingStore = context.backingStorePixelRatio ||
+	                    context.webkitBackingStorePixelRatio ||
+	                    context.mozBackingStorePixelRatio ||
+	                    context.msBackingStorePixelRatio ||
+	                    context.oBackingStorePixelRatio ||
+	                    context.backingStorePixelRatio || 1;
+	            return (window.devicePixelRatio || 1) / backingStore;
+	        },
+	        //绘制dom 元素，生成截图canvas
+	        html2Canvas: function () {
+	        	var shareContent = document.getElementById('createimg');// 需要绘制的部分的 (原生）dom 对象 ，注意容器的宽度不要使用百分比，使用固定宽度，避免缩放问题
+	            var width = shareContent.offsetWidth;  // 获取(原生）dom 宽度
+	            var height = shareContent.offsetHeight; // 获取(原生）dom 高
+	            var offsetTop = shareContent.offsetTop;  //元素距离顶部的偏移量
+				
+	            var canvas = document.createElement('canvas');  //创建canvas 对象
+	            var context = canvas.getContext('2d');
+	            var scaleBy = main.getPixelRatio(context);  //获取像素密度的方法 (也可以采用自定义缩放比例)
+	            canvas.width = width * scaleBy;   //这里 由于绘制的dom 为固定宽度，居中，所以没有偏移
+	            canvas.height = (height + offsetTop) * scaleBy;  // 注意高度问题，由于顶部有个距离所以要加上顶部的距离，解决图像高度偏移问题
+	            context.scale(scaleBy, scaleBy);
+	
+	            var opts = {
+	                allowTaint:true,//允许加载跨域的图片
+	                tainttest:true, //检测每张图片都已经加载完成
+	                scale:scaleBy, // 添加的scale 参数
+	                canvas:canvas, //自定义 canvas
+	                logging: true, //日志开关，发布的时候记得改成false
+	                width:width, //dom 原始宽度
+	                height:height //dom 原始高度
+	            };
+	            html2canvas(shareContent, opts).then(function (canvas) {
+	                var dataURL = canvas.toDataURL();     
+	                $('.code').html("<img src='"+dataURL+"' style='margin-top:0.46875rem'/>")
+	                $('.joinbg').css('display','none')
+	            });
+	        }
+	    };
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

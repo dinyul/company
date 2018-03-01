@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>爱的许愿屋</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/crowdfunding/css/wish.css?t=20161117" />
+</head>
+<body style="min-height: 100%;background-color:#fff ; background-image: url(./crowdfunding/imgs/wish/wish-bottom.png?t=20161117);background-size: 100%;background-repeat: no-repeat;background-position: left bottom;">
+	<div class="body">
+		<div class="wish-top">
+			<div id="FontScroll" >
+			    <ul class="FontScroll-list">
+			    </ul>
+			</div>
+			<script type="dot/tmpl" id="FontScroll-list">
+				{{~ it :data:i}}
+				<li><p>{{=data.wechatName}}<span>完成了心愿,获得了{{=data.goodsName}}</span></p></li>
+				{{~}}
+			</script>
+			<div class="count"><p><span></span>已完成</p></div>
+			<a class="yiwancheng" href="wish-complete.html"></a>	
+			<div class="rankingList">
+				<a href="rankinglist.html?type=aixin"></a>
+				<a href="rankinglist.html?type=tuhao"></a>
+				<a href="rankinglist.html?type=renyuan"></a>
+				<a href="rankinglist.html?type=renqi"></a>
+			</div>
+		</div>
+		<div class="wish-list">
+			<ul >
+				
+			</ul>
+			<img src="/crowdfunding/imgs/wish/complete.png?t=20161117" style="display: none;" class="wish-list-complete"/>
+		</div>
+		
+		<div class="wish-bottom">
+			<img src="/crowdfunding/imgs/wish/wish.png?t=20161117" />
+		</div>
+		<div class="danmu">
+			<ul>
+			</ul>
+		</div>
+		<script type="dot/tmpl" id="danmu">
+		{{~it.data:data:i}}
+			<li><div><img src="{{=data.wechatHead}}"/><p><span>{{=data.wechatName}}</span>{{=data.barrageContent}}</p></div></li>
+		{{~}}
+		</script>
+		
+	</div>
+	<a style="display: block;width: 1.906667rem;height: 1.76rem;position: fixed;bottom: 0.226667rem;left:0;z-index: 3;" href="../index.html"><img src="/crowdfunding/imgs/wish/home.png?t=20161117" /></a>
+	<a style="display: block;width: 1.96rem;height: 1.76rem;position: fixed;bottom: 0.226667rem;right:0;z-index: 3;" href="guize.html"><img src="/crowdfunding/imgs/wish/guize.png?t=20161117" /></a>
+	<p class="jianyi">谢谢你的爱心，为TA减少了<span></span>元硬币</p>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/fontscroll.js?t=20161117&v2"></script>
+	<script type="text/javascript" src="/crowdfunding/js/wish.js"></script>
+	<script type="text/javascript" src="/crowdfunding/js/base.js"></script>
+</body>
+</html>	

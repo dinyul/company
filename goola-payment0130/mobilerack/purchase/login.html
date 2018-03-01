@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body style="background: #fff;">
+		<div class="body">
+			<div class="login">
+				<img src="../imgs/purchase/icon.png"/>
+				<h2>进销存管理系统</h2>
+				<ul>
+					<li><input type="text" name="username" placeholder="请输入用户名" id="name"/></li>
+					<li><input type="password" name="password" placeholder="请输入密码" id="password"/><a class="password"></a></li>
+					<li class="yzm" style="display: none;">
+						<input type="text"  name="captcha"  id="captcha" class="yzm1" placeholder="验证码" />
+						<span class="yzmtu"  id="idcode">
+							<img alt="验证码" style="cursor: hand" title="换一张" id="captchaimg"  />
+						</span>
+					</li>
+				</ul>
+				<div>
+					<p><span class="remember"></span>记住用户名</p>
+				</div>
+				<a class="denglu1">登录</a>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				if((getCookie('purchase')=='' || getCookie('purchase')==null || getCookie('purchase')==undefined)&& getCookie('purchase')!="true" ){
+					for(var i=0;i<localStorage.length;i++){
+						if(localStorage.key(i).indexOf('purchase')>=0){
+							localStorage.removeItem(localStorage.key(i))
+						}
+					}
+				}
+				
+				
+				ajax.post(api.mobileServerUrl + "/logout",{
+				 	"mobileLogin":true
+				},function(data){
+				},function(data){
+					
+				})
+				if(getCookie("purchaseName")!='' && getCookie("purchaseName")!=undefined && getCookie("purchaseName")!=null){
+					$('#name').val(getCookie("purchaseName"))
+					$('.remember').addClass('checked')
+				}
+				$('.password').click(function(){
+					if($('#password').attr('type')=="password"){
+						$(this).addClass('check')
+						$('#password').attr('type','text')
+					}else{
+						$(this).removeClass('check')
+						$('#password').attr('type','password')
+					}
+				})
+				$('input').bind('input propertychange', function(){
+					if($('#name').val()!='' && $('#password').val()!=''){
+						$('.denglu1').addClass('denglu')
+					}else{
+						$('.denglu1').removeClass('denglu')
+					}
+				})
+				function yzm(){
+					$("#captchaimg").attr("src",'/shop-admin/servlet/validateCodeServlet?'+new Date().getTime());
+				}
+				$("#captchaimg").click(function(){
+					yzm();
+				})
+				$('.remember').click(function(){
+					$(this).toggleClass('checked')
+				})
+				$('.login').delegate('.denglu','click',function(){
+					var userName=$('#name').val()
+					var passWord=$('#password').val()
+					var validateCode=$('#captcha').val()
+					if(userName==''){
+						alert('用户名不能为空')
+						return
+					}
+					if(passWord==''){
+						alert('密码不能为空')
+						return
+					}
+					if($('.yzm').css('display')=="block" && validateCode==''){
+						alert('图片验证码不能为空')
+						return
+					}
+					ajax.post(api.mobileServerUrl + "/login",{
+						"username":userName,"password":passWord,
+						"mobileLogin":true,"validateCode":validateCode
+					},function(data) {
+						if($('.remember').hasClass('checked')){
+							setCookie("purchaseName",userName)
+						}else{
+							setCookie("purchaseName",'')
+						}
+						yzm()
+						window.location.href="/mobilerack/purchase/index.html"
+					},function(data){
+						var data=jQuery.parseJSON(data)
+						alert(data.message)
+						if(data.data.isValidateCodeLogin==true){
+							yzm()
+							$('.yzm').css('display','block')
+						}
+					});
+					
+				})
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

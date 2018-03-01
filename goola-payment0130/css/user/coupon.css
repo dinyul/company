@@ -1,0 +1,119 @@
+.coupon{
+	width: 100%;
+	height: 16.0rem;
+	background: url(/imgs/coupon/bg1.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.coupon .exchange{
+	padding-top: 5.046875rem;
+	width: 8.59375rem;
+	margin: 0 auto
+}
+.coupon .exchange input{
+	background:#ffffff;
+	border-radius:0.125rem;
+	width:8.59375rem;
+	height:1.375rem;
+	border:0;
+	display: block;
+	text-align: center;
+	line-height: 1.375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#d9d9d9;
+}
+.coupon .exchange a{
+	display: block;
+	width: 100%;
+	margin-top: 0.46875rem;
+	text-align: center;
+	height: 1.375rem;
+	line-height: 1.375rem;
+	background:#d70029;
+	border-radius:0.125rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#ffffff;
+}
+.coupon .success{
+	padding-top: 5.171875rem;
+}
+.coupon .success>h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#d70029;
+	line-height:0.5rem;
+	text-align: center;
+	margin-bottom: 0.3125rem
+}
+.coupon .success>div{
+	width: 7.421875rem;
+	height: 2.734375rem;
+	margin: 0 auto;
+	background: url(/imgs/coupon/bg2.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.coupon .success>div h3{
+	position: absolute;
+	font-family:PingFangSC-Medium;
+	font-size:1.5625rem;
+	color:#ffffff;
+	line-height:1.25rem;
+	left: 1.34375rem;
+	top:0.21875rem;
+}
+.coupon .success>div h4{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#ffffff;
+	position: absolute;
+	left: 2.875rem;
+	top: 0.28125rem;
+}
+.coupon .success>div h5{
+	font-family:PingFangSC-Medium;
+	font-size:0.3125rem;
+	color:#ffffff;
+	position: absolute;
+	left: 2.875rem;
+	top: 1.03125rem
+}
+.coupon .success>div p{
+	position: absolute;
+	left: 1.015625rem;
+	top: 1.796875rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.3125rem;
+	color:#d70029;
+}
+.coupon .success>div p span{
+	margin-left: 0.671875rem;
+	color:#252525;
+}
+.coupon .info{
+	position: absolute;
+	top: 8.578125rem;
+	left: 0;
+	width: 8.59375rem;
+	left: 0.6875rem
+}
+.coupon .info div:first-child{
+	border-bottom: 2px solid #e4d7a5
+}
+.coupon .info h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#252525;
+	text-align: center;
+	font-weight: bold;
+	margin:0.46875rem 0 0.3125rem 0
+}
+.coupon .info p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#252525;
+	line-height:0.4375rem;
+	margin-bottom: 0.3125rem
+}

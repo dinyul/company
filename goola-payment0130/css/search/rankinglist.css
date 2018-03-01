@@ -1,0 +1,121 @@
+.search{
+	height: 1.171875rem;
+	background: #c7a994;
+	padding-top: 0.015625rem
+}
+.search p{
+	width: 5.703125rem;
+    padding: 0 0.171875rem 0 3.609375rem;
+	height: 0.765625rem;
+	margin: 0.1875rem auto;
+	background: #fff url(/imgs/search/search.png) no-repeat 3.09375rem center;
+	background-size: 0.375rem 0.390625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	line-height:0.765625rem;
+	text-align:left;
+	border-radius:0.078125rem;
+}
+.list li{
+	background: #fff;
+	height: 3.125rem;
+	padding: 0.328125rem 0;
+	margin-top: 0.0625rem;
+	border-left: 0.15625rem solid #fff;
+	overflow: hidden;
+	position: relative;
+}
+.list li:first-child{
+	border-left-color: #ffd65f
+}
+.list li:nth-child(2){
+	border-left-color: #a1b9cd
+}
+.list li:nth-child(3){
+	border-left-color: #e5a77c
+}
+.list li .icon{
+	width: 1.90625rem;
+	height: 3.125rem;
+	float: left;
+	line-height: 3.125rem;
+}
+.list li .icon img{
+	width: 1.4375rem;
+	margin-left: 0.296875rem;
+    line-height: 3.125rem;
+    vertical-align: middle;
+}
+.list li .goodsimg{
+	width: 3.125rem;
+	height: 3.125rem;
+	float: left;
+	margin-right: 0.46875rem
+}
+.list li .message{
+	float: left;
+	width: 3.984375rem;
+	height: 3.125rem;
+}
+.list li .message h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height:0.625rem;
+	text-align:left;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	font-weight: bold;
+	margin-bottom: 0.03125rem
+}
+.list li .message b{
+	font-weight: normal;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	line-height:0.3125rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin-bottom: 0.4375rem;
+	display: block;
+}
+.list li .message p{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#fa2f3e;
+	line-height:0.40625rem;
+}
+.list li .message p>a{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	text-align:left;
+	margin-right: 0.078125rem
+}
+.list li .message p span{
+	margin-left: 0.21875rem;
+	font-family:PingFangSC-Regular;
+	color:#9b9b9b;
+	font-size:0.3125rem;
+}
+.list li .message p span a{
+	color:#fa2f3e;
+}
+.list li>a{
+	display: block;
+	background:#fa2f3e;
+	border-radius:0.0625rem;
+	width:1.875rem;
+	height:0.75rem;
+	line-height: 0.75rem;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.3125rem;
+	color:#ffffff;
+	position: absolute;
+	bottom: 0.4375rem;
+    right: 2.46875rem;
+}

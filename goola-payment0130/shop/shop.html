@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>店铺首页</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/css/fenlei.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/shop/css/shopInfo.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="shop">
+				<div class="shop-top"></div>
+				<script id="shop-top" type="dot/tmpl">
+					<div style="overflow: hidden;height: 2.1875rem;position: relative;">
+						<div class="shophead blur" style="background-image: url({{=it.picUrl}}{{=it.data.shopSign}});"></div>
+						<div style="width: 100%;height: 2.1875rem;background: rgba(0,0,0,0.3);position: absolute;top: 0;z-index: 2;"></div>
+					</div>
+					<div class="topcontent">
+						<img src="{{=it.picUrl}}{{=it.data.shopSign}}" />
+						<h2>{{=it.data.shopName}}</h2>
+						<h3>店铺公告：{{=it.data.shopNotice}}</h3>
+						<p>已售<span>{{=it.data.totalSaleCount}}</span>单</p>
+						{{?it.data.isFollow==0}}
+						<a class="guanzhu" id="1" shopId="{{=it.data.id}}">关注店铺</a>
+						{{??it.data.isFollow==1}}
+						<a class="guanzhu" id="0" shopId="{{=it.data.id}}" style="background-image: url(imgs/Shape.png);">已关注</a>
+						{{?}}
+					</div>
+				</script>
+				<div class="recharge"></div>
+				<script id="recharge" type="dot/tmpl">
+					{{?it}}
+					<div>
+						<p>充值优惠：</p>
+						<div class="width">
+							<ul>{{~it:data:i}}<li>{{=data.activeName}};</li>{{~}}</ul>
+						</div>
+					</div>
+					<a href="../payment/recharge.html">去充值</a>
+					{{?}}
+				</script>
+				<nav class="title">
+					<a>购物</a>
+					<a id="shopinfo">店铺信息</a>
+					<div class="clear"></div>
+				</nav>
+				<div class="fenlei" style="margin-top: 0;">
+					<ul class="leftsidebar_box"></ul>
+					<div class="fenlei-content">
+						<div class="fenlei-content-list" id="wrapper">
+								
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<script id="leftsidebar_box_dl" type="dot/tmpl">
+					
+					{{~ it:data:i}}
+						<li categoryId="{{~data.childsCatetory:categoryId:j}}{{=categoryId.categoryId}},{{~}}"><p>{{=data.categoryName}}</p></li> 
+					{{~}}
+				</script>
+				<script id="ly_item" type="dot/tmpl">
+					{{~it.data:data:i}}
+					<p>{{=data.categoryName}}</p>
+					<ul>
+					{{~data.goodsList:data:j}}
+					<li id="{{=data.goodsId}}">
+						<div class="product">
+							<img class="lazy" data-original="{{=it.picUrl}}{{=data.cartPhoto}}">
+							<p class="goodsName">{{=data.goodsName}}</p>
+							<p>{{=data.goodsDesc}}</p>
+							<p class="preferentialPrice" price="{{=data.price}}">¥<span>{{=(data.preferentialPrice).toFixed(2)}}</span></p>
+							<p class="salesCount">已售<span>{{=data.salesCount}}</span>单</p>
+
+						</div>
+						<div class="num" ></div>
+						<h6 class="clear"></h6>
+					</li>
+					{{~}}
+					</ul>
+					{{~}}
+				</script>
+				<script id="ly_item1" type="dot/tmpl">
+					<ul>
+					{{~it.data:data:i}}
+					{{?data!=null && data!=undefined && data!=''}}
+					<li id="{{=data.goodsId}}">
+						<div class="product">
+							<img class="lazy" data-original="{{=it.picUrl}}{{=data.cartPhoto}}">
+							<p class="goodsName">{{=data.goodsName}}</p>
+							<p>{{=data.goodsDesc}}</p>
+							<p class="preferentialPrice" price="{{=data.price}}">¥<span>{{=(data.preferentialPrice).toFixed(2)}}</span></p>
+							<p class="salesCount">已售<span>{{=data.salesCount}}</span>单</p>
+
+						</div>
+						<div class="num" ></div>
+						<h6 class="clear"></h6>
+					</li>
+					{{?}}
+					{{~}}
+					</ul>
+				</script>
+			</div>
+			<div class="shop-bottom">
+				<a href="../index.html">更好甄选</a>
+				<div class="gouwuche">
+					<a href="/gouwuche/gouwuche.html" >
+						<img src="/imgs/shangpin/gouwuche.png">
+						<div class="gwc" id="selectedTotal"></div>
+					</a>
+					<p>去结算</p>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script src="/shop/js/shop.js"></script>
+	</body>
+</html>

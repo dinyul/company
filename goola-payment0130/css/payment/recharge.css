@@ -1,0 +1,152 @@
+body{
+	background: #fff
+}
+.recharge{
+	
+	margin-bottom: 1.40625rem
+}
+.recharge .title{
+	padding: 0.46875rem 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.recharge .top ul{
+	padding: 0 0.078125rem;
+	overflow: hidden;
+}
+.recharge .top ul li{
+	background-image:url(/imgs/personal/recharge-nochecked.png);
+	background-size: 100%;
+	background-repeat: no-repeat;
+	border-radius:0.15625rem;
+	width:3.796875rem;
+	height:2.75rem;
+	margin:0 0.46875rem 0.625rem 0;
+	float: left;
+	padding: 0 0.265625rem 0 0.3125rem;
+	position: relative;
+}
+.recharge .top ul li:nth-of-type(2n){
+	margin-right: 0
+}
+.recharge .top ul li h2{
+	padding: 0.65625rem 0 0.5rem 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.53125rem;
+	color:#4a4a4a;
+	border-bottom: 3px solid #d9d9d9
+}
+.recharge .top ul li p{
+	padding-top: 0.984375rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.40625rem;
+    color: #4a4a4a;
+    line-height: 0.53125rem;
+    font-weight: bold;
+}
+.recharge .top ul li p span{
+	font-size: 0.53125rem;
+    margin: 0 0.0625rem;
+}
+.recharge .top ul li a{
+	position: absolute;
+	display: block;
+	width: 0.796875rem;
+	height: 0.796875rem;
+	top: 0.1875rem;
+	right: 0.171875rem;
+	display: none;
+	background: url(/imgs/personal/recharge-icon.png);
+	background-size: 100%;
+	border-radius: 100%
+}
+.recharge .top ul .checked{
+	background-image: url(/imgs/personal/recharge-checked.png);
+}
+.recharge .top ul .checked a{
+	display: block;
+}
+.recharge .img img{
+	display: block;
+}
+.recharge .img img:nth-of-type(2){
+	margin-top: 0.3125rem
+}
+.recharge .img img:nth-of-type(3){
+	width: 4.015625rem;
+	height: 2.15625rem;
+	float:left;
+	margin: 0.71875rem 0.46875rem 0 0.359375rem
+}
+.recharge .img img:nth-of-type(4){
+	width: 3.90625rem;
+	height: 1.96875rem;
+	float:left;
+	margin-top: 0.875rem
+}
+.recharge .sum{
+	border-bottom: 2px solid #eee;
+	margin-top: 0.46875rem
+}
+.recharge .sum,.recharge .top{
+	padding: 0 0.3125rem;
+}
+.recharge .sum p{
+	float: left;
+}
+.recharge .sum input{
+	float: right;
+    width: 7.234375rem;
+    height: 1.3125rem;
+    line-height: 1.3125rem;
+    background: #fff;
+    border: 0;
+}
+.confirmpay h2{
+	font-family:PingFangSC-Regular;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	line-height:0.53125rem;
+	padding-top: 0.625rem;
+	text-align: center;
+}
+.confirmpay h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.8125rem;
+	color:#fa2f3e;
+	text-align: center;
+	margin-top: 0.3125rem;
+	font-weight: bold;
+}
+.confirmpay p{
+	background:#ffffff;
+	height:1.25rem;
+	line-height: 1.25rem;
+	padding: 0 0.3125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.46875rem;
+	color:#999999;
+	margin-top: 0.703125rem
+}
+.confirmpay p span{
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	float: right;
+}
+.confirmpay a{
+	display: block;
+	background:#fa2f3e;
+	border-radius:0.078125rem;
+	width:9.375rem;
+	height:0.953125rem;
+	margin: 0.703125rem auto 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+	text-align: center;
+	line-height: 0.953125rem
+}

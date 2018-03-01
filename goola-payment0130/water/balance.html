@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<ul class="record balance"></ul>
+			<script id="balance" type="dot/tmpl">
+				{{~it.data:data:i}}
+				<li>
+					<div class="goods">
+						<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+						<h2>{{=data.goodsName}}</h2>
+						<p>品牌：{{=data.brand}}</p>
+						<p>规格：{{=data.goodsSpecifications}}</p>
+					</div>
+					<ul>
+						<li>桶装水:<span style="float: none;"><a>{{=data.noFinishCount}}</a>（张）</span><a href="order.html?goodsId={{=data.goodsId}}">一键叫水</a></li>
+						<li>空桶押金<span><a>{{=data.chargeBattleCount}}</a>（桶）</span></li>
+						<li>滞留桶数<span><a>{{=data.customLockCount}}</a>（桶）</span></li>
+					</ul>
+				</li>
+				{{~}}
+			</script>
+			<div class="bottom"><p>充值</p></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				
+				ajax.post(api.baseServerUrl + "/scm/customRemainingSumList",{
+					
+				},function(data) {
+					var obj={data:data,picUrl:api.picUrl}
+					util.render("#balance", obj, ".balance");
+
+				});
+				
+				
+				$('.bottom').click(function(){
+					window.location.href="goodslist.html"
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

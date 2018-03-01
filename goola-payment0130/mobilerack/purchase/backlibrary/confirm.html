@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>确认回库</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="confirm">
+				<div>
+					<h2 class="apply-title"></h2>
+					<div class="purchase-search">
+						<input placeholder="商品名称查询" />
+						<p>查询</p>
+					</div>
+				</div>
+				<div class="goods"></div>
+				<script id="goods" type="dot/tmpl">
+					<ul>
+						{{~it.data:data:i}}
+						{{~it.items:items:l}}
+						{{?items.GoodsId==data.goodsId}}
+						<li goodsId="{{=data.goodsId}}">
+							<div class="goodslist">
+								<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+								<div class="message">
+									<h3><span>{{=data.goodsName}}</span><a>¥{{=Number(data.price).toFixed(2)}}</a></h3>
+									<p>{{=data.specifications}}</p>
+									<p>货架在售量：<span class="bencibuhuo">{{=data.shopGoodsStock}}</span><a>申请回库量：<span>{{=data.applyNum}}</span></a></p>
+									<h5 class="buhuo">实际回库量：
+										<a goodsId="{{=data.goodsId}}" class="changenum">
+											<span class="minus"></span>
+											<span class="num" outGoodsCount="{{=data.applyNum}}">{{=Number(items.GoodsCount)}}</span>
+											<span class="add"></span>
+										</a>
+									</h5>
+								</div>
+							</div>
+							<div class="goodslist-bottom">
+								<p>回库后应有库存：<span class="yingyoukucun">{{=Number(data.shopGoodsStock)-Number(items.GoodsCount)}}
+								</span></p>
+								<p class="yingyou">回库后库存量<a goodsId="{{=data.goodsId}}" class="changenum"><span class="minus"></span><span class="num">{{?items.RepertoryCount==-1}}{{?Number(data.shopGoodsStock)-Number(items.GoodsCount)<0}}0{{??}}{{=Number(data.shopGoodsStock)-Number(items.GoodsCount)}}{{?}}{{??}}{{=items.RepertoryCount}}{{?}}</span><span class="add"></span></a></p>
+								{{?items.RepertoryCount==-1}}
+								{{?Number(data.shopGoodsStock)-Number(items.GoodsCount)<0}}
+									<h3 class="a">本次货损：盈余量 {{=0-Number(Number(data.shopGoodsStock)-Number(items.GoodsCount))}}</h3>
+								{{??}}
+								<h3 class="a">本次货损：无货损</h3>
+								{{?}}
+								{{??}}
+									{{?Number(items.RepertoryCount)>Number(data.shopGoodsStock)-Number(items.GoodsCount)}}
+									<h3 class="a">本次货损：盈余量 {{=Number(items.RepertoryCount)-Number(Number(data.shopGoodsStock)-Number(items.GoodsCount))}}</h3>
+									{{??Number(items.RepertoryCount)<Number(data.shopGoodsStock)-Number(items.GoodsCount)}}
+									<h3 class="a">本次货损：货损量 {{=Number(Number(data.shopGoodsStock)-Number(items.GoodsCount))-Number(items.RepertoryCount)}}</h3>
+									{{??}}
+									<h3 class="a">本次货损：无货损</h3>
+									{{?}}
+								{{?}}
+							</div>
+						</li>
+						{{?}}
+						
+						{{~}}
+						{{~}}
+					</ul>
+				</script>
+			</div>
+			<div class="bg"></div>
+			<div class="address-firm">
+				<div class="address-firm-title">
+					<p>是否确认提交本次回库，提交后将无法修改?</p>
+				</div>
+				<div class="address-firm-list">
+					<p style="display:none"></p>
+					<p class="cancel">取消</p>
+					<p class="confirm">确定</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="purchase-bottom" style="position: initial;">
+				<p>确认回库</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/mobilerack/js/purchase.js"></script>
+		<script type="text/javascript" src="/mobilerack/js/backlibrary-confirm.js"></script>
+	</body>
+</html>

@@ -1,0 +1,47 @@
+
+.pattern .express{
+	height: 1.09375rem;
+	background: #fff;
+	line-height: 1.09375rem;
+	padding: 0 0.3125rem;
+	margin-top: 0.3125rem;
+}
+.pattern .ziqu{
+	background: #fff;
+	margin-top: 0.3125rem;
+}
+.pattern .ziqu .ziqu-title{
+	height: 1.09375rem;
+	line-height: 1.09375rem;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0 0.3125rem;
+}
+.pattern .ziqu .info{
+	padding: 0 0.3125rem;
+}
+.pattern .ziqu .info li{
+	padding: 0.15625rem 0;
+	border-bottom: 1px solid #e5e5e5;
+}
+.pattern .ziqu .info li:last-child{
+	border-bottom: 0;
+}
+.pattern .ziqu .info p{
+	line-height: 0.65625rem;
+}
+.pattern .ziqu .info p:last-child{
+	color: #bcbcbc;
+}
+.pattern .ziqu .info li:last-child p:first-child{
+	color: #fa2f3e;
+}
+.pattern .checked{
+	display: block;
+	width: 0.390625rem;
+	height: 0.265625rem;
+	float: right;
+	margin-top: 0.414062rem;
+	background: url(/imgs/order/peisongfangshi-TICK.png?t=20161117) no-repeat;
+	background-size: 100%;
+	line-height: 1.09375rem;
+}

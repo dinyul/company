@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>升级三级分销商</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/user/fenxiaoshang.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+</head>
+<body>
+	<div class="distributor">
+		<div class="examine">
+			<p>审核不通过<span>原因：身份证图片不清晰</span><a class="examine-close"></a></p>
+		</div>
+		<div class="introduce">
+			<div class="introduce-title">
+				<p>三级分销商权益</p>
+			</div>
+			<div class="introduce-content">
+				<ul>
+					<li>
+						<div>
+							<p>额外的积分获取</p>
+							<span>推广他人消费，即可获得大量积分回馈</span>
+						</div>
+					</li>
+					<li>
+						<div>
+							<p>积分提现</p>
+							<span>可用积分可随时申请提现到您的账户</span>
+						</div>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<div class="process">
+			<h2>申请流程</h2>
+			<div>
+				<p>在更好甄选完成订单1次以上</p>
+			</div>
+			<img src="/imgs/fenxiao/fenxiao-jiantou.png?t=20161117">
+			<div>
+				<p>以下条件满足其一</p>
+				<span style="margin-top: -0.109375rem">当前拥有10000积分，升级后扣除</span>
+				<span>持有二级分销商推广号</span>
+			</div>
+			<img src="/imgs/fenxiao/fenxiao-jiantou.png?t=20161117">
+			<div>
+				<p>填写注册信息，上传身份信息</p>
+			</div>
+			<img src="/imgs/fenxiao/fenxiao-jiantou.png?t=20161117">
+			<div>
+				<p>审核通过，申请成功</p>
+			</div>
+		</div>
+	</div>
+	<div class="bottom">
+			<p>立即申请</p>
+		</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript">
+	$('.examine').remove()
+	$('.examine-close').click(function(){
+		$('.examine').remove()
+	})
+	$(".bottom").click(function() {
+		window.location.href = "../distribution/reg.html";
+	})
+	</script>
+</body>
+</html>

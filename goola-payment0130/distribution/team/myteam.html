@@ -1,0 +1,230 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>我的团队</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/team.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="team">
+				<nav class="teamnav" style="display: none;">
+					<a team="teamcontent1" class="checked" id="onteam">所在团队</a>
+					<a team="teamcontent2" id="myteam">我的团队</a>
+				</nav>
+				<div class="myteam teamcontent1"></div>
+				<script id="teamcontent1" type="dot/tmpl">
+					{{?it.data}}
+					<div class="myteam-title">
+						<p>{{=it.data.wxName}}团队<span>（{{=it.data.totalPeople}}人团）</span></p>
+					</div>
+					<ul class="myteam-list">
+						<p>团队管理员</p>
+						<li>
+							<div>
+								<img src="{{=it.data.photo}}"/>
+								<h2>{{=it.data.wxName}}</h2>
+							</div>
+							<p><a>累计收益：￥{{=it.data.totalPrice}}</a><a>团队人数：{{=it.data.totalPeople}}</a></p>
+						</li>
+					</ul>
+					<ul class="myteam-list">
+						<p>团队成员</p>
+						{{~it.data.myLevelUsers.rows:list:j}}
+						<li>
+							<div>
+								<img src="{{=list.photo}}"/>
+								<h2>{{=list.wxName}}</h2>
+							</div>
+							<p><a>累计收益：￥{{=list.totalPrice}}</a><a>团队人数：{{?list.memberCount}}{{=list.memberCount}}{{??}}0{{?}}</a></p>
+						</li>
+						{{~}}
+						
+					</ul>
+					{{??}}
+					<div class="myteam-none">
+						<img src="../imgs/myteam-none.png" />
+						<p>所在团队空荡荡的</p>
+					</div>
+					{{?}}
+				</script>
+				<div class="myteam teamcontent2"  style="display: none;"></div>
+				<script id="teamcontent2" type="dot/tmpl">
+					<div class="myteam-title">
+						<p>{{=it.data.wxName}}团队<span>（{{=it.data.totalPeople}}人团）</span></p>
+						<a class="yaoqing">邀请加入</a>
+					</div>
+					<ul class="myteam-list">
+						{{?it.data.lowLevelUsers.rows!=''}}
+						{{~it.data.lowLevelUsers.rows:list:j}}
+						<li>
+							<div>
+								<img src="{{=list.photo}}"/>
+								<h2>{{=list.wxName}}</h2>
+							</div>
+							<p><a>累计收益：￥{{=list.totalPrice}}</a><a>团队人数：{{?list.memberCount}}{{=list.memberCount}}{{??}}0{{?}}</a></p>
+						</li>
+						{{~}}
+						{{??}}
+						<div class="myteam-none">
+							<img src="../imgs/myteam-none.png" />
+							<p>下级团队空荡荡的</p>
+						</div>
+						{{?}}
+					</ul>
+				</script>
+				<div class="join">
+					<div class="content">
+						<div class="code" id="createimg">
+							<h2>扫一扫，加入<span id="wxname"></span>的团队</h2>
+							<div id="code"></div>
+						</div>
+						<div class="joinbg"></div>
+						<p>长按图片保存或转发</p>
+						<a><img src="/distribution/imgs/close.png"/></a>
+					</div>
+				</div>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/distribution/static/jquery-plugin/jquery.qrcode.min.js" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/html2canvas.min.js"></script>
+		<script>
+			(function(api, util, ajax){
+				onteam()
+				myteam()
+				//我的团队
+				function myteam(){
+					ajax.post(api.baseServerUrl + "/distribution/lowLevelUsers",{
+					},function(data) {
+						if(data!='' && data!=null && data!=undefined){
+							var data=jQuery.parseJSON(data)
+						}
+							var obj={data:data,picUrl:api.picUrl}
+							util.render("#teamcontent2", obj, ".teamcontent2");
+							$('#wxname').html(data.wxName)
+						
+					});
+				}
+				ajax.post(api.baseServerUrl + "/distribution/currentUser/",{
+				},function(data) {
+					
+					$("#code").qrcode(
+							{width:150,height:150,correctLevel:0,text:"http://"+ document.domain +"/distribution/introduce.html?expandCode="+data.expandCode});
+				});
+				//所在团队
+				function onteam(){
+					ajax.post(api.baseServerUrl + "/distribution/myLevelUsers",{
+					},function(data) {
+						console.log(data)
+						if(data!='' && data!=null && data!=undefined){
+							$('.teamnav').css('display','block')
+							var data=jQuery.parseJSON(data)
+							var obj={data:data,picUrl:api.picUrl}
+							util.render("#teamcontent1", obj, ".teamcontent1");
+						}else{
+							$('#onteam').removeClass('checked').css('display','none')
+							$('#myteam').css('width','100%')
+							$('.teamnav').css('display','block')
+							$('.teamcontent1').css('display','none')
+							$('.teamcontent2').css('display','block')
+						}
+					});
+				}
+				$('.teamnav a').click(function(){
+					$('.teamnav a').removeClass('checked')
+					$(this).addClass('checked')
+					$('.myteam').css('display','none')
+					$('.'+$(this).attr('team')).css('display','block')
+				})
+				
+				$('.teamcontent2').delegate('.yaoqing','click',function(){
+					$('.join').css('display','block')
+					if($('.code').find('img').length<=0){
+						main.html2Canvas()
+					}
+					
+				})
+				$('.join .content a').click(function(){
+					$('.join').css('display','none')
+				})
+				
+					
+		var main = {
+	        init:function(){
+	            main.setListener();
+	        },
+	        //设置监听事件
+	        setListener:function(){
+	        	/*window.onload=function(){
+	        		main.html2Canvas();
+	        	}*/
+	        	var btnShare = document.getElementById("createimg");
+	            btnShare.onclick = function(){
+	                main.html2Canvas();
+	            }
+	           
+	        },
+	        //获取像素密度
+	        getPixelRatio:function(context){
+	            var backingStore = context.backingStorePixelRatio ||
+	                    context.webkitBackingStorePixelRatio ||
+	                    context.mozBackingStorePixelRatio ||
+	                    context.msBackingStorePixelRatio ||
+	                    context.oBackingStorePixelRatio ||
+	                    context.backingStorePixelRatio || 1;
+	            return (window.devicePixelRatio || 1) / backingStore;
+	        },
+	        //绘制dom 元素，生成截图canvas
+	        html2Canvas: function () {
+	        	var shareContent = document.getElementById('createimg');// 需要绘制的部分的 (原生）dom 对象 ，注意容器的宽度不要使用百分比，使用固定宽度，避免缩放问题
+	            var width = shareContent.offsetWidth;  // 获取(原生）dom 宽度
+	            var height = shareContent.offsetHeight; // 获取(原生）dom 高
+	            var offsetTop = shareContent.offsetTop;  //元素距离顶部的偏移量
+				
+	            var canvas = document.createElement('canvas');  //创建canvas 对象
+	            var context = canvas.getContext('2d');
+	            var scaleBy = main.getPixelRatio(context);  //获取像素密度的方法 (也可以采用自定义缩放比例)
+	            canvas.width = width * scaleBy;   //这里 由于绘制的dom 为固定宽度，居中，所以没有偏移
+	            canvas.height = (height + offsetTop) * scaleBy;  // 注意高度问题，由于顶部有个距离所以要加上顶部的距离，解决图像高度偏移问题
+	            context.scale(scaleBy, scaleBy);
+	
+	            var opts = {
+	                allowTaint:true,//允许加载跨域的图片
+	                tainttest:true, //检测每张图片都已经加载完成
+	                scale:scaleBy, // 添加的scale 参数
+	                canvas:canvas, //自定义 canvas
+	                logging: true, //日志开关，发布的时候记得改成false
+	                width:width, //dom 原始宽度
+	                height:height //dom 原始高度
+	            };
+	            html2canvas(shareContent, opts).then(function (canvas) {
+	                var dataURL = canvas.toDataURL();     
+	                $('.code').html("<img src='"+dataURL+"' style='margin-top:0.46875rem'/>")
+	                $('.joinbg').css('display','none')
+	            });
+	        }
+	    };
+				
+				
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

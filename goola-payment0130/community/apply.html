@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>合伙人申请</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/community/css/community.css">
+	</head>
+	<body>
+		<div class="body" >
+			<div class="apply" >
+				<div class="info">
+					<h2>成为合伙人条件：</h2>
+					<p>个人业绩达到 365.00， 当前业绩：500.00</p>
+					<p>个人业绩达到 365.00， 当前业绩：500.00</p>
+					<p>个人业绩达到 365.00， 当前业绩：500.00</p>
+				</div>
+				<div class="information">
+					<input type="text" placeholder="真实姓名" class="name"/>
+					<input type="text" placeholder="微信号" class="wx-Id" />
+					<input type="text" placeholder="身份证号" class="idcode" />
+				</div>
+				<div class="bottom apply2" style="display: none;">
+					<p>提交申请</p>
+				</div>
+				
+			</div>
+			
+			
+
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript"  src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		
+		<script type="text/javascript">
+		(function(api, util,ajax){
+			var inviteCode = util.getUrlParams("inviteCode");
+			var gradeId = util.getUrlParams("gradeId");
+			/*ajax.post(api.baseServerUrl + "/reg/disOfflineMemberApplyCheck",{
+				
+			},function(data) {
+				util.render("#inviter",data,".inviter");
+			})*/
+			$('.apply1').click(function(){
+				
+			})
+			$('.apply2').click(function(){
+				
+				if(!(/[\u4E00-\u9FA5]{1,10}/.test($('.name').val()))){
+					alert("姓名不能超过10个汉字");
+					return false;
+				}
+				if($('.wx-Id').val() == ''){
+					alert("微信号不能为空");
+					return false;
+				}
+				if ( !(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test($('.idcode').val())) ){
+						alert('身份证号输入错误');
+						return false;
+					};
+					
+					
+					
+			})
+			var title="更好甄选新零售引流社群管理系统"
+			var doc="“更好甄选”是由软银中国与明星投资机构STAR.VC、长石资本、5100矿泉水联合投资企业旗下的生活品质新零售社群。母公司估值超10亿元"
+			shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/community/query.html","http://" + document.domain +"/imgs/community/share1.jpg");
+		})(goola.api, goola.util,goola.ajax)
+	    </script>
+
+	    	
+	</body>
+</html>

@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>为爱许愿</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/crowdfunding-payment.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117&v1">
+		<link rel="stylesheet" href="/css/address/mobiscroll.ios.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/address/style.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/address/cityLayout.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="balance body">		
+			<div class="address" id="addressInfo" >
+			</div>
+			<div class="content">
+			</div>
+			<script id="content" type="dot/tmpl">
+				<div class="crowdfunding">
+					<p>我的心愿</p>
+					<input type="text" placeholder="{{=it.data.goodsDeclare}}"  />
+				</div>
+				<div id="shoppingList">
+					<div class="business">
+						<p>{{=it.data.goods.providerName}}</p>
+					</div>
+					<div class="good-info" id="{{=it.data.goods.goodsId}}" >
+						<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+						<div class="title">
+							<p>{{=it.data.goods.goodsName}}</p>
+							<span>规格：{{=it.data.goods.specifications}}</span>
+						</div>
+						<div class="price1" style="float: right;"><p>¥{{=it.data.goods.preferentialPrice}}</p></div>
+						<div class="clear"></div>
+					</div>
+				</div>
+			</script>
+			<div class="method">
+				<ul>
+					<li id="tms">
+						
+					</li>
+					<li id="couponCount">
+						
+					</li>
+				</ul>
+			</div>
+			<div class="payment">
+				<p>支付金额：</p>
+				<div class="price">
+					<div>
+						<a class="jian"></a>
+						<input type="number" value=""/>
+						<a class="jia"></a>
+					</div>
+					<p>元</p>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div class="balance-total">
+				<p class="crowdfunding-total">心愿金额：<span>¥<a></a></span></p>
+				<p class="payment-total">支付金额：<span>¥<a></a></span></p>
+			</div>
+		</div>	
+
+			<script id="tmsTmpl" type="dot/tmpl">
+				<p>配送方式</p>
+				<a>
+					<p>快递 ¥{{=it.toFixed(2)}}<span>></span></p>
+				</a>
+			</script>
+			<script id="couponCountTmpl" type="dot/tmpl">
+				<p>可用优惠劵</p>
+				<a>
+					<p>{{=it}}<span>></span></p>
+				</a>
+			</script>
+			
+			<script type="dot/tmpl" id="addressInfoTmpl">
+				{{? it}}
+				<p><a class="receiverName">{{=it.name}}</a>
+					<span class="receiverPhone">{{=it.phone}}</span>
+				</p>
+				<p class="receiverAddress">{{=it.provinceName}}{{=it.cityName}}{{=it.address}}</p>
+				{{??}}
+				<a style="display: block;">
+					<p style="line-height: 1.375rem;">请选择收货地址 ></p>
+				</a>
+				{{?}}
+			</script>
+			<!-- 优惠券 -->
+			<div id="yhq" class="coupon">
+				<div class="fanhui" style="border-bottom:1px solid #e5e5e5" >
+					<span id="fanhui"></span>
+					<p>我的优惠站</p>
+				</div>
+				<ul class="use" id="couponInfo">
+				</ul>
+			</div>
+			<script id="couponInfoTmpl" type="dot/tmpl">
+				{{~it :data:i}}
+				<li>
+					<div class="left" id="{{=data.userCouponId}}">
+						￥<span>{{=data.preferentialPrice}}</span>
+					</div>
+					<div class="right">
+						<p><span>使用范围：</span>购啦商城平台</p>
+						<p><span>使用说明：</span>{{=data.couponName}}</p>
+						<p><span>使用期限：</span>{{=getFormatDate(data.availableTimeBegin,'yyyy-MM-dd')}}~{{=getFormatDate(data.availableTimeEnd,'yyyy-MM-dd')}}</p>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{{~}}
+
+			</script>
+		
+		<div class="bottom">
+			<a><p>去结算</p></a>
+		</div>
+		<div id="selectAddressList"></div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/crowdfunding/js/crowdfunding-payment.js?t=20161117&v1"></script>
+	</body>
+
+</html>

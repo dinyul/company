@@ -1,0 +1,28 @@
+.jifen ul{
+	padding-right: 0.15625rem;
+}
+.jifen ul li{
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.4375rem 0.15625rem 0.390625rem 0.3125rem;
+}
+.jifen ul li span{
+	float: right;
+	color: #fa2f3e;
+	font-size: 0.375rem;
+	line-height: 0.59375rem;
+}
+.jifen ul li p{
+	margin-bottom: 0.21875rem
+}
+.jifen ul li p span{
+	color: #bcbcbc;
+	font-size: 0.28125rem;
+}
+.jifen ul li a{
+	font-size: 0.34375rem;
+	color: #bcbcbc;
+	display: inline-block;
+	padding: 0.15625rem;
+	border:1px solid #e5e5e5;
+	border-radius: 0.15625rem
+}

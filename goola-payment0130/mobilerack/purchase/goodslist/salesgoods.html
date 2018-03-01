@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>在售商品</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-search">
+				<input placeholder="商品名称查询" />
+				<p>查询</p>
+			</div>
+			<div class="record"></div>
+			<script id="record" type="dot/tmpl">
+				{{?it.data || it.data.length>0}}
+				<ul class="list" style="background: #F5F5F5;">
+					{{~it.data:items:j}}
+					<li style="background:#fff;">
+						<img src="{{=it.picUrl}}{{=items.cartPhoto}}" />
+						<div>
+							<h2>{{=items.goodsName}}</h2>
+							<p>{{=items.specifications}}</p>
+							<p style="margin-top: 0.65625rem;">数量：{{=items.shopStock}}</p>
+						</div>
+					</li>
+					{{~}}
+				</ul>
+				{{??}}
+				<div class="none">
+					<img src="/mobilerack/imgs/purchase/kong.png" />
+					<p>货架没有在售商品</p>
+				</div>
+				{{?}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				var shopId=util.getUrlParams("shopId")
+				
+				record('',1,20)
+				$(window).on('scroll', doSth)
+				
+				$('.purchase-search p').click(function(){
+					pageNo=1
+					$('.record').html('')
+					record($('.purchase-search input').val(),1,20)
+					$(window).on('scroll', doSth)
+				})
+				
+				function doSth() {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.record').find('ul').length>=total){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						pageNo=pageNo+1
+						record($('.purchase-search input').val(),pageNo,20)
+					}
+				}
+				function record(goodsName,pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/shopGoodsList",{
+						"shopId":shopId,"goodsName":goodsName,"pageSize":pageSize,"pageNo":pageNo
+					},function(data){
+						total=data.dataList.total
+						pageTotal=parseInt(total/pageSize)+1
+						if( total==0){
+							$('.noinfo').show()
+						}else{
+							$('.content1').show()
+						}
+						var obj = {data:data.dataList.rows,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#record').html());
+						var html = doTtmpl(obj);
+						$('.record').append(html)
+					})
+				}
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

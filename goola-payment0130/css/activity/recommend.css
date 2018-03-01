@@ -1,0 +1,68 @@
+.recommend{
+	padding-left: 0.390625rem;
+	background: url(/imgs/activity/recommend/time-line.png) repeat-y 0.46875rem 0;
+	background-size: 0.03125rem 100%;
+	margin-bottom: 1.328125rem
+}
+.recommend ul {
+	padding-left: 0.328125rem;
+}
+.recommend ul li{
+	padding-top: 0.15625rem;
+	position: relative;
+}
+.recommend ul li p{
+	padding: 0.15625rem 0 0.15625rem 0.53125rem;
+	font-family:PingFangSC-Light;
+	font-size:0.3125rem;
+	color:#313131;
+	background: url(/imgs/activity/recommend/time-cycle.png) no-repeat left center;
+	background-size: 0.1875rem 0.1875rem;
+	margin-left: -0.328125rem;
+}
+.recommend ul li img{
+	display: block;
+	line-height: 0
+}
+.recommend ul li h3{
+	margin-top: 0.03125rem;
+	line-height: 0.46875rem;
+	padding: 0 0.46875rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#313131;
+	font-weight: bold;
+	background: #fff;
+	padding-top: 0.28125rem
+}
+.recommend ul li h3 b{
+	float: right;
+	color:#c53f40;
+}
+.recommend ul li h3 span{
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	width:6.65625rem;
+	display: inline-block;
+	font-weight: normal;
+}
+.recommend ul li h4{
+	padding: 0.125rem 0.46875rem 0.3125rem;
+    background: #fff;
+    font-family: PingFangSC-Regular;
+    font-size: .375rem;
+    color: #8e8e8e;
+    line-height: 0.4375rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.recommend ul li a{
+	display: block;
+	width: 2.09375rem;
+	height: 0.625rem;
+	position: absolute;
+	left: 0;
+	top: 0.78125rem
+}

@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8" />
+	<title>评价</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/shangpin/pingjia.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+</head>
+
+<body>
+
+	<div class="evaluate body">
+		<div class="list">
+		</div>
+	</div>
+	<div class="bottom" style="background:#d4aa70">
+		<p>提交追评</p>
+	</div>
+	<script type="dot/tmpl" id="goodsTmpl">
+		{{~it.data.children:provider:i}}
+			{{~provider.orderItems:goods:j}}
+				<div class="goods" id="{{=goods.goodsId}}">
+					<div class="goods-title">
+						<div class="goods-title-img">
+							<img style="height: 100%" src="{{=it.picUrl}}{{=goods.goodsPhoto}}">
+						</div>
+						<div class="goods-title-message">
+							<h3>{{=goods.goodsName}}</h3>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="goods-list">
+						<textarea placeholder="您对这个商品满意吗？您的评价会帮助我们选择更好的商品~"></textarea>
+					</div>
+				</div>
+			{{~}}
+		{{~}}
+		</script>
+
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+
+	<script type="text/javascript">
+		(function (api, util, ajax) {
+
+			//取订单Id
+			var orderId = util.getUrlParams("orderId");
+
+			//初始化
+			initEva(orderId);
+
+			function initEva(orderId) {
+				ajax.post(api.baseServerUrl + "/order/orderDetail", {
+					"orderId": orderId
+				}, function (data) {
+					var obj = { data: data, picUrl: api.picUrl };
+					util.render("#goodsTmpl", obj, ".list");
+				})
+			}
+
+			//提交评价
+			$('.bottom').click(function () {
+				var submitFlag = 1;
+
+				var orderEva=new Object();
+				orderEva.orderId=orderId;
+
+				var goodsEva = new Array();
+				$('.goods').each(function (i) {
+					var obj = new Object();
+					obj.goodsId = $(this).attr('id');
+					var evaluateContent = $(this).find('.goods-list textarea').val();
+					obj.evaluateContent = evaluateContent;
+					goodsEva[i] = obj;
+				})
+
+				goodsEva.forEach(function (item) {
+					if (item.evaluateContent == "" || !item.evaluateContent) {
+						submitFlag = 2;
+					}else if(item.evaluateContent.length > 100){
+						submitFlag = 3
+					}
+				})
+
+				submitFlag == 1 
+				? submitEva(goodsEva, orderEva) 
+				: submitFlag == 2 
+					?	alert("请输入您的评论！")
+					:	alert("评论最多输入100字哟！")
+			})
+
+			$(".app-top a").attr("href","../order/wodedingdan.html")
+			$(".app-top p").eq(1).html("追评")
+			function submitEva(goodsEva, orderEva) {
+				ajax.post(api.baseServerUrl + "/goods/submitEvaluate",{
+					"goodsEva":JSON.stringify(goodsEva),
+					"orderEva":JSON.stringify(orderEva)
+				}, function (response) {
+
+					$.ajax({
+						type: "post",
+						url: "/goola-web/v1/userTask/operateUserGrowValue",
+						async: true,
+						data: { "acquireType": 3, "orderId": orderId },
+						success: function (data) {
+							var data = jQuery.parseJSON(data)
+								message = " ";
+							if (data.code == 0) {
+								message = data.message
+							}
+							lert(message)
+						}
+					});
+				})
+			}
+
+			function lert(message){
+				if(message != " "){
+					message = '<p>'+message+'</p>'
+				}
+				$('body').append(`<div class="share-open">
+						<img src="/imgs/zhifu/zhifuchenggong.png" />
+						<h2>追评成功</h2>
+						${message}
+					</div>`);
+				if(message == " "){
+					$(".share-open h2").css("margin","1.3rem 0 0.40625rem 0");
+				}
+				setTimeout(function () {
+					window.location.href = '../order/wodedingdan.html'
+				}, 3000)
+			}
+
+		})(goola.api, goola.util, goola.ajax)
+	</script>
+</body>
+
+</html>

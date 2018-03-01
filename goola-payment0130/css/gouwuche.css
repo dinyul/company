@@ -1,0 +1,1096 @@
+
+.gouwuche-content ul{
+	margin-top: 0.28125rem;
+}
+.gouwuche-content{
+	margin-bottom: 2.8125rem;
+}
+.gouwuche-content ul .gouwuche-title{
+	background: #fff;
+	height: 1.40625rem;
+	padding-left: 0.375rem;
+	line-height: 1.40625rem;
+	margin-bottom: 0.0625rem;
+}
+.gouwuche-content ul .gouwuche-title .btn{
+	float: left;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-top: 0.46875rem;
+	background: url(/imgs/gouwuche/gouwuche-meixuan.png) no-repeat;
+	background-size: 0.5rem 0.5rem;
+	border-radius: 0.56375rem;
+	overflow: hidden;
+}
+.gouwuche-content ul .gouwuche-title .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-content ul .gouwuche-title .checked{
+	background: url(/imgs/gouwuche/gouwuche-yixuan.png?t=20161117) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-content ul .gouwuche-title p{
+	float: left;
+	margin-left: 0.359375rem;
+	padding-left: 0.65625rem;
+	background: url(/imgs/gouwuche/gouwuche-dianpu.png?t=20161117) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+}
+.gouwuche-content ul li{
+	margin-bottom: 0.0625rem;
+	padding:0.328125rem 0.375rem;
+	position: relative;
+	background: #fff
+}
+.gouwuche-content ul li:last-child{
+	margin-bottom:0;
+}
+.gouwuche-content ul li .btn{
+	float: left;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin-top: 1.328125rem;
+	background: url(/imgs/gouwuche/gouwuche-meixuan.png) no-repeat;
+	background-size: 0.5rem 0.5rem;
+	border-radius: 0.56375rem;
+	overflow: hidden;
+}
+.gouwuche-content ul li .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-content ul li .checked{
+	background: url(/imgs/gouwuche/gouwuche-yixuan.png?t=20161117) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-content ul li .img{
+	float: left;
+	width: 3.125rem;
+	height: 3.125rem;
+	margin: 0 0.46875rem 0 0.375rem;
+	overflow: hidden;
+}
+.gouwuche-content ul li .container{
+	float: left;
+	width: 3.984375rem
+}
+.gouwuche-content ul li .container-title{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	font-weight: bold;
+	line-height: 0.40625rem
+}
+.gouwuche-content ul li .container-norm{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	margin-top: 0.15625rem;
+	height: 0.75rem;
+    line-height: 0.375rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+}
+
+.gouwuche-content ul li .container-pay{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	margin-top: 0.078125rem
+}
+.gouwuche-content ul li .container-pay span:first-of-type{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#fa2f3e;
+	font-weight: bold;
+	margin-left: 0.078125rem
+}
+.gouwuche-content ul li .container-pay .biaoqian{
+	position: relative;
+	top: -.05rem;
+}
+.delete{
+	width: 1.25rem;
+    height: 1.25rem;
+    background: url(/imgs/gouwuche/gouwuche-shanchu.png?t=20161117) no-repeat 0.453125rem 0.4375rem;
+    background-size: 0.421875rem 0.4375rem;
+    position: absolute;
+    top: 0;
+    right: 0;
+}
+.num-choice{
+	width: 3.8125rem;
+    height: 0.8125rem;
+    position: absolute;
+    bottom: 0.328125rem;
+    right: 1.34375rem;
+    border: 2px solid #ededed;
+    border-radius: 0.078125rem;
+}
+.num-choice span{
+	display: inline-block;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.421875rem;
+	color:#c7a994;
+	float: left;
+	height: 0.8125rem;
+	line-height: 0.8125rem;
+}
+.num-choice .reduce{
+	width: 0.984375rem;
+	background: url(/imgs/shangpin/gouwuche--.png?t=20161117) no-repeat center center;
+	background-size: 0.390625rem 0.046875rem;
+	border-top-left-radius: 0.0625rem;
+	border-bottom-left-radius: 0.0625rem;
+}
+.num-choice .add{
+	width: 0.984375rem;
+	background: url(/imgs/shangpin/gouwucheadd.png?t=20161117) no-repeat center center;
+	background-size: 0.390625rem 0.359375rem;
+	border-top-right-radius: 0.0625rem;
+	border-bottom-right-radius: 0.0625rem;
+}
+.num-choice .count-input{
+	width: 1.84375rem;
+}
+.gouwuche-bottom{
+	width: 100%;
+	position: fixed;
+	bottom: 1.328125rem;
+	border-top: 1px solid #eeeeee;
+	border-bottom: 1px solid #eeeeee;
+	height: 1.328125rem;
+    background: #fff;
+}
+.gouwuche-bottom .payment{
+	height: 1.25rem;
+	line-height: 1.25rem;
+	text-align: center;
+}
+.gouwuche-bottom .all-btn{
+	width: 2.34375rem;
+	float: left;
+	background: #fff;
+}
+.gouwuche-bottom .all-btn .btn{
+	float: left;
+	width: 0.5rem;
+	height: 0.5rem;
+	margin: 0.4375rem 0.359375rem 0 0.375rem;
+	background: url(/imgs/gouwuche/gouwuche-meixuan.png) no-repeat;
+	background-size: 0.5rem 0.5rem;
+	border-radius: 0.56375rem;
+	overflow: hidden;
+}
+.gouwuche-bottom .all-btn p{
+	float: left;
+	height: 1.328125rem;
+	line-height: 1.328125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.gouwuche-bottom .all-btn .btn input{
+	width: 0.5625rem;
+	height: 0.5625rem;
+	opacity: 0;
+}
+.gouwuche-bottom .all-btn .checked{
+	background: url(/imgs/gouwuche/gouwuche-yixuan.png?t=20161117) no-repeat center center;
+	background-size:0.46875rem 0.46875rem ;
+}
+.gouwuche-bottom .total{
+	background: #fff;
+    width: 3.28125rem;
+    float: left;
+	height: 1.328125rem;
+    text-align: left;
+}
+.gouwuche-bottom .total div{
+	width: 3.64rem;
+	height: 1.328125rem;
+	padding-top: .4765625rem;
+	box-sizing: border-box;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+.gouwuche-bottom .total div p{
+	flex: 1;
+	width: 100%;
+	height: .325rem;
+	text-align: left;
+	font-size: 0.375rem;
+	font-family:PingFangSC-Medium;
+	overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.gouwuche-bottom .total div p.yh,.gouwuche-bottom .total div p.yh span{
+	color: #999999;
+	font-size: .3rem;
+	font-weight: normal;
+}
+
+.gouwuche-bottom .total div p.yh {
+	margin-top: .05rem;
+	display: none;
+}
+
+.gouwuche-bottom .total div p .tit{
+	display: inline-block;
+	width: 1.2rem;
+	text-align: right;
+	padding-right:.1rem;
+}
+.gouwuche-bottom .total span{
+	font-size:0.375rem;
+	color:#fa2f3e;
+	font-weight: bold;
+}
+
+.fullReduce a{
+	font-size: .39rem;
+	color: #999;
+}
+
+.gouwuche-bottom .choice-payment{
+	width: 4.375rem;
+    height: 1.328125rem;
+    float: right;
+}
+.gouwuche-bottom .choice-payment a{
+	float: right;
+    width: 2rem;
+    height: 1.328125rem;
+	background:#fa2f3e;
+	color: #fff;
+	text-align: center;
+	line-height: 1.328125rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+}
+.gouwuche-bottom .choice-payment .payment1{
+	background: #1b1a1f;
+}
+#fullCart_4{
+	text-align: center;
+}
+#fullCart_4 img{
+	width: 3.3125rem;
+	margin: 1.875rem 0 0.46875rem 0;
+}
+#fullCart_4 a{
+	display: block;
+	width:1.875rem;
+	height: 0.78125rem;
+	margin:0.46875rem auto 0;
+	font-size:0.375rem;
+	background: #fa2f3e;
+	color: #fff;
+	line-height: 0.78125rem;
+	border-radius: 0.09375rem;
+}
+
+/*去结算*/
+.xq_tie{
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	text-align: center;
+	position: relative;
+}
+.xq_tie .leftbtn{
+	font-size: 0.3125rem;
+    position: absolute;
+    left: 0.3125rem;
+}
+.balance{
+	width: 100%;
+	margin-bottom: 1.40625rem;
+}
+.balance .address{
+    padding: 0.46875rem 0.34375rem 0.46875rem 1.03125rem;
+	background:#4a4a4a url(/imgs/gouwuche/jiesuan-Location－hui.png) no-repeat 0.34375rem center;
+	background-size: 0.4375rem 0.421875rem;
+	color: #bcbcbc;
+	position: relative;
+}
+.balance .address>a>p{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#ffffff;
+	line-height: 0.875rem;
+}
+.balance .address>a>p span{
+	float: right;
+	padding-right: 0.3125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.balance .address>p{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+}
+.balance .address>p span{
+	margin-left: 0.8125rem;
+}
+.balance .address>p:nth-of-type(2){
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	line-height:0.40625rem;
+	width: 6.21875rem;
+	margin-top: 0.28125rem
+}
+.balance .address>p:nth-of-type(3){
+	margin-top: 0.28125rem
+}
+.balance .address>span{
+	padding-right: 0.3125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem;
+	position: absolute;
+	right: 0.34375rem;
+	display: block;
+	width: 1.4375rem;
+	height: 0.375rem;
+	top: 50%;
+	margin-top: -0.1875rem
+}
+.balance .gift-title{
+	height: 1.0625rem;
+    line-height: 1.0625rem;
+    background: #fff;
+    border-bottom: 1px solid #e5e5e5;
+    padding: 0 0.3125rem;
+}
+.balance .gift-title a{
+	float: right;
+    color: #fa2f3e;
+    background: url(/imgs/shouye-xiangyou.png?t=20161117) no-repeat right center;
+    background-size: 0.21875rem 0.375rem;
+    padding-right: 0.484375rem;
+    background-size: 0.21875rem 0.375rem
+}
+.balance .gift-img{
+	background: #fff;
+	margin-bottom: 0.28125rem;
+	height: 2.0rem;
+}
+.balance .gift-img ul{
+	float: left;
+	width: 7.75rem;
+	height: 2.0rem;
+}
+.balance .gift-img ul li{
+	float: left;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.balance .gift-img ul li:nth-of-type(2),.balance .gift-img ul li:nth-of-type(4){
+	width: 0.3125rem;
+	height: 0.3125rem;
+	background: url(../../imgs/gouwuche/gift/icon.png) no-repeat;
+	background-size: 100%;
+	margin-top: 0.75rem
+}
+.balance .gift-img ul li:nth-of-type(1),.balance .gift-img ul li:nth-of-type(3),.balance .gift-img ul li:nth-of-type(5){
+	
+	padding-top: 1.171875rem;
+}
+.balance .gift-img ul li:nth-of-type(1){
+	background: url(../../imgs/gouwuche/gift/gift-icon1.png) no-repeat center 0.5rem;
+	background-size: 0.375rem 0.4375rem;
+	margin: 0 0.328125rem 0 0.34375rem;
+}
+.balance .gift-img ul li:nth-of-type(3){
+	background: url(../../imgs/gouwuche/gift/gift-icon2.png) no-repeat center 0.5rem;
+	background-size: 0.421875rem 0.4375rem;
+	margin: 0 0.359375rem 0 0.484375rem
+}
+.balance .gift-img ul li:nth-of-type(5){
+	background: url(../../imgs/gouwuche/gift/gift-icon3.png) no-repeat center 0.515625rem;
+	background-size: 0.4375rem 0.421875rem;
+	margin-left: 0.453125rem
+}
+.balance .gift-img>a{
+	display: block;
+	float: left;
+	height: 0.796875rem;
+	padding-left: 0.3125rem;
+	border-left: 1px solid #d8d8d8;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	line-height: 0.796875rem;
+	margin-top: 0.609375rem;
+	background: url(../../imgs/shangpin/jiantou.png) no-repeat 1.71875rem 0.265625rem;
+    background-size: 0.15625rem 0.3125rem;
+    width: 1.875rem;
+}
+.balance .gift{
+	background: #fff;
+	padding: 0 0.34375rem;
+}
+.balance .gifts-top{
+	height: 1.40625rem;
+    line-height: 1.40625rem;
+    background: url(../../imgs/gouwuche/gift/icon2.png) no-repeat left center;
+    background-size: 0.4375rem 0.375rem;
+    padding-left: 0.6875rem;
+    border-bottom: 2px solid #eeeeee
+} 
+.balance .gifts .gifts-top span{
+	display: inline-block;
+	border-radius:0.0625rem;
+	height:0.703125rem;
+	line-height: 0.703125rem;
+	padding: 0 0.25rem;
+	margin-right: 0.28125rem;
+	border:1px solid #979797;
+	background: #fff;
+	color:#9b9b9b;
+}
+.balance .gifts .gifts-top span:first-of-type{
+	margin-left: 0.46875rem
+}
+.balance .gifts .gifts-top .gifts-checked{
+	border:1px solid #c7a994;
+	color: #fff;
+	background:#c7a994;
+}
+.balance .gifts .liuyan{
+	background: #fff;
+	position: relative;
+	border-bottom: 2px solid #eeeeee;
+	height: 1.40625rem
+}
+.balance .gifts .liuyan:last-child{
+	border-bottom: 0
+}
+.balance .gifts .liuyan p{
+	line-height: 1.40625rem;
+	float: left;
+	width: 1.5rem;
+	margin-right: 0.375rem
+}
+.balance .gifts .liuyan input{
+	border:0;
+	background: #fff;
+	outline: none;
+	border-radius: 0.125rem;
+	height: 1.40625rem;
+	width: 7.4375rem;
+	float: left;
+}
+.balance .gifts .liuyan span{
+	display: block;
+	position: absolute;
+	width:  0.9375rem;
+	height:  0.9375rem;
+	background-image:url(/imgs/qiehuandizhi/tianjiadizhi.png?t=20161117) ;
+	background-repeat:no-repeat ;
+	background-position: center center;
+	background-size: 0.3125rem 0.3125rem;
+	bottom: 0.125rem;
+    right: 0.265625rem;
+    display: none;
+}
+.balance .commodity{
+	margin-top: 0.28125rem;
+	background: #F1EDEE
+}
+.balance .commodity>div{
+	margin-top: 0.28125rem;
+}
+.balance .commodity .business{
+	margin-bottom:0.0625rem;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	padding-left: 0.34375rem;
+	background: #fff;
+}
+.balance .commodity .business p{
+	background: url(/imgs/gouwuche/gouwuche-dianpu.png?t=20161117) no-repeat left center;
+	background-size: 0.4375rem 0.4375rem;
+	padding-left: 0.6875rem;
+}
+
+.balance .commodity ul li{
+	padding: 0.328125rem 0.375rem;
+    height: 3.125rem;
+    background: #fff
+}
+.balance .commodity .message{
+	border-bottom: 2px solid #eeeeee;
+    background: #fff;
+    margin-top: 0.0625rem;
+    height: 1.40625rem;
+    padding: 0 0.34375rem;
+}
+.balance .commodity .message p{
+	width: 1.875rem;
+    float: left;
+    line-height: 1.40625rem;
+}
+.balance .commodity .message input{
+	border: 0;
+    width: 7.4375rem;
+    height: 1.40625rem;
+    background: #fff;
+    font-size: 0.375rem;
+    color: #9b9b9b;
+    line-height: 1.40625rem;
+}
+.balance .commodity .select{
+	padding: 0 0.34375rem;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	background: #fff
+}
+.balance .commodity .select>p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	width: 1.875rem;
+	float: left;
+}
+.balance .commodity .select a{
+	float: right;
+}
+
+.balance .commodity .select .mode-select{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	padding-right: 0.3125rem
+}
+.balance .commodity .selectMode .mode-select{
+	color:#c7a994;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.balance .commodity .select .time-select{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	padding-right: 0.3125rem
+}
+.balance .commodity .selectTime .time-select{
+	color:#c7a994;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.balance .commodity .water{
+	border-bottom: 2px solid #eeeeee;
+    background: #fff;
+    margin-top: 0.0625rem;
+    height: 1.40625rem;
+    padding: 0 0.34375rem;
+}
+.balance .commodity .water p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa5654;
+	line-height: 1.40625rem;
+}
+.balance .method{
+	background: #fff;
+	margin-top: 0.28125rem;
+	padding: 0 0.34375rem;
+}
+.balance .method ul li{
+	border-bottom: 0.015625rem solid #eee;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	
+}
+.balance .method ul li:last-child{
+	border-bottom: 0;
+}
+.balance .method ul li>p{
+	float: left;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.balance .method ul li>p>span{
+	color:#fa2f3e;
+}
+.balance .method ul li a{
+	float: right;
+	display: block;
+}
+.balance .method ul .jifen a{
+	width: 1.5625rem;
+	height: 1.40625rem;
+	position: relative;
+}
+.balance .method ul .jifen a img{
+	width: 1.125rem;
+    height: 0.703125rem;
+    position: absolute;
+    top: 0.351562rem;
+    right: 0
+}
+.balance .method ul li a p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	padding-right: 0.3125rem;
+	color:#c7a994;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.balance .balance-total{
+	background: #fff;
+	margin-top: 0.3125rem;
+	padding: 0 0.3125rem;
+	text-align: right;
+	height: 1.09375rem;
+	line-height: 1.09375rem;
+}
+.balance .balance-total p span{
+	display: inline-block;
+	min-width: 0.90625rem;
+	color:#fa2f3e;
+	font-weight: bold;
+}
+.balance .bottom{
+	background: #fff;
+}
+.balance .bottom .bottom-one{
+	display: block;
+    width: 4.421875rem;
+    height: 1.328125rem;
+    background: #FA2F3D;
+    float: right;
+    line-height: 1.328125rem;
+}
+.balance .bottom .balance-total{
+	width: 5.203125rem;
+	float: left;
+	padding: 0 0 0 0.375rem;
+	text-align: left;
+	margin: 0;
+	height: 1.328125rem;
+	line-height: 1.328125rem
+}
+.balance .bottom .balance-total p{
+	color:#4a4a4a;
+}
+/*优惠券*/
+#yhq{
+	position: fixed;
+	width: 100%;
+	top: 0;
+	left: 0;
+	background: #EEEEEE;
+	display: none;
+	height: 100%;
+    overflow: scroll;
+}
+.coupon ul{
+	margin: 0.3125rem auto 0;
+}
+.coupon ul>img{
+	display: block;
+	width: 3.3125rem;
+	height: 2.046875rem;
+	margin: 0 auto;
+	padding-top: 1.71875rem
+}
+.coupon ul>p{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	margin-top: 0.890625rem;
+	text-align: center;
+	font-weight: bold;
+}
+.coupon ul li{
+	height: 2.359375rem;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin: 0 auto 0.3125rem;
+	overflow: hidden;
+	width: 9.40625rem;
+	background-image:  url(/imgs/personal/youhuizhan-beijing.png?t=20161117);
+}
+.coupon ul li .left{
+	width: 2.140625rem;
+    font-size: 0.546875rem;
+    text-align: center;
+    color: #fff;
+    margin-right: 0.515625rem;
+    float: left;
+    overflow: hidden;
+    height: 2.359375rem;
+}
+.coupon ul li .left h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#ffffff;
+	padding-top: 0.484375rem;
+	margin-bottom: 0.21875rem
+}
+.coupon ul li .left h3 span{
+	font-family:PingFangSC-Medium;
+	font-size:0.71875rem;
+}
+.coupon ul li .left p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+}
+.coupon ul li .right{
+	float: left;
+	padding-top: 0.484375rem;
+	width: 4.265625rem;
+}
+.coupon ul li .right h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	margin-bottom: 0.296875rem
+}
+.coupon ul li .right p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#4a4a4a;
+	margin-bottom: 0.109375rem
+}
+.coupon ul li .btn{
+	width: 2.4375rem;
+    float: left;
+    height: 2.359375rem;
+    position: relative;
+}
+.coupon ul li .btn img{
+	display: block;
+	margin: 0.25rem 0 0 0.203125rem;
+	width: 1.875rem;
+	height: 1.875rem
+}
+.coupon ul li .btn a{
+	display: block;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	line-height:0.46875rem;
+	width: 1.125rem;
+	background: url(../../imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem;
+	height: 0.9375rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -0.46875rem;
+	margin-left: -0.5625rem
+}
+#integral{
+	position: fixed;
+	height: 3.90625rem;
+	width: 5.875rem;
+	border-radius: 0.15625rem;
+	top: 50%;
+	left: 50%;
+	margin-left: -2.9375rem;
+	margin-top: -1.953125rem;
+	background: #fff;
+	display: none;
+    overflow: scroll;
+    z-index: 99;
+}
+#integral>p{
+	height: 1.0rem;
+	line-height: 1.0rem;
+	text-align: center;
+	border-bottom: 1px solid #E5E5E5
+}
+.integral-choice{
+	padding:0.234375rem 0.3125rem 0.203125rem;
+	height: 1.515625rem
+}
+.integral-choice input{
+	width: 1.203125rem;
+	height: 0.34375rem;
+	border: 1px solid #a4a4a4;
+	border-radius: 0.078125rem;
+	padding: 0.3125rem 0.3125rem;
+	background: #fff;
+	font-size: 0.34375rem;
+	float: left;
+}
+.integral-choice span{
+	color: #fa2f3e;
+    font-size: 0.34375rem;
+    width: 3.046875rem;
+    display: block;
+    text-align: right;
+    float: right;
+    margin: 0.3125rem 0.1875rem 0 0;
+}
+.integral-choice p{
+	font-size: 0.3125rem;
+	margin-top: 0.234375rem;
+	color: #fa2f3e
+}
+.integral-btn{
+	height: 0.921875rem;
+	border-top: 1px solid #E5E5E5;
+	line-height:0.921875rem;
+	font-size: 0.3125rem;
+}
+.integral-btn a{
+	display: block;
+	float: left;
+	width: 49%;
+	text-align: center;
+	color: #1b1b1b;
+}
+.integral-btn a:first-child{
+	border-right: 1px solid #e5e5e5
+}
+.bottom>p{
+	width: 4.140625rem;
+    height: 1.34375rem;
+    text-align: center;
+    line-height: 1.34375rem;
+    font-size: 0.375rem;
+    font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+}
+.bottom b{
+	float: left;
+    width: 1.71875rem;
+    text-align: center;
+    font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #4a4a4a;
+    line-height: 1.953125rem;
+    background: #fff url(../../imgs/gouwuche/gift/return.png) no-repeat center 0.21875rem;
+    background-size: 0.5rem 0.46875rem
+
+}
+.bottom .yulan{
+	float: left;
+	background:#1b1a1f;
+}
+.bottom .bottom-two{
+	float: left;
+	background:#fa2f3e;
+}  
+/*送礼弹窗*/
+.giftopen{
+	position: fixed;
+	top: 28%;
+	width: 8.59375rem;
+	left: 50%;
+	margin-left: -4.296875rem;
+	background: #fff;
+	border-radius: 0.15625rem;
+	display: none;
+	z-index: 99;
+}
+.giftopen p{
+	padding: 0.78125rem 0.46875rem 0;
+	line-height: 0.5625rem
+}
+.giftopen-btn{
+	padding: 0 0.46875rem;
+	margin-top: 0.46875rem
+}
+.giftopen-btn input{
+	float: left;
+	width: 0.46875rem;
+	height: 0.46875rem;
+	margin-right: 0.15625rem
+}
+.giftopen-btn span{
+	font-size: 0.375rem;
+}
+.giftopen-close{
+	display: block;
+	width: 4.0625rem;
+	height: 1.09375rem;
+	margin: 0.46875rem auto 0.546875rem;
+	background: #fa2f3e;
+	color: #fff;
+	line-height: 1.09375rem;
+	text-align: center;
+	font-size: 0.375rem;
+	border-radius: 0.125rem
+}
+
+/*选择配送方式*/
+.peisong{
+	margin-top: 0.3125rem;
+	height: 1.09375rem;
+	background: #fff
+}
+.peisong p,.ziti .ziti-title p{
+	line-height: 1.09375rem;
+	padding: 0 0.3125rem;
+	position: relative;
+}
+.peisong p a,.ziti .ziti-title p a{
+	display: block;
+	width: 0.390625rem;
+	height: 1.09375rem;
+	position: absolute;
+	right: 0.3125rem;
+	top: 0;
+	background: url(/imgs/location/check.png) no-repeat center center;
+	background-size: 0.390625rem 0.265625rem
+}
+.peisong p span,.ziti .ziti-title p span{
+	float: right;
+	padding-right: 0.859375rem;
+}
+.ziti{
+	background: #fff;
+	margin-top: 0.3125rem;
+}
+.ziti .ziti-title{
+	height: 1.09375rem;
+}
+.ziti-content{
+	padding: 0 0.3125rem;
+}
+.ziti-content li{
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.3125rem 0 0.234375rem 0
+}
+.ziti-content li p{
+	margin-bottom: 0.15625rem;
+	font-size: 0.34375rem;
+}
+.ziti-content li span{
+	color: #bcbcbc;
+	font-size: 0.34375rem;
+	line-height: 0.59375rem;
+}
+.ziti-content li h3{
+	color: #fa2f3e;
+	font-size: 0.34375rem;
+	margin-bottom: 0.28125rem;
+}
+.dis-goods{
+	margin-top: 0.28125rem;
+}
+.dis-goods .dis-title{
+	height: 1.0625rem;
+	background: #F7F7F7;
+	line-height: 1.0625rem;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0 0.3125rem
+}
+.dis-goods ul{
+	background: #fff;
+}
+.dis-goods ul li,.commodity li{
+	padding: 0.328125rem 0.375rem;
+    height: 3.125rem;
+    background: #fff;
+    margin-bottom: 0.0625rem;
+    position:relative;
+}
+
+.dis-goods ul li:last-child,.commodity li:last-child{
+	margin-bottom: 0
+}
+.dis-goods ul li>a{
+	display: block;
+	float: left;
+	width: 0.78125rem;
+	height: 0.375rem;
+	margin-top: 1.375rem;
+	background: #BEBEBE;
+	border-radius: 0.0625rem;
+	color: #fff;
+	font-size: 0.28125rem;
+	text-align: center;
+	line-height: 0.375rem
+}
+.dis-goods ul li>img,.commodity li>img{
+	width: 3.125rem;
+	height: 3.125rem;
+	float: left;
+	margin-right: 0.46875rem;
+}
+.commodity li .dis-content{
+	float: left;
+	width: 5.65625rem;
+	position: relative; 
+	height: 3.125rem
+}
+.dis-goods ul li .dis-content h3,.commodity li .dis-content h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	line-height: 0.625rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.dis-goods ul li .dis-content p,.commodity li .dis-content p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	margin-top: 0.03125rem;
+	margin-bottom: 0.40625rem
+}
+.dis-goods ul li .dis-content p:nth-of-type(2) span,.commodity li .dis-content p:nth-of-type(2) span{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	margin-top: 28px
+}
+.dis-goods ul li .dis-content p span a,.commodity li .dis-content p span a{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+}
+.commodity li .dis-content p:last-of-type{
+	position: absolute;
+	right: 0;
+	bottom: 0;
+	margin: 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.dis-goods ul li>p{
+	position: absolute;
+	bottom: 0;
+	left: 1.21875rem;
+	font-size: 0.28125rem;
+	color: #fa2f3e
+}

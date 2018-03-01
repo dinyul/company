@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>礼品卡</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/giftcard/giftcard.css?t=20161117&v4">
+	</head>
+	<body>
+		<div class="body">
+			<div id="shareGiftcard"></div>
+			<div class="share-btn" style="display: none;">
+				<img src="/imgs/giftcard/fenxiang.png?t=20161117" />
+				<a>知道啦</a>
+			</div>
+			<div class="giftopen">
+				<p>温馨提示：自己收礼完成后，您的好友将不能再通过您已分享的礼品订单接收您本次的礼品</p>
+				<a class="giftopen-close">关闭</a>
+			</div>
+			<div class="bg"></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		
+		<script>
+		(function(api,util,ajax){
+			var title1=0;
+			var giftKey = util.getUrlParams("giftKey");
+			var type=util.getUrlParams("type");
+			
+			shareGiftCard()
+			function shareGiftCard(){
+				ajax.post(api.baseServerUrl + "/giftOrder/findOrderGift",{
+						"key":giftKey	
+				},function(data) {
+					$('#shareGiftcard').load("../giftcard/giftcard1.html",function(){
+						if(type==1){
+							$(".shareButton1").show()
+							$('#fanhui3').show()
+							$('title').html('分享礼品卡')
+							title1='这是我为你精心挑选的礼物，快拆开看看吧！'
+						}else if(type==2){
+							$(".shareButton1").show()
+							$('#fanhui3').show()	
+						}else if(data.orderStatus==8){
+							$('#jieshou').show();
+							if(type==3){
+								$('.giftopen').show()
+								$('.bg').show()
+								document.body.ontouchmove=function(){
+									return false;
+								}
+							}
+						}else{
+							$('#yijieshou').show()
+							$('body').find('.yijieimg').css('display','block')
+						}
+						$('#title').html(data.giftGreet)
+						$('#cards-name').html(data.giftPerson)
+						$('#date').html((data.createDate).split(' ')[0])
+						$(".shareButton1").click(function(){
+							$('.share-btn').show()
+							if( browser.versions.ios || browser.versions.android){
+									if(!isWeiXin()){
+										$('.share-btn').css('top','1.25rem')
+										}
+								}
+							
+						})
+						$('.giftopen-close').click(function(){
+							$(this).parent().hide()
+							$('.bg').hide()
+							document.body.ontouchmove=function(){
+								return true;
+							}
+						})
+						$('.share-btn a').click(function(){
+							$('body').find('.share-btn').hide()
+						})
+						$('#jieshou').click(function(){
+							window.location.href="../gift/jieshoulipin.html?giftKey="+giftKey
+						})
+						$('#dese').click(function(){
+							$('.share-btn').show()
+						})
+                        title1='每一份礼物都有Ta存在的意义和属于Ta的人--更好甄选'
+						shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title1,data.giftGreet,"http://" + document.domain + "/giftcard/giftShare.html?giftKey="+giftKey,"http://" + document.domain +"/imgs/lipinka-share.jpg");
+						});
+				})
+			}
+
+		})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,266 @@
+body{
+	background: #FEED27
+}
+.test{
+	width: 100%;
+	height: 15.813333rem;
+	background: url(/imgs/activity/test/test-bg.png) no-repeat;
+	background-size: 100%;;
+	position: relative;
+}
+.test-btn{
+	width: 6.626667rem;
+	height: 3.12rem;
+	margin: 0 auto;
+	position: absolute;
+	bottom: 0.133333rem;
+    left: 50%;
+    margin-left: -3.313333rem;
+}
+.testshare{
+	width: 100%;
+	height: 15.813333rem;
+	background: url(/imgs/activity/test/testshare-bg.png) no-repeat;
+	background-size: 100%;;
+	position: relative;
+}
+.testlist{
+	width: 100%;
+	height: 15.813333rem;
+	background: url(/imgs/activity/test/test-bg1.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.sharelist{
+	width: 100%;
+	height: 15.813333rem;
+	background: url(/imgs/activity/test/testshare-bg1.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.content ul{
+	padding: 4.96rem 0.866667rem 0;
+}
+.content ul li{
+	float: left;
+	width: 1.266667rem;
+	height: 2.106667rem;
+	margin:0 0.453333rem 0.266667rem 0;
+	position: relative;
+}
+.content ul li:nth-child(5n){
+	margin-right: 0
+}
+.content ul li .checkedimg{
+	position: absolute;
+	width: 1.68rem;
+	height: 1.64rem;
+	left: -0.306667rem;
+    top: 0.266667rem;
+}
+.testresult,.shareresult{
+	background: #FEED27;
+	margin-bottom: 1.853333rem;
+}
+.testresult .top{
+	width: 10.0rem;
+	height: 11.2rem;
+	background: url(/imgs/activity/test/test-bg2.png) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.testresult .top .title{
+	padding-top: 5.6rem;
+    text-align: center;
+}
+.testresult .top>p{
+	font-size: 0.266667rem;
+	color: #777;
+	position: absolute;
+	bottom: 0.64rem;
+	left: 5.733333rem
+}
+.testresult .top .title h2{
+	font-size: 0.48rem;
+	color: #fff000;
+	font-weight: bold;
+}
+.testresult .top .title p{
+	font-size: 0.24rem;
+	color: #fff;
+	margin-top: 0.2rem
+}
+
+.shareresult .top{
+	width: 10.0rem;
+	height: 7.2rem;
+	background: url(/imgs/activity/test/testshare-bg2.jpg) no-repeat;
+	background-size: 100%;
+	position: relative;
+}
+.shareresult .top>p{
+	font-size: 0.266667rem;
+	color: #777;
+	position: absolute;
+	bottom: 0.64rem;
+	left: 5.733333rem
+}
+.shareresult .top .title{
+	padding-top: 2.253333rem;
+    text-align: center;
+}
+.shareresult .top .title h2{
+	font-size: 0.48rem;  
+	color: #fff000;
+	font-weight: bold;
+}
+.shareresult .top .title p{
+	font-size: 0.24rem;
+	color: #fff;
+	margin-top: 0.2rem
+}
+.label{
+	margin-bottom: 0.133333rem
+}
+.label li{
+	float: left;
+	width: auto;
+	margin:0 0.346667rem 0.266667rem 0;
+	height: 0.826667rem
+}
+.label li a{
+	display: block;
+}
+.label li img{
+	width: auto;
+}
+.result{
+	margin-bottom: 0.4rem;
+	padding: 0.4rem 0.8rem 0;
+	background: url(/imgs/activity/test/line.png) no-repeat center top;
+	background-size: 8.226667rem 0.093333rem;
+}
+.result>h3{
+	font-size: 0.4rem; 
+	color: #222;
+	text-align: center;
+	margin-bottom: 0.4rem;
+	font-weight: bold;
+}
+.result>h3 span{
+	font-size: 0.266667rem;
+	color: #777;
+	margin-top: 0.2rem
+}
+.result>p{
+	margin-top: 0.666667rem;
+	text-align: center;
+	font-size: 0.266667rem;
+	color: #777
+}
+.result-bottom{
+	position: fixed;
+    bottom: 0;
+    width: 8.24rem;
+    left: 0;
+    background: rgba(0,0,0,0.4);
+    padding: 0.266667rem 0.88rem;
+}
+.testresult>img{
+	width: 8.24rem;
+    display: block;
+    margin: 0 auto;
+}
+.result-bottom a{
+	display: block;
+}
+.result-bottom a:first-of-type{
+	float: left;
+	width: 3.826667rem;
+	height: 1.32rem;
+}
+.result-bottom a:last-of-type{
+	float: right;
+	width: 3.853333rem;
+	height: 1.32rem;
+} 
+.result-list li .headimg{
+	width: 1.0rem;
+	height: 1.0rem;
+	border-radius: 100%;
+	float: left;
+	margin-right: 0.466667rem;
+	margin-bottom: 0.24rem
+}
+.result-list li p{
+	font-size: 0.32rem;
+	color: #222;
+	padding-top: 0.08rem
+}
+.result-list li p span{
+	font-size: 0.266667rem;
+	color: #D9292B;
+	margin-left: 0.4rem
+}
+.result-list li h3{
+	margin-top: 0.266667rem;
+	font-weight: bold;
+	font-size: 0.32rem;
+	color: #2288D6
+}
+.shareresult-list li{
+	margin-bottom: 0.533333rem;
+	text-align: center;
+}
+.shareresult-list li p{
+	font-size: 0.32rem;
+	color: #222;
+}
+.shareresult-list li a{
+	display: block;
+}
+.shareresult-list li img{
+	width: auto;
+	margin-top: 0.266667rem;
+}
+.similar h3{
+	font-size: 0.8rem;
+	color: #d9292b;
+	text-align: center;
+}
+.similar h3 span{
+	font-size: 0.266667rem;
+	color: #777;
+	margin-left: 0.32rem
+}
+.similar p{
+	font-size: 0.32rem;
+	color: #d9292b;
+	text-align: center;
+	margin-top: 0.533333rem;
+	line-height: 0.373333rem
+}
+.sharebg{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background:rgba(0,0,0,0.5);
+	display: none;
+}
+.sharebg a{
+	display: block;
+	width: 3.125rem;
+	height: 0.96875rem;
+	background: #fa2f3e;
+	color: #fff;
+	line-height: 0.96875rem;
+	text-align: center;
+	border-radius: 0.15625rem;
+	font-size: 0.4375rem;
+	position: absolute;
+	top: 7.0rem;
+	left: 50%;
+	margin-left: -1.5625rem
+}

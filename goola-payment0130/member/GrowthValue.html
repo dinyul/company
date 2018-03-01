@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>成长记录</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/member/GrowthValue.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<nav>
+				<a class="checked">成长值明细</a>
+				<a>成长值解读</a>
+			</nav>
+			<div class="content1 content">
+				<ul>
+					<p>累积获得：<span class="total"></span></p>
+				</ul>
+				<p class="none">没有更多数据了~</p>
+			</div>
+			<script id="content" type="dot/tmpl">
+				{{~it.data:data:i}}
+					<li>
+						<div>
+							<h3>{{=data.acquireName}}</h3>
+							<p>{{=getFormatDate(data.operDate).split(' ')[0]}}</p>
+						</div>
+						<a>{{?data.operType==2}}-{{??data.operType==1}}+{{?}}{{=data.growValue}}</a>
+					</li>
+				{{~}}
+			</script>
+			<div class="content2 content" style="display: none;">
+				<img src="/imgs/member/growth.png" />
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				
+				list(1,20)
+				function scroll(){
+					$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.content1').find('li').length>=total){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+						
+					}
+				});
+				}
+				
+				
+				function list(pageNo,pageSize){
+					ajax.post(api.baseServerUrl + "/userTask/queryUserGrowRuleRecord",{
+						'pageNo':pageNo,'pageSize':pageSize
+					},function(data) {
+						$('.total').html(data.totalGrowValue)
+						total=data.recordList.total
+						pageTotal=parseInt(total/pageSize)+1;
+						
+						var obj = {data:data.recordList.rows,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#content').html());
+						var html = doTtmpl(obj);
+						$('.content1 ul').append(html)
+						if(total<pageSize){
+							$('.none').show()
+							$(window).unbind('scroll')
+						}
+					})
+				}
+				
+				
+				
+				$('nav a').click(function(){
+					$('nav a').removeClass('checked')
+					$(this).addClass('checked')
+					$('.content').hide()
+					$('.content'+Number($(this).index()+1)).show()
+					if($(this).index()==1){
+						$(window).unbind('scroll')
+					}else if($(this).index()==0){
+						scroll()
+					}
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

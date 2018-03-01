@@ -1,0 +1,536 @@
+.team>nav{
+	height: 1.40625rem;
+	padding:0 0.3125rem;
+	background: #fff;
+}
+.team>nav a{
+	display: block;
+	float: left;
+	width: 3.90625rem;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	float: left;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+} 
+.team>nav a:last-child{
+	float: right;
+}
+.team>nav .checked{
+	color:#c7a994;
+	background: url(/imgs/personal/line.png) no-repeat left bottom;
+	background-size:100% 0.0625rem;
+}
+.onteam{
+	margin-top: 0.0625rem;
+}
+.onteam .teaminfo{
+	padding: 0 0.34375rem;
+	background: #fff;
+}
+.onteam .teaminfo .teaminfo-title{
+	height: 1.34375rem;
+	border-bottom: 2px solid #eee;
+	line-height: 1.34375rem
+}
+.onteam .teaminfo .teaminfo-title p:first-child{
+	float: left;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	padding-left: 0.671875rem;
+	background: url(/distribution/imgs/myteam1.png) no-repeat left center;
+	background-size: 0.4375rem 0.375rem
+}
+.onteam .teaminfo .teaminfo-title p:first-child span{
+	color: #9b9b9b
+}
+.onteam .teaminfo .teaminfo-title p:last-child{
+	float: right;
+	padding-right: 0.3125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	position: relative;
+	background: url(/imgs/gouwuche/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.onteam .teaminfo .teaminfo-title p:last-child a{
+	position: absolute;
+	border-radius: 100%;
+	background:#fa2f3e;
+	height: 0.34375rem;
+	line-height: 0.34375rem;
+	min-width: 0.34375rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	left: 1.328125rem;
+	bottom: 0.734375rem
+}
+.onteam .teaminfo .teaminfo-content{
+	padding-bottom: 0.359375rem
+}
+.onteam .teaminfo .teaminfo-content>h3{
+	padding-top: 0.6875rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	position: relative;
+	line-height: 0.4375rem
+}
+.onteam .teaminfo .teaminfo-content>h3 a{
+	position: absolute;
+	right: 0.359375rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	padding-left: 0.5rem;
+	background: url(/distribution/imgs/dist-xinshou.png) no-repeat left center;
+	background-size: 0.34375rem 0.359375rem
+}
+.onteam .teaminfo .teaminfo-content>h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.78125rem;
+	color:#fa2f3e;
+	text-align: center;
+	margin-top: 0.3125rem;
+	position: relative;
+}
+.onteam .teaminfo .teaminfo-content>h2 span{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	position: absolute;
+	bottom: 0;
+	margin-left: 0.390625rem
+}
+.onteam .teaminfo .teaminfo-content>p{
+	background:#c7a994 url(/imgs/member/jiantou-bai.png) no-repeat 1.28125rem center;
+	background-size: 0.15625rem 0.3125rem;
+	border-radius:0.78125rem;
+	width:1.4375rem;
+	height:0.421875rem;
+	margin: 0.265625rem auto 0;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	line-height: 0.421875rem;
+	padding-left: 0.1875rem;
+}
+.onteam .teaminfo .teaminfo-content ul{
+	margin-top: 0.546875rem;
+}
+.onteam .teaminfo .teaminfo-content ul li{
+	width: 33.33%;
+	float: left;
+}
+.onteam .teaminfo .teaminfo-content ul li p:first-child{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+	line-height: 0.46875rem;
+	border-right: 2px solid #eee;
+	text-align: center;
+}
+.onteam .teaminfo .teaminfo-content ul li:last-of-type p:first-child{
+	border-right: 0
+}
+.onteam .teaminfo .teaminfo-content ul li p:last-child{
+	font-family:PingFangSC-Regular;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	margin-top: 0.234375rem;
+	text-align: center;
+}
+.onteam .order{
+	margin-top: 0.28125rem
+}
+.onteam .order .order-title{
+	height: 1.34375rem;
+	margin-bottom:0.03125rem;
+	line-height: 1.34375rem;
+	padding: 0 0.34375rem;
+	background: #fff
+}
+.onteam .order .order-title p:first-child{
+	float: left;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	padding-left: 0.671875rem;
+	background: url(/distribution/imgs/myteam2.png) no-repeat left center;
+	background-size: 0.421875rem 0.4375rem
+}
+.onteam .order .order-title p:first-child span{
+	color: #9b9b9b
+}
+.onteam .order nav{
+	height: 1.1875rem;
+	line-height: 1.1875rem;
+	background: #fff;
+}
+.onteam .order nav a{
+	display: block;
+	float: left;
+	width: 2.65625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	text-align: center;
+	margin-right: 1.015625rem;
+}
+.onteam .order nav a:last-child{
+	margin-right: 0
+}
+.onteam .order nav .checked{
+	color:#c7a994;
+	background: url(/distribution/imgs/team-jiantou.png) no-repeat center bottom;
+	background-size: 0.375rem 0.1875rem
+}
+.orderlist {
+	background: #fff;
+	padding: 0 0.34375rem
+}
+.orderlist li{
+	border-bottom: 2px solid #eee;
+	padding: 0.46875rem 0
+}
+.orderlist li h3{
+	width: 4.6875rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	float: left;
+}
+.orderlist li h3 span{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	padding-top: 0.15625rem;
+    display: inline-block;
+}
+.orderlist li p{
+	float: right;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+	text-align: right;
+	min-width: 1.5625rem
+}
+.orderlist li p span{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	display: inline-block;
+	margin-top: 0.109375rem;
+}
+.orderlist li img{
+	float: right;
+	width: 1.28125rem;
+	height: 0.9375rem;
+	margin-right: 0.3125rem
+}
+.team .myteam{
+	margin-top: 0.0625rem;
+}
+.team .myteam .myteam-title{
+	height: 1.34375rem;
+	margin-bottom: 0.0625rem;
+	line-height: 1.34375rem;
+	padding: 0 0.34375rem;
+	background: #fff
+}
+.team .myteam .myteam-title p{
+	float: left;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	padding-left: 0.671875rem;
+	background: url(/distribution/imgs/myteam1.png) no-repeat left center;
+	background-size: 0.4375rem 0.375rem
+}
+.team .myteam .myteam-title p span{
+	color: #9b9b9b
+}
+.team .myteam .myteam-title a{
+	display: block;
+	background:#c7a994;
+	border-radius:0.0625rem;
+	width:1.875rem;
+	height:0.734375rem;
+	float: right;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#ffffff;
+	line-height: 0.734375rem;
+	text-align: center;
+	margin-top: 0.296875rem
+}
+.myteam .myteam-list>p{
+	padding:0.5rem 0 0.15625rem 0.28125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+}
+.myteam .myteam-list li{
+	margin-top: 0.0625rem;
+	background: #fff;
+	padding: 0 0.34375rem;
+}
+.myteam .myteam-list li div{
+	height: 1.15625rem;
+	line-height: 1.15625rem;
+	padding: 0.34375rem 0;
+	border-bottom: 2px solid #eee;
+}
+.myteam .myteam-list li div img{
+	float: left;
+	width: 1.15625rem;
+	height: 1.15625rem;
+	border-radius: 100%;
+	margin-right: 0.46875rem
+}
+.myteam .myteam-list li div h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.myteam .myteam-list li div h2 span{
+	float: right;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	font-weight: normal;
+}
+.myteam .myteam-list li p{
+	height: 0.625rem;
+	line-height: 0.625rem;
+	text-align: center;
+	padding: 0.15625rem 0
+}
+.myteam .myteam-list li p a{
+	display: inline-block;
+	float: left;
+	width: 50%;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	box-sizing:border-box;
+}
+.myteam .myteam-list li p a:first-child{
+	border-right: 2px solid #eee
+}
+.myteam-none{
+	background: #fff;
+	padding: 2.390625rem 0;
+}
+.myteam-none img{
+	display: block;
+	width: 3.3125rem;
+	height: 1.96875rem;
+	margin: 0 auto 0.78125rem
+}
+.myteam-none p{
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.teamlist>nav a{
+	position: relative;
+}
+.teamlist>nav a span{
+	display: inline-block;
+	height: 0.34375rem;
+	line-height: 0.34375rem;
+	min-width: 0.34375rem;
+	text-align: center;
+	border-radius: 100%;
+	background:#fa2f3e;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	position: absolute;
+	top: 0.328125rem;
+	right: 0.875rem
+}
+.teamapply{
+	margin-top: 0.0625rem;
+	background: #fff;
+	padding: 0 0.34375rem;
+}
+.teamapply li{
+	height: 1.15625rem;
+	padding: 0.34375rem 0;
+	border-bottom: 2px solid #eee;
+}
+.teamapply li:last-child{
+	border-bottom: 0
+}
+.teamapply li img{
+	float: left;
+	width: 1.15625rem;
+	height: 1.15625rem;
+	margin-right: 0.46875rem
+}
+.teamapply li div{
+	float: left;
+}
+.teamapply li h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height: 0.6875rem;
+	font-weight: bold;
+}
+.teamapply li h3{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+}
+.teamapply li p{
+	float: right;
+	line-height: 1.15625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+}
+.teamapply li p a{
+	display: inline-block;
+	border:1px solid #fa2f3e;
+	border-radius:0.0625rem;
+	width:1.53125rem;
+	height:0.703125rem;
+	line-height: 0.703125rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	float: left;
+	margin-top: 0.21875rem
+}
+.teamapply li p a:last-child{
+	margin-left: 0.46875rem;
+	border:1px solid #9b9b9b;
+	color:#9b9b9b;
+}
+.applyteam h2{
+	height: 1.484375rem;
+	line-height: 1.484375rem;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+	background: #fff
+}
+.applyteam .applyteam-text{
+	background: #fff;
+	margin-top: 0.28125rem;
+}
+.applyteam .applyteam-text textarea{
+	background: #fff;
+	border:0;
+	padding: 0.625rem 0.34375rem;
+	width: 9.3125rem;
+	outline: none;
+	resize:none;
+	line-height: 0.625rem
+}
+.applyteam .applyteam-bottom{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	width: 100%;
+	height: 1.328125rem;
+	line-height: 1.328125rem
+}
+.applyteam .applyteam-bottom a{
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+	background:#1b1a1f;
+}
+.applyteam .applyteam-bottom a:last-child{
+	background:#fa2f3e;
+}
+
+/*分享弹出层*/
+.join{
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	top: 0;
+	left: 0;
+	background: rgba(0,0,0,0.5);
+	z-index: 100;
+	display: none;
+}
+.join .content{
+	background:#ffffff;
+	border-radius:0.15625rem;
+	width:9.375rem;
+	height:9.96875rem;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-top: -4.984375rem;
+	margin-left: -4.6875rem;
+	position: relative;
+}
+.join .content .code{
+	width: 8.4375rem;
+    height: 8.90625rem;
+    margin: 0 auto  
+}
+.join .content .code h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.5rem;
+	color:#fa2f3e;
+	text-align: center;
+	line-height: 1.875rem;
+	font-weight: bold;
+}
+.join .content .code #code{
+	border:1px solid #979797;
+	width:6.21875rem;
+	height:6.21875rem;
+	margin:0 auto;
+}
+.join .content .code #code canvas{
+	width:6.21875rem;
+	height:6.21875rem;
+}
+.join .content>p{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#c7a994;
+	text-align: center;
+}
+.join .content .joinbg{
+	position: absolute;
+	width: 100%;
+	height: 8.8125rem;
+	top: 0;
+	left: 0;
+	background: #fff;
+	border-radius: 0.15625rem;
+}
+.join .content a{
+	display: block;
+	width: 0.9375rem;
+	height: 0.9375rem;
+	position: absolute;
+	top: -1.40625rem;
+	right: 0.3125rem
+}

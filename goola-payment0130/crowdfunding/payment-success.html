@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>支付成功</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/payment-success.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="title">
+				<img src="/crowdfunding/imgs/zhifuchenggong.png?t=20161117" />
+				<h2>支付成功</h2>
+				<p>已成功帮助好友筹款~</p>
+			</div>
+			<div class="youhuiquan">
+				
+			</div>
+			<div class="btn">
+				<a class="fanhui">返回</a>
+				<a href="../index.html">去逛逛</a>
+			</div>
+		</div>
+		<script id="youhuiquan" type="dot/tmpl">
+			{{? it}}
+				<p>您的爱心让您获得了{{=it.couponName}}优惠券，快去使用吧~</p>
+				<div class="coupon">
+					<div class="left">
+						¥<span>{{=it.preferentialPrice}}</span>
+					</div>
+					<div class="right">
+						<p><span>使用范围：</span>购啦商城平台</p>
+						<p><span>使用说明：</span>{{=it.couponName}}</p>
+						<p><span>使用期限：</span><a class="time1">{{=it.beginTime}}</a>~<a>{{=it.endTime}}</a></p>
+					</div>
+					<div class="clear"></div>
+					<div class="shiyong"><p>去使用</p></div>
+				</div>
+			{{?}}
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/crowdfunding/js/payment-success.js"></script>
+	</body>
+</html>

@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>查看订单</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/gift-order.css?t=20161117&v1">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" href="/css/address/mobiscroll.ios.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/address/style.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/address/cityLayout.css?t=20161117">
+	<link  rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117" />
+</head>
+<body>
+	<div class="lipin body">
+		<div class="lipin-list">
+			<div class="lipin-top">
+				<p>您的礼品清单</p>
+			</div>
+			<ul>
+			</ul>
+		</div>
+		<script id="lipin-list" type="dot/tmpl">
+			{{~it:data:i}}
+				{{~data.orderItems:goods:j}}
+					<li id="{{=goods.goodsId}}">
+						<table>
+							<tr>
+								<td><img src="{{=picUrl}}{{=goods.goodsPhoto}}"></td>
+								<td><p>{{=goods.goodsName}}</p></td>
+								<td><span>x{{=goods.goodsCount}}</span></td>
+							</tr>
+						</table>
+						
+					</li>
+				{{~}}
+			{{~}}
+		</script>
+		<script id="lipin-list1" type="dot/tmpl">
+			{{~it:data:i}}
+					<li id="{{=data.goodsId}}">
+						<table>
+							<tr>
+								<td><img src="{{=picUrl}}{{=data.goodsPhoto}}"></td>
+								<td><p>{{=data.goodsName}}</p></td>
+								<td><span>x{{=data.goodsCount}}</span></td>
+							</tr>
+						</table>
+						
+					</li>
+			{{~}}
+		</script>
+		<div class="information">
+			<div class="lipin-top">
+				<p>您的联系方式:</p>
+			</div>
+			<div class="xinxi">
+				
+			</div>
+		</div>
+		
+		<script id="information-xinxi" type="dot/tmpl">
+				<p>{{=it.receiverName}}<span>{{=it.receierPhone}}</span></p>
+				<a>{{=it.receiverAddress}}</a>
+		</script>
+		<div class="lipin-order">
+			<div class="lipin-top">
+				<p>订单信息：</p>
+			</div>
+			<ul>
+			</ul>
+		</div>
+		<script id="lipin-order" type="dot/tmpl">
+			{{~it.children:data:i}}
+			<li id="{{=data.orderId}}">
+				<h2 >订单编号：{{=data.orderCode}}
+					{{? data.serviceStatus == 6}}
+					<span>待发货</span>
+					{{?? data.serviceStatus == 2}}
+					<span>待收货</span>
+					{{?? data.serviceStatus == 5}}
+					<span>已完成</span>
+					{{?}}
+				</h2>
+				{{~data.orderItems:goods:j}}
+				<p>{{=goods.goodsName}}<span>x{{=goods.goodsCount}}</span></p>
+				{{~}}
+				{{? data.serviceStatus == 6}}
+				<h2 style="margin-bottom: 0;">发货时间：<b style="font-weight: 200;" class="fahuoshijian">{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}</b><span class="xiugai">修改发货时间</span></h2>
+				{{?? data.serviceStatus == 2}}
+				<h2 style="margin-bottom: 0;">发货时间：<b style="font-weight: 200;" class="fahuoshijian">{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}</b></h2>
+				{{?}}
+				{{? data.serviceStatus == 2 || data.serviceStatus == 5 }}
+				<a id="{{=data.expressNumber}}">物流信息</a>
+				{{?}}
+			</li>
+			{{~}}
+		</script>
+	</div>
+	<div class="bottom" style="display: none;">
+		<p class="queren">确认收货</p>
+	</div>
+	<div class="bg"></div>
+	<div class="xiugaishijian">
+		<p>请选择发货时间</p>
+		<b class="shijian"></b>
+		<input type="date"  />
+		<a class="queding">确定</a>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/js/init-fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/public.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/jquery.actionsheet-1.0.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/address/mobiscroll.scroller.zh-min.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryAllProvinces.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryCities.js?t=20161117"></script>
+	<script>
+	
+	(function(api,util,ajax){
+		var orderId = util.getUrlParams("orderId");
+		var key=util.getUrlParams("key")
+		var time
+		var currYear = (new Date()).getFullYear();	
+			var currMonth = (new Date()).getMonth()+1
+			var currDay = (new Date()).getDate()
+			if(currMonth<10){
+				var currMonth = "0"+(currMonth); 
+			}
+			if(currDay<10){
+				 currDay = "0"+currDay; 
+			}
+			time=currYear+'-'+currMonth+'-'+currDay
+		shouli(orderId,key)
+		function shouli(orderId,key){
+			ajax.post(api.baseServerUrl + "/giftOrder/orderDetail",{
+				orderId:orderId,key:key
+			},function(data) {
+				if(data.orderItems.length!=0){
+					util.render("#lipin-list1", data.orderItems, ".lipin-list ul");
+				}else{
+					util.render("#lipin-list", data.children, ".lipin-list ul");
+				}
+				
+				util.render("#lipin-order", data, ".lipin-order ul");
+				util.render("#information-xinxi", data, ".xinxi");
+				$('.bottom .queren').attr('id',data.orderId)
+				$('.lipin-order').delegate('li a','click',function(){
+					var expressCode=$(this).attr('id')
+					window.location.href="../logistics/wuliu.html?expressCode="+expressCode+'&key='+key+"&address=" + data.receiverAddress;
+				})
+				$('.fahuoshijian').each(function(){
+					if($(this).html()<=time){
+						$(this).parent().find('.xiugai').hide()
+					}
+				})
+			})
+		}
+		//修改发货时间
+		$('.lipin-order').delegate('.xiugai','click',function(){
+			$('.lipin-order').find('.xiugai').removeClass('selected')
+			$(this).addClass('selected')
+			$('.bg').show()
+			$('.xiugaishijian').show()
+			document.body.ontouchmove=function(){
+				return false;
+			}
+			$('.xiugaishijian input').attr('value',$(this).prev().html())
+			$('.shijian').html($(this).prev().html())
+		})
+		$('.xiugaishijian input').change(function(){
+				$('.shijian').html($(this).val())
+			})
+		$('.queding').click(function(){
+			$('.bg').hide()
+			$('.xiugaishijian').hide()
+			console.log(($('.xiugaishijian input').val()).replace(/-/g,""))
+			console.log(time.replace(/-/g,""))
+			if(($('.xiugaishijian input').val()).replace(/-/g,"")<=time.replace(/-/g,"")){
+						alert('请重新设置')
+						return false
+			}
+			ajax.post(api.baseServerUrl + "/giftOrder/changeSendTime",{
+				"orderId":$('.lipin-order').find('.selected').parent().parent().attr('id'),
+				"newSendTime":$('.xiugaishijian input').val()
+				},function(data) {
+					window.location.reload()
+				})
+			
+		})
+		$('.lipin-list').delegate('li','click',function(){
+			window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('id')
+		})
+
+	var title="更好甄选—更好·不贵"
+	var doc="种草全世界的好货"
+	shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+	})(goola.api,goola.util,goola.ajax)
+	</script>
+</body>
+</html>

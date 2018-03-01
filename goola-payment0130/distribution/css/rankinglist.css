@@ -1,0 +1,108 @@
+.ranktop{
+	height: 5.46875rem;
+	background: url(/distribution/imgs/rank-top.png) no-repeat;
+	background-size: 100%;
+	text-align: center;
+}
+.ranktop h2{
+	font-family:HiraginoSansGB-W6;
+	font-size:0.374063rem;
+	color:#ffffff;
+	padding-top: 0.734375rem;
+	margin-bottom: 0.453125rem
+}
+.ranktop p{
+	font-family:PingFangSC-Semibold;
+	font-size:0.374063rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	margin-bottom: 0.15625rem;
+	padding: 0 0.78125rem;
+	line-height: 0.703125rem;
+	height: 2.109375rem;
+	overflow: auto;
+}
+.ranktop h3{
+	margin-top: 0.265625rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.410156rem;
+	color:#fa2f3e;
+	text-shadow:0 0.03125rem 0.0625rem rgba(255,48,48,0.50);
+	font-weight: bold;
+}
+.ranktop h4{
+	background:#fd5f90;
+	border-radius:0.03125rem;
+	width:6.65625rem;
+	height:0.625rem;
+	margin: 0.296875rem auto 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.39375rem;
+	color:#ffffff;
+	line-height: 0.625rem
+}
+.rank .list{
+	margin-top: 0.3125rem
+}
+.rank .list li{
+	height: 2.5rem;
+	background: #fff;
+	margin-bottom: 0.078125rem;
+	overflow: hidden;
+}
+.rank .list li div{
+	float: left;
+}
+.rank .list li .left{
+	background:#d0d0d0;
+	width:1.140625rem;
+	height:1.140625rem;
+	border-radius:100%;
+	margin: 0.78125rem 0.546875rem 0 0.46875rem;
+	position: relative;
+}
+.rank .list li .left p{
+	line-height: 1.140625rem;
+	text-align: center;
+	font-family:PingFangSC-Medium;
+	font-size:0.34375rem;
+	color:#ffffff;
+	position: relative;
+}
+.rank .list li .left img{
+	width: 1.40625rem;
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+.rank .list li .name{
+	width: 4.375rem;
+	padding-top: 0.71875rem
+}
+.rank .list li .name h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#4a4a4a;
+	line-height: 0.625rem;
+	font-weight: bold;
+	margin-bottom: 0.15625rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.rank .list li .name p{
+	font-family:PingFangSC-Light;
+	font-size:0.46875rem;
+	color:#7c7c7c;
+	padding-left: 0.65625rem;
+	line-height: 0.5rem;
+	background: url(/distribution/imgs/rank-icon4.png) no-repeat left center;
+	background-size: 0.5rem 0.5rem
+}
+.rank .list li .price p{
+	font-family:PingFangSC-Medium;
+	font-size:0.625rem;
+	color:#fa2f3e;
+	margin-top: 1.015625rem;
+	font-weight:bold;
+}

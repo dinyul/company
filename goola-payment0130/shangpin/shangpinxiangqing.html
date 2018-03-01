@@ -1,0 +1,512 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>商品详情</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+    <link rel="stylesheet" href="/css/flex.css?t=20161117" />
+    <link rel="stylesheet" type="text/css" href="/css/shangpin/shangpin.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+    <style>
+        .u-flyer {
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50px;
+            position: fixed;
+            z-index: 998;
+        }
+		.index-nav{
+			width: 100%;
+			height: 1.1875rem;
+			background: #fff;
+			overflow-x:scroll;
+		}
+		.index-nav::-webkit-scrollbar {
+			display: none;
+		}
+		.index-nav ul{
+			height: 0.828125rem;
+			padding: 0 0.34375rem;
+
+		}
+    </style>
+</head>
+
+<body>
+    <div class="details body">
+        <div class="shangpin" style="width: 100%;height: 100%;">
+            <a href="../index.html" id="shouye"></a>
+            <div id="detailsFirst">
+                <div class="swiper-container"></div>
+                <div class="seckill" style="display: none;"></div>
+                <div class="tuan" style="display: none;">
+                    <div class="tuan-details"></div>
+                    <div class="tuan-content"></div>
+
+                </div>
+                <div class="details-one"></div>
+            </div>
+            <!--众筹流程-->
+            <div class="crowdfunding" style="display: none;">
+                <p>本商品支持
+                    <a class="leastprice"></a>元许愿活动</p>
+            </div>
+
+            <!--评价-->
+            <div class="evaluate"></div>
+            <div class="shopadmin" style="display: none;">
+
+            </div>
+            <script id="shopadmin" type="dot/tmpl">
+                {{?it.data.goods.providerIsShop=='1'}}
+                <img src="{{=it.picUrl}}{{=it.data.goods.shopSign}}" />
+                <p>{{=it.data.goods.shopName}}</p>
+                <a href="../shop/shop.html?providerId={{=it.data.goods.providerId}}">进入店铺</a> {{?}}
+            </script>
+            <div class="collocation"></div>
+            <!--商品详情/规格参数-->
+            <div class="message">
+                <div class="message-content"></div>
+                <div class="news"></div>
+            </div>
+        </div>
+        <!--底部加入购物车-->
+        <div class="bottom" style="display: none">
+            <div class="gwc" id="end">
+                <div class="num" id="selectedTotal"></div>
+            </div>
+            <a href="javascript:;" onclick="kefu();" class="customer_service">
+                <img src="/imgs/shangpin/customer_service.png" alt="">
+            </a>
+            <p class="addgwc">加入购物车</p>
+            <p class="payment1">立即购买</p>
+        </div>
+
+        <!--底部点击划出-->
+        <div id="bottom-slider" style="display: none;">
+            <div class="bg"></div>
+            <div class="bottom-slide">
+                <div class="bottom-slide1"></div>
+                <div class="bottom-slide-confirm1">
+                    <div class="gwc" id="end">
+                        <div class="num selectedTotal1" id="selectedTotal"></div>
+                    </div>
+                    <p class="bottom-slide-confirm">加入购物车</p>
+                    <p class="bottom-slide-payment">立即购买</p>
+                </div>
+            </div>
+
+        </div>
+        <!--底部加入购物车-->
+        <div class="tuan-bottom cantuan" style="display:none">
+            <div class="gwc" id="end">
+                <div class="num selectedTotal1" id="selectedTotal"></div>
+            </div>
+            <a href="javascript:;" onclick="kefu();" class="customer_service">
+                <img src="/imgs/shangpin/customer_service.png" alt="">
+            </a>
+            <a href="../tuan/my-tuan.html">我的拼团</a>
+            <a class="cantuan-btn">立即参团</a>
+        </div>
+        <div class="tuan-bottom kaituan" style="display: none;">
+            <div class="gwc" id="end">
+                <div class="num selectedTotal1" id="selectedTotal"></div>
+            </div>
+            <a href="javascript:;" onclick="kefu();" class="customer_service">
+                <img src="/imgs/shangpin/customer_service.png" alt="">
+            </a>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+    <script src="/lib/jquery_cookie.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+    <script src="/js/gouwuche/Operation.js?t=20161117"></script>
+    <script src="/js/gouwuche/car.js?t=20161117"></script>
+    <script src="/js/gouwuche/main.js?t=20161117"></script>
+    <script src="/lib/jquery.fly.min.js?t=20161117"></script>
+    <script type="text/javascript" src='/js/shangpin/shangpin.js?t=20161117&v2'></script>
+    <script id="swiper-container" type="dot/tmpl">
+        <div class="swiper-wrapper">
+            {{~ it.data.photo:data:i}}
+            <div class="swiper-slide"><img src="{{=picUrl}}{{=data}}" /></div>
+            {{~}}
+        </div>
+        <div class="swiper-pagination"></div>
+    </script>
+    <script id="seckill" type="dot/tmpl">
+        <img src="../imgs/seckill/icon0.png" />
+        <div class="sk-price">
+            <p><a>¥</a><span class="qianggou">{{=(it.limitPrice)}}</span></p>
+        </div>
+        <div class="sk-left" id="limitCount" {{? it.isLimit==1}}limitCount="{{=it.limitCount}}" {{?}}>
+            <p class="sk-oldprice">¥{{=(it.goodsPrice)}}</p>
+            <!--<p id="limitCount" limitCount="{{=it.limitCount}}">限购数量：{{=it.limitCount}}&nbsp;剩余：{{=it.goodsCount}}</p>-->
+        </div>
+        <div class="sk-time">
+            <p id="aa">距离结束</p>
+            <p id="sk-time"></p>
+        </div>
+    </script>
+    <script id="tuan-details" type="dot/tmpl">
+        <h2>{{=it.data.goods.goodsName}}</h2>
+        {{? it.data.goods.goodsDesc}}
+            <p class="goodsDesc">{{=it.data.goods.goodsDesc}}</p>
+        {{?}}  
+        <p class="price"><a class="tuan-num">{{=it.data.groupBuying.groupBuyingPeopleNumber}}人团</a><span class="tuan-price">¥{{=(it.data.groupBuying.groupBuyingPrice)}}</span><a>已团<span>{{=it.data.groupBuying.salesCount}}</span>件</a></p>
+        {{?it.data.groupBuying.activityEndTime}}
+        <p class="time">{{?it.data.groupBuying.activityEndTime}}活动剩余时间：<span class="settime settime1" id="{{=it.data.groupBuying.activityEndTime}}"></span>{{?}}</p>
+        {{?}}
+        <div class="clear"></div>
+    </script>
+    <script id="tuan-content" type="dot/tmpl">
+        <div class="tc-top">
+            {{?it.tuan=="cantuan"}}
+            {{?it.data.groupBuyingPeopleNumber>6}}
+                <nav class="index-nav swiper-nav swiper-container-horizontal swiper-container-free-mode">
+                    <ul class="swiper-wrapper">
+                        {{~it.data.orderList:data:i}}
+                            {{?data.isReal==1}}
+                            <li><img src="{{=data.userPhoto}}"/></li>
+                            {{??}}
+                            <li><img src="{{=it.picUrl}}{{=data.userPhoto}}"/></li>
+                            {{?}}
+                        {{~}}
+                        {{?it.data.orderList.length<it.data.groupBuyingPeopleNumber}}
+                            {{ for(var j=0; j<it.data.groupBuyingPeopleNumber-it.data.orderList.length; j++) { }}
+                                <li></li>
+                            {{}}}
+                        {{?}}				
+                        <div class="clear"></div>
+                    </ul>
+                </nav>
+            {{??}}
+                <ul>
+                    {{~it.data.orderList:data:i}}
+                        {{?data.isReal==1}}
+                        <li><img src="{{=data.userPhoto}}"/></li>
+                        {{??}}
+                        <li><img src="{{=it.picUrl}}{{=data.userPhoto}}"/></li>
+                        {{?}}
+                    {{~}}
+                    {{?it.data.orderList.length<it.data.groupBuyingPeopleNumber}}
+                        {{ for(var j=0; j<it.data.groupBuyingPeopleNumber-it.data.orderList.length; j++) { }}
+                            <li></li>
+                        {{}}}
+                    {{?}}				
+                    <div class="clear"></div>
+                </ul>
+            {{?}}
+            <h3>拼团还剩
+                <a class="settime settime2 tuan-settime" id="{{=it.data.remainIngTime+new Date().getTime()}}"></a>
+            </h3>
+            <p><img src="../tuan/imgs/icon7.png" />距离成团还差{{=it.data.remainPerson}}人，快快邀请好友参团</p>
+            {{??}}
+            <b>去看看该商品有哪些正在进行中的团<a href="../tuan/tuan-goods.html?goodsId={{=it.data.goods.goodsId}}&activityId={{=it.data.groupBuying.activityId}}">{{=it.data.groupBuying.joinNum}}人参加</a></b> {{?}}
+        </div>
+        <div class="tc-bottom">
+            <h3>拼团玩法<a href="../tuan/rule.html">查看规则</a></h3>
+            <p>选择商品付款开团<span></span>邀请好友参团<span></span>凑齐人数拼团成功</p>
+        </div>
+    </script>
+
+    <script id="leftsidebar_box_dl" type="dot/tmpl">
+        <!--商品详情标题-->
+        {{?it.isCompositeGoods}}
+        <div class="details-title-zuhe" {{?it.data.goods.goodsType==2}}childrenGoodsIds="{{~it.data.comboGoods:childGoods:i}}{{=childGoods.goods.goodsId}}{{~}}"{{?}}>
+            <div class="introduce">
+                <p class="slh">{{=it.data.goods.goodsName}}</p>
+            </div>
+            {{?it.data.goods.goodsDesc}}
+            <p class="goodsDesc slh">{{=it.data.goods.goodsDesc}}</p>
+            {{?}}
+            <p class="cost">¥<span>{{=(it.data.goods.preferentialPrice)}}</span><a>组合价格</a></p>
+            <div class="oldPrice">
+                组合商品原价<span>¥{{=(it.data.goods.price)}}</span>
+                <div class="stock">库存：
+                    {{?it.data.goods.repertoryTotalNum}}
+                    {{= it.data.goods.repertoryTotalNum}}
+                    {{??}}0{{?}}     
+                </div>
+            </div>
+        </div>
+        <!--选择口味-->
+        {{? it.data.ifSelectFlag}}
+        <div class="choice">
+                {{? it.data.type1}}
+                <p>选择 {{=it.data.type1}}&nbsp;{{=it.data.type2}}</p>
+                {{??}}
+                <p>选择商品的规格信息</p>
+                {{?}}
+        </div>
+        {{?}} {{?it.data.goods.showTitle}}
+        <div class="details-tuijian">
+            <p>推荐理由</p>
+            <span>{{=(it.data.goods.showTitle).replace(/<.*?>/ig,"")}}</span>
+        </div>
+        {{?}} {{??}}
+        <div class="details-title-zuhe">
+            <div class="introduce">
+                <p class="slh">
+                    {{? it.data.goods.goodsLabel}}
+                    <span class="biaoqian">{{=it.data.goods.goodsLabel}}</span> {{?}} {{=it.data.goods.goodsName}}
+                </p>
+            </div>
+            {{?it.data.goods.goodsDesc}}
+            <p class="goodsDesc">{{=it.data.goods.goodsDesc}}</p>
+            {{?}}
+            <div class="cost">¥<span>{{=(it.data.goods.preferentialPrice)}}</span><a>{{=(it.data.goods.specificationsShowStr).split(',')[0].split('：')[1]}}</a><div class="stock">库存：
+                {{?it.data.goods.repertoryTotalNum}}
+                {{= it.data.goods.repertoryTotalNum}}
+                {{??}}0{{?}}     
+            </div></div>
+        </div>
+        <!--选择口味-->
+        {{? it.data.isGroupBuying}}
+            <div class="goods-activity goods-activity-group">此商品正在进行拼团活动</div>
+        {{?}}
+        <!-- <div class="goods-activity goods-activity-ms">此商品正在进行秒杀活动</div> -->
+        {{? it.data.ifSelectFlag}}
+        <div class="choice">
+            <p>选择 {{=it.data.type1}}&nbsp;{{=it.data.type2}}</p>
+        </div>
+        {{?}} {{?it.data.goods.showTitle}}
+        <div class="details-tuijian">
+            <p>推荐理由</p>
+            <span>{{=(it.data.goods.showTitle).replace(/<.*?>/ig,"")}}</span>
+        </div>
+        {{?}} {{?}}
+
+    </script>
+
+    <script id="evaluate" type="dot/tmpl">
+        {{? it.data}}
+        <div class="evaluate-title">
+            <p>评价({{=it.data.count}})<span>查看全部</span></p>
+        </div>
+        <div class="evaluate-list">
+            <ul>
+                {{~ it.data.list:evaluate:j}}
+                <li>
+                    <p>买家：{{=evaluate.userName}}</p>
+                    {{? evaluate.evaluateResult==0}}
+                    <p>评分： <span></span><span></span><span></span><span></span><span></span></p>
+                    {{?? evaluate.evaluateResult==1}}
+                    <p>评分： <span class='btn'></span><span></span><span></span><span></span><span></span></p>
+                    {{?? evaluate.evaluateResult==2}}
+                    <p>评分： <span class='btn'></span><span class='btn'></span><span></span><span></span><span></span></p>
+                    {{?? evaluate.evaluateResult==3}}
+                    <p>评分： <span class='btn'></span><span class='btn'></span><span class='btn'></span><span></span><span></span></p>
+                    {{?? evaluate.evaluateResult==4}}
+                    <p>评分： <span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span><span></span></p>
+                    {{??}}
+                    <p>评分： <span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span></p>
+                    {{?}}
+                    {{? evaluate.evaluateContent!=""}}
+						<p class="evaluate_content evaluate_content1">{{=evaluate.evaluateContent}}</p>
+                    {{?}}
+                    {{?evaluate.appendEvaluateList && evaluate.appendEvaluateList.length}}
+                        {{~evaluate.appendEvaluateList:item:index}}
+                        <h2 class="chase_evaluate_title">{{=item.desc}}</h2>
+                        <p class="evaluate_content">{{=item.evaluateContent}}</p>
+                        {{~}}
+                    {{?}}
+                </li>
+                {{~}}
+            </ul>
+        </div>
+        {{?}}
+    </script>
+    <script type="dot/tmpl" id="collocation">
+        {{? it.data.goods.recommendGoodsList.length!=0}}
+        <div class="collocation-title">
+            <p>推荐搭配</p>
+        </div>
+        <ul>
+            {{~ it.data.goods.recommendGoodsList:data:i}}
+            <li id="{{=data.recommendGoodsId}}">
+                <a href="shangpinxiangqing.html?goodsId={{=data.recommendGoodsId}}" style="display: block; margin-bottom: 0.3125rem;">
+                    <img class="lazy" data-original="{{=it.picUrl}}{{=data.recommendPhoto}}" />
+                </a>
+                <h3 class="newPrice">¥<span>{{=(data.preferentialPrice)}}</span></h3>
+                <a class="collocation-addcard"><img src="../imgs/fenlei/fenlei-jia.png" /></a>
+                <div class="clear"></div>
+            </li>
+            {{~}}
+        </ul>
+        {{?}}
+    </script>
+    <script type="dot/tmpl" id="message">
+
+        {{? it.data.descPhotos}}
+        <div class="suggest message-show" style="display: block;">
+            {{~ it.data.descPhotos:data:i}}
+            <img class="lazy" data-original="{{=it.picUrl}}{{=data}}" style="display: block;margin-top: -0.015625rem;"/> {{~}}
+        </div>
+        {{?}}
+
+
+    </script>
+    <script id="articles" type="dot/tmpl">
+        {{? it.data.goods.articles.length!=0}}
+        <div class="news-top"><img src="../imgs/shangpin/news-top.jpg" /></div>
+        <div class="news-title"><img src="../imgs/shangpin/news-title.jpg" /></div>
+        <ul>
+            {{~it.data.goods.articles:data:i}}
+            <li>
+                <a href="{{=data.url}}">
+                    <img src="{{=it.picUrl}}{{=data.articleImage}}" />
+                    <p>{{=data.title}}</p>
+                </a>
+            </li>
+            {{~}}
+        </ul>
+        {{?}}
+        <img src="../imgs/shangpin/bottom.jpg" style="display: block;" />
+        <img src="/imgs/logo-bottom.jpg" id="logo-bottom" style="display: block;" />
+    </script>
+    <script type="dot/tmpl" id="bottom-slide">
+        {{? it.data.ifSelectFlag}}
+        <div class="cancel"></div>
+        <div class="bottom-slide-content">
+            <div class="bottom-slide-title">
+                <img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}">
+                <div class="bottom-slide-title-describe">
+                    <p>{{=it.data.goods.goodsName}}</p>
+                    <h3>¥<span>{{=(it.data.goods.preferentialPrice)}}</span></h3>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div style="overflow: auto;max-height: 6.25rem;padding: 0.453125rem 0 1.1875rem 0;">
+                <div class="bottom-slide-choice a">
+                    <p>
+                        {{=it.data.type1}}
+                    </p>
+                    <div>
+                        {{ for(var key in it.data.typeInfo) { }}
+                        <a class="noselected">{{=key}}</a> {{}}}
+                    </div>
+                </div>
+                <div class="bottom-slide-choice b">
+                    <p>
+                        {{=it.data.type2}}
+                    </p>
+                    {{ var t=-1;for(var key in it.data.typeInfo) { t++;}}
+                    <div id="{{=t}}" style="display:none">
+                        {{ for(var key2 in it.data.typeInfo[key]) { }}
+                        <a id="{{=it.data.typeInfo[key][key2].goods.goodsId}}" preferentialPrice="{{=it.data.typeInfo[key][key2].goods.preferentialPrice}}" class="noselected">{{=key2}}</a> {{}}}
+                    </div>
+                    {{}}}
+                </div>
+                {{ for(var key in it.data.typeInfo) { }} {{ for(var key2 in it.data.typeInfo[key]) { }}
+                <div class="bottom-slide-num" style="display:none" id="bottom{{=it.data.typeInfo[key][key2].goods.goodsId}}" repertoryCount="{{=it.data.typeInfo[key][key2].goods.repertoryCount}}">
+                    <p>数量</p>
+                    <p>{{?it.data.typeInfo[key][key2].goods.goodsSource==1}}{{?it.data.typeInfo[key][key2].goods.repertoryCount != -1}}库存：{{=it.data.typeInfo[key][key2].goods.repertoryCount}}{{?}}{{?}}&nbsp;&nbsp;&nbsp;
+                        <a class="slide-btn">
+                            <span class="minus"></span>
+                            <span class='amount'>1</span>
+                            <span class="add"></span>
+                        </a>
+                    </p>
+                    <div class="clear"></div>
+                </div>
+                {{}}} {{}}}
+            </div>
+        </div>
+        {{?}}
+    </script>
+    <script type="dot/tmpl" id="bottom-slide1">
+        <div class="cancel"></div>
+        <div class="bottom-slide-content">
+            <div class="bottom-slide-title">
+                <img src="{{=it.picUrl}}{{=it.data.poActivity[0].cartPhoto}}">
+                <div class="bottom-slide-title-describe">
+                    <p>{{=it.data.poActivity[0].goodsName}}</p>
+                    <h3>¥<span>{{=(it.data.poActivity[0].prePrice)}}</span></h3>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div style="overflow: auto;max-height: 6.25rem;padding: 0.453125rem 0 1.1875rem 0;">
+                <div class="bottom-slide-choice d">
+                    <p>规格</p>
+                    <div>
+                        {{~it.data.poActivity:typeName:i}}
+                        <a class="noselected" prePrice="{{=typeName.prePrice}}" cartPhoto="{{=typeName.cartPhoto}}" activityId="{{=typeName.id}}">{{=typeName.typeName}}</a> {{~}}
+                    </div>
+                </div>
+                {{~it.data.poActivity:data:j}}
+                <div class="bottom-slide-choice c c{{=j}}" style="display:none">
+                    <p>起送时间</p>
+                    <div class="bottom-time">
+                        <p>{{=getFormatDate(data.sendTime).split(' ')[0]}}</p>
+                    </div>
+                    <div style="display:none;margin-bottom:0" class="bottom-time-choice">
+                        <div>
+                            <p>起送时间</p>
+                            <ul>
+                                {{~data.senTimeList:time:l}}
+                                <li time="{{=time}}">{{=getFormatDate(time).split(' ')[0]}}</li>
+                                {{~}}
+                            </ul>
+                        </div>
+                        <a class="time-quxiao" style="padding: 0;">取消</a>
+                        <a class="time-queding" style="padding: 0;">确定</a>
+                    </div>
+                </div>
+                {{~}}
+                <div class="bottom-slide-num" id="bottom{{=it.data.goods.goodsId}}">
+                    <p>数量</p>
+                    <p>&nbsp;&nbsp;&nbsp;
+                        <a class="slide-btn">
+                            <span class="minus"></span>
+                            <span class='amount'>1</span>
+                            <span class="add"></span>
+                        </a>
+                    </p>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </script>
+    <script>
+        var swiper = new Swiper('.swiper-nav', {
+            slidesPerView: 'auto',
+            paginationClickable: false,
+            freeMode: true,
+            scrollBehavior: false
+        });
+    </script>
+    <script type='text/javascript'>
+        (function(m, ei, q, i, a, j, s) {
+            m[i] = m[i] || function() {
+                (m[i].a = m[i].a || []).push(arguments)
+            };
+            j = ei.createElement(q),
+                s = ei.getElementsByTagName(q)[0];
+            j.async = true;
+            j.charset = 'UTF-8';
+            j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+            s.parentNode.insertBefore(j, s);
+        })(window, document, 'script', '_MEIQIA');
+        _MEIQIA('entId', 97425);
+        
+        _MEIQIA('withoutBtn');
+        
+        function kefu(){
+            _MEIQIA('showPanel');
+        }
+    </script>
+</body>
+
+</html>

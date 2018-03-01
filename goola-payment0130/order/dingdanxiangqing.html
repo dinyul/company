@@ -1,0 +1,345 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>订单详情</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/dingdanxiangqing.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	
+		
+	<div class="body">
+		<div class="fanhui" style="display: none;">
+			<span id="fanhui"></span>
+			<p>订单详情</p>
+		</div>
+		<div class="details"></div>
+		<div class="bg"></div>
+		<div class="xiugaishijian">
+			<p>请选择发货时间</p>
+			<b class="shijian"></b>
+			<input type="date"  />
+			<a class="queding">确定</a>
+		</div>
+		<a class="share" style="display: none;width: 2.84375rem;position: fixed;right: 1%;bottom: 9%"><img src="/imgs/activity/676528989524956002.png"/></a>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/js/init-fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/public.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/jquery.actionsheet-1.0.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/address/mobiscroll.scroller.zh-min.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryAllProvinces.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryCities.js?t=20161117"></script>
+	<script id="orderInfoTmpl" type="dot/tmpl">
+		<div class="information">
+			<ul>
+				<li><p>订单状态：
+					{{? it.serviceStatus == 1}}
+					<span>待付款</span>
+					{{?? it.serviceStatus == 6}}
+					<span>待发货</span>
+					{{?? it.serviceStatus == 2}}
+					<span>待收货</span>
+					{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 2}}
+					<span>待评价</span>
+					{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 1}}
+					<span>已评价</span>
+					{{?? it.serviceStatus == 8}}
+					<span>地址未确认</span>
+					{{?}}</p></li>
+				<li><p>订单编号：{{=it.orderCode}}</p></li>
+				<li><p>下单时间：{{=getFormatDate(it.createTime)}}</p></li>
+			</ul>
+		</div>
+		<div class="personal">
+			<div class="personal-content">
+				<p>{{=it.receiverName}}<span>{{=it.receierPhone}}</span></p>
+				<a>{{=it.receiverAddress}}</a>
+			</div>
+			<div class="clear"></div>
+		</div>
+		<div class="commodity">
+			<div class="commodity-title">
+				<p>商品详情</p>
+			</div>
+			{{~it.children:data:i}}
+				<div style="margin-bottom: 0.3125rem;background: #fff;padding:0 0.3125rem">
+					/*
+					<div class="commodity-name">
+						<a {{?data.providerIsShop==1}}href="../shop/shop.html?providerId={{=data.providerId}}"{{?}} style="display: block;">
+							<p {{?data.providerIsShop==1}}style="background-image: url(/imgs/gouwuche/gouwuche-dianpu1.png?t=20161117);"{{?}}>{{=data.providerName}}</p>
+						</a>
+					</div>
+					*/
+					<div class="commodity-list">
+						{{~data.orderItems:goods:j}}
+						<a href="/shangpin/shangpinxiangqing.html?goodsId={{=goods.goodsId}}">
+							<p><span>{{=goods.goodsName}}</span><span class="price">¥{{=(goods.goodsPrice).toFixed(2)}}</span><span>x{{=goods.goodsCount}}</span></p>
+						</a>	
+						{{~}}
+					</div>
+					{{?data.orderType==7}}
+					<div class="fahuo-time">
+						<p>收货时间：<span class="fahuoshijian">{{=(data.deliveryTime).split(' ')[0]}}</span></p>
+					</div>
+					{{??}}
+					{{?data.deliverType==1}}	
+						{{? it.serviceStatus == 1 || it.serviceStatus == 6}}
+						<div class="fahuo-time" id="{{=data.orderId}}">
+							<p>发货时间：<a class="fahuoshijian">{{? data.choosedSendTime}}{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(data.createTime).split(' ')[0]}}{{?}}</a><span class="xiugai"></span></p>
+						</div>
+						{{?? it.serviceStatus == 2}}
+						<div class="fahuo-time">
+							<p>发货时间：<a class="fahuoshijian">{{? data.choosedSendTime}}{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(data.createTime).split(' ')[0]}}{{?}}</a></p>
+						</div>
+						{{?}}	
+					{{??data.deliverType==2 && data.orgDeliverType==1}}
+						<div class="fahuo-time">
+							<p>送货时间：<a class="fahuoshijian">{{? data.choosedSendTime}}{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(data.createTime).split(' ')[0]}}{{?}}</a></p>
+						</div>
+					{{??data.deliverType==2 && data.orgDeliverType==2}}
+					<div class="fahuo-time">
+						<p>自提时间：<a class="fahuoshijian">{{? data.choosedSendTime}}{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}{{??}}{{=getFormatDate(data.createTime).split(' ')[0]}}{{?}}</a></p>
+					</div>
+					<div class="ziti">
+						<p>门店地址：{{=data.orgName}}<span>{{=data.orgPhone}}</span></p>
+						<p>{{=data.orgAddress}}</p>
+					</div>
+					{{?}}
+					{{?}}
+					{{? data.serviceStatus == 2 || data.serviceStatus == 5 }}
+					<div class="commodity-wuliu">
+						<p>物流查询<a class="chakanwuliu" id="{{=data.expressNumber}}">></a></p>
+					</div>
+					{{?}}
+				</div>
+			{{~}}
+		</div>
+		<div class="balance price">
+			<div class="balance-title">
+				<p>结算详情</p>
+			</div>
+			<div class="balance-list">
+				{{?it.preferentialPrice}}
+				<p>抵扣金额<span>¥{{=(it.preferentialPrice).toFixed(2)}}</span></p>
+				{{?}}
+				<p>实付（含运费）<span>¥{{=(it.orderPrice).toFixed(2)}} </span></p>
+			</div>
+		</div>
+		<div class="details-bottom">
+			{{? it.serviceStatus == 1}}
+			<a class="left" href="../payment/querenzhifu.html?orderId={{=it.orderId}}">去支付</a>
+			<a class="offOrder right">取消订单</a>
+			{{??it.serviceStatus == 6}}
+			<a class="left chargeback" refundStatus="{{=it.refundStatus}}">申请退款</a>
+			<a class="cuidan right">催单</a>
+			{{?? it.serviceStatus == 2}}
+			<a class="confirm one">确认收货</a>
+			{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 2}}
+			<a class="right" href="../shangpin/pingjia.html?orderId={{=it.orderId}}">去评价</a>
+			<a class="left" href="../index.html">去逛逛</a>
+			{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 1}}
+			<a class="right" href="../shangpin/chase_evaluate.html?orderId={{=it.orderId}}">去追评</a>
+			<a class="left" href="../index.html">去逛逛</a>
+			{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 3}}
+			<a class="one" href="../index.html">再逛逛</a>
+			{{?? it.serviceStatus == 8}}
+			<a class="left chargeback" refundStatus="{{=it.refundStatus}}">申请退款</a>
+			<a class="share right" id="right" href="../giftcard/giftShare.html?giftKey={{=it.giftKey}}&type=2">转发订单</a>
+			{{?}}
+		</div>
+	</script>
+	
+	
+	<script>
+	(function(api,util,ajax){
+		var orderId = util.getUrlParams("orderId");
+		var type=util.getUrlParams("type");
+		var time
+		var currYear = (new Date()).getFullYear();	
+			var currMonth = (new Date()).getMonth()+1
+			var currDay = (new Date()).getDate()
+			if(currMonth<10){
+				var currMonth = "0"+(currMonth); 
+			}
+			if(currDay<10){
+				 currDay = "0"+currDay; 
+			}
+			time=currYear+'-'+currMonth+'-'+currDay
+			if(type==3){
+				$('.fanhui2').css('display','block')
+			
+			}
+			initOrder(orderId);
+			
+		
+		function initOrder(orderId) {
+			ajax.post(api.baseServerUrl + "/order/orderDetail",{
+				"orderId":orderId	
+			},function(data) {
+				console.log(data)
+				util.render("#orderInfoTmpl", data, ".details");
+				if(data.redPacketId!=undefined){
+					$('.share').css('display','block')
+					$('.share').click(function(){
+						if(isWeiXin()){
+							$('body').append('<div class="wx-share" style="z-index:101">\
+												<img src="../imgs/giftcard/fenxiang.png" />\
+												<a class="wx-share-btn">知道啦</a>\
+												</div>')
+								$('.wx-share-btn').click(function(){
+									 $('.wx-share').remove()	 
+								})
+							wxShare(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.rpActivity.shareTitle,data.rpActivity.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.redPacketId,"http://" + document.domain +api.picUrl +data.rpActivity.sharePrint);
+						}else if( browser.versions.ios || browser.versions.android){
+							if(!isWeiXin()){
+								toShare(data.rpActivity.shareTitle,data.rpActivity.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.redPacketId,"http://" + document.domain +api.picUrl +data.rpActivity.sharePrint)
+							}
+						}
+						})
+				}
+				
+				if(data.receiverName==undefined){
+					$('.personal-content').html('<p style="margin-bottom: 0;color:#fa2f3e">由好友填写</p>')
+					$('.personal-title p').css('margin-bottom','0')
+				}
+				$('.details').delegate('.commodity-wuliu','click',function(){
+					var expressCode=$(this).find('.chakanwuliu').attr('id')
+					window.location.href="../logistics/wuliu.html?expressCode="+expressCode+"&address=" + data.receiverAddress;
+				})
+				$('.fahuoshijian').each(function(){
+					if($(this).html()<=time){
+						$(this).parent().parent().find('.xiugai').hide()
+					}
+				})
+			})
+		}
+		$('.details').delegate('.chakan','click',function(){
+			$('.bg').show()
+			$('.cycle').show()
+		})
+		$('.cycle').delegate('.queren','click',function(){
+			$('.bg').hide()
+			$('.cycle').hide()
+		})
+		
+		
+		
+		//修改发货时间
+		$('.details').delegate('.xiugai','click',function(){
+			
+			$('.details').find('.xiugai').removeClass('selected')
+			$(this).addClass('selected')
+			$('.bg').show()
+			$('.xiugaishijian').show()
+			document.body.ontouchmove=function(){
+				return false;
+			}
+			$('.xiugaishijian input').attr('value',$(this).prev().html())
+			$('.shijian').html($(this).prev().html())
+		})
+		$('.xiugaishijian input').change(function(){
+				$('.shijian').html($(this).val())
+			})
+		$('.queding').click(function(){
+			$('.bg').hide()
+			$('.xiugaishijian').hide()
+			if(($('.xiugaishijian input').val()).replace(/-/g,"")<=time.replace(/-/g,"")){
+						alert('不能晚于'+time)
+						return false
+			}
+			ajax.post(api.baseServerUrl + "/giftOrder/changeSendTime",{
+				"orderId":$('.details').find('.selected').parent().parent().attr('id'),
+				"newSendTime":$('.xiugaishijian input').val()
+				},function(data) {
+					window.location.reload()
+				})
+			
+		})
+		//返回
+		
+		if(isWeiXin()){
+			$('.fanhui').show()
+		}
+		$('#fanhui').click(function(){
+			location.href="../gerenzhongxin/gerenzhongxin.html"
+		})
+		
+		
+		//取消订单
+		$('.details').delegate('.offOrder','click',function(){
+			offOrder(orderId);
+		})
+		//确认收货
+		$('.details').delegate('.confirm','click',function(){
+			confirm(orderId);
+		})
+		//催单
+		$('.details').delegate('.cuidan','click',function(){
+			cuidan(orderId);
+		})
+		//退单
+		$('.details').delegate('.chargeback','click',function(){
+			if($(this).attr('refundStatus')==0){
+				window.location.href="applycharge.html?orderId="+orderId
+			}else if($(this).attr('refundStatus')==1){
+				alert('您已经申请过退单')
+			}
+		})
+		
+		
+		
+		/**
+		 * 取消订单
+		 */
+		function offOrder(orderId){
+			ajax.post(api.baseServerUrl + "/order/cancelOrder",{
+				"orderId":orderId	
+			},function(data) {
+				window.location.href="../order/wodedingdan.html";
+			})
+		}
+		/**
+		 * 确定收货
+		 * @param openId
+		 * @param orderId
+		 */
+		function confirm(orderId){
+			ajax.post(api.baseServerUrl + "/order/completeOrder",{
+				"orderId":orderId	
+			},function(data) {
+				window.location.href="../order/wodedingdan.html";
+			})
+		}
+		/*催单*/
+		function cuidan(orderId){
+			$("#cuidan"+orderId).one('click', function (event) {    
+				 event.preventDefault();    
+				 //do something    
+				 $(this).prop('disabled', true);   
+		 });
+			
+			alert("已催单,Please wait...");
+		}
+		var title="更好甄选—更好·不贵"
+		var doc="种草全世界的好货"
+		shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+	})(goola.api,goola.util,goola.ajax)
+	</script>
+</body>
+</html>

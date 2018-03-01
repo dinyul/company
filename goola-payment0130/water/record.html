@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<ul class="record"></ul>
+			<script id="record" type="dot/tmpl">
+				{{~it.data:data:i}}
+				<li>
+					{{?data.chargeStatus==2}}
+					<p><span style="color:#fa2f3e;">待充值</span></p>
+					{{??data.chargeStatus==1}}
+					<p>{{=data.chargeTime}}<span style="color:#c7a994;">充值</span></p>
+					{{?}}
+					<div class="goods">
+						<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+						<h2>{{=data.goodsName}}</h2>
+						<p>品牌：{{=data.goodsBrand}}</p>
+						<p>规格：{{=data.goodsSpec}}</p>
+					</div>
+					<ul>
+						<li>水票：¥{{=data.goodsPrice}}<a>X{{=data.goodsCount}}</a><span>¥{{=data.goodsTotalPrice}}</span></li>
+						<li>押金：¥{{=data.depositPrice}}<a>X{{=data.battlesCount}}</a><span>¥{{=data.depositTotalPrice}}</span></li>
+					</ul>
+					<h3>商品总价：<span>{{=data.receivePrice}}</span></h3>
+					{{?data.chargeStatus==2}}
+					<a href="../payment/water-confirmpay.html?customChargeLogId={{=data.id}}">去充值</a>
+					{{?}}
+				</li>
+				{{~}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/scm/customChargeLogList",{
+					
+				},function(data) {
+					var obj={data:data,picUrl:api.picUrl}
+					util.render("#record", obj, ".record");
+					
+				});
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

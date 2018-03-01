@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>搜索列表</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	
+</head>
+<body>
+	<div class="body">
+		<div class="search">
+			<p></p>
+		</div>
+		<div class="result">
+			<div class="none" style="display: none;">
+				<img src="/imgs/search/none.png" />
+				<p>您寻找的商品还未上架  换个词试试吧</p>
+				<div class="list1" style="display: none;">
+					<p>更好推荐</p>
+					<ul class="list"></ul>
+				</div>
+			</div>
+			<div class="has" style="display: none;">
+				<nav>
+					<ul>
+						<li class="checked" id="1">综合</li>
+						<li id="2">价格<span>&nbsp;&nbsp;</span></li>
+						<li id="3">新品</li>
+					</ul>
+				</nav>
+				<ul class="list"></ul>
+				<script type="dot/tmpl" id="list">
+					{{~it.data:data:i}}
+						<li goodsId="{{=data.goodsId}}">
+							<div class="goodslist">
+								<div class="goodsimg">
+									<img src="{{=it.picUrl}}{{=data.cartPhoto}}""/>
+								</div>
+								<h3>{{=data.goodsName}}</h3>
+								<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+								<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+							</div>
+						</li>
+					{{~}}
+				</script>
+			</div>
+		</div>
+		<div class="footer">
+			<div class="footer-logo">
+				<img src="/imgs/logo-bottom.jpg" id="logo-bottom"/>
+			</div>
+			<div class="nav"></div>
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>
+	<script src="/js/search/result.js"></script>
+</body>
+</html>

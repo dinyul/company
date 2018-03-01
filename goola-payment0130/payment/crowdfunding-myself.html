@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>靠自己</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/crowdfunding-myself.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="content body"></div>
+		<script id="content" type="dot/tmpl">
+			<div class="info">
+				<div class="left">
+					<img src="{{=it.data.wechatHead}}" />
+					<p>{{=it.data.userName}}</p>
+				</div>
+				<div class="right">
+					<p>{{=it.data.slogan}}</p>
+					<span>{{=it.data.createDate}}发起</span>
+				</div>
+				<div class="clear"></div>
+			</div>
+			<div id="shoppingList">
+				<div class="business">
+					<p>{{=it.data.goods.providerName}}</p>
+				</div>
+				<div class="good-info">
+					<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+					<div class="title">
+						<p>{{=it.data.goods.goodsName}}</p>
+						<span>规格：{{=it.data.goods.specifications}}</span>
+					</div>
+					<div class="price"><p>¥{{=it.data.goods.preferentialPrice}}</p></div>
+					<div class="clear"></div>
+					<div class="yukuan"><p>心愿余额：<span>¥{{=(it.data.crowdPrice-it.data.finishPrice).toFixed(2)}}</span></p></div>
+				</div>
+			</div>
+			<div class="payment">
+				<p>支付金额：<span>¥{{=(it.data.crowdPrice-it.data.finishPrice).toFixed(2)}}</span></p>	
+			</div>
+		</script>
+		
+		<div class="bottom">
+			<a><p>去结算</p></a>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script>
+			(function(api, util, ajax){
+				var crowdfundingId = util.getUrlParams("crowdfundingId");
+				
+				initOrder(crowdfundingId);
+				
+				function initOrder(crowdfundingId) {
+					ajax.post(api.baseServerUrl + "/shareCrowdfunding/getCrowdById",{
+						"crowdfundingId":crowdfundingId	
+					},function(data) {
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#content", obj, ".content");
+						$('.price p').html("¥"+Number($('.price p').html().split("¥")[1]).toFixed(2))
+					})
+				}
+				
+				function payOrder(crowdItemId) {
+					ajax.post(api.baseServerUrl + "/crowdfunding/openAuthority/payCrowdOrder",{
+						"crowdItemId":crowdItemId,"url":encodeURI(location.href.split('#')[0])	
+					},function(data) {
+						wx.config({
+							debug: false,
+							appId: data[0].appid,
+							timestamp: data[0].timeStamp,
+							nonceStr: data[0].nonceStr,
+							signature: data[0].signature,
+							jsApiList: ['chooseWXPay']
+						});
+						wx.ready(function () {
+								wx.chooseWXPay({
+									timestamp: data[1].timeStamp , 
+									nonceStr: data[1].nonceStr, 
+									package: data[1].packageWithPrepayId , 
+									signType: data[1].signType, 
+									paySign: data[1].paySign, 
+									success: function (res) {
+										window.location.href="http://" + document.domain +"/crowdfunding/payment-success.html?crowdItemId="+crowdItemId+"&crowdfundingId="+crowdfundingId+"&type=2";
+									}
+								});	
+						})			
+					})
+				}
+				$(".bottom").click(function(){
+					ajax.post(api.baseServerUrl + "/crowdfunding/openAuthority/createCrowdfundingItem",{
+						"orderCrowdfundingId":crowdfundingId,
+						"message":"",
+						"price":0,
+						"type":"1"
+					},function(data) {
+						if(isWeiXin()){
+							payOrder(data.id)
+						}else{
+							var orderCode=data.code;
+							toPay(orderCode);
+						}
+						$(".bottom").unbind( "click" ).css('background','#ccc')
+					})
+				})
+				
+				
+				//确认订单
+				function confirmOrder(crowdItemId){
+					ajax.post(api.baseServerUrl + "/crowdfunding/openAuthority/confirmCrowdfundingItem",{
+						"crowdItemId":crowdItemId	
+					},function(data) {
+						window.location.href="http://" + document.domain +"/crowdfunding/payment-success.html?crowdItemId="+crowdItemId+"&crowdfundingId="+crowdfundingId+"&type=2";
+					})
+				}
+		
+				//取消订单
+				function cancelOrder(crowdItemId){
+					ajax.post(api.baseServerUrl + "/crowdfunding/cancelCrowdfundingItem",{
+						"crowdItemId":crowdItemId	
+					},function(data) {
+						alert("取消成功");
+						window.location.href="";
+					})
+				}
+				
+				})(goola.api, goola.util, goola.ajax);
+		</script>
+	</body>
+</html>

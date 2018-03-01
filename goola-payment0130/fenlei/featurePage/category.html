@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="feature">
+				<nav class="feature-nav swiper-nav">
+					<ul class="swiper-wrapper"></ul>
+				</nav>
+				<div class="content"></div>
+			</div>
+			<script type="dot/tmpl" id="feature-nav">
+				{{~it.childCategoryList:data:i}}
+					<li class="swiper-slide" categoryId="{{=data.categoryId}}"><a>{{=data.categoryName}}</a></li>
+				{{~}}
+			</script>
+			<script id="subject" type="dot/tmpl">
+				{{?it.data.goodsCatetory.categoryBanner}}
+				<img src="{{=it.picUrl}}{{=it.data.goodsCatetory.categoryBanner}}" />
+				{{?}}
+				<div class="title" {{?it.data.goodsCatetory.categoryBanner}}{{??}}style="margin-top:1px ;"{{?}}>
+					<h2>{{=it.data.goodsCatetory.categoryName}}</h2>
+					<p>{{=it.data.goodsCatetory.categoryDesc}}</p>
+				</div>
+				<ul id="masonry">
+					
+					{{~it.data.goodsList:data:i}}
+						<li class="box">
+							<a href="/shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}">
+								<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+								<div>
+									<h2>{{=data.goodsName}}</h2>
+									<p>{{=data.goodsDesc}}</p>
+									<h3>¥{{=(data.preferentialPrice)}}<span>已售<b>{{=data.salesCount}}</b>件</span></h3>
+								</div>
+							</a>
+						</li>
+					{{~}}
+					<div class="clear"></div>
+				</ul>
+			</script>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script src="/fenlei/featurePage/masonry-docs.min.js"></script>
+		<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+		<script>
+			(function(api,util,ajax){
+				var id = util.getUrlParams("id");
+				ajax.post(api.baseServerUrl + "/goodsCategory/findChildGoodsCategory",{
+					"parentCategoryId":id,"lat":getCookie('lat'),"lng":getCookie('lng'),"locationType":1
+				},function(data) {
+					util.render("#feature-nav",data,".feature-nav ul")
+					var swiper = new Swiper('.swiper-nav', {
+				        slidesPerView: 'auto',
+				        paginationClickable: true,
+				        freeMode: true
+				    });
+					$('.feature-nav li').eq(0).addClass("menu_chioce")
+					$('title').html(data.goodsCatetory.categoryName)
+					$('.app-top').remove()
+				    if(!isWeiXin()){
+				    	if( browser.versions.ios || browser.versions.android){
+							$('body').prepend('<div class="app-top">\
+								<p><a href="javascript:void(history.back())" style="display: block;"></a></p>\
+								<p>'+data.goodsCatetory.categoryName+'</p>\
+								<p class="shareButton" style="display:none">分享</p>\
+							</div>')
+							$('.body').addClass('app-content')
+						}
+				    }
+					getgoodList($('.feature-nav').find('.menu_chioce').attr('categoryId'))
+					var title=data.goodsCatetory.shareTitle;
+					var description=data.goodsCatetory.shareDescription
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain+api.picUrl+data.goodsCatetory.childCategoryPhoto );
+					
+				});
+				$('.feature-nav').delegate('li','click',function(){
+					$('.feature-nav').find('li').removeClass('menu_chioce')
+					$(this).addClass('menu_chioce')
+					getgoodList($(this).attr('categoryId'))
+				})
+				function getgoodList(categoryId){
+					ajax.post(api.baseServerUrl +"/goods/queryByChildCid",{
+						"categoryId":categoryId,"lat":getCookie('lat'),"lng":getCookie('lng'),"locationType":1
+					}, function(data) {
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#subject",obj,'.content');
+						var $container = $('#masonry');
+						var right=0.125*($(window).width()/10)
+					    $container.imagesLoaded(function() {
+					        $container.masonry({
+					                itemSelector: '.box',
+					                gutter: right,
+					                isAnimated: false,
+					            });
+					    });
+					});
+				
+				}
+				
+			})(goola.api,goola.util,goola.ajax)
+			
+
+				
+		</script>
+		
+	</body>
+</html>

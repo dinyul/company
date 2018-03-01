@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>新鲜水果</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			body>a{
+				display: block;
+			}
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="nut-list" goodsId="2760">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2760">
+				<img class="lazy" data-original="../imgs/subject/fruits/23.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2761">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2761">
+				<img class="lazy" data-original="../imgs/subject/fruits/22.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2134">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2134">
+				<img class="lazy" data-original="../imgs/subject/fruits/21.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2119">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2119">
+				<img class="lazy" data-original="../imgs/subject/fruits/19.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2106">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2106">
+				<img class="lazy" data-original="../imgs/subject/fruits/14.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			
+			<div class="nut-list" goodsId="2107">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2107">
+				<img class="lazy" data-original="../imgs/subject/fruits/16.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="2111">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=2111">
+				<img class="lazy" data-original="../imgs/subject/fruits/17.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			
+			<img class="lazy" data-original="../imgs/subject/yimacha/yima_img-13.jpg?v1" />
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 800
+				});
+				var title="更好甄选-精选优秀源产地，最顶级的水果";
+				var description="全程冷链配送，新鲜水果无忧送到家，给炎热夏天带来极致的凉爽口感"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/fruits/share.jpg");
+				$('.nut-buy').click(function(){
+					var goodsId=$(this).parent().attr('goodsId');
+					//var goodsPrice=$(this).parent().find('i').text()
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.nut-buy','click', addCart);
+				})
+				
+				
+				})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

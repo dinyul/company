@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>身份认证</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/haomi.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="method info">
+				<p>设置您的提现信息</p>
+				<ul>
+					<li id="zhifubao" type="1">
+						<h3>支付宝提现</h3>
+						<input type="text" placeholder="请输入支付宝账户" />
+					</li>
+					<li id="weixin" type="0">
+						<h3>微信提现</h3>
+						<p>微信账户<span class="wxname"></span></p>
+					</li>
+				</ul>
+				<div class="bottom"><p>确认提交</p></div>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/distribution/userPaymentInfoList",{
+				},function(data) {
+					for(var i=0;i<data.length;i++){
+						if(data[i].type==0){
+							$('.wxname').html(data[i].accountName)
+							if(data[i].status==1){
+								$('#weixin h3').addClass('checked')
+							}
+						}else if(data[i].type==1){
+							$('#zhifubao input').val(data[i].account)
+							if(data[i].status==1){
+								$('#zhifubao h3').addClass('checked')
+							}
+						}
+						
+					}
+				});
+				
+				$('.method').delegate('li h3',"click",function(){
+					$('.method li h3').removeClass('checked')
+					$(this).addClass('checked')
+					
+				})
+				
+				$('.bottom').click(function(){
+					if($('.method').find('.checked').length==0){
+						alert('请选择提现账户')
+						return false
+					}
+					if($('.method').find('.checked').parent().attr('id')=="zhifubao"){
+						if($('.method').find('.checked').next().val()==''){
+							alert('请输入支付宝账号信息')
+							return false;
+						}
+					}
+					
+					var data = new Array();
+					$('.method li').each(function(i) {
+						var obj = new Object();
+						if($(this).attr('type')==1){
+							obj.account = $(this).find('input').val();	
+						}
+						obj.type = $(this).attr('type');
+						if($(this).find('.checked').length>0){
+							obj.status=1
+						}
+						
+						data[i] = obj;
+					})
+					
+					ajax.post(api.baseServerUrl + "/distribution/savePaymentInfo",{
+					"data":JSON.stringify(data)
+					},function(data) {
+						window.location.href="apply.html"
+					});
+					
+				})
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

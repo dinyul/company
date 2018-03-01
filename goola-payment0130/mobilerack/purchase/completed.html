@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-list">
+				
+			</div>
+			<script id="purchase-list" type="dot/tmpl">
+				<div class="info">
+					<h3>补货单：{{=it.data.code}}</h3>
+					<h4>目标货架：{{~it.data.shopList :data:i}}{{=data.shopName}}{{?(i+1)<(it.data.shopList.length)}},{{?}}{{~}}</h4>
+				</div>
+				<ul class="goods">
+					{{~it.data.shopRefillTotalInfoGoodsList:goods:j}}
+					<li class="goodslist">
+						<img src="{{=it.picUrl}}{{=goods.goodsPhoto}}" />
+						<div class="message">
+							<h3>{{=goods.goodsName}}</h3>
+							<p>规格：{{=goods.specifications}}</p>
+							<p>出库数量：<span>{{=goods.outGoodsCount}}</span></p>
+							<h4>补货总数量：<span>{{=goods.realGoodsCount}}</span><a>回库数量：<span>{{=goods.backGoodsCount}}</span></a></h4>
+						</div>
+					</li>
+					{{~}}
+				</ul>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var id = util.getUrlParams("id");
+				ajax.post(api.mobileServerUrl+"/shopWX/shopWXRefillTotalInfo/wxViewTotalGoodsList",{
+					"id":id
+				},function(data){
+					var obj={data:data,picUrl:api.picUrl}
+					util.render("#purchase-list", obj, ".purchase-list");
+				})
+			})(goola.api,goola.util,goola.ajax,goola.address);	
+		</script>
+	</body>
+</html>

@@ -1,0 +1,49 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>配送方式</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/peisongfangshi.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+</head>
+<body>
+	<div class="pattern">
+		<div class="express choice">
+			<p>快递<span class="checked"></span></p>
+		</div>
+		<div class="ziqu">
+			<div class="ziqu-title choice">
+				<p>上门自提<span ></span></p>
+			</div>
+			<div class="info">
+				<ul>
+					<li>
+						<p>自提地址： </p>
+						<p>北京市海淀区丹棱街16号海星大厦B座一层西塔网络指尖 快递服务站 </p>
+					</li>
+					<li>
+						<p>联系电话： </p>
+						<p>010-68345618 </p>
+					</li>
+					<li>
+						<p>选择自提时，请与代办点员工协商自提时间</p>
+						<p>代办点营业时间：</p>
+						<p>9:00-20:00</p>
+					</li> 
+				</ul>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript">
+		$('.choice').click(function(){
+			$('.choice span').removeClass('checked')
+			$(this).find('span').addClass('checked')
+		})
+	</script>
+</body>
+</html>

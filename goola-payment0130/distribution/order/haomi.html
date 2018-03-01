@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>好米明细</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/haomi.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="haomi">
+				<nav>
+					<a class="checked">全部</a>
+					<a id="1">收入</a>
+					<a id="2">消费</a>
+					<a id="3">提现</a>
+				</nav>
+				<ul class="haomi-list">
+					
+				</ul>
+				<script id="haomi-list" type="dot/tmpl">
+					{{?it.total>0}}
+					{{~it.rows:data:i}}
+					<li>
+						<h3>{{=data.reason}}<br/><span>{{=data.createDate}}</span></h3>
+						<p>{{=data.pointsMoneyValueStr}}<br/><span>¥{{=(data.pointsRemainMoneyValue).toFixed(2)}}</span></p>
+						{{?data.remarks}}
+						<img src="../imgs/haomi-icon{{=data.remarks}}.png" />
+						{{?}}
+						<div class="clear"></div>
+					</li>
+					{{~}}
+					{{??}}
+					<img src="../imgs/haomi-kong.png" />
+					<p>好米明细空荡荡的</p>
+					{{?}}
+					
+				</script>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				orderList('')
+				$('.haomi a').click(function(){
+					$('.haomi a').removeClass('checked')
+					$(this).addClass('checked')
+					orderList($(this).attr('id'))
+				})
+				
+				function orderList(status){
+					ajax.post(api.baseServerUrl + "/distribution/getUserPointsOperList",{
+						"operType":status
+					},function(data) {
+						util.render("#haomi-list", data.pointsList, ".haomi-list");
+						
+					});
+				}
+				
+				
+				$('.haomi-list').css('min-height',($(window).height()-90-4)/64+'rem')
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

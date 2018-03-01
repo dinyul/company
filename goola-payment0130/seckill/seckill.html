@@ -1,0 +1,227 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>限时抢购</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/seckill/seckill.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="seckill">
+			<img src="/imgs/banner.jpg" style="display: none;"/>
+			<div class="seckill-nav" style="display: none;">
+				<ul class="swiper-wrapper"></ul>
+				<div class="seckill-nav1"></div>
+			</div>
+			<script type="dot/tmpl" id="seckill-nav">
+					{{~it.data:data:i}}
+					{{?it.type!='' && it.type!=undefined && it.type!=null}}
+						<li limitStartTime="{{=data.limitStartTime}}" limitEndTime="{{=data.limitEndTime}}" class="swiper-slide {{?data.limitStartTime==it.type}}checked{{?}}" id="{{=data.id}}">
+					{{??}}
+						<li limitStartTime="{{=data.limitStartTime}}" limitEndTime="{{=data.limitEndTime}}" class="swiper-slide {{?data.activityStatus==4}}checked{{?}}" id="{{=data.id}}">
+					{{?}}
+							<h3 {{?data.activityStatus==5}}class="js"{{?}}>{{=(data.limitStartTime).slice(0,5)}}</h3>
+							{{?data.activityStatus==3}}
+							<p>未开始</p>
+							{{??data.activityStatus==4}}
+							<p>进行中</p>
+							{{??data.activityStatus==5}}
+							<p>已结束</p>
+							{{?}}
+						</li>
+					{{~}}
+				</script>
+			<div class="seckill-list" style="display: none;">
+				<p class="sl-title"></p>
+				<ul class="sl-first"></ul>
+				<ul class="sl-conent">
+					
+				</ul>
+				<script type="dot/tmpl" id="sl-first">
+					{{~it.data:data:i}}
+						
+						{{~data.fSActivityModuleGoodsList:list:j}}
+						{{? list.goodsId==it.goodsId}}
+							<li goodsId='{{=list.goodsId}}'>
+								<div class="sl-goods">
+									<img src="{{=it.picUrl}}{{=list.goodsPic}}" class="sl-goods"/>
+									{{? list.isLimit ==1 && list.activityStatus==1}}
+										<a id="{{=list.limitCount}}" fsCount="{{=list.fsCount}}"> 限购{{=list.limitCount}}件</a>
+										{{? list.limitCount==0}}
+										<img src="../imgs/seckill/xiangou.png" class="sl-icon" />
+										{{?}}
+									{{?}}
+									{{?list.activityStatus==2}}
+									<img src="../imgs/seckill/Group2.png" class="sl-icon" />
+									{{??list.activityStatus==3}}
+									<img src="../imgs/seckill/Group3.png" class="sl-icon" />
+									{{??list.activityStatus==4}}
+									<img src="../imgs/seckill/Group1.png" class="sl-icon" />
+									{{?}}
+								</div>
+								<div class="sl-message">
+									<h3>{{=list.goodsName}}</h3>
+									<p class="message">规格：{{=list.specifications}}</p>
+									<p class="sl-price">¥<span>{{=(list.limitPrice).toFixed(2)}}</span></p>
+									<p class="sl-oldprice">¥<span>{{=(list.goodsPrice).toFixed(2)}}</span></p>
+									{{?list.activityStatus==1}}
+									<div class="sl-jd sl-jd-jxz">
+										<div style="width: {{=list.prescent}}%;"></div>
+										{{?list.prescent>90}}
+										<img src="../imgs/seckill/Group.png" />
+										{{??}}
+										<p>已售{{=list.prescent}}%</p>
+										{{?}}	
+									</div>
+									{{??list.activityStatus==2}}
+									<div class="sl-jd sl-jd-jxz">
+										<div style="width: 100%;"></div>
+										<p>已售100%</p>
+									</div>
+									{{??list.activityStatus==3}}
+									<div class="sl-jd sl-jd-wks">
+										<img src="../imgs/seckill/jingqing.png" />
+									</div>
+									{{??list.activityStatus==4}}
+									<div class="sl-jd sl-jd-yjs">
+										<img src="../imgs/seckill/xiaci.png" />
+									</div>
+									{{?}}
+									
+								</div>
+								<div class="sl-btn">
+									{{?list.activityStatus==1}}
+									<a class="add-card"><img src="../imgs/seckill/add-card.png"/></a>
+									{{??list.activityStatus==2}}
+									<a class="mgl"><img src="../imgs/seckill/icon4.png"/></a>
+									{{??list.activityStatus==3}}
+									<a class="wks"><img src="../imgs/seckill/icon5.png"/></a>
+									{{??list.activityStatus==4}}
+									<a class="yjs"><img src="../imgs/seckill/icon6.png"/></a>
+									{{?}}
+									
+								</div>
+							</li>
+						{{~}}
+						{{?}}
+					{{~}}
+				</script>
+				<script type="dot/tmpl" id="sl-conent">
+					{{~it.data:data:i}}
+						{{? data.banner!=''}}
+						<div style="padding-top: 0.78125rem; background: #fff;" >
+						<img src="{{=it.picUrl}}{{=data.banner}}"/>
+						</div>
+						{{?}}
+						{{~data.fSActivityModuleGoodsList:list:j}}
+						{{? list.goodsId!=it.goodsId}}
+							<li goodsId='{{=list.goodsId}}'>
+								<div class="sl-goods">
+									<img src="{{=it.picUrl}}{{=list.goodsPic}}" class="sl-goods"/>
+									{{? list.isLimit ==1 && list.activityStatus==1}}
+										<a id="{{=list.limitCount}}" fsCount="{{=list.fsCount}}"> 限购{{=list.limitCount}}件</a>
+										{{? list.limitCount==0 }}
+										<img src="../imgs/seckill/xiangou.png" class="sl-icon" />
+										{{?}}
+									{{?}}
+									{{?list.activityStatus==2}}
+									<img src="../imgs/seckill/Group2.png" class="sl-icon" />
+									{{??list.activityStatus==3}}
+									<img src="../imgs/seckill/Group3.png" class="sl-icon" />
+									{{??list.activityStatus==4}}
+									<img src="../imgs/seckill/Group1.png" class="sl-icon" />
+									{{?}}
+								</div>
+								<div class="sl-message">
+									<h3>{{=list.goodsName}}</h3>
+									<p class="message">规格：{{=list.specifications}}</p>
+									<p class="sl-price">¥<span>{{=(list.limitPrice).toFixed(2)}}</span></p>
+									<p class="sl-oldprice">¥<span>{{=(list.goodsPrice).toFixed(2)}}</span></p>
+									{{?list.activityStatus==1}}
+									<div class="sl-jd sl-jd-jxz">
+										<div style="width: {{=list.prescent}}%;"></div>
+										{{?list.prescent>90}}
+										<img src="../imgs/seckill/Group.png" />
+										{{??}}
+										<p>已售{{=list.prescent}}%</p>
+										{{?}}
+									</div>
+									{{??list.activityStatus==2}}
+									<div class="sl-jd sl-jd-jxz">
+										<div style="width: 100%;"></div>
+										<p>已售100%</p>
+									</div>
+									{{??list.activityStatus==3}}
+									<div class="sl-jd sl-jd-wks">
+										<img src="../imgs/seckill/jingqing.png" />
+									</div>
+									{{??list.activityStatus==4}}
+									<div class="sl-jd sl-jd-yjs">
+										<img src="../imgs/seckill/xiaci.png" />
+									</div>
+									{{?}}
+									
+								</div>
+								<div class="sl-btn">
+									{{?list.activityStatus==1}}
+									<a class="add-card"><img src="../imgs/seckill/add-card.png"/></a>
+									{{??list.activityStatus==2}}
+									<a class="mgl"><img src="../imgs/seckill/icon4.png"/></a>
+									{{??list.activityStatus==3}}
+									<a class="wks"><img src="../imgs/seckill/icon5.png"/></a>
+									{{??list.activityStatus==4}}
+									<a class="yjs"><img src="../imgs/seckill/icon6.png"/></a>
+									{{?}}
+									
+								</div>
+							</li>
+							{{?}}
+						{{~}}
+						
+					{{~}}
+				</script>
+			</div>
+			<div style="padding: 1rem 0;display: none;" id="empty">
+				<img src="/imgs/empty.png" style="display: block;width: 3.3125rem;height: 2.046875rem;margin: 0 auto;"/>
+				<p style="text-align: center;margin-top: 0.5rem;">活动未开始</p>
+			</div>
+		</div>
+		
+	</div>
+
+
+	<!--底部导航-->
+	<div class="footer">
+		<div class="footer-logo" style="display: none;">
+			<img src="/imgs/logo-bottom.jpg" id="logo-bottom"/>
+		</div>
+		<div class="nav"></div>
+		
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Geocoder"></script>
+	<script src="/js/seckill/seckill.js"></script>
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>账户充值</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/recharge.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="recharge">
+				<div class="top">
+					<p class="title">充值金额：</p>
+					<ul></ul>
+				</div>
+				<script id="top" type="dot/tmpl">
+					{{~it:data:i}}
+					<li id="{{=data.id}}" price="{{=data.activeMinMoney}}">
+						{{?data.activePresent>0}}
+						<p>充<span>{{=data.activeMinMoney}}</span>返{{=data.activePresent}}</p>
+						{{??}}
+						<p><span>{{=data.activeMinMoney}}</span>元</p>
+						{{?}}
+						<a></a>
+					</li>
+					{{~}}
+				</script>
+				<!--<div class="img">
+					<img src="/imgs/recharge/ad.jpg" />
+				</div>-->
+				<div class="sum">
+					<p class="title">其他金额:</p>
+					<input type="text" placeholder="请输入充值金额" />
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+			<div class="bottom">
+				<p>立即支付</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/layer.js?t=20161117"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Autocomplete"></script>
+		<script>
+			(function(api, util,ajax){
+				var type = util.getUrlParams("type");
+				ajax.post(api.baseServerUrl + "/Charge/findActiveList",{
+				},function(data) {
+					util.render("#top", data, ".top ul")
+					$('.top').find('li').eq(0).addClass('checked')	
+				})
+				
+				
+				$('.top').delegate('li','click',function(){
+					$('.top').find('li').removeClass('checked')
+					$(this).addClass('checked')
+					$('.sum input').val('')
+				})
+				
+				$('.sum input').bind('input propertychange', function(){
+					$('.top').find('li').removeClass('checked')
+					if($(this).val()==''){
+						$('.top').find('li').eq(0).addClass('checked')	
+					}
+				})
+				$('.bottom').click(function(){
+					ajax.post(api.baseServerUrl + "/Charge/createOrder",{
+						"id":$('.top').find('.checked').attr('id'),"price":$('.sum input').val()
+					},function(data) {
+						var price
+						if($('.top').find('.checked').length>0){
+							price=$('.top').find('.checked').attr('price')
+						}else{
+							price=$('.sum input').val()
+						}
+						window.location.href="recharge-confirmpay.html?orderId="+data.ordercode+"&price="+price+'&type='+type
+						
+					})
+					
+					
+				})
+				
+				
+				var title="更好甄选—更好·不贵"
+				var doc="种草全世界的好货"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+			})(goola.api, goola.util,goola.ajax)
+		</script>
+	</body>
+
+</html>
+

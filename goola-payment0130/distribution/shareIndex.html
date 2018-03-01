@@ -1,0 +1,74 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<title>推广分享</title>
+		<meta charset="utf-8" />
+		<style>
+			.mui-table-view-cell
+			{
+				padding-top: 20px;
+				padding-bottom: 20px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">推广分享</h1>
+		</header>
+		<div class="mui-content">
+			<ul class="mui-table-view mui-table-view-chevron">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right" id="shareMall">
+						<i class="user-share-pic user-share-mall user-share-backgroundsize"></i>
+						<div class="mui-media-body" style="font-size: 17px;">
+							分享购啦商城
+							<p class='mui-ellipsis'>爱家人，爱朋友，爱自己，爱就购啦</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+			<ul class="mui-table-view mui-table-view-chevron margin-line">
+				<li class="mui-table-view-cell mui-media">
+					<a class="mui-navigate-right"  id="shareActivity">
+						<i class="user-share-pic user-share-activity user-share-backgroundsize"></i>
+						<div class="mui-media-body" style="font-size: 17px;">
+							分享模块专区
+							<p class='mui-ellipsis'>爱家人，爱朋友，爱自己，爱就购啦</p>
+						</div>
+					</a>
+				</li>
+			</ul>
+		</div>
+		<script type="text/javascript">
+		$("#shareMall").click(function(){
+			window.location.href="./shareMall.html";
+		})
+		$("#shareActivity").click(function(){ 
+			window.location.href="./shareActivity.html";
+		});
+		</script>
+	</body>
+</html>

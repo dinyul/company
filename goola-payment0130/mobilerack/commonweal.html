@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>捐赠者名单</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" href="/mobilerack/css/commonweal.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="list">
+				<div class="title">
+					<p><span>捐赠者名单</span></p>
+				</div>
+				<ul></ul>
+			</div>
+			<script id="list" type="dot/tmpl">
+				{{~it.data:data:i}}
+					<li>
+						<a>
+							{{?data.rownum==1}}
+							<img src="imgs/one.png"/>
+							{{??data.rownum==2}}
+							<img src="imgs/two.png"/>
+							{{??data.rownum==3}}
+							<img src="imgs/three.png"/>
+							{{??}}
+							{{=data.rownum}}
+							{{?}}
+						</a>
+						<div>
+							<div class="userimg">
+								{{? data.wxPhoto}}
+								<img src="{{=data.wxPhoto}}" />
+								{{??}}
+								<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/默认头像.png" />
+								{{?}}
+								<a>{{=data.shelvesSalePublicBenefitLevel.publicBenefitLevel}}</a>
+							</div>
+							<div class="info">
+								{{?data.wxName}}
+								<h3>{{=data.wxName}}</h3>
+								{{??}}
+								<h3>匿名公益人</h3>
+								{{?}}
+								<a>捐赠编号 {{=data.volunteerCode}}</a>
+								<div class="clear"></div>
+								<p><span>{{=data.publicValue}}公益值</span><span>已捐赠{{=data.publicTimes}}次</span></p>
+							</div>
+						</div>
+					</li>
+				{{~}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+		(function(api,util,ajax){
+			
+			var pageNo=1;
+			var total;
+			var pageTotal;
+			list(1,20)
+			$(window).scroll(function () {
+				var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+				if($(document.body).height()<=totalheight){
+					if($('.database').find('li').length>=total){
+						$('.none').show()
+						$(window).unbind('scroll')
+						return false
+					}
+					if(pageNo>=pageTotal){
+						$('.none').show()
+						$(window).unbind('scroll')
+						return false
+					}
+					pageNo=pageNo+1
+					list(pageNo,20)
+					
+				}
+			});
+			function list(pageNo,pageSize){
+				ajax.post(api.baseServerUrl + "/publicBenefit/openAuthority/findPageVolunteerInfo",{
+					'pageNo':pageNo,'pageSize':pageSize
+				},function(data) {
+					total=data.total
+					pageTotal=parseInt(total/pageSize)+1
+					if( total==0){
+						$('.noinfo').show()
+					}else{
+						$('.content1').show()
+					}
+					var obj = {data:data.rows,picUrl:api.picUrl}
+					var doTtmpl = doT.template($('#list').html());
+					var html = doTtmpl(obj);
+					$('.list ul').append(html)
+				});
+			}
+			
+			
+				
+		})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

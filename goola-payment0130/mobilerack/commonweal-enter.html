@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>爱角落·更好</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=1710111601"/>
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/list.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/rack-shopping-bottom.css">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/store.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="store">
+				<img src="/mobilerack/imgs/commonweal/1.jpg" />
+				<img src="/mobilerack/imgs/commonweal/2.jpg" />
+				<img src="/mobilerack/imgs/commonweal/3.jpg" />
+				<img src="/mobilerack/imgs/commonweal/4.jpg" />
+				<div class="storeinfo" style="border-top: 0.03125rem solid #eee;">
+					<div class="storeinfo-title">
+						<img src="/mobilerack/imgs/commonweal/5.jpg" />
+					</div>
+					<ul>
+						<li>
+							<input type="text" placeholder="公司名称" id="enterpriseName"/>
+						</li>
+						<li>
+							<input type="text" placeholder="联系电话" id="contactPhone"/>
+						</li>
+						<li>
+							<input type="text" placeholder="联系人" id="contactName" />
+						</li>
+						<li>
+							<p>选择城市<span id="cityName">请选择</span></p>
+						</li>
+					</ul>
+					<a class="apply">申请入驻</a>
+					<p>致电申请  400-135-2403</p>
+				</div>
+			</div>
+			<div class="bg"></div>
+			<div class="storeopen">
+				<p class="title">请选择所在城市</p>
+				<a class="close"></a>
+				<ul></ul>
+			</div>
+			<script id="storeopen" type="dot/tmpl">
+				{{~it:data:i}}
+				<li>{{=data.cityName}}</li>
+				{{~}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				ajax.post(api.baseServerUrl + "/apply/openAuthority/allCityList",{
+				},function(data) {
+					util.render("#storeopen", data,".storeopen ul");
+				})
+				
+				$('#cityName').click(function(){
+					$('.bg').show()
+					$('.storeopen').show()
+				})
+				$('.storeopen .close').click(function(){
+					$('.bg').hide()
+					$('.storeopen').hide()
+				})
+				$('.storeopen').delegate('li','click',function(){
+					$('#cityName').html($(this).html())
+					$('.bg').hide()
+					$('.storeopen').hide()
+				})
+				$('.apply').click(function(){
+					if($('#enterpriseName').val()==''){
+						alert('公司名称不能为空')
+						return
+					}
+					if(!(/^\d{1,}/.test($('#contactPhone').val()))){
+						alert('号码格式不正确')
+						return
+					}
+					if($('#contactName').val()==''){
+						alert('联系人不能为空')
+						return
+					}
+					if($('#cityName').html()==''){
+						alert('请选择城市')
+						return
+					}
+					ajax.post(api.baseServerUrl + "/apply/openAuthority/insertAplly",{
+						"applyType":2,"cityName":$('#cityName').html(),"enterpriseName":$('#enterpriseName').val(),
+						"contactName":$('#contactName').val(),"contactPhone":$('#contactPhone').val()
+					},function(data) {
+						alert('申请成功')
+					})
+				})
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

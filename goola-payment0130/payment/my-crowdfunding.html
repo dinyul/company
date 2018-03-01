@@ -1,0 +1,225 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>我的心愿</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/my-crowdfunding.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="content body" style="padding-top: 0.373333rem;margin-bottom: 2.266667rem;"></div>
+		<div class="coupon" style="display: none;"></div>
+		<script type="dot/tmpl" id="coupon">
+			{{? it.data}}
+			<div class="coupon-content" style="background-image: url({{=it.picUrl}}{{=it.data.popupPicture}});">
+				<a class="close"></a>
+				<ul class="couponlist">
+					{{~it.data.redPacketActivityItemList:data:i}}
+					<li>
+						<div class="left">
+							<p><span>¥</span>{{=data.coupon.preferentialPrice}}</p>
+						</div>
+						<div class="right">
+							{{? data.coupon.couponLimitValue}}
+							<p><span>使用范围：</span>{{=data.coupon.couponLimitValue.split('-')[1]}}</p>
+							{{??}}
+							<p><span>使用范围：</span>全品类</p>
+							{{?}}
+							<p><span>使用说明：</span>{{=data.coupon.couponName}}</p>
+							<p><span>有效期：</span>{{=data.coupon.availableDays}}天</p>
+						</div>
+					</li>
+					{{~}}
+				</ul>
+				<a class="share"></a>
+			</div>
+			{{?}}
+		</script>
+		<a class="share1" style="display: none;width: 2.84375rem;position: fixed;right: 1%;bottom: 11%"><img src="/imgs/activity/676528989524956002.png"/></a>
+		<script id="content" type="dot/tmpl">
+			<div class="content-top" style="margin-top: 0;">
+				<div class="details">
+					<div class="information">
+						<ul>
+							<li><p><a>编&#12288;&#12288;号:</a>{{=it.data.code}}</p></li>
+							{{? it.data.status == 4}}
+								<li>
+									<p><a>订单状态:</a>
+										{{? it.data.orderStatus == 6}}
+										<span>待发货</span>
+										{{?? it.data.orderStatus == 2}}
+										<span>待收货</span>
+										{{?? it.data.orderStatus == 5}}
+										<span>已收货</span>
+										{{?}}
+									</p>
+								</li>
+								<li><p style="float: left;"><a>已付金额:</a>¥ {{=(it.data.startPrice).toFixed(2)}}</p><p style="float: right;width: 5.0rem;text-align: left;">优惠：¥ {{=(it.data.preferential).toFixed(2)}}</p></li>
+							{{??}}
+							<li><p><a>已付金额:</a>¥ {{=(it.data.startPrice).toFixed(2)}}</p></li>
+							<li><p><a>优惠金额:</a>¥ {{=(it.data.preferential).toFixed(2)}}</p></li>
+							{{?}}
+							<li><p><a>下单时间:</a>{{=it.data.createDate}}</p></li>
+						</ul>
+						{{?it.data.status==2}}
+						<img src='../crowdfunding/imgs/my-wish/jinxingzhong.png' />
+						{{??it.data.status==4}}
+						<img src='../crowdfunding/imgs/my-wish/wancheng.png' />
+						{{??}}
+						<img src='../crowdfunding/imgs/my-wish/weishixian.png' />
+						{{?}}
+					</div>
+				</div>
+				<div id="crowd-shoppingList">
+					<div class="business">
+						<p>{{=it.data.goods.providerName}}</p>
+					</div>
+					<div class="good-info">
+						<a style="display: block;" href="../shangpin/shangpinxiangqing.html?goodsId={{=it.data.goods.goodsId}}">
+							<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+							<div class="title">
+								<p>{{=it.data.goods.goodsName}}</p>
+								<span>规格：{{=it.data.goods.specifications}}</span>
+							</div>
+							<div class="price"><p>¥{{=it.data.goods.preferentialPrice}}</p></div>
+							<div class="clear"></div>
+							<p style="position: absolute;bottom: 0.3125rem;right: 0.3125rem;color: #fa2f3e;">已付：¥{{=(it.data.startPrice+it.data.preferential).toFixed(2)}}</p>
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="content-bottom" style="border: 1px solid {{?it.data.status==2}}#fa2f3e{{??it.data.status==4}}#F49827{{??}}#999999{{?}};">
+				<div class="jindu">
+					{{? it.data.status == 2}}
+					<div class="jindu-top">
+						<h2>心愿实现中</h2>
+						{{?it.data.status == 2 && it.data.leftDays=="心愿已完成"}}
+						<p>今天24点后心愿即将失败</p>
+						{{??}}
+						<p>{{=it.data.leftDays}}</p>
+						{{?}}
+					</div>
+					{{?? it.data.status == 4}}
+					<div class="jindu-top" style="background: #F49827;">
+						<h2>实现心愿</h2>
+						<p style="color: #fff;">心愿已完成</p>
+					</div>
+					{{?? it.data.status == 5 || it.data.status == 6}}
+					<div class="jindu-top" style="background: #999999;">
+						<h2>心愿未完成</h2>
+						<p style="color: #fff;">剩余时间：0</p>
+					</div>
+					{{?}}
+					<div class="jindu-content" >
+						<div class="jindutiao"><div class="jindu-jieshu"></div></div>
+						<ul>
+							<li><p>已支持:<span>¥{{=(it.data.finishPrice).toFixed(2)}}</span></p></li>
+							<li><p>{{=it.data.finishPercent}}%</p></li>
+							<li><p>心愿价格:<span style="color: #1b1b1b;">¥{{=(it.data.crowdPrice).toFixed(2)}}</span></p></li>
+						</ul>
+					</div>
+				</div>
+				<div class="zhichi">
+					<div class="zhichi-top">
+							<h2>友情支持</h2>
+							<p>支持人数：{{=it.data.supportCount}}</p>
+					</div>
+					<ul>
+						{{~it.data.crowdfundingItemList :data:i}}
+						<li>
+							<div class="left">
+								<img src="{{=data.wechatHead}}" />
+								{{? data.status==1}}
+								<span><a class="fukuan" id="{{=data.id}}" payable="{{=data.payable}}" code="{{=data.code}}">(待付款>)</a></span>
+								{{?}}
+							</div>
+							<div class="right">
+								<p class="name">
+									<span style="float: left;display: inline-block;width: 3.515625rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{=data.wechatNickname}}</span>
+									{{? data.status==1}}
+									<span><a class="fukuan" id="{{=data.id}}" payable="{{=data.payable}}" code="{{=data.code}}">(待付款&nbsp;&gt;)</a></span>
+									{{?}}
+									<span>
+									{{? data.type==1}}
+									支付
+									{{?? data.type==2}}
+									支持
+									{{?? data.type==3}}
+									帮TA砍价
+									{{?}}
+									<a>&nbsp;{{=(data.price).toFixed(2)}}元</a></span>	
+								</p>
+								<p class="liuyan"><span>{{?data.message}}{{=data.message}}{{??}}好友没有留言哦~{{?}}</span><span style="float: right;">{{=data.shortCreateDate}}</span></p>
+								{{? data.flag}}
+								<a class="xinyuan" flag="{{=data.flag}}" href="crowdfunding-share.html?crowdfundingId={{=data.flag}}" style="color: #fa2f3e; font-size: 0.3125rem;position: absolute;bottom: -0.213333rem;right: 0;">TA的心愿&nbsp;&gt;</a>
+								{{?}}
+							</div>
+							<div class="clear"></div>
+						</li>
+						{{~}}
+					</ul>
+				</div>
+			</div>
+			<div class="mycrowd-bottom">
+				<!--{{? it.data.status == 5}}
+				<p style="text-align: center;color: #fff;line-height: 1.09375rem;">您只需要支付{{=(it.data.crowdPrice-it.data.finishPrice).toFixed(2)}}元，就可以领走商品了</p>
+				{{?}}-->
+				<a href="../index.html" class="home">
+					<img src="../crowdfunding/imgs/my-wish/crowd-home.png">
+				</a>
+				{{? it.data.status == 5}}
+				<a class="refund">
+					<img src="../crowdfunding/imgs/my-wish/crowd-tuikuan.png">
+				</a>
+				<a class="zhifuyue">
+					<img src="../crowdfunding/imgs/my-wish/crowd-yue.png">
+				</a>
+				{{?? it.data.status == 6 || it.data.status == 7||it.data.status == 8||it.data.status == 9}}
+				<a class="refund" style="margin-left: 3.671875rem;">
+					<img src="../crowdfunding/imgs/my-wish/crowd-tuikuan1.png">
+				</a>
+				{{?? it.data.status == 4}}
+				<a class="zaici" href="../crowdfunding/wish.html" style="margin-left: 4.866667rem;width: 2.906667rem;height: 2.013333rem;">
+					<img src="../crowdfunding/imgs/my-wish/crowd.png"/>
+				</a>
+				{{?? it.data.status == 2}}
+				<a class="haoyou shareButton1">
+					<img src="../crowdfunding/imgs/my-wish/share.png">
+				</a>
+				<a class="zhifuyue">
+					<img src="../crowdfunding/imgs/my-wish/crowd-yue.png">
+				</a>
+				{{?}}
+			</div>
+			
+		</script>
+		
+		<div class="payment-success" style="display: none;">
+			<h2>支付成功！ </h2>
+			<p>发起众筹成功，快邀好友筹款啦~</p>
+			<img src="/crowdfunding/imgs/fuceng2@2x.png?t=20161117" />
+			<a>知道啦</a>
+		</div>
+		<div class="share-btn" style="display: none;">
+			<img src="/imgs/giftcard/fenxiang.png?t=20161117" />
+			<a>知道啦</a>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script type="text/javascript" src="/crowdfunding/js/my-crowdfunding.js"></script>
+	</body>
+
+</html>

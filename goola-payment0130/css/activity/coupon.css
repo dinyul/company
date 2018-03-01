@@ -1,0 +1,172 @@
+.coupon{
+	width: 100%;
+	height: 14.078125rem;
+	position: relative;
+}
+.coupon input{
+	position: absolute;
+	left: 1.359375rem;
+    bottom: 2.9375rem;
+    width: 7.03125rem;
+    height: 1.21875rem;
+    outline: none;
+    border: none;
+    border-radius: 0.078125rem;
+    background: #C7C7C7;
+    padding-left: 0.3125rem
+}
+.coupon>p{
+	color: #FFF8D8;
+	text-align: center;
+	position: absolute;
+	bottom: 3.171875rem;
+	width: 100%
+}
+.coupon .list{
+	width: 8.125rem;
+	height: 1.78125rem;
+	position: absolute;
+	left: 0.9375rem;
+    bottom: 4.0rem;
+    overflow: auto;
+	overflow-y:hidden;
+}
+.coupon ul li{
+	width: 6.734375rem;
+	height: 1.78125rem;
+	float: left;
+	background: url(/imgs/activity/couponli1.jpg) no-repeat;
+	background-size: 100%;
+	margin-right: 0.078125rem
+}
+.coupon ul li .left{
+	float: left;
+	width: 1.640625rem;
+	height: 1.484375rem;
+	margin: 0.15625rem 0 0 0.25rem;
+	overflow: hidden;
+}
+.coupon ul li .left p{
+	font-size: 0.9375rem;
+	color: #fff;
+	line-height: 1.484375rem;
+	height: 1.484375rem;
+	text-align: center;
+}
+.coupon ul li .left p span{
+	font-size: 0.5rem;
+}
+.coupon ul li .right{
+	float: left;
+	margin:0.3125rem 0 0 0.21875rem
+}
+.coupon ul li .right p{
+	margin-bottom: 0.15625rem;
+	font-size: 0.25rem
+}
+.coupon ul li .right p span{
+	display: inline-block;
+	width: 1.34375rem;
+	color: #999;
+	float: left;
+}
+.coupon .btn{
+	display: block;
+	width: 7.375rem;
+	height: 1.21875rem;
+	position: absolute;
+	left: 1.359375rem;
+	line-height: 1.21875rem;
+	text-align: center;
+	background: #F0F1C9;
+	color: #D62628;
+	border-radius: 0.125rem;
+	font-size: 0.46875rem;
+	bottom: 1.015625rem
+}
+.coupon .unregistered-img{
+	position: absolute;
+    bottom: 4.59375rem;
+    left: 50%;
+    width: 6.03125rem;
+    margin-left: -3.015625rem;
+}
+.receive-img{
+	position: absolute;
+	width: 8.421875rem;
+	bottom: 5.609375rem;
+	left: 50%;
+	margin-left: -4.210938rem
+}
+.coupon .notreceive-img{
+	position: absolute;
+	width: 3.125rem;
+	bottom: 3.984375rem;
+	left: 50%;
+	margin-left: -1.5625rem
+}
+.luck li{
+	height: 2.078125rem;
+	background: url(/imgs/activity/couponli.jpg) no-repeat;
+	background-size: 100%;
+}
+.luck li .head{
+	float: left;
+	width: 1.1875rem;
+	height: 1.1875rem;
+	border-radius: 1.1875rem;
+	overflow: hidden;
+	margin: 0.5rem 0 0 0.546875rem
+}
+.luck li .info{
+	float: left;
+	width: 7.1875rem;
+	overflow: hidden;
+	margin:0.5rem 0 0 0.5rem
+}
+.luck li .info p{
+	color: #AEAEAE;
+}
+.luck li .info p:first-child{
+	margin-bottom: 0.375rem
+}
+.news ul{
+	padding-left:0.546875rem; 
+}
+.news ul li{
+	font-size: 0.375rem;
+	color: #AEAEAE;
+	line-height: 0.78125rem
+}
+.coupon-bottom{
+	text-align: center;
+}
+.coupon-bottom img{
+	width: 100%;
+	display: block;
+}
+.prompt{
+	width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    position: fixed;
+    bottom: 0;
+    z-index: 98;
+    left: 0;
+	
+}
+.prompt p{
+	position: fixed;
+    width: 6.5625rem;
+    top: 50%;
+    left: 50%;
+    margin-left: -3.90625rem;
+    margin-top: -1.765625rem;
+    z-index: 99;
+    background: #fff;
+    border-radius: 0.15625rem;
+    height: 2.265625rem;
+    text-align: center;
+    padding: 0 0.625rem;
+    line-height: 2.265625rem
+}

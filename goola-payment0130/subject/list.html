@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>兰大益创公益义卖</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			.list a{
+				display: block;line-height: 0;
+				margin-bottom: 0.28125rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="list"></div>
+			<script id="list" type="dot/tmpl">
+				{{~it.data:data:i}}
+				<a href="{{=data.subjectAddress}}"><img src="{{=it.picUrl}}{{=data.subjectPhoto}}"/></a>
+				{{~}}
+			</script>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				subject()
+				function subject(){
+					ajax.post(api.baseServerUrl + "/subject/grass/openAuthority/list",{
+						"pageType":1,"isIndex":0,"lat":getCookie('lat'),"lng":getCookie('lng'),"locationType":1
+					},function(data) {
+						var obj = {data:data.rows,picUrl:api.picUrl};
+						util.render("#list",obj, ".list")
+					})
+				}
+				var title="兰大益创公益义卖，暖冬五折起"
+				var doc="兰大益创义卖，每一件，一份爱！双十一低价，传递冬日温暖"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,location.href,"http://" + document.domain +"/imgs/zhongcao-share.jpg");
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+		
+	</body>
+</html>

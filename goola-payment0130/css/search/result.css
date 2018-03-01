@@ -1,0 +1,184 @@
+.search{
+	height: 1.171875rem;
+	background: #c7a994;
+	padding-top: 0.015625rem
+}
+.search p{
+	width: 8.28125rem;
+    padding: 0 0.71875rem 0 0.296875rem;
+	height: 0.765625rem;
+	margin: 0.1875rem auto;
+	background: #fff url(/imgs/search/del1.png) no-repeat 8.734375rem center;
+	background-size: 0.40625rem 0.40625rem;
+	border-radius:0.078125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height:0.765625rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;   
+}
+
+.result .none{
+	padding: 1.796875rem 0 0;
+	margin-top: 0.0625rem;
+	background: #fff;
+}
+.result .none>img{
+	width: 3.3125rem;
+	height: 2.046875rem;
+	display: block;
+	margin: 0 auto 0.46875rem
+}
+.result .none>p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	text-align:center;
+	padding-bottom:1.796875rem 
+}
+.result .none>div>p{
+	padding: 0.5rem 0 0.484375rem 0.59375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+}
+.list{
+	padding: 0 0.28125rem;
+	overflow: hidden;
+}
+.list li{
+	width: 4.5625rem;
+	float: left;
+	margin:0 0.296875rem 1.09375rem 0;
+	position: relative;
+    padding-bottom: 0.0625rem;
+    text-align: center;
+}
+.list li:nth-child(even){
+	margin-right: 0
+}
+.list li>div .goodsimg{
+	width: 100%;
+    background: #fff;
+    position: relative;
+    padding-top: 0.625rem;
+}
+.list li>div .goodsimg img{
+    display: block;
+    height: 4.0625rem
+}
+.list li>div .goodsimg p{
+	background:rgba(199,169,148,0.5);
+	width:4.21875rem;
+	height:0.625rem;
+	line-height: 0.625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#774826;
+	text-align: center;
+	margin-top: 0.15625rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.list li>div h3{
+	margin-top: 0.46875rem;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #131313;
+    line-height: 0.40625rem;
+    padding: 0 0.40625rem;
+}
+.list li>div b{
+	font-weight: normal;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    line-height: 0.3125rem;
+    font-family: PingFangSC-Light;
+    font-size: 0.3125rem;
+    color: #8d8d8d;
+    letter-spacing: 0;
+    margin-top: 0.1875rem;
+    display: block;
+    padding: 0 0.40625rem;
+}
+.list li>div>p{
+	margin-top: 0.296875rem;
+    line-height: 0.296875rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.4375rem;
+    color: #c53f40;
+}
+.list li>div>p span{
+	margin-left: 0.3125rem;
+	font-family:PingFangSC-Regular;
+	color:#9b9b9b;
+}
+.list li>div>p span a{
+	color:#fa2f3e;
+}
+.list li .addcard{
+	display: block;
+	width: 0.640625rem;
+	height: 0.640625rem;
+	position: absolute;
+	right: 0;
+	bottom: 0.453125rem
+}
+.has nav{
+	height: 0.9375rem;
+	background: #fff;
+}
+.has nav ul{
+	overflow: hidden;
+}
+.has nav ul li{
+	float: left;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height:0.9375rem;
+	text-align:center;
+	width: 1.9375rem;
+	margin-right: 2.09375rem;
+	font-weight: bold;
+}
+.has nav ul .checked{
+	color:#fa2f3e;
+	background: url(/imgs/search/line.png) no-repeat left bottom;
+	background-size: 1.9375rem 0.0625rem
+}
+.has nav ul li:last-child{
+	margin-right: 0
+}
+.has nav ul li span{
+	background: url(/imgs/search/icon0.png) no-repeat left center;
+	background-size: 0.125rem 0.34375rem;
+    margin-left: 0.15625rem;
+}
+.has nav ul li span a{
+	display: inline-block;
+	width: 0.125rem;
+	height: 0.125rem;
+	position: absolute;
+	background-size: 100%
+}
+.has nav ul li span a:first-child{
+	background: url(/imgs/search/icon1.png) no-repeat;
+	top: 0.078125rem
+}
+.has nav ul li span a:last-child{
+	background: url(/imgs/search/icon2.png) no-repeat;
+	bottom: 0.078125rem
+}
+.has .list{
+	background: #fff;
+	margin-top: 0.0625rem
+}

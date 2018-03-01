@@ -1,0 +1,570 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-plugin/jquery.qrcode.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<title>个人中心</title>
+		<meta charset="utf-8" />
+		<style>
+			.mui-card.widthall
+			{
+				margin: 0px;
+				border-radius: 0px;
+				box-shadow: 0 0px 0px;
+				margin-top:12px;
+			}
+			.mui-control-content {
+				height: 600px;
+				min-height: 400px;
+			}
+			.mui-input-group:before
+			{
+				position: relative
+			}
+			.mui-input-group:after
+			{
+				position: relative
+			}
+			.mui-input-group
+			{
+				position: inherit;
+				margin-top: 2px;
+			}
+			.mui-input-group .mui-input-row:after
+			{
+				position: relative;
+			}
+			.mui-input-group .mui-input-row
+			{
+				border-bottom: 1px solid #eee;
+				margin: 0px 20px 0px 20px;
+				padding: 10px 0px;
+				height: 50px;
+			}
+			
+			.mui-input-group input
+			{
+				padding-left: 50px;
+				padding-right: 30px;
+				display: block;
+			}
+			.img-class
+			{
+				display:block;
+				position:relative;
+				background:url(${fns:getConfig('pic_path')}/${fns:getUser().expandQrcodeImg}) no-repeat;
+				max-width: 200px;
+			    height:200px;
+			    background-size:auto 200px;
+			    margin:0 auto;
+			    margin-top: 50px;
+			}
+			.mui-radio input[type=radio]
+			{
+				top: -5px;
+			}
+			.mui-checkbox.mui-left input[type=checkbox], .mui-radio.mui-left input[type=radio]
+			{
+				left:6px;
+			}
+			.mui-checkbox.mui-left label, .mui-radio.mui-left label
+			{
+				padding-left: 35px;
+				padding-right: 1px;
+			}
+			.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before
+			{
+				color: #fa2f3e;
+			}
+			.mui-btn-orange
+			{
+				color: #fff;
+	            border: 1px solid #fa2f3e;
+		    	background-color: #fa2f3e;
+		    	margin-top: 30px;
+		    	padding: 10px 0px;
+			}
+			.mui-card-header
+			{font-size:13px;}
+			.mui-input-row label 
+			{
+				padding:11px 5px;
+			}
+			.mui-card-content, .mui-card-content input
+			{
+				font-size:13px;
+			}
+			.margin-line
+			{
+				margin-top: 12px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">个人信息</h1>
+		</header>
+		
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary totop">
+					<a class="mui-control-item mui-active color border-right" href="#basicInfo">
+						基本信息
+					</a>
+					<a class="mui-control-item color" href="#extendInfo">
+						扩展信息
+					</a>
+				</div>
+				<div class="mui-slider-group">
+					<div id="basicInfo" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view">
+							         <li class="mui-table-view-cell">
+										微信名
+										<span id="name" class="mui-btn mui-text"></span>
+									 </li>
+								</ul>
+								<ul class="mui-table-view margin-line">
+									<li class="mui-table-view-cell">
+										手机号
+										<span id="mobile" class="mui-btn mui-text"></span>
+									</li>
+								</ul>
+								<ul class="mui-table-view margin-line">
+									<li class="mui-table-view-cell">
+										推广号
+										<span id="expandUpgradeCode" class="mui-btn mui-text"></span>
+									</li>
+								</ul>
+								<div style="text-align:center; margin-top:10px;">
+									扫描二维码  去更好甄选
+									<br/>
+									<br/>
+									<div id="code"></div> 
+								</div>
+							</div>
+						</div>
+					</div>
+					<div id="extendInfo" class="mui-slider-item mui-control-content">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<div class="mui-card widthall margin-line">
+									<div class="mui-card-header">
+										打款方式
+										<div class="mui-radio mui-left">
+											<input name="payWay" type="radio" disabled="disabled" value="0"
+												onclick="changePayWay(this.value)">
+											<label>微信</label>
+										</div>
+										<div class="mui-radio mui-left">
+											<input name="payWay" type="radio" disabled="disabled" value="1"
+												onclick="changePayWay(this.value)">
+											<label>支付宝</label>
+										</div>
+										<div class="mui-radio mui-left">
+											<input name="payWay" type="radio" disabled="disabled" value="2"
+												onclick="changePayWay(this.value)">
+											<label>银行卡</label>
+										</div>
+									</div>
+									<div class="mui-card-content">
+										<div id="accountInfo2" name="accountType" class="mui-input-group">
+											<div class="mui-input-row">
+												<label>银行卡类型</label>
+												<input id='bankAddress' name = 'accountAddress' type="text" class="mui-input-clear mui-input"
+													 placeholder="请输入银行卡类型" alt="银行卡类型" onblur="CHCheck(this.value, 0)" 
+													 disabled = "disabled">
+											</div>
+											<div class="mui-input-row">
+												<label>银行卡户名</label>
+												<input id='bankName' name = 'accountName' type="text" class="mui-input-clear mui-input"
+													 placeholder="请输入银行卡户名" alt="银行卡户名" onblur="CHCheck(this.value, 1)"
+													 disabled = "disabled">
+											</div>
+											<div class="mui-input-row">
+												<label>银行卡卡号</label>
+												<input id='bankAccount' name = 'account' type="text" class="mui-input-clear mui-input required"
+													 placeholder="请输入银行卡卡号" alt="银行卡卡号" onblur="luhmCheck(this.value)"
+													 disabled = "disabled">
+											</div>
+										</div>
+										<div id="accountInfo0" name="accountType" class="mui-input-group">
+											<div class="mui-input-row">
+												<label>微信用户名</label>
+												<input id = 'wechatName' name = 'accountName' type="text" class="mui-input-clear mui-input"
+														 placeholder="请输入微信用户名" alt="微信用户名" onblur = "CHCheck(this.value, 2)"
+														 disabled = "disabled">
+											</div>
+											<div class="mui-input-row">
+												<label>微信号</label>
+												<input id = 'wechatAccount' name = 'account' type="text" class="mui-input-clear mui-input required"  
+													 placeholder="请输入微信号" alt="微信号"
+													 disabled = "disabled">
+											</div>
+										</div>
+										<div id="accountInfo1" name="accountType" class="mui-input-group">
+											<div class="mui-input-row">
+												<label>支付宝用户名</label>
+												<input id='alipayName' name = 'accountName' type="text" class="mui-input-clear mui-input"
+														 placeholder="请输入支付宝用户名" alt="支付宝用户名" onblur = "CHCheck(this.value, 3)"
+													 disabled = "disabled">
+											</div>
+											<div class="mui-input-row">
+												<label>支付宝账号</label>
+												<input id='alipayAccount' name = 'account' type="text" class="mui-input-clear mui-input required"
+													 placeholder="请输入支付宝账号" alt="支付宝账号"
+													 disabled = "disabled">
+											</div>
+										</div>
+									</div>
+								</div>
+								<input id="buttonFlag" type="hidden" value="0">
+								<div class="mui-content-padded">
+									<button id='submitButton' class="mui-btn mui-btn-block mui-btn-orange" >修改打款方式</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		//表单验证标示
+		var bankNameFlag = false;//银行户主姓名标示
+		var bankAddressFlag = false;//银行类型标示	
+		var alipayNameFlag = false;//支付宝户主姓名标示
+		var wechatNameFlag = false;//微信户主姓名标示
+		$(function(){
+			(function(api, util, ajax){
+			ajax.post(api.baseServerUrl + "/distribution/currentUser/",{}
+			,function(data) {
+				$("#loginName").html(data.userName);
+				$("#name").html(data.wxName);
+				$("#mobile").html(data.telphone);
+				$("#expandUpgradeCode").html(data.expandCode);
+				$("#code").qrcode(
+						{width:150,height:150,correctLevel:0,text:data.expandIndexUrl});
+			});
+			ajax.post(api.baseServerUrl + '/distribution/userInfo/',{}
+			,function(data) {
+				initUseInfo(data);
+			},function(returnData) {
+				initUseInfo(returnData.data);
+			});   
+			function initUseInfo(account) {
+				var type = account.type;
+				if(type == null || type == ""){
+					type = 2;
+				}
+				$('input[name="payWay"]').each(function(){
+					if(type == $(this).val()){
+						$(this).attr("checked",true);
+					}
+				});
+				
+				$("div[id^='accountInfo']").each(function(){
+					var doNotNone = "accountInfo"+type;
+					if($(this).attr('id') != doNotNone){
+						$(this).css('display','none'); 
+					}else{
+						$("div[id=" + doNotNone + "] input").each(function(){
+							if($(this).attr('name') == 'accountAddress'){
+								$(this).val(account.accountAddress);
+							}	
+							if($(this).attr('name') == 'accountName'){
+								$(this).val(account.accountName);
+							}
+							if($(this).attr('name') == 'account'){
+								$(this).val(account.account);
+							}
+						});
+					}
+				});
+				//修改表单验证元素
+				if(type == 0){
+					wechatNameFlag = true;
+				}else if(type == 1){
+					alipayNameFlag = true;
+				}else if(type == 2){
+					bankNameFlag = true;//银行户主姓名标示
+					bankAddressFlag = true;//银行类型标示
+				}
+				
+				//默认切换至可编辑状态
+				buttonAction();
+			}
+			
+			$("#submitButton").click(function(){
+				buttonAction();
+			})
+
+			
+			//按钮修改和保存动作
+			function buttonAction(){
+				var flag = $("#buttonFlag").val();
+				var type = $('input:radio:checked').val();
+				if(flag == 0){
+					$("#buttonFlag").val(1);
+					$("div[id^='accountInfo'] input").attr("disabled",false);
+					$('input[name="payWay"]').attr("disabled",false);
+					$("button").text("保存信息");
+				}else if(flag == 1){
+					if(type == null){
+						mui.alert("请选择打款方式 ");
+						return;
+					}
+					var loopFlag = true;
+					$("#accountInfo" + type + " input").each(function(){
+						//若当前input为空，则alert提醒  
+						if(!this.value||this.value.trim()==""){ 
+							mui.alert(this.alt+"不允许为空");     
+							loopFlag = false;
+							return false;
+						} 
+					});
+					if(!loopFlag){
+						return;
+					}
+					var accountAddress, account, accountName;
+					if(type == 0){
+						if(!wechatNameFlag){
+							mui.alert("表单信息有误，请重新检查");
+							return false;
+						}
+						accountAddress = "";
+						accountName = $("#wechatName").val();
+						account = $("#wechatAccount").val();
+					}else if(type == 1){
+						if(!alipayNameFlag){
+							mui.alert("表单信息有误，请重新检查");
+							return false;
+						}
+						accountAddress = "";
+						accountName = $("#alipayName").val();
+						account = $("#alipayAccount").val();
+					}else if(type == 2){
+						if(!bankNameFlag || !bankAddressFlag){
+							mui.alert("表单信息有误，请重新检查");
+							return false;
+						}
+						accountAddress = $("#bankAddress").val();
+						accountName = $("#bankName").val();
+						account = $("#bankAccount").val();
+					}
+					url = api.baseServerUrl + "/distribution/savePaymentInfo";
+					ajax.post(url,{
+						type : type,
+						account : account,
+						accountName : accountName,
+						accountAddress : accountAddress
+					},function(data) {
+						$("#buttonFlag").val(0);
+						$("div[id^='accountInfo'] input").attr("disabled", true);
+						$('input[name="payWay"]').attr("disabled", true);
+						$("button").text("修改打款方式");
+						$("div[id^='accountInfo'] input").each(function(){
+							var doNotClear = "accountInfo"+type;
+							if($(this).parent().parent().attr('id') != doNotClear){
+								this.value = "";
+							}
+						});
+					},function(returnData) {
+						mui.alert(returnData.message);
+						$("div[id^='accountInfo'] input").each(function(){
+							var doNotClear = "accountInfo"+type;
+							if($(this).parent().parent().attr('id') != doNotClear){
+								this.value = "";
+							}
+						});
+						
+					})
+				}
+			}
+		})(goola.api, goola.util, goola.ajax)
+			})
+			//改变打款方式后动态展示表单
+			function changePayWay(value){
+				$("[name='accountType']").hide();
+				$("#accountInfo" + value).show();
+			}
+			//校验银行卡号和户主中文
+			function CHCheck(content, flag){
+				if($.trim(content) == ""){
+					return;
+				} 
+				if(flag == 0 || flag == 1){
+					if(!/^[\u4e00-\u9fa5]{2,20}$/i.test(content)){
+						mui.alert('请输入2-20个中文字符');
+						if(flag == 0){
+							$("#bankAddress").css('color','red');
+							bankAddressFlag = false;
+						}else if(flag == 1){
+							$("#bankName").css('color','red');
+							bankNameFlag = false;
+						}
+						return;
+					}else{
+						if(flag == 0){
+							$("#bankAddress").css('color','black');
+							bankAddressFlag = true;
+						}else if(flag == 1){
+							$("#bankName").css('color','black');
+							bankNameFlag = true;
+						}
+					}
+				}else{
+					if(/[`~!@#\$%\^\&\*\(\)\+<>\?:\"\{\},\.\\\/;'\[\]]/i.test(content)){
+						mui.alert('输入不允许包含特殊字符');
+						if(flag == 2){
+							$("#wechatName").css('color','red');
+							wechatNameFlag = false;
+						}else if(flag == 3){
+							$("#alipayName").css('color','red');
+							alipayNameFlag = false;
+						}
+						return;
+					}else{
+						if(flag == 2){
+							$("#wechatName").css('color','black');
+							wechatNameFlag = true;
+						}else if(flag == 3){
+							$("#alipayName").css('color','black');
+							alipayNameFlag = true;
+						}
+					}
+				}
+			}
+			//Description:  银行卡号Luhm校验
+			//Luhm校验规则：16位银行卡号（19位通用）:
+			// 1.将未带校验位的 15（或18）位卡号从右依次编号 1 到 15（18），位于奇数位号上的数字乘以 2。
+			// 2.将奇位乘积的个十位全部相加，再加上所有偶数位上的数字。
+			// 3.将加法和加上校验位能被 10 整除。
+			function luhmCheck(bankno){
+				if($.trim(bankno) == ""){
+					return;
+				}
+				if(bankno.length<16 || bankno.length>19){
+					mui.alert("银行卡号长度必须在16到19之间");
+					return false;
+				}
+				var num = /^\d*$/;  //全数字
+				if (!num.exec(bankno)) {
+					mui.alert("银行卡号必须全为数字");
+					return false;
+				}
+				//开头6位
+				var strBin="10,18,30,35,37,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,58,60,62,65,68,69,84,87,88,94,95,98,99";    
+				if (strBin.indexOf(bankno.substring(0, 2))== -1) {
+					mui.alert("银行卡号开头6位不符合规范");
+					return false;
+				}
+		        var lastNum=bankno.substr(bankno.length-1,1);//取出最后一位（与luhm进行比较）
+		    
+		        var first15Num=bankno.substr(0,bankno.length-1);//前15或18位
+		        var newArr=new Array();
+		        for(var i=first15Num.length-1;i>-1;i--){    //前15或18位倒序存进数组
+		            newArr.push(first15Num.substr(i,1));
+		        }
+		        var arrJiShu=new Array();  //奇数位*2的积 <9
+		        var arrJiShu2=new Array(); //奇数位*2的积 >9
+		        
+		        var arrOuShu=new Array();  //偶数位数组
+		        for(var j=0;j<newArr.length;j++){
+		            if((j+1)%2==1){//奇数位
+		                if(parseInt(newArr[j])*2<9)
+		                arrJiShu.push(parseInt(newArr[j])*2);
+		                else
+		                arrJiShu2.push(parseInt(newArr[j])*2);
+		            }
+		            else //偶数位
+		            arrOuShu.push(newArr[j]);
+		        }
+		        
+		        var jishu_child1=new Array();//奇数位*2 >9 的分割之后的数组个位数
+		        var jishu_child2=new Array();//奇数位*2 >9 的分割之后的数组十位数
+		        for(var h=0;h<arrJiShu2.length;h++){
+		            jishu_child1.push(parseInt(arrJiShu2[h])%10);
+		            jishu_child2.push(parseInt(arrJiShu2[h])/10);
+		        }        
+		        
+		        var sumJiShu=0; //奇数位*2 < 9 的数组之和
+		        var sumOuShu=0; //偶数位数组之和
+		        var sumJiShuChild1=0; //奇数位*2 >9 的分割之后的数组个位数之和
+		        var sumJiShuChild2=0; //奇数位*2 >9 的分割之后的数组十位数之和
+		        var sumTotal=0;
+		        for(var m=0;m<arrJiShu.length;m++){
+		            sumJiShu=sumJiShu+parseInt(arrJiShu[m]);
+		        }
+		        
+		        for(var n=0;n<arrOuShu.length;n++){
+		            sumOuShu=sumOuShu+parseInt(arrOuShu[n]);
+		        }
+		        
+		        for(var p=0;p<jishu_child1.length;p++){
+		            sumJiShuChild1=sumJiShuChild1+parseInt(jishu_child1[p]);
+		            sumJiShuChild2=sumJiShuChild2+parseInt(jishu_child2[p]);
+		        }      
+		        //计算总和
+		        sumTotal=parseInt(sumJiShu)+parseInt(sumOuShu)+parseInt(sumJiShuChild1)+parseInt(sumJiShuChild2);
+		        
+		        //计算Luhm值
+		        var k= parseInt(sumTotal)%10==0?10:parseInt(sumTotal)%10;        
+		        var luhm= 10-k;
+		        
+		        if(lastNum==luhm){
+		        	//mui.alert("银行卡号开头6位不符合规范");
+		        	return true;
+		        }
+		        else{
+		       		//mui.alert("银行卡号必须符合Luhm校验");
+		       		mui.alert("银行卡号不正确");
+		       		return false;
+		        }        
+		    }
+			mui.init({
+				swipeBack: true
+			});
+			(function($) {
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+			})(mui);
+
+		</script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+

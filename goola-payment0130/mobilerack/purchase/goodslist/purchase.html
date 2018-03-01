@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>本月采购</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="list">
+				<ul class="content"></ul>
+				<script type="dot/tmpl" id="content">
+					{{?it.data || it.data.length>0}}
+					{{~it.data:data:i}}
+					<li id="{{=data.id}}" shopId="{{=data.shopId}}">
+						<h3>采购单：{{=data.code}} </h3>
+						<h4>采购金额：¥{{=Number(data.purchaseTotalPrice).toFixed(2)}}</h4>
+						<p>采购时间：{{=data.receiveTime}}</p>
+					</li>
+					{{~}}
+					{{??}}
+					<div class="none">
+						<img src="/mobilerack/imgs/purchase/kong.png" />
+						<p>采购记录为空</p>
+					</div>
+					{{?}}
+				</script>
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				list(1,20)
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.content').find('li').length>=total){
+							//$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+						
+					}
+				});
+				function list(pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/purchaseList",{
+						"pageSize":pageSize,"pageNo":pageNo
+					},function(data){
+						total=data.total
+						pageTotal=parseInt(total/pageSize)+1
+						
+						var obj = {data:data.rows}
+						var doTtmpl = doT.template($('#content').html());
+						var html = doTtmpl(obj);
+						$('.content').append(html)
+					})
+				}
+				
+				$('.content').delegate('li','click',function(){
+					window.location.href="/mobilerack/purchase/goodslist/purchase-list.html?id="+$(this).attr('id')
+					
+				})
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

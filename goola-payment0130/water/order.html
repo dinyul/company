@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="o_order">
+				<div class="goods"></div>
+				<script id="goods" type="dot/tmpl">
+				 	{{~it.data:data:i}}
+				 	{{?data.goodsId==it.goodsId}}
+					<img src="{{=it.picUrl}}{{=data.cartPhoto}}" />
+					<h2>{{=data.goodsName}}</h2>
+					<p>品牌：{{=data.brand}}</p>
+					<p>规格：{{=data.goodsSpecifications}}</p>
+					{{?}}
+					{{~}}
+				</script>
+				<ul>
+					<li>水票余额：<span class="noFinishCount"></span>（张）<a href="goodslist.html">充值</a></li>
+					<li>本次送水数量
+						<div>
+							<span class="minus"></span>
+							<input class='amount waterCount' value="1" type="number" min='0'/>
+							<span class="add"></span>
+						</div>
+					</li>
+					<li>选择送水时间<p class="deliveryTime"></p><!--<input size="16" id="mydate" type="date" value="" >--></li>
+				</ul>
+			</div>
+			<div class="bg"></div>
+			<div class="address-firm">
+				<div class="address-firm-title">
+					<p></p>
+				</div>
+				<div class="address-firm-list">
+					<p style="display:none"></p>
+					<p class="cancel">取消</p>
+					<p class="confirm">确定</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="slider">
+				<a class="sliconfirm">确定</a>
+				<a class="slicancel">取消</a>
+				<div class="clear"></div>
+				<ul></ul>
+			</div>
+			<div class="bottom o_order_bottom"><p>立即叫水</p></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var date = new Date().getTime();
+				var date1= new Date().getTime();
+				for(var i=1;i<31;i++){
+					var time=getFormatDate(date,"yyyy-MM-dd")
+					var week
+					if(weekend(time)==1){
+						week="一"
+					}else if(weekend(time)==2){
+						week="二"
+					}else if(weekend(time)==3){
+						week="三"
+					}else if(weekend(time)==4){
+						week="四"
+					}else if(weekend(time)==5){
+						week="五"
+					}else if(weekend(time)==6){
+						week="六"
+					}else if(weekend(time)==0){
+						week="日"
+					}
+					$('.slider ul').append('<li>'+time+' 星期'+week+'</li>')
+					date=date+86400000
+				}
+				
+				$('.slider ul').delegate('li','click',function(){
+					$('.slider ul').find('li').removeClass('checked')
+					$(this).addClass('checked')
+				})
+				$('.deliveryTime').html($('.slider ul').find('li:eq(0)').html())
+				$('.deliveryTime').click(function(){
+					$('.bg').show()
+					if($('.slider ul').find('.checked').length==0){
+						$('.slider ul').find('li:eq(0)').addClass('checked')
+					}
+					$('.slider').slideDown('2000')
+				})
+				$('.bg').click(function(){
+					$(this).hide()
+					$('.slider').slideUp('2000')
+				})
+				$('.slicancel').click(function(){
+					$('.bg').hide()
+					$('.slider').slideUp('2000')
+				})
+				$('.sliconfirm').click(function(){
+					$('.deliveryTime').html($('.slider ul').find('.checked').html())
+					$('.bg').hide()
+					$('.slider').slideUp('2000')
+				})
+				function formatData(date, format) {
+					var o = {
+						"M+": date.getMonth() + 1,
+						"d+": date.getDate(),
+						"h+": date.getHours(),
+						"m+": date.getMinutes(),
+						"s+": date.getSeconds(),
+						"q+": Math.floor((date.getMonth() + 3) / 3),
+						"S": date.getMilliseconds()
+					}
+					if (/(y+)/.test(format)) {
+						format = format.replace(RegExp.$1, (date.getFullYear() + "").substr(4 - RegExp.$1.length));
+					}
+					for (var k in o) {
+						if (new RegExp("(" + k + ")").test(format)) {
+							format = format.replace(RegExp.$1, RegExp.$1.length == 1 ? o[k] : ("00" + o[k]).substr(("" + o[k]).length));
+						}
+					}
+					return format;
+				}
+
+				function getFormatDate(timeStamp, pattern) {
+					var date = new Date(timeStamp);
+					if (pattern == undefined) {
+						pattern = "yyyy-MM-dd hh:mm:ss";
+					}
+					return formatData(date, pattern);
+				}
+				 
+				
+				 
+				var goodsId = util.getUrlParams("goodsId");
+				
+				ajax.post(api.baseServerUrl + "/scm/customRemainingSumList",{
+					
+				},function(data) {
+					var obj={data:data,picUrl:api.picUrl,goodsId:goodsId}
+					util.render("#goods", obj, ".goods");
+					for(var i=0;i<data.length;i++){
+						if(data[i].goodsId==goodsId){
+							$('.noFinishCount').html(data[i].noFinishCount)
+						}
+					}
+				});
+				
+				
+				$('.o_order').delegate('.add','click',function(){
+					$(this).prev().val(Number($(this).prev().val())+1)
+				})
+				$('.o_order').delegate('.minus','click',function(){
+					if(Number($(this).next().val())<=0){
+						return
+					}
+					$(this).next().val(Number($(this).next().val())-1)
+				})
+				
+				
+			    function weekend(riqi){
+				   	var arys1= new Array();      
+				    arys1=riqi.split('-');     //日期为输入日期，格式为 2013-3-10
+				    var ssdate=new Date(arys1[0],parseInt(arys1[1]-1),arys1[2]);   
+				    return ssdate.getDay()    //就是你要的星期几
+			    }
+			    function hours(){
+				   	var arys1= new Date();      
+				    
+				    return arys1.getHours()    //就是你要的星期几
+			    }
+			   
+				$('.o_order_bottom').click(function(){
+					
+					if($('.deliveryTime').html()=="还未选择时间"){
+						alert('请选择送水时间')
+						return
+					}
+					var deliveryTime=$('.deliveryTime').html().split(' ')[0]
+					
+					if(weekend(deliveryTime)==0 || weekend(deliveryTime)==6){
+						$('.address-firm-title p').html('因周六日暂时不进行配送会顺延至下周一进行配送')
+						$('.address-firm').css('display','block')
+						$('.bg').css('display','block')
+						return 
+					}
+					if(deliveryTime==getFormatDate(date1,"yyyy-MM-dd") && weekend(deliveryTime)!=5 && hours()>17){
+						$('.address-firm-title p').html('当天17点以后的订单会在第二天进行配送')
+						$('.address-firm').css('display','block')
+						$('.bg').css('display','block')
+						return 
+					}
+					if(deliveryTime==getFormatDate(date1,"yyyy-MM-dd") && weekend(deliveryTime)==5 && hours()>17){
+						$('.address-firm-title p').html('周五17点以后的订单会在下周一进行配送')
+						$('.address-firm').css('display','block')
+						$('.bg').css('display','block')
+						return
+					}
+					createScmOrder()
+				})
+				
+				$('.cancel').click(function(){
+					$('.address-firm-title p').html('')
+					$('.address-firm').css('display','none')
+					$('.bg').css('display','none')
+				})
+				$('.confirm').click(function(){
+					createScmOrder()
+					$('.address-firm-title p').html('')
+					$('.address-firm').css('display','none')
+					$('.bg').css('display','none')
+				})
+				function createScmOrder(){
+					ajax.post(api.baseServerUrl + "/scm/createScmOrder",{
+						"goodsId":goodsId,
+						"goodsCount":$('.waterCount').val(),
+						"deliveryTime":$('.deliveryTime').html().split(' ')[0]+" 00:00:00"
+					},function(data) {
+						window.location.href="list.html"
+					});
+				}
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

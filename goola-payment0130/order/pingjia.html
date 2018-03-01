@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>评价</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/shangpin/pingjia.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="evaluate">
+			<div class="evaluate-message">
+				<div class="message-top">
+					<table>
+						<tr>
+							<td>
+								<img src="/imgs/gouwuche/gouwuche-xiangnggua@2x.png?t=20161117">
+							</td>
+							<td>
+								<p>山东密宝玉香瓜4斤装山东密宝玉香 瓜4斤装</p>
+							</td>
+						</tr>
+					</table>
+				</div>
+				<textarea placeholder="购啦需要您的评价哦"></textarea>
+			</div>
+			<div class="evaluate-btn">
+				<ul>
+					<li>
+						<p>商品评分</p>
+						<p><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></p>
+					</li>
+					<li>
+						<p>服务态度</p>
+						<p><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></p>
+					</li>
+					<li>
+						<p>送货速度</p>
+						<p><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></p>
+					</li>
+				</ul>
+			</div>
+			
+		</div>
+		<div class="bottom">
+			<p>提交评价</p>
+		</div>
+		<script type="text/javascript" src="../js/wx_oid.js"  ></script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript">
+			$('.check').on('click',function(){
+				$(this).toggleClass('checked')
+			})
+		</script>
+	</body>
+</html>

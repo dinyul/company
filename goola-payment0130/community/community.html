@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>代理商团队</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/community/css/community.css">
+		<link rel="stylesheet" type="text/css" href="/community/css/base.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="community" style="margin-bottom:1.40625rem">
+				<nav class='com-nav1' style="display: none;">
+					<a class="checked" id="1">直属团队</a>
+					<a id="2">待审核</a>
+					<a id="3">全部成员</a>
+				</nav>
+				<nav class='com-nav2' style="display: none;">
+					<a class="checked" id="1">直属团队</a>
+					<a id="2">待审核</a>
+					<a id="4">我的上级</a>
+				</nav>
+				<div class="content1 content"></div>
+				<script id="content1" type="dot/tmpl">
+					<div class="title">
+						<p>{{=it.name}}的团队<span>（{{=it.totalPeople}}人）</span><a id="yaoqing">邀请伙伴</a></p>
+					</div>
+					<ul class="list">
+						<p>团队管理员</p>
+						<li>
+							{{?it.photo}}
+							<img src="{{=it.photo}}" />
+							{{??}}
+							<img src="../imgs/community/no-photo.png" />
+							{{?}}
+							<div class="info">
+								<h2>
+								{{?it.name}}
+								{{=it.name}}
+								{{?}}
+								<a>{{=it.gradeName}}</a></h2>
+								<p>{{=it.telphone}}</p>
+							</div>
+							<p style="color:#c7a994;">我</p>
+							<div class="clear"></div>
+							<h3>当前业绩：200.00<span>累计业绩：500.00</span></h3>
+						</li>
+					</ul>
+					<ul class="list">
+						<p>团队成员</p>
+						{{~it.lowLevelUsers.rows:data:i}}
+						<li class="lower" id="{{=data.memberId}}">
+							{{?data.photo}}
+							<img src="{{=data.photo}}" />
+							{{??}}
+							<img src="../imgs/community/no-photo.png" />
+							{{?}}
+							<div class="info">
+								<h2>
+								{{?data.name}}
+								{{=data.name}}
+								{{?}}
+								{{?data.gradeName}}<a>{{=data.gradeName}}</a>{{?}}</h2>
+								<p>{{=data.telphone}}</p>
+							</div>
+							<p>下级人数：<span>{{=data.memberCount}}</span></p>
+							<div class="clear"></div>
+							<h3>当前业绩：200.00<span>累计业绩：500.00</span></h3>
+						</li>
+						{{~}}
+					</ul>
+				</script>
+				<div class="content2 content" id="content2" style="display: none">
+					<ul class="list">
+						
+						 <li style="position: relative;">
+							<img src="/imgs/community/no-photo.png" />
+							<div class="info">
+								<h2>44<a>11</a></h2>
+								<p>111111111111</p>
+							</div>
+							<h4><a>同意</a><a>拒绝</a></h4>
+							<div class="clear"></div>
+							<h3 style="margin-top: 0.578125rem;">申请时间：2017-10-11<span style="display: inline-block;width: 3.984375rem;">加入时间：2017-10-11</span></h3>
+							<h3>申请月业绩：1000.00<span style="display: inline-block;width: 3.984375rem;">累积业绩：1000.00</span></h3>
+							
+						</li>
+						
+						
+					</ul>
+				</div>
+				<script id="content2tmpl" type="dot/tmpl">
+					<ul class="list">
+						{{~it:data:i}}
+						<li style="position: relative;" memberId="{{=data.id}}">
+							<img src="../imgs/community/no-photo.png" />
+							<div class="info">
+								<p>{{=data.telphone}}</p>
+							</div>
+							<h4><a class="auditLink" type="1">同意</a><a class="auditLink" type="2">拒绝</a></h4>
+							<div class="clear"></div>
+							<h3 style="margin-top: 0.578125rem;">申请时间：2017-10-11<span style="display: inline-block;width: 3.984375rem;">加入时间：2017-10-11</span></h3>
+							<h3>申请月业绩：1000.00<span style="display: inline-block;width: 3.984375rem;">累积业绩：1000.00</span></h3>
+						</li>
+						{{~}}
+						
+					</ul>
+				</script>
+				<div class="content3 content" style="display: none"></div>
+				<script id="content3" type="dot/tmpl">
+					<ul class="list">
+						<p>全部成员</p>
+						{{~it.lowLevelUsers:data:i}}
+						<li id="{{=data.memberId}}">
+							{{?data.photo}}
+							<img src="{{=data.photo}}" />
+							{{??}}
+							<img src="../imgs/community/no-photo.png" />
+							{{?}}
+							<div class="info">
+								<h2>
+								{{?data.name}}
+								{{=data.name}}
+								{{?}}{{?data.gradeName}}<a>{{=data.gradeName}}</a>{{?}}</h2>
+								<p>{{=data.telphone}}</p>
+							</div>
+							<p>下级人数：<span>{{=data.memberCount}}</span></p>
+						</li>
+						{{~}}
+					</ul>
+				</script>
+				<div class="content4 content" style="display: none"></div>
+				<script id="content4" type="dot/tmpl">
+					{{?it}}
+					<div class="level">
+						{{?it.photo}}
+							<img src="{{=it.photo}}" />
+							{{??}}
+							<img src="../imgs/community/no-photo.png" />
+							{{?}}
+						<h2>{{=it.name}}<a>{{=it.gradeName}}</a></h2>
+						<p>{{=it.telphone}}</p>
+					</div>
+					{{?}}
+				</script>
+			</div>
+			
+			<div class="invite-open">
+				<div>
+					<h2>邀请代理商加入</h2>
+					<!-- <ul class="io-list"></ul> -->
+					<p id="qrcode"></p>					
+					<a><img src="/imgs/community/del.png"/></a>
+				</div>
+			</div>
+			<ul class="community-bottom">
+				<li onclick="window.location.href='/community/index.html'">
+					<img src="/community/imgs/home.png" />
+					<a>社群首页</a>
+				</li>
+				<li onclick="window.location.href='/community/fenlei/fenlei.html'">
+					<img src="/community/imgs/goods.png" />
+					<a>更好商品</a>
+				</li>
+				<li onclick="window.location.href='/community/about.html'">
+					<img src="/community/imgs/about.png" />
+					<a>关于社群</a>
+				</li>
+				<li onclick="window.location.href='/community/gouwuche/gouwuche.html'">
+					<img src="/community/imgs/car.png" />
+					<a>购物车</a>
+				</li>
+				<li onclick="window.location.href='/community/user-center.html'">
+					<img src="/community/imgs/center.png" />
+					<a>代理中心</a>
+				</li>
+			</ul>
+
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript"  src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/distribution/static/jquery-plugin/jquery.qrcode.min.js"></script>
+		<script type="text/javascript">
+		(function(api, util,ajax){
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/memberInfo",{
+			},function(data) {
+				if(data.level==1){
+					$('.com-nav1').show()
+				}else{
+					$('.com-nav2').show()
+				}
+			})
+			
+			
+			$('nav a').click(function(){
+				$('nav a').removeClass('checked')
+				$(this).addClass('checked')
+				$('.content').css('display','none')
+				$('.content'+$(this).attr('id')).css('display','block')
+			})
+			//直属下级
+			var inviter,inviteCode
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/lowLevelUsers",{
+			},function(data) {
+				util.render("#content1",jQuery.parseJSON(data),".content1");
+				inviter=jQuery.parseJSON(data).name
+				inviteCode=jQuery.parseJSON(data).inviteCode
+				
+			})
+			$('.content').delegate('.lower',"click",function(){
+				window.location.href="lower.html?memberId="+$(this).attr('id')
+			})
+			
+			//待审核邀请
+			function auditList(){
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/offlineAuditUsersList",{
+			},function(data) {
+				util.render("#content2tmpl",data,".content2");
+				
+			})
+			}
+			auditList()
+			/*
+			//同级返点
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/sameLevelUsers",{
+			},function(data) {
+				util.render("#content3",jQuery.parseJSON(data),".content3");
+				
+			})*/
+			//全部成员
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/secondLowLevelUsers",{
+			},function(data) {
+				
+				util.render("#content3",jQuery.parseJSON(data),".content3");
+				
+			})
+			//我的上级
+			ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/myLevelUsers",{
+			},function(data) {
+				util.render("#content4",data,".content4");
+				
+			})
+			
+			/*ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/memberGradeList",{
+			},function(data) {
+				if(data!=''&& data!=null&& data!=undefined){
+					util.render("#io-list",data,".io-list");
+				}else{
+					$('.content1').find('#yaoqing').css('display','none')
+				}
+				
+				
+			})*/
+			$('.content1').delegate('#yaoqing','click',function(){
+				$('.invite-open').css('display','block')
+				$("#qrcode").html('');
+				$("#qrcode").qrcode(
+							{width:150,height:150,correctLevel:0,text:"http://"+ document.domain +"/community/invite.html?inviteCode="+inviteCode+"&timestamp=354123"});
+				
+				/*$('.io-list li').removeClass('checked')
+				$('.io-list li').each(function(){
+					$(this).find('img').attr('src','../imgs/community/'+$(this).attr('id')+'.png')
+				})
+				$('.io-list li:last-child').addClass('checked')
+						.find('img').attr('src','../imgs/community/'+$('.io-list li:last-child').attr('id')+'checked.png')
+				*/
+			})
+			$('.io-list').delegate('li','click',function(){
+				$('.io-list li').removeClass('checked')
+				$(this).addClass('checked')
+				$('.io-list li').each(function(){
+					$(this).find('img').attr('src','../imgs/community/'+$(this).attr('id')+'.png')
+				})
+				$(this).find('img').attr('src','../imgs/community/'+$(this).attr('id')+'checked.png')
+			})
+			
+			$('.invite-open').delegate('a','click',function(){
+				$('.invite-open').css('display','none')
+			})
+			$('.invite-open #invite').click(function(){
+				var title=inviter+"邀请您成为社群合伙人，加入社群新零售系统；"
+				var doc="更好甄选新零售社群是一个社交电商创业平台，搭建海内外高性价比正品货源。"
+				var gradeId=$('.io-list').find('.checked').attr('gradeId')
+				if(isWeiXin()){
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/community/invite.html?inviteCode="+inviteCode+"&gradeId="+gradeId,"http://" + document.domain +"/imgs/community/share.jpg");
+					$('body').append('<div class="shareinfo-bg">\
+						<img src="/distribution/imgs/fenxiang.png" />\
+						<a>知道啦</a>\
+					</div>')
+					$('.shareinfo-bg a').click(function(){
+						$(this).parent().remove()
+					})
+				}else{
+					toShare(title,doc,"http://" + document.domain + "/community/invite.html?inviteCode="+inviteCode+"&gradeId="+gradeId,"http://" + document.domain +"/imgs/community/share.jpg")
+				}
+			})
+			
+			$('#content2').delegate('.auditLink','click',function(){
+				var audit = $(this).attr('type')
+				var memberId = $(this).parent().parent().attr('memberId')
+				//审核
+				ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/offlineAudit",{
+					audit:audit, memberId:memberId
+				},function(data) {
+					auditList()
+				})
+			})
+			
+			var title="更好甄选新零售引流社群管理系统"
+			var doc="“更好甄选”是由软银中国与明星投资机构STAR.VC、长石资本、5100矿泉水联合投资企业旗下的生活品质新零售社群。母公司估值超10亿元"
+			shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/community/query.html","http://" + document.domain +"/imgs/community/share1.jpg");
+		})(goola.api, goola.util,goola.ajax)
+	    </script>
+
+	    	
+	</body>
+</html>

@@ -1,0 +1,502 @@
+.login{
+	padding-top: 1.09375rem;
+}
+.login>img{
+	width:3.125rem;
+	height:3.125rem;
+	display: block;
+	margin: 0 auto 0.46875rem;
+}
+.login>h2{
+	font-family:PingFangSC-Light;
+	font-size:0.5rem;
+	color:#313131;
+	line-height:0.5rem;
+	text-align: center;
+}
+.login ul{
+	margin-top: 0.625rem;
+	padding-left: 0.46875rem
+}
+.login ul li{
+	height:0.625rem;
+	border-bottom: 2px solid #eee;
+	padding:0.46875rem 0 0.46875rem 0.78125rem
+}
+.login ul li input{
+	border:0;
+	background: #fff;
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#313131;
+	line-height:0.625rem;
+	height: 0.625rem;
+	width: 5.46875rem
+}
+.login ul li:first-child{
+	background: url(/mobilerack/imgs/purchase/username.png) no-repeat left center;
+	background-size: 0.46875rem 0.53125rem
+}
+.login ul li:nth-child(2){
+	background: url(/mobilerack/imgs/purchase/password.png) no-repeat left center;
+	background-size: 0.46875rem 0.625rem;
+	position: relative;
+}
+.login ul li:nth-child(2) a{
+	display: block;
+	position: absolute;
+	right: 0.46875rem;
+	background: url(/mobilerack/imgs/purchase/mima1.png) no-repeat center center;
+	background-size: 0.6875rem 0.28125rem;
+	width: 0.6875rem;
+	height: 1.5625rem;
+    top: 0;
+}
+.login ul li:nth-child(2) .check{
+	background: url(/mobilerack/imgs/purchase/mima2.png) no-repeat center center;
+	background-size: 0.6875rem 0.40625rem;
+}
+.login ul li:nth-child(3){
+	background: url(/mobilerack/imgs/purchase/mima3.png) no-repeat left center;
+	background-size: 0.46875rem 0.625rem;
+	position: relative;
+}
+.login ul li:nth-child(3) span{
+	display: block;
+	float: right;
+	width: 2.1875rem;
+	height: 1.25rem;
+	position: absolute;
+	right: 0.46875rem;
+	top: 0.140625rem
+}
+.login ul li:nth-child(3) span img{
+	height: 1.25rem;
+}
+.login>a{
+	display: block;
+	background:#e2e2e2;
+	border-radius:0.125rem;
+	width:7.8125rem;
+	height:1.375rem;
+	margin: 0.78125rem auto 0;
+	text-align: center;
+	line-height: 1.375rem;
+	font-family:PingFangSC-Light;
+	font-size:0.46875rem;
+	color:#ffffff;
+}
+.login>.denglu{
+	background:#d4aa70;
+}
+.login>div{
+	height: 0.46875rem;
+	line-height: 0.46875rem;
+	margin-top: 0.3125rem;
+	padding-left: 0.46875rem
+}
+.login>div p{
+	line-height: 0.46875rem;
+	font-family:PingFangSC-Light;
+	font-size:0.3125rem;
+	color:#8d8d8d;
+}
+.login>div p span{
+	display: inline-block;
+	margin-right: 0.3125rem;
+	width: 0.46875rem;
+	height: 0.46875rem;
+	background: url(/mobilerack/imgs/purchase/remember1.png) no-repeat center center;
+	background-size: 0.46875rem 0.46875rem;
+	float: left;
+}
+.login>div p .checked{
+	background: url(/mobilerack/imgs/purchase/remember2.png) no-repeat center center;
+	background-size: 0.46875rem 0.46875rem
+}
+.list nav{
+	height: 1.34375rem;
+	background: #fff;
+	border-bottom: 2px solid #e9e9e9;
+	padding: 0 1.5625rem
+}
+.list nav a{
+	display: block;
+	width: 1.875rem;
+	height: 1.34375rem;
+	line-height: 1.34375rem;
+	text-align: center;
+	float: left;
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#313131;
+}
+.list nav a:last-child{
+	float: right;
+}
+.list nav .checked{
+	color: #d4aa70;
+	background: url(/imgs/line-zong.png) no-repeat center bottom;
+    background-size: 1.875rem 0.0625rem;
+}
+.list .content>img{
+	width: 4.59375rem;
+	height: 3.6875rem;
+	display: block;
+	margin: 0 auto 0.34375rem;
+	padding-top: 1.25rem
+}
+.list .content>p{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#999999;
+	text-align: center;
+}
+.list .content li{
+	background: #fff url(/mobilerack/imgs/purchase/jiantou.png) no-repeat 9.25rem center;
+	background-size: 0.28125rem 0.46875rem;
+	padding: 0.46875rem 0.859375rem 0.46875rem 0.46875rem;
+	border-bottom: 2px solid #eee;
+	position: relative;
+}
+.list .content li:last-of-type{
+	border-bottom: 0
+}
+.list .content li h3{
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#313131;
+	line-height:0.4375rem;
+}
+.list .content li h4{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#313131;
+	line-height: 0.40625rem;
+	margin: 0.203125rem 0;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.list .content li p{
+	font-family:PingFangSC-Light;
+	font-size:0.3125rem;
+	color:#8d8d8d;
+	line-height:0.3125rem;
+	margin-bottom: 0.15625rem
+}
+.list .content li p:last-of-type{
+	margin-bottom: 0
+}
+.list .content li a{
+	display: block;
+	position: absolute;
+	right: 0.859375rem;
+	top: 50%;
+	margin-top: -0.25rem;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+}
+.purchase-list .info{
+	background: #fff;
+	padding: 0.453125rem 0.46875rem;
+}
+.purchase-list .info h3{
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#313131;
+	line-height:0.4375rem;
+}
+.purchase-list .info h4{
+	margin-top: 0.21875rem;
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#313131;
+	line-height:0.375rem;
+}
+.purchase-list .info p{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+	line-height:0.375rem;
+	margin-top: 0.21875rem
+}
+.purchase-list>div{
+	width: 100%;
+	position: fixed;
+	border-bottom: 1px solid #e5e5e5;
+}
+.purchase-list .goods{
+	padding-top: 2.625rem;
+	background: #fff;
+}
+.purchase-list .goods>p{
+	height:1.234375rem;
+	line-height: 1.234375rem;
+	padding-left: 0.46875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.4375rem;
+	color:#313131;
+}
+.goodslist{
+	padding: 0.328125rem 0.453125rem 0.328125rem 0.3125rem;
+	height: 2.78125rem;
+	border-bottom: 2px solid #eee;
+}
+.goodslist>img{
+	float: left;
+	width: 2.78125rem;
+	height: 2.78125rem;
+	margin-right: 0.46875rem;
+	display: block;
+}
+.goodslist .message{
+	width: 5.984375rem;
+	float: left;
+}
+.goodslist .message h3{
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#313131;
+	line-height:0.46875rem;
+	height: 0.46875rem
+}
+.goodslist .message h3 span{
+	float: left;
+	display: inline-block;
+	width: 4.296875rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.goodslist .message h3 a{
+	float: right;
+	font-family: PingFangSC-Regular;
+	font-size: 0.375rem;
+	color: #C53F40;	
+}
+.goodslist .message p{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+	line-height:0.375rem;
+	margin-top: 0.21875rem;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+}
+.goodslist .message span{
+	color:#313131;
+}
+.goodslist .message p a{
+	float: right;
+}
+.goodslist .message h4{
+	margin-top: 0.78125rem;
+	font-family:PingFangSC-Light;
+	font-size:0.3125rem;
+	color:#8d8d8d;
+	line-height:0.3125rem;
+}
+.goodslist .message h4 a{
+	float: right;
+}
+.purchase-bottom{
+	height: 1.375rem;
+	line-height: 1.375rem;
+	background:#d4aa70;
+	text-align: center;
+	position: fixed;
+	width: 100%;
+	left: 0;
+	bottom: 0
+}
+.purchase-bottom p{
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#ffffff;
+}
+.purchase-bottom a{
+	width: 50%;
+	float: left;
+	display: block;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #FFFFFF;
+}
+.purchase-bottom a:first-child{
+	background: #C53F40;
+}
+.purchase-list-open{
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	background: rgba(0,0,0,0.5);
+	top: 0;
+	left: 0;
+}
+.purchase-list-open div{
+	position: absolute;
+	background: #FFFFFF;
+	border-radius: 0.1875rem;
+	width: 7.8125rem;
+	height: 5.09375rem;
+	top: 50%;
+	left: 50%;
+	margin:-2.546875rem 0 0 -3.90625rem;
+}
+.purchase-list-open div h2{
+	height: 1.21875rem;
+	line-height: 1.21875rem;
+	text-align: center;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+}
+.purchase-list-open div textarea{
+	width: 6.25rem;
+	height: 1.5625rem;
+	margin: 0 auto;
+	background: #F8F8F8;
+	border-radius: 0.0625rem;
+	display: block;
+	border:0;
+	font-family: PingFangSC-Regular;
+	font-size: 0.375rem;
+	color: #313131;
+	line-height: 0.53125rem;
+	resize:none;
+	padding: 0.234375rem 0.3125rem
+}
+.purchase-list-open div p{
+	margin-top: 0.46875rem;
+	height: 1.359375rem;
+	line-height: 1.359375rem;
+	border-top:1px solid #e5e5e5;
+	box-sizing:border-box;
+}
+.purchase-list-open div p a{
+	display: block;
+	float: left;
+	width: 50%;
+	text-align: center;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #8D8D8D;
+	box-sizing:border-box;
+}
+.purchase-list-open div p a:last-child{
+	border-left:1px solid #e5e5e5;
+	color: #D4AA70;
+}
+.confirm .code{
+	height: 1.25rem;
+	line-height: 1.25rem;
+	background:#d4aa70;
+	width: 100%;
+	position: fixed;
+}
+.confirm .code p{
+	text-align: center;
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#ffffff;
+}
+.confirm .code img{
+	width: 0.53125rem;
+	height: 0.53125rem;
+	vertical-align: middle;
+	margin-right: 0.15625rem
+}
+.confirm>div:first-of-type{
+	width: 100%;
+	position: fixed;
+	border-bottom: 1px solid #e5e5e5;
+}
+.confirm .goods{
+	padding-top: 2.65625rem;
+}
+.confirm .goods>p{
+	height:1.234375rem;
+	line-height: 1.234375rem;
+	padding-left: 0.46875rem;
+	font-family:PingFangSC-Light;
+	font-size:0.4375rem;
+	color:#d4aa70;
+	background: #fff;
+}
+.confirm .goods ul{
+	background: #fff;
+}
+.confirm .goods .goodslist .message p:first-of-type{
+	margin-top: 0.15625rem
+}
+.confirm .goods .goodslist h5{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+	margin-top: 0.4375rem;
+	line-height: 0.75rem;
+	display: block;
+}
+.confirm .goods .changenum{
+	display: block;
+	border:1px solid #dbdbdb;
+	border-radius:1.5625rem;
+	width:2.78125rem;
+	height:0.71875rem;
+	float: right;
+	overflow: hidden;
+}
+.confirm .goods .changenum span{
+	float: left;
+	display: block;
+	width: 0.875rem;
+	height: 0.71875rem;
+	line-height: 0.71875rem
+}
+.confirm .goods .changenum span:nth-of-type(2){
+	width: 1.03125rem;
+	text-align: center;
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+}
+.confirm .goods .changenum span:nth-of-type(1){
+	background: url(/mobilerack/imgs/purchase/jian.png) no-repeat center center;
+	background-size: 0.25rem 0.25rem
+}
+.confirm .goods .changenum span:nth-of-type(3){
+	background: url(/mobilerack/imgs/purchase/jia.png) no-repeat center center;
+	background-size: 0.25rem 0.25rem
+}
+
+.confirm .goods .goodslist-bottom p{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+	line-height:0.375rem;
+	padding: 0.3125rem 0.453125rem 0.3125rem 0.3125rem
+}
+.confirm .goods .goodslist-bottom span{
+	color: #313131;
+}
+.confirm .goods .goodslist-bottom p:last-of-type{
+	margin-top: 0.3125rem;
+	line-height: 0.75rem;
+}
+.confirm .goods .goodslist-bottom h3{
+	background:#fff6e9;
+	padding-left: 0.46875rem;
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#8d8d8d;
+}
+.confirm .goods ul li{
+	border-bottom: 2px solid #eee;
+}
+.confirm .goods ul li:last-child{
+	border-bottom: 0
+}

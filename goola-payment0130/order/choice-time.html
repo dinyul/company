@@ -1,0 +1,206 @@
+		<div class="time">
+			<div class="fanhui">
+				<span id="fanhui"></span>
+				<p>选择发货时间</p>
+			</div>
+			<div class="choice-time" >
+				<div>
+					<div class="btn choice-btn " id="2"></div>
+				</div>
+				<p>请选择发货时间：</p><b class="shijian"></b><span><input type="date" id="appDate" /></span>
+				<div class="show"></div>
+			</div>
+			<div class="choice-cycle" >
+				
+				
+			</div>
+			<p class="tishi">温馨提示：您设置的时间为发货时间，到货时间请以实际配送时 间为准。</p>
+			<a class="time-confirm">确定</a>
+		</div>
+		
+		<script id="content-list" type="dot/tmpl">
+			<div class="top">
+				<div class="btn a" style="height: 1.0625rem;" id="1"></div>
+				<p style="margin-left: 0.78125rem;">请选择发货周期</p>
+			</div>
+			<div class="content content-list show">
+			{{~it :data:i}}
+			
+			<ul class="shop1">
+				<div class="title"><p class="providername">{{=data.providerName}}</p></div>
+				<li singleSendCount='1' class="lis lis{{=data.isDeliveryPlan}}" goodsId="{{=data.goodsId}}" buyCount="{{=data.buyCount}}" cycle="{{=data.cycle}}" latestDate="{{=getFormatDate(data.latestDeliveryDate)}}" isDeliveryPlan="{{=data.isDeliveryPlan}}" >
+					<p class="cont-top"><a class="goodsname">{{=data.goodsName}}</a><span>x<a class="shuliang">{{=data.buyCount}}</a></span></p>
+					{{? data.isDeliveryPlan==1}}
+					{{? data.cycle==1}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						
+						<span class="week" planType="1"><p>每周</p></span>
+						<span class="day" planDay='6'><p>星期五</p><a></a></span>
+						<div class="day-choice">
+							<ul>
+								<li planDay="2">星期一</li>
+								<li planDay="3">星期二</li>
+								<li planDay="4">星期三</li>
+								<li planDay="5">星期四</li>
+								<li planDay="6">星期五</li>
+								<li planDay="7">星期六</li>
+								<li planDay="1">星期日</li>
+							</ul>
+						</div>
+					</div>
+					{{?? data.cycle==2}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						<span class="week" planType="2"><p>每月</p></span>
+						<span class="day" planDay='1'><input type="number" value="1"/>日</span>
+					</div>
+					{{??}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						
+						<span class="week" planType="1"><p>每周</p><a></a></span>
+						<div class="week-choice">
+							<ul>
+								<li planType="1">每周</li>
+								<li planType="2">每月</li>
+							</ul>
+						</div>
+						<span class="day" planDay='6'><p>星期五</p><a></a></span>
+						<div class="day-choice">
+							<ul>
+								<li planDay="2">星期一</li>
+								<li planDay="3">星期二</li>
+								<li planDay="4">星期三</li>
+								<li planDay="5">星期四</li>
+								<li planDay="6">星期五</li>
+								<li planDay="7">星期六</li>
+								<li planDay="1">星期日</li>
+							</ul>
+						</div>
+					</div>
+					{{?}}
+					<div class="cont-num"><p>单次发货数量：</p><input class="num" type="number" value="1" /><p>发货周期数：<a class="zhouqishu">{{=data.buyCount}}</a></p></div>
+					{{?? data.isDeliveryPlan==2}}
+						<p style="color: #fa2f3e;font-size: 0.3125rem;">*该商品不支持周期发货，将以当天为发货日期生成订单</p>
+					{{?}}
+				</li>
+			</ul>
+			
+			{{~}}
+			</div>
+		</script>
+
+		<script id="content-list1" type="dot/tmpl">
+			<div class="top">
+				<div class="btn a" style="height: 1.0625rem;" id="1"></div>
+				<p style="margin-left: 0.78125rem;">请选择发货周期</p>
+			</div>
+			<div class="content content-list show">
+			{{~it :data:i}}
+			<ul class="shop1">
+				<div class="title"><p class="providername">{{=data.providerName}}</p></div>
+				<li singleSendCount='{{=data.singleSendCount}}' class="lis lis{{=data.isDeliveryPlan}}" goodsId="{{=data.goodsId}}" buyCount="{{=data.buyCount}}" latestDate="{{=data.latestDeliveryDate}}" isDeliveryPlan="{{=data.isDeliveryPlan}}">
+					<p class="cont-top"><a class="goodsname">{{=data.goodsName}}</a><span>x<a class="shuliang">{{=data.buyCount}}</a></span></p>
+					{{? data.isDeliveryPlan==1}}
+					{{? data.cycle==1}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						{{? data.planType==1}}
+						<span class="week" planType="1"><p>每周</p></span>
+						{{?}}
+						{{? data.planDay==1}}
+						<span class="day" planDay='1'><p>星期日</p><a></a></span>
+						{{?? data.planDay==2}}
+						<span class="day" planDay='2'><p>星期一</p><a></a></span>
+						{{?? data.planDay==3}}
+						<span class="day" planDay='3'><p>星期二</p><a></a></span>
+						{{?? data.planDay==4}}
+						<span class="day" planDay='4'><p>星期三</p><a></a></span>
+						{{?? data.planDay==5}}
+						<span class="day" planDay='5'><p>星期四</p><a></a></span>
+						{{?? data.planDay==6}}
+						<span class="day" planDay='6'><p>星期五</p><a></a></span>
+						{{?? data.planDay==7}}
+						<span class="day" planDay='7'><p>星期六</p><a></a></span>
+						{{?}}
+						<div class="day-choice">
+							<ul>
+								<li planDay="2">星期一</li>
+								<li planDay="3">星期二</li>
+								<li planDay="4">星期三</li>
+								<li planDay="5">星期四</li>
+								<li planDay="6">星期五</li>
+								<li planDay="7">星期六</li>
+								<li planDay="1">星期日</li>
+							</ul>
+						</div>
+					</div>
+					{{?? data.cycle==2}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						<span class="week" planType="2"><p>每月</p></span>
+						<span class="day" planDay='{{=data.planDay}}'><input type="number" value="{{=data.planDay}}"/>日</span>
+					</div>
+					{{??}}
+					<div class="cont-time">
+						<p>发货周期：</p>
+						{{? data.planType==1}}
+							<span class="week" planType="1"><p>每周</p><a></a></span>
+							<div class="week-choice">
+								<ul>
+									<li planType="1">每周</li>
+									<li planType="2">每月</li>
+								</ul>
+							</div>
+							{{? data.planDay==1}}
+							<span class="day" planDay='1'><p>星期日</p><a></a></span>
+							{{?? data.planDay==2}}
+							<span class="day" planDay='2'><p>星期一</p><a></a></span>
+							{{?? data.planDay==3}}
+							<span class="day" planDay='3'><p>星期二</p><a></a></span>
+							{{?? data.planDay==4}}
+							<span class="day" planDay='4'><p>星期三</p><a></a></span>
+							{{?? data.planDay==5}}
+							<span class="day" planDay='5'><p>星期四</p><a></a></span>
+							{{?? data.planDay==6}}
+							<span class="day" planDay='6'><p>星期五</p><a></a></span>
+							{{?? data.planDay==7}}
+							<span class="day" planDay='7'><p>星期六</p><a></a></span>
+							{{?}}
+						{{?? data.planType==2}}
+							<span class="week" planType="2"><p>每月</p><a></a></span>
+							<div class="week-choice">
+								<ul>
+									<li planType="1">每周</li>
+									<li planType="2">每月</li>
+								</ul>
+							</div>
+							<span class="day" planDay='{{=data.planDay}}'><input type="number" value="{{=data.planDay}}"/>日</span>
+						{{?}}
+						<div class="day-choice">
+							<ul>
+								<li planDay="2">星期一</li>
+								<li planDay="3">星期二</li>
+								<li planDay="4">星期三</li>
+								<li planDay="5">星期四</li>
+								<li planDay="6">星期五</li>
+								<li planDay="7">星期六</li>
+								<li planDay="1">星期日</li>
+							</ul>
+						</div>
+					</div>
+					{{?}}
+					<div class="cont-num"><p>单次发货数量：</p><input class="num" type="number" value="{{=data.singleSendCount}}" /><p>发货周期数：<a class="zhouqishu">{{=data.zhouqishu}}</a></p></div>
+					{{?? data.isDeliveryPlan==2}}
+						<p style="color: #fa2f3e;font-size: 0.3125rem;">*该商品不支持周期发货，将以当天为发货日期生成订单</p>
+					{{?}}
+				</li>
+			</ul>
+			
+			{{~}}
+			</div>
+		</script>
+	
+
+

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>已完成心愿</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/crowdfunding/css/wish-complete.css?t=20161117" />
+</head>
+<body style="min-height: 100%;background-color:#fff ; background-image: url(./crowdfunding/imgs/wish/wish-complete-bottom.jpg?t=20161117);background-size: 100%;background-repeat: repeat-y;">
+	<div class="body">
+		<div class="wish-top">
+			<!--<div class="count"><p>(<span></span>)</p></div>
+			<a class="xuyuan" href="wish.html"></a>-->
+		</div>
+		<div class="wish-list">
+			<ul>
+			</ul>
+			<img src="/crowdfunding/imgs/wish/gengxin.png?t=20161117" />
+		</div>
+		<script type="dot/tmpl" id="wish-list">
+			{{~it.data:data:i}}
+			<li>
+				<img class="touxiang" src="{{=it.picUrl+data.wechatHead}}"/>
+				<div class="message">
+					<h2>{{=data.wechatName}}</h2>
+					<p>许愿{{=data.goodsName}},{{=data.slogan}}</p>
+				</div>
+				<div class="link">
+					<img src="imgs/wish/icon-complete.png"/>
+				</div>
+			</li>
+			{{~}}	
+		</script>
+		<div class="wish-bottom">
+			<img src="/crowdfunding/imgs/wish/wish.png?t=20161117" />
+		</div>
+		<a style="display: block;width: 1.906667rem;height: 1.76rem;position: fixed;bottom: 0.226667rem;left:0;z-index: 3;" href="../index.html"><img src="/crowdfunding/imgs/wish/home.png?t=20161117" /></a>
+		<a style="display: block;width: 1.96rem;height: 1.76rem;position: fixed;bottom: 0.226667rem;right:0;z-index: 3;" href="wish.html"><img src="/crowdfunding/imgs/wish/go-wish.png?t=20161117" /></a>
+		<div class="danmu">
+			<ul>
+			</ul>
+		</div>
+		<script type="dot/tmpl" id="danmu">
+		{{~it.data:data:i}}
+			<li><div><img src="{{=data.wechatHead}}"/><p><span>{{=data.wechatName}}</span>{{=data.barrageContent}}</p></div></li>
+		{{~}}
+		</script>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/fontscroll.js?t=20161117&v2"></script>
+	<script type="text/javascript" src="/crowdfunding/js/wish-complete.js"></script>
+</body>
+</html>

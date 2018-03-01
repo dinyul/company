@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>采购详情</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-search">
+				<input placeholder="商品名称查询" />
+				<p>查询</p>
+			</div>
+			<div class="record"></div>
+			<script id="record" type="dot/tmpl">
+				<ul class="list" style="background: #F5F5F5;">
+					<h2 style="background:#fff;margin-bottom: 0.03125rem;">采购单：{{=it.data.bcReplenishOrder.code}}</h2>
+					{{~it.data.detailList:items:j}}
+					<li style="background:#fff;">
+						<img src="{{=it.picUrl}}{{=items.cartPhoto}}" />
+						<div>
+							<h2>{{=items.goodsName}}</h2>
+							<p>{{=items.specifications}}</p>
+							<p style="margin-top: 0.65625rem;">数量：{{=items.receiveGoodsCount}}</p>
+						</div>
+					</li>
+					{{~}}
+				</ul>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				
+				var id=util.getUrlParams("id")
+				
+				record('')
+				$('.purchase-search p').click(function(){
+					
+					$('.record').html('')
+					record($('.purchase-search input').val())
+					
+				})
+				function record(goodsName){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/purchaseDetailList",{
+						"id":id,"goodsName":goodsName
+					},function(data){
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#record", obj, ".record");
+					})
+				}
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

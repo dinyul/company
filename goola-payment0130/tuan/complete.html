@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好团</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/tuan/css/tuan-goods.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		.index-nav{
+			width: 100%;
+			height: 1.1875rem;
+			background: #fff;
+			overflow-x:scroll;
+		}
+		.index-nav::-webkit-scrollbar {
+			display: none;
+		}
+		.index-nav ul{
+			height: 0.828125rem;
+			padding: 0 0.34375rem;
+
+		}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="goods"></div>
+		<script id="goods" type="dot/tmpl">
+			<img src="{{=it.picUrl}}{{=it.data.goodsPic}}" />
+			<div class="message">
+				<h3><a>{{=it.data.groupBuyingPeopleNumber}}人团</a>{{=it.data.goodsName}}</h3>
+				<p>¥<span>{{=(it.data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(it.data.preferentialPrice).toFixed(2)}}</span></p>
+				<a>已团<span>{{=it.data.saleCount}}</span>件</a>
+				{{?it.data.status==1}}
+				<div class="icon"><img src="imgs/icon6.png"/></div>
+				{{??it.data.status==2}}
+				<div class="icon"><img src="imgs/icon4.png"/></div>
+				{{??it.data.status==3}}
+				<div class="icon"><img src="imgs/icon6.png"/></div>
+				{{??it.data.status==4}}
+				<div class="icon"><img src="imgs/icon16.png"/></div>
+				{{??it.data.status==5}}
+				<div class="icon"><img src="imgs/icon5.png"/></div>
+				{{?}}
+			</div>
+			<div class="clear"></div>
+		</script>
+		<div class="tuan-content">
+			
+		</div>
+		<script id="tuan-content" type="dot/tmpl">
+			<div class="tc-top">
+				{{?it.data.groupBuyingPeopleNumber>6}}
+					<nav class="index-nav swiper-nav swiper-container-horizontal swiper-container-free-mode">
+						<ul class="swiper-wrapper">
+							{{~it.data.orderList:data:i}}
+								{{?data.isReal==1}}
+								<li><img src="{{=data.userPhoto}}"/></li>
+								{{??}}
+								<li><img src="{{=it.picUrl}}{{=data.userPhoto}}"/></li>
+								{{?}}
+							{{~}}
+							{{?it.data.orderList.length<it.data.groupBuyingPeopleNumber}}
+								{{ for(var j=0; j<it.data.groupBuyingPeopleNumber-it.data.orderList.length; j++) { }}
+									<li></li>
+								{{}}}
+							{{?}}				
+							<div class="clear"></div>
+						</ul>
+					</nav>
+				{{??}}
+					<ul>
+						{{~it.data.orderList:data:i}}
+							{{?data.isReal==1}}
+							<li><img src="{{=data.userPhoto}}"/></li>
+							{{??}}
+							<li><img src="{{=it.picUrl}}{{=data.userPhoto}}"/></li>
+							{{?}}
+						{{~}}
+						{{?it.data.orderList.length<it.data.groupBuyingPeopleNumber}}
+							{{ for(var j=0; j<it.data.groupBuyingPeopleNumber-it.data.orderList.length; j++) { }}
+								<li></li>
+							{{}}}
+						{{?}}				
+						<div class="clear"></div>
+					</ul>
+				{{?}}
+				
+				{{?it.data.status==5}}
+				<h3>拼团还剩<a class="settime settime2 tuan-settime" id="{{=it.data.remainIngTime+new Date().getTime()}}"></a>结束</h3>
+				<p><img src="imgs/icon7.png"/>距离成团还差{{=it.data.remainPerson}}人，快快邀请好友参团</p>
+				{{??it.data.status==2}}
+				<p class="chenggong"><img src="imgs/icon8.png"/>我们会尽快为您安排发货，感谢您的支持</p>
+				{{?}}
+				
+			</div>
+			<div class="tc-bottom">
+				{{?it.data.status==5}}
+				<p class="yaoqing">邀请好友参团</p>
+				{{??it.data.status==2}}
+				<a href="../order/dingdanxiangqing.html?orderId={{=it.data.orderId}}">查看订单</a>
+				<a href="../index.html">去逛逛</a>
+				{{?}}
+			</div>
+		</script>
+		<div class="part2" style="display: none">
+			<p class="title">看一看其他商品正在进行中的团：</p>
+			<ul></ul>
+			<script type="dot/tmpl" id="part2">
+				{{~it.data:data:i}}
+				<li>
+					<img src="{{=it.picUrl}}{{=data.goodsPic}}" />
+					<div class="message">
+						<h3>{{=data.goodsName}}</h3>
+						<p>¥<span>{{=(data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(data.preferentialPrice).toFixed(2)}}</span><span>已团<a>{{=data.saleCount}}</a>件</span></p>
+						<div>
+							<img src="{{=data.userPhoto}}" />
+							<h3><b>{{=data.wxName}}</b><span>剩余名额{{=data.remainPerson}}</span></h3>
+							<p>拼团还剩<span class="settime tuan-settime" id="{{=data.remainIngTime+new Date().getTime()}}"></span></p>
+							{{?data.status==5}}
+							<a href="complete.html?activityId={{=data.activityId}}&goodsId={{=data.goodsId}}&groupBuyingOrderUserId={{=data.id}}">去参团</a>
+							{{??}}
+							<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=cantuan&id={{=data.id}}&activityId={{=data.activityId}}">去参团</a>
+							{{?}}
+						</div>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{{~}}
+			</script>
+		</div>
+		<div class="share-btn" style="display: none;">
+			<img src="/imgs/giftcard/fenxiang.png?t=20161117" />
+			<a>知道啦</a>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script src="/tuan/js/complete.js"></script>
+	<script>
+		var swiper = new Swiper('.swiper-nav', {
+			slidesPerView: 'auto',
+			paginationClickable: false,
+			freeMode: true,
+			scrollBehavior: false
+		});
+	</script>
+</body>
+</html>

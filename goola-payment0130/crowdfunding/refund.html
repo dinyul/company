@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>申请退款</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/refund.css?t=20161117" />
+	</head>
+	<body>
+		<div class="body">
+			
+		</div>
+		<script type="dot/tmpl" id="refund">
+				<div class="refund-top">
+					<ul>
+						<li><p><span>心愿状态：</span>
+						
+							{{? it.status == 5}}
+							<span>众筹失败</span>
+							{{?? it.status == 6}}
+							<span>申请退款</span>
+							{{?? it.status == 7}}
+							<span>退款成功</span>
+							{{?? it.status == 8}}
+							<span>退款中</span>
+							{{?? it.status == 9}}
+							<span>退款中</span>
+							{{?}}
+							
+						</p></li>
+						<li><p><span>编&#12288;&#12288;号：</span>{{=it.code}}</p></li>
+						<li><p><span>发起时间：</span>{{=it.createDate}}</p></li>
+					</ul>
+				</div>
+				<div class="refund-content">
+					<ul>
+						<li>
+							<div class="left" style="background-image: url(imgs/refund/refund1.jpg);"><p>订单</p></div>
+							<div class="right">
+								<p>总金额：<span>¥{{=it.price}}</span></p>
+								<p>支付金额：<span><a>¥{{=it.refundPrice}}</a></span></p>
+							</div>
+						</li>
+						
+						<li>
+							<div class="left" style="background-image: url(imgs/refund/refund3.jpg);"><p>退款</p></div>
+							<div class="right">
+								<p>金额：<span><a>¥{{=it.refundPrice}}</a></span></p>
+								<p>
+								{{? it.status==5}}
+								<a>可申请全额退款(不包含优惠金额)</a>
+								{{?? it.status==6}}
+								<a>退款提示：已申请退款，等待管理员审核</a>
+								{{?? it.status==9}}
+								<p><a>退款提示：已同意退款，预计3-5天到账</a></p>
+								{{?? it.status==8}}
+								<p><a>退款提示：已同意退款，预计3-5天到账</a></p>
+								{{?? it.status==7}}
+								<p><a>退款提示：退款已成功</a></p>
+								{{?}}
+								</p>
+								<!--<p class="refund-time"></p>-->
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="refund-info">
+					
+					<p>心愿退款，会向所有已支付好友全额退款。<br/>退款金额会按支付原路退回</p>
+					<p><a>如有疑问请联系客服：010-57455124</a></p>
+					
+				</div>
+				<div class="refund-bottom">
+					{{? it.status==5}}
+					<a class='re-refund'>申请退款</a>
+					{{?? it.status==6}}
+					<a class='refund'>取消</a>
+					
+					{{?}}
+				</div>
+			</script>
+			<div class="goola-alert" style="display: none;">
+				<div class="goola-alert-title">
+					<table style="width:100%;height:100%;text-align:center"><tr><td><p>退款已取消成功</p></td></tr></table>
+				</div>
+				<div class="goola-alert-list">
+					<p style="display:none"></p>
+					<p class="confirm">确定</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="bg"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/crowdfunding/js/refund.js"></script>
+	</body>
+</html>

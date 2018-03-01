@@ -1,0 +1,252 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>支付成功</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/zhifuchenggong.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+	</head>
+	<body>
+		<div class="payment body">
+			<div class="moren" style="display: none;">
+				<div class="payment-content">
+					<img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>
+					<h2>支付成功</h2>
+					<p>感谢您的购买</p>
+				</div>
+				<div class="payment-bottom">
+					<p style="color:#9b9b9b;display: none;" class="haomi"></p>
+					<a id="dingdan" style="float:left;margin-left: 0.5rem;">查看订单</a>
+					<a href="../index.html"  style="float:right; margin-right: 0.5rem;">返回首页</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="water" style="display: none;">
+				<div class="payment-content">
+					<img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>
+					<h2>支付成功</h2>
+					<p>感谢您的购买</p>
+				</div>
+				<div class="payment-bottom">
+					<a id="dingdan" style="float:left" href="../water/balance.html">查看余额</a>
+					<a href="../index.html"  style="float:right">返回首页</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="recharge" style="display: none;background: #fff;">
+				<div class="payment-content">
+					<img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>
+					<h2>支付成功</h2>
+					<p class="totalPrice"></p>
+				</div>
+				<p class="chargePresent" style="display:none;font-family: PingFangSC-Regular;color: #4a4a4a;text-align: center;"></p>
+				<div class="payment-bottom">
+					<p style="color:#9b9b9b;display: none;" class="haomi"></p>
+					<a href="../index.html" style="float:left;margin-left: 0.5rem;">立即使用</a>
+					<a href="../member/haomi.html"  style="float:right; margin-right: 0.5rem;">查看余额</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="qrcode" style="display: none;background: #fff;">
+				<div class="payment-content">
+					<img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>
+					<h2>支付成功</h2>
+					<p class="totalPrice"></p>
+				</div>
+				<p class="chargePresent" style="display:none;font-family: PingFangSC-Regular;color: #4a4a4a;text-align: center;"></p>
+				<div class="payment-bottom">
+					<p style="color:#9b9b9b;display: none;" class="haomi"></p>
+					<a href="http://wx.goola.cn/activity/coupon.html?redPacketUserId=4b340a3e7398406ca42bd65d9f792987" style="float:left;margin-left: 0.5rem;">桶装水领券</a>
+					<a href="../member/haomi.html"  style="float:right; margin-right: 0.5rem;">查看余额</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="songli" style="display: none;">
+				<div class="payment-content">
+					<img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>
+					<h2>支付成功</h2>
+					<p>感谢您使用更好送礼！</p>
+				</div>
+				<div class="payment-bottom">
+					<p>将礼品清单转发给您的好友，以便于填写收货信息！</p>
+					<p style="color:#9b9b9b;display: none;" class="haomi"></p>
+					<a style="margin: 0 auto;background: #fa2f3e;" id='share'>转发给好友</a>
+				</div>
+			</div>
+			<div class="rankinglist" style="display: none;">
+				<div class="title">
+					<a>更好推荐</a>
+				</div>
+				<ul class="list"></ul>	
+			</div>
+			
+			
+			<div class="coupon" style="display: none;"></div>
+		</div>
+		<script type="dot/tmpl" id="coupon">
+			{{? it.data}}
+			<div class="coupon-content" style="background-image: url({{=it.picUrl}}{{=it.data.popupPicture}});">
+				<a class="close"></a>
+				<ul class="couponlist">
+					{{~it.data.redPacketActivityItemList:data:i}}
+					<li>
+						<div class="left">
+							<p><span>¥</span>{{=data.coupon.preferentialPrice}}</p>
+						</div>
+						<div class="right">
+							{{? data.coupon.couponLimitValue}}
+							<p><span>使用范围：</span>{{=data.coupon.couponLimitValue.split('-')[1]}}</p>
+							{{??}}
+							<p><span>使用范围：</span>全品类</p>
+							{{?}}
+							<p><span>使用说明：</span>{{=data.coupon.couponName}}</p>
+							<p><span>有效期：</span>{{=data.coupon.availableDays}}天</p>
+						</div>
+					</li>
+					{{~}}
+				</ul>
+				<a class="share"></a>
+			</div>
+			{{?}}
+		</script>
+		<script type="dot/tmpl" id="list">
+			{{~it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					<div class="goodslist">
+						<div class="goodsimg">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}"/>
+						</div>
+						<h3>{{=data.goodsName}}</h3>
+						<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+						<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+					</div>
+				</li>
+			{{~}}
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+		(function(api,util,ajax){
+			var orderId = util.getUrlParams("orderId");
+			var zhifutype=util.getUrlParams("zhifutype");
+			var giftKey=util.getUrlParams("giftKey")
+			var type=util.getUrlParams("type")
+			if(zhifutype==4){
+				$('.songli').show()
+			}else if(zhifutype==5){
+				$('.water').show()
+			}else if(zhifutype=="recharge"){
+				if(type=="qrcode"){
+					$('.qrcode').show()
+				}else{
+					$('.recharge').show()
+				}
+				ajax.post(api.baseServerUrl + "/Charge/findRecordByOrdercode",{
+					"orderCode":orderId
+				},function(data) {
+					$('.totalPrice').html('充值'+data.totalPrice+'元')
+					if(data.chargePresent!=''&&data.chargePresent!=undefined &&data.chargePresent!=null){
+						$('.chargePresent').html('包含充值赠送金额'+data.chargePresent+'元')
+						$('.chargePresent').show()
+					}
+				})
+			}else{
+				$('.moren').show()
+			}
+			$('.payment').delegate('#share','click',function(){
+				window.location.href="../giftcard/giftShare.html?giftKey="+giftKey+'&type=1'
+			})
+			$('#dingdan').click(function(){
+				location.href="../order/dingdanxiangqing.html?orderId="+orderId+"&type=3"
+			})
+			if(zhifutype!="recharge"){
+				$.ajax({
+					type:"post",
+					url:"/goola-web/v1/userTask/getOrderTips",
+					async:true,
+					data:{"orderId":orderId},
+					success:function(data){
+						var data=jQuery.parseJSON(data)
+						if(data.code==0){
+							$('.haomi').css('display','block')
+							   .html('确认收货后您将获得<span style="color: #c7a994;">'+data.data+'</span>')
+						}
+						
+					}
+				});
+			}
+			
+			if(zhifutype!=5 && zhifutype!="recharge" && orderId!=undefined && orderId!=null && orderId!=''){
+				ajax.post(api.baseServerUrl + "/order/orderIsRpa",{
+					"orderId":orderId 
+				},function(data) {
+					var obj={data:data,picUrl:api.picUrl};
+					util.render("#coupon",obj,".coupon");
+					if(data!=undefined){
+						$('.coupon').css('display','block')
+					}
+					if($('.couponlist li').length==1){
+						$('.couponlist li').css('margin-top','2.015625rem')
+					}else if($('.couponlist li').length==2){
+						$('.couponlist li:nth-child(1)').css('margin','0.703125rem 0')
+					}else if($('.couponlist li').length>3){
+						$('.couponlist').css('height',"6.484375rem")
+										.css('margin','5.3125rem auto 0')
+					}
+					$('.close').click(function(){
+						$('.coupon').hide()
+					})
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.shareTitle,data.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.redPacketUserId,"http://" + document.domain +api.picUrl + data.sharePrint);
+					$('.share').click(function(){
+						if(isWeiXin()){
+							$('body').append('<div class="wx-share" style="z-index:101">\
+												<img src="../imgs/giftcard/fenxiang.png" />\
+												<a class="wx-share-btn">知道啦</a>\
+												</div>')
+								$('.wx-share-btn').click(function(){
+									 $('.wx-share').remove()	 
+								})
+							wxShare(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.shareTitle,data.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.redPacketUserId,"http://" + document.domain +api.picUrl + data.sharePrint);
+						}else if( browser.versions.ios || browser.versions.android){
+							if(!isWeiXin()){
+								toShare(data.shareTitle,data.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.redPacketUserId,"http://" + document.domain +api.picUrl + data.sharePrint)
+							}
+						}
+						
+					})
+				},function(data){
+					console.log(data)
+				});
+			}
+			rankinglist()
+			function rankinglist(){
+				ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+					
+				},function(data) {
+					if(data!='' && data!=undefined && data!=null && data.length!=0){
+						$('.rankinglist').show()
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#list",obj,".rankinglist .list")
+						$('.rankinglist li').click(function(){
+							window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+						})
+					}
+					
+				})
+			}
+				
+		})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

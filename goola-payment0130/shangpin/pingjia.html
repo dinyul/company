@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>评价</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/shangpin/pingjia.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="evaluate body">
+			<div class="list">
+			</div>
+			<div class="goods-num"></div>
+			<div class="pingjia-title">
+				<p>快递公司</p>
+			</div>
+			<div class="service-pingjia">
+				<p class="star1"><a>订单评价</a><i><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></i></p>
+				<p class="star2"><a>服务评价</a><i><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></i></p>
+				<p class="star3"><a>送货速度</a><i><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></i></p>
+			</div>
+		</div>
+		<div class="bottom">
+			<p>提交评价</p>
+		</div>
+		<script type="dot/tmpl" id="goodsTmpl">
+		{{~it.data.children:provider:i}}
+			{{~provider.orderItems:goods:j}}
+				<div class="goods" id="{{=goods.goodsId}}">
+					<div class="goods-title">
+						<div class="goods-title-img">
+							<img src="{{=it.picUrl}}{{=goods.goodsPhoto}}">
+						</div>
+						<div class="goods-title-message">
+							<h3>{{=goods.goodsName}}</h3>
+							<p>评分：<span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span><span class='check'></span></p>
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div class="goods-list">
+						<textarea placeholder="您对这个商品满意吗？您的评价会帮助我们选择更好的商品~"></textarea>
+					</div>
+				</div>
+			{{~}}
+		{{~}}
+		</script>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		
+		<script type="text/javascript">
+			(function(api,util,ajax){
+				var orderId = util.getUrlParams("orderId");
+				initEva(orderId);
+				function initEva(orderId) {
+					ajax.post(api.baseServerUrl + "/order/orderDetail",{
+						"orderId":orderId	
+					},function(data) {
+						var obj = {data:data,picUrl:api.picUrl};
+						util.render("#goodsTmpl", obj, ".list");
+						var i=$('.list').find('.goods').length
+						if(i<2){
+							$('.goods-num').hide()
+						}else{
+							$('.goods-num').show()
+							$('.goods-num').html('<p>共'+i+'件商品可评论</p>')
+						}
+						
+						$('.check').on('click',function(){
+							$(this).parent().find('.check').removeClass('checked')
+							var a=$(this).index()+1
+							$(this).parent().find('.check:lt('+a+')').toggleClass('checked')
+						})
+					})
+				}
+				$('.bottom').click(function(){
+
+					var submitLenFlag = true;
+
+					var star1=$('.star1').find('.checked').length
+					var star2=$('.star2').find('.checked').length
+					var star3=$('.star3').find('.checked').length
+					var orderEva=new Object();
+					orderEva.orderId=orderId;
+					orderEva.star1=star1;
+					orderEva.star2=star2;
+					orderEva.star3=star3;
+					
+					var goodsEva=new Array();
+					$('.goods').each(function(i){
+						var goodsId=$(this).attr('id')
+						var obj = new Object();
+						obj.goodsId = goodsId;
+						var evaluateResult=$(this).find('.goods-title-message p').find('.checked').length;
+						var evaluateContent=$(this).find('.goods-list textarea').val();
+						if(evaluateContent.length > 100){
+							submitLenFlag = false
+						}
+						obj.evaluateResult = evaluateResult;
+						obj.evaluateContent = evaluateContent;
+						goodsEva[i] = obj;						
+					})
+					if(star1==0||star2==0||star3==0){
+						alert('请为我们的商品和服务打分');
+						return false
+					}
+					for(var i=0;i<goodsEva.length;i++){
+						if(goodsEva[i].evaluateResult==0){
+							alert('请为我们的商品和服务打分');
+							return false
+						}
+					}
+					if(!submitLenFlag){
+						alert("评论最多输入100字哟！");
+						return false;
+					}
+					submitEva(goodsEva,orderEva)
+				})
+				function submitEva(goodsEva,orderEva){
+					ajax.post(api.baseServerUrl + "/goods/submitEvaluate",{
+						"goodsEva":JSON.stringify(goodsEva),
+						"orderEva":JSON.stringify(orderEva)
+					},function(data) {
+						$.ajax({
+							type:"post",
+							url:"/goola-web/v1/userTask/operateUserGrowValue",
+							async:true,
+							data:{"acquireType":3,"orderId":orderId},
+							success:function(data){	
+								var data=jQuery.parseJSON(data)
+								if(data.message!='' && data.message!=null && data.message!=undefined){
+									$('body').append('<div class="share-open">\
+										<img src="/imgs/zhifu/zhifuchenggong.png" />\
+										<h2>评价成功</h2>\
+										<p>'+data.message+'</p>\
+									</div>')
+									setTimeout(function(){
+										window.location.href='../order/wodedingdan.html'
+										
+									},3000)
+										}
+								
+							}
+						});
+						
+					})
+				}
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>身份认证</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/distribution/css/haomi.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="apply info">
+				<p>设置您的身份信息</p>
+				<ul>
+					<li><input type="text" placeholder="请输入真实姓名" id="name"/></li>
+					<li><input type="text" placeholder="请输入身份证号" id="idcode"/></li>
+				</ul>
+				<p style="color: #fa2f3e;">身份信息请务必与提现账户的实名认证信息保持一致</p>
+				<div class="bottom"><p>确认提交</p></div>
+			</div>
+			<div class="bg"></div>
+			<div class="address-firm">
+				<div class="address-firm-title">
+					<p style="line-height: 0.625rem;padding: 0.46875rem;">请确认身份信息是否与提现账户的实名认证信息一致，否则将无法提现。</p>
+				</div>
+				<div class="address-firm-list">
+					<p style="display:none"></p>
+					<p class="cancel cancelAddress">取消</p>
+					<p class="confirm deleteAddress">确定</p>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/distribution/userPointsConversion",{
+					"type":1
+				},function(data) {
+					$('.wxname').html(data.accountInfo.accountName)
+				});
+				$('.bottom').click(function(){
+					if(!(/[\u4E00-\u9FA5]+$/.test($('#name').val()))){
+						alert('姓名必须是汉字')
+						return false;
+					}
+					if ( !(/(^\d{15}$)|(^\d{17}([0-9]|X)$)/.test($('#idcode').val())) ){
+						alert('身份证号输入错误');
+						return false;
+					};
+					$('.bg').show()
+					$('.address-firm').show()
+					
+				})
+				$('.cancel').click(function(){
+					$('.bg').hide()
+					$('.address-firm').hide()
+				})
+				$('.confirm').click(function(){
+					ajax.post(api.baseServerUrl + "/distribution/saveIdentityInfo",{
+					"identityId":$('#idcode').val(),"identityName":$('#name').val()
+					},function(data) {
+						window.location.href="apply.html"
+					});
+				})
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

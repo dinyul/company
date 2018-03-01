@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>账户充值</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/recharge.css" />
+	</head>
+	<body style="background: #F1EDEE;">
+		<div class="body" >
+			<div class="recharge confirmpay">
+				
+			</div>
+			<script id="recharge" type="dot/tmpl">
+				<h2>付款金额</h2>
+				<h3>¥{{=Number(it.price).toFixed(2)}}</h3>
+				<p>充值单号<span>{{=it.orderId}}</span></p>
+				<a>立即支付</a>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/layer.js?t=20161117"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Autocomplete"></script>
+		<script>
+			(function(api, util,ajax){
+				var orderId = util.getUrlParams("orderId");
+				var price = util.getUrlParams("price");
+				var type=util.getUrlParams("type");
+				var obj={orderId:orderId,price:price}
+				util.render("#recharge", obj, ".recharge")
+				$('.confirmpay').delegate('a','click',function(){
+					if(isWeiXin()){
+						payOrder(orderId);
+					}else{
+						toPay(orderId,orderId,encodeURI(location.href.split('#')[0]),0);
+					}
+				})
+				
+				$('.complete').click(function(){
+					complete($(this).attr('type'),orderId,0)
+				})
+				//点击支付完成查询订单状态
+				function complete(type,orderCode,flag){
+					if(type=="weixin"){
+						completePay("/order/weChatH5PayConfirmOrder",orderCode,flag)
+					}else if(type=="zhifubao"){
+						completePay("/order/wapAlipayConfirmOrder",orderCode,flag)
+					}
+				}
+				//查询订单状态是否已支付
+				function completePay(url,orderCode,flag){
+					ajax.post( api.baseServerUrl+ url,{
+						"orderCode":orderCode,"flag":flag
+					},function(data) {
+						setCookie('reFresh','')
+						if(type=="qrcode"){
+							window.location.href="./zhifuchenggong.html?orderId="+orderCode+"&zhifutype=recharge&type=qrcode";
+						}else{
+							window.location.href="./zhifuchenggong.html?orderId="+orderCode+"&zhifutype=recharge";
+						}
+					},function(){
+						setCookie('reFresh','')
+						window.location.reload()
+					})
+				}
+				
+				function payOrder(orderId) {
+					ajax.post(api.baseServerUrl + "/Charge/getChargeParam",{
+						"orderCode":orderId,"url":encodeURI(location.href.split('#')[0])	
+					},function(data) {
+						wx.config({
+							debug: false,
+							appId: data[0].appid,
+							timestamp: data[0].timeStamp,
+							nonceStr: data[0].nonceStr,
+							signature: data[0].signature,
+							jsApiList: ['chooseWXPay']
+						});
+						wx.ready(function () {
+							wx.chooseWXPay({
+								timestamp: data[1].timeStamp , 
+								nonceStr: data[1].nonceStr, 
+								package: data[1].packageWithPrepayId , 
+								signType: data[1].signType, 
+								paySign: data[1].paySign, 
+								success: function (res) {
+									confirmOrder(orderId)
+								}
+							});
+						})			
+					})
+				}
+				function confirmOrder(orderId){
+					ajax.post(api.baseServerUrl + "/Charge/confirmOrder",{
+						"orderId":orderId	
+					},function(data) {
+						if(type=="qrcode"){
+							window.location.href="./zhifuchenggong.html?orderId="+orderId+"&zhifutype=recharge&type=qrcode";
+						}else{
+							window.location.href="./zhifuchenggong.html?orderId="+orderId+"&zhifutype=recharge";
+						}
+						
+					})
+				}
+				var title="更好甄选—更好·不贵"
+				var doc="种草全世界的好货"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+			})(goola.api, goola.util,goola.ajax)
+		</script>
+	</body>
+
+</html>
+

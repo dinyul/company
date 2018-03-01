@@ -1,0 +1,94 @@
+body{
+	background: #fff
+}
+.title{
+	text-align: center;
+	padding-top: 1.15625rem
+}
+.title img{
+	width: 1.984375rem;
+	height: 1.984375rem
+}
+.title h2{
+	color: #fa2f3e;
+	font-size: 0.5rem;
+	margin: 0.4375rem 0 0.84375rem 0;
+}
+.youhuiquan{
+	margin-top: 1.5625rem;
+	padding: 0 0.3125rem
+}
+.youhuiquan>p{
+	padding-left: 0.15625rem
+}
+.coupon{
+	height: 2.21875rem;
+	background-repeat: no-repeat;
+	background-size: 100%;
+	margin-top:0.3125rem;
+	overflow: hidden;
+	background-image:  url(/imgs/personal/youhuizhan-beijing1.png?t=20161117);
+	position: relative;
+}
+.coupon .left{
+	width: 2.5625rem;
+	line-height: 2.171875rem;
+	font-size: 0.546875rem;
+	text-align: center;
+	color: #fff;
+	margin-right: 0.234375rem;
+	float: left;
+	overflow: hidden;
+    height: 2.171875rem;
+}
+.coupon .left span{
+	font-size: 0.9375rem;
+}
+.coupon .right{
+	float: left;
+	padding-top: 0.3125rem
+}
+.coupon .right p{
+	font-size: 0.3125rem;
+	line-height: 0.5rem;
+}
+.coupon  .right span{
+	display: inline-block;
+	width: 1.6875rem;
+	color: #9c9c9c;
+}
+.coupon .shiyong{
+	position: absolute;
+    top: 0.515625rem;
+    right: 0.25rem;
+}
+.coupon .shiyong p{
+	width: 0.703125rem;
+    color: #fa2f3e;
+    height: 1.171875rem;
+    background: url(/crowdfunding/imgs/haoyouzhifu-Arrow@2x.png?t=20161117) no-repeat right center;
+    background-size: 0.203125rem 0.34375rem
+}
+.btn{
+	margin-top: 1.3125rem
+}
+.btn a{
+	display: block;
+	width: 3.75rem;
+	height: 1.09375rem;
+	text-align: center;
+	line-height: 1.09375rem;
+	font-size: 0.375rem;
+	color: #fff;
+	background: #fa2f3e;
+	border-radius: 0.15625rem
+}
+.btn a:first-child{
+	float: left;
+	margin-left: 0.84375rem;
+}
+
+.btn a:nth-child(2){
+	float: right;
+	margin-right: 0.84375rem
+}

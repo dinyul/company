@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>购物车</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+    <meta name="format-detection" content="telephone=no">
+    <meta http-equiv="x-rim-auto-match" content="none">
+    <link rel="stylesheet" href="/css/flex.css?t=20161117" />
+    <link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117" />
+    <link rel="stylesheet" type="text/css" href="/css/gouwuche.css?t=20161117&v1">
+    <link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117&v1">
+    <link rel="stylesheet" type="text/css" href="/css/address/style.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/address/cityLayout.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/giftcard/giftcard.css?t=20161117&v10">
+    <link rel="stylesheet" type="text/css" href="/css/order/choice-time.css?t=20161117" />
+    <link rel="stylesheet" type="text/css" href="/css/giftcard/gift-process.css?t=20161117">
+</head>
+
+<body>
+    <div class="body">
+        <div id="container">
+            <div id="gwc" style="display:block">
+                <div class="gouwuche-content" id="cartInfo">
+                    <div class="mb10 abcd" id="fullCart_1"></div>
+                    <div id="fullCart_4" style="display: none;">
+                        <img src="/imgs/gouwuche/no-goods.png" />
+                        <p>购物车空荡荡的</p>
+                        <a href="../index.html">去逛逛</a>
+                    </div>
+                </div>
+                <div class="bg"></div>
+                <div class="address-firm">
+                    <div class="address-firm-title">
+                        <p>确认删除此商品？</p>
+                    </div>
+                    <div class="address-firm-list">
+                        <p style="display:none"></p>
+                        <p class="cancel cancelGoods">取消</p>
+                        <p class="confirm deleteGoods">确定</p>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <div class="gouwuche-bottom" id="total" style="display: none">
+                    <div class="all-btn">
+                        <div class="btn checked">
+                            <input type="checkbox" class="goods-check GoodsCheckall" checked='true' />
+                        </div>
+                        <p>全选</p>
+                    </div>
+
+                    <div class="total all-total"></div>
+                    <script type="dot/tmpl" id="totalTmpl">
+                        <div class="total-area">
+                            <p><a class="tit">总计 : </a><span>¥ <span class="shop-total-amount" id="totalPrice_2"></span></span></p>
+                            <p class="yh" id="yh"><a class="tit">已优惠 : </a>¥ <span></span>元</p>
+                        </div>
+
+                        <!-- <p>总计：
+                        
+                        </p> -->
+                    </script>
+                    <div class="choice-payment">
+                        <a class="payment">去结算</a>
+                        <a class="payment1">送礼</a>
+                        <div class="clear"></div>
+                    </div>
+                </div>
+                <script id="cartTmpl" type="dot/tmpl">
+                    {{? it}} 
+                    {{~it :data:i}}
+                    <ul class="one-shop">
+                        <div class="gouwuche-title" style="display:none">
+                            <div class="btn checked">
+                                <input type="checkbox" class="goods-check GoodsCheck1" checked='true' />
+                            </div>
+                            <a {{?data.isShop==1}}href="../shop/shop.html?providerId={{=data.goodsList[0].providerId}}" {{?}}>
+                                <p {{?data.isShop==1}}style="background-image: url(/imgs/gouwuche/gouwuche-dianpu1.png?t=20161117);" {{?}}>{{=data.providerName}}</p>
+                            </a>
+                        </div>
+                        {{~ data.goodsList:goods:l}}
+                        <li class="one-goods" id="{{=goods.goodsId}}" {{?goods.goodsType==2}} childrenGoodsIds="{{=goods.childrenGoodsIds}}"{{?}}>
+                            <div class="btn checked" id="{{=goods.goodsId}}" {{?goods.goodsType == 2}} childrenGoodsIds="{{=goods.childrenGoodsIds}}"{{?}}>
+                                <input type="checkbox" class="goods-check GoodsCheck" checked='true' />
+                            </div>
+                            <div class="goodsmessage" style="float: left;">
+                                <div class="img">
+                                    <img src="{{=picUrl}}{{=goods.goodsPhoto}}">
+                                </div>
+                                <div class="container">
+                                    <p class="container-title">{{=goods.goodsName}}</p>
+                                    <p class="container-norm">{{?goods.goodsType==2}}{{~goods.childrenGoodsSpecificationList:data:j}}{{=data.split(':')[1]}}</br>{{~}}{{??}}{{=goods.goodsSpecificationsShowStr}}{{?}}</p>
+                                    <p class="container-pay">¥<span class="price shop-total-amount GoodsPrice">
+											<a id="{{=goods.goodsId}}p">{{=(goods.goodsPrice).toFixed(2)}}</a></span> {{? goods.goodsLabel}}
+                                        <span class="biaoqian">{{=goods.goodsLabel}}</span> {{?}}
+                                    </p>
+                                </div>
+                                <div class="clear"></div>
+                            </div>
+                            <div class="clear"></div>
+                            <div class="delete"></div>
+                            <div class="num-choice">
+                                <span class="reduce minus"></span>
+                                <span class="count-input am-num-text {{=goods.goodsId}}c" id="{{=goods.goodsId}}c" {{?goods.goodsType==2}}childrenGoodsIds="{{=goods.childrenGoodsIds}}"{{?}}>{{=goods.goodsCount}}</span>
+                                <span class="add plus" activityType="{{=goods.activityType}}" maxFsCount="{{=goods.maxFsCount}}"></span>
+                            </div>
+                        </li>
+                        {{~}}
+                    </ul>
+                    {{~}} {{?}}
+                </script>
+                <div class="nav"></div>
+            </div>
+            <!--page2 确认订单-->
+            <div id="page2" class="balance" style="display:none;">
+                <div class="balance">
+                    <!--header-->
+                    <div class="fanhui">
+                        <span id="fanhui"></span>
+                        <p>确认订单</p>
+                    </div>
+                    <div class="address" id="addressInfo"></div>
+                    <div class="idcard" style="display: none;">
+                        <h3>温馨提示：因订单含海外购商品，需添加身份证号</h3>
+                        <div class="idcode">
+                            <span>身份证号：</span><input type="text" name="idcode" placeholder="请输入您的身份证号" />
+                        </div>
+                        <div class="img">
+                            <div style="float: left;">
+                                <div>
+                                    <input type="file" name="file" accept="image/*" />
+                                </div>
+                                <p>上传身份证正面</p>
+                            </div>
+                            <div style="float: right;">
+                                <div>
+                                    <input type="file" name="file" accept="image/*" />
+                                </div>
+                                <p>上传身份证背面</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="gifts">
+                        <div class="gift-img">
+                            <ul>
+                                <li>结算支付</li>
+                                <li></li>
+                                <li>好友分享</li>
+                                <li></li>
+                                <li>填写信息</li>
+                                <div class="clear"></div>
+                            </ul>
+                            <a class="gift-process">查看攻略</a>
+                            <div class="clear"></div>
+
+                        </div>
+                        <div class="gift">
+                            <div class="gifts-top">
+                                <p>送给谁<span class='gifts-checked' id="1">爱谁谁</span><span id="4">爱人</span><span id="3">家人</span><span id="2">朋友</span></p>
+                            </div>
+                            <div class="gift-liuyan">
+                                <div class="liuyan">
+                                    <p>祝福语:</p>
+                                    <input id="zhufu" />
+                                    <div class="clear"></div>
+                                </div>
+                                <div class="liuyan">
+                                    <p>落款:</p>
+                                    <input id="name" />
+                                    <div class="clear"></div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div id="shoppingList">
+                    </div>
+                    <div class="method">
+                        <ul>
+                            <li class="fullReduce">
+                                <p>满减活动</p>
+                                <a></a>
+                            </li>
+                            <li id="couponCount">
+
+                            </li>
+                            <li class="jifen">
+                                <p class="pointsMoneyValue">余额支付：<span></span></p>
+                                <a><img src="/imgs/payment/jiesuan2/icon2/617871071494316514.png" /></a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="goola-alert" id="alert" style="display: none;">
+                        <div class="goola-alert-title">
+                            <p style="padding-top: 0.46875rem;">您的金额不足1元，暂不能使用哦!</p>
+                            <a href="recharge.html" style="float: none;display:block;width: 2.03125rem;margin: 0 auto;height: 0.78125rem;background: #fa2f3e;line-height: 0.78125rem;color: #fff;font-size: 0.34375rem ;margin-top: 0.234375rem;border-radius: 0.078125rem;">立即充值</a>
+                        </div>
+                        <div class="goola-alert-list">
+                            <p style="display:none"></p>
+                            <p class="closealert">确定</p>
+                            <div class="clear"></div>
+                        </div>
+                    </div>
+                    <div class="balance-total"></div>
+                    <div class="dis-goods"></div>
+                    <script id="dis-goods" type="dot/tmpl">
+                        <div class="dis-title">
+                            <p>库存不足商品</p>
+                        </div>
+                        <ul class="dis-goods-ul">
+                            {{~it :data:i}}  {{~data.goodsList:goods:j}}
+                            {{?Number(goods.enoughVoidRepertory) == 0}}
+                            <li id="{{=goods.goodsId}}" class="goodsId">
+                                <img src="{{=picUrl}}{{=goods.goodsPhoto}}" />
+                                <div class="dis-content">
+                                    <h3>{{=goods.goodsName}}</h3>
+                                    <p>{{=goods.goodsSpecificationsShowStr}}</p>
+                                    <p><span>¥<a>{{=(goods.goodsPrice).toFixed(2)}}</a></span></p>
+                                </div>
+                                <div class="clear"></div>
+                            </li>
+                            {{?}}
+                            {{~}}  {{~}}
+                        </ul>
+                    </script>
+
+                    <script id="shoppingListTmpl" type="dot/tmpl">
+                        <div class="commodity">
+                            {{~it :data:i}} {{? data.isLocationInventory==2}}
+                            <div>
+                                /*
+                                <div class="business" {{?data.orgName}} orgAddress="{{=data.orgAddress}}" orgPhone="{{=data.orgPhone}}" orgOpenTime="{{=data.orgOpenTime}}" {{?data.carriage=="包邮" }}carriage="0" {{??Number(data.carriage)}}carriage="{{=data.carriage}}" {{??}}carriage="0"
+                                    {{?}} {{?}}>
+                                    <a {{?data.isShop==1}}href="../shop/shop.html?providerId={{=data.providerId}}" {{?}} style="display: block;">
+                                        <p {{?data.isShop==1}}style="background-image: url(../../imgs/gouwuche/gouwuche-dianpu1.png) ;" {{?}}>{{=data.providerName}}{{?data.orgName}}({{=data.orgName}}){{?}}</p>
+                                    </a>
+                                </div>
+                                */
+                                <ul>
+                                    {{~data.goodsList :goods:j}}
+                                    {{?Number(goods.enoughVoidRepertory) != 0}}
+                                    <li class="goodsId" {{? data.deliverType==2}} orgDeliverType="1" {{?}} id="{{=goods.goodsId}}" isBatchOrder="2" {{?goods.parentComboGoodsId}}parentComboGoodsId="{{=goods.parentComboGoodsId}}"{{?}}>
+                                        <img src="{{=picUrl}}{{=goods.goodsPhoto}}" />
+                                        <div class="dis-content">
+                                            <h3>{{=goods.goodsName}} {{? goods.goodsLabel}}
+                                                <span class="biaoqian">{{=goods.goodsLabel}}</span> {{?}}
+                                            </h3>
+                                            <p>{{=goods.goodsSpecificationsShowStr}}</p>
+                                            <p><span>¥<a>{{=(goods.goodsPrice).toFixed(2)}}</a></span></p>
+                                            <p class="shuliang">x<span class="goodsCount">{{=goods.goodsCount}}</span></p>
+                                        </div>
+                                        <div class="clear"></div>
+                                    </li>
+                                    {{?}}
+                                    {{~}}
+                                </ul>
+                                {{?data.deliverType==2}}
+                                <div class="water">
+                                    <p>如无同品牌空桶，需线下支付空桶押金</p>
+                                </div>
+                                {{?}}
+                                <div class="message">
+                                    <p style="display:none">{{=data.providerId}}</p>
+                                    <p>买家留言:</p>
+                                    <input type="text" placeholder="选填项" />
+                                </div>
+                                <div class="select {{? data.deliverType==2}}selectMode{{?}}" style="border-bottom: 1px solid #e5e5e5;">
+                                    <p>配送方式</p>
+                                    {{? data.deliverType==1}}
+                                    <a>
+                                        <p class="mode-select">快递&nbsp;运费 ¥{{?data.carriage=="包邮"}}0{{??Number(data.carriage)}}{{=Number(data.carriage).toFixed(2)}}{{??}}0{{?}}</p>
+                                    </a>
+                                    {{?? data.deliverType==2}}
+                                    <a>
+                                        <p class="mode-select">站点配送&nbsp;运费 ¥{{?data.carriage=="包邮"}}0{{??Number(data.carriage)}}{{=Number(data.carriage).toFixed(2)}}{{??}}0{{?}}</p>
+                                    </a>
+                                    {{?}}
+                                </div>
+                                <div class="select  selecttime {{? data.deliverType==1}}selectTime{{?}}">
+                                    {{? data.deliverType==1}}
+                                    <p>发货时间</p>
+                                    <a>
+                                        <p class="time-select">去选择</p>
+                                    </a>
+                                    {{?? data.deliverType==2}}
+                                    <p>收货时间</p>
+                                    <a>
+                                        <p class="time-select">将在{{=getFormatDate(data.receiveTime).split(' ')[0]}}进行配送</p>
+                                    </a>
+                                    {{?}}
+                                </div>
+                            </div>
+                            {{?}} {{~}}
+                        </div>
+                    </script>
+
+                    <script id="tmsTmpl" type="dot/tmpl">
+                        <p>配送方式</p>
+                        <a>
+                            <p>快递 ¥{{=(it).toFixed(2)}}</p>
+                        </a>
+                    </script>
+                    <script id="couponCountTmpl" type="dot/tmpl">
+                        <p>可用优惠劵</p>
+                        <a>
+                            <p>{{=it}}</p>
+                        </a>
+                    </script>
+                    <script id="orderPriceTmpl" type="dot/tmpl">
+                        <p>共{{=it.count}}件商品 总计：<span>¥{{=(it.price).toFixed(2)}}</span></p>
+                    </script>
+                    <script type="dot/tmpl" id="addressInfoTmpl">
+                        {{? it && it.isUse==1}}
+                        <p>{{=it.name}}
+                            <span>{{=it.phone}}</span>
+                        </p>
+                        <p>{{=it.provinceName}}{{=it.cityName}}{{=it.address}}</p>
+                        {{?it.card}}
+                        <p class="card">{{=it.card}}</p>
+                        {{?}}
+                        <span>去修改</span> {{??}}
+                        <a style="display: block;">
+                            <p>请选择收货地址 <span>去选择</span></p>
+                        </a>
+                        {{?}}
+                    </script>
+                </div>
+                <div class="bottom">
+                    <div class="balance-total"></div>
+                    <a>
+                        <p>去结算</p>
+                    </a>
+                </div>
+            </div>
+            <!-- 优惠券 -->
+            <div id="yhq" class="coupon">
+                <div class="fanhui" style="border-bottom:1px solid #e5e5e5">
+                    <span id="fanhui"></span>
+                    <p>我的优惠站</p>
+                </div>
+                <ul class="use" id="couponInfo">
+                </ul>
+            </div>
+            <!-- 积分 -->
+            <div id="integral">
+                <p>请输入本次要抵现的金额</p>
+                <div class="integral-choice">
+                    <input type="number" /> <span></span>
+                    <p style="display: none;">您的可用余额不足</p>
+                </div>
+                <div class="integral-btn"><a class="integral-cancle">取消</a><a class="integral-config">确认提交</a></div>
+            </div>
+            <div class="bg"></div>
+            <!--送礼弹窗-->
+            <div class="giftopen">
+                <p>温馨提示：您正在使用的是礼品赠送功能，订单的收货信息在您付款后将订单转发给好友，由好友进行填写。详情可查看页面上方的送礼详细攻略。</p>
+                <div class="giftopen-btn"><input type="checkbox" /><span>我已知晓，不再提醒</span></div>
+                <a class="giftopen-close">关闭</a>
+            </div>
+            <script id="couponInfoTmpl" type="dot/tmpl">
+                {{~it :data:i}}
+                <li>
+                    <div class="left" id="{{=data.userCouponId}}">
+                        <h3>¥<span>{{=data.preferentialPrice}}</span></h3>
+                        {{?data.limitPrice}}
+                        <p>满{{=data.limitPrice}}使用</p>
+                        {{?}}
+                    </div>
+                    <div class="right">
+                        <h3>{{=data.couponName}}</h3>
+                        {{?data.categoryName}}
+                        <p>1、限制{{=data.categoryName}}</p>
+                        {{?}}
+                        <p>2、{{=data.endTime}}</a>
+                        </p>
+                    </div>
+                    <div class="btn">
+                        <a>立即<br/>使用</a>
+                    </div>
+                    <div class="clear"></div>
+                </li>
+                {{~}}
+
+            </script>
+        </div>
+
+        <div id="selectAddressList"></div>
+        <div id="selectGiftcard"></div>
+        <div id="selectTime"></div>
+        <div id="selectMode"></div>
+        <div id="gift-process"></div>
+        <!-- <div id="yh">已优惠：<span>100</span>元</div> -->
+    </div>
+    <script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+    <script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+    <script src="/js/jquery_cookie.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+    <script src="/js/gouwuche/Operation.js?t=20161117"></script>
+    <script src="/js/gouwuche/car.js?t=20161117"></script>
+    <script src="/js/gouwuche/main.js?t=20161117"></script>
+    <script src="/lib/layer.js?t=20161117"></script>
+    <script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Autocomplete"></script>
+    <script src="/js/gouwuche/Shopping.js?t=20161117&v=10"></script>
+</body>
+
+</html>

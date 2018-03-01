@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>优惠券领取</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/activity/coupon.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="content">
+				<div class="prompt">
+					<p>领取中，请稍候</p>
+				</div>
+				
+			</div>
+			<script type="dot/tmpl" id="content">
+				<div class="coupon">
+					<!--未注册-->
+					<img src="{{=it.picUrl}}{{=it.data.activity.activityPicture}}" />
+					{{? it.data.packetStatus==2}}
+						<img src="../imgs/activity/01-01.png" class="unregistered-img"/>
+						<input type="text" />
+						<a class="btn unregistered">立即领取</a>
+					<!--领取-->
+					{{?? it.data.packetStatus==1}}
+						<img src="../imgs/activity/03-01.png" class="receive-img"/>
+						<div class="list">
+							<ul>
+								{{~it.data.redPacketUserItemList:data:i}}
+								{{?data.status==3}}
+								<li>
+									<div class="left">
+										<p style="font-size: 0.625rem;"><span style="font-size: 0.40625rem;">¥</span>{{=data.coupon.preferentialPrice}}</p>
+									</div>
+									<div class="right">
+										{{? data.coupon.couponLimitValue}}
+										<p style="display: none;"><span>使用范围：</span>{{=data.coupon.couponLimitValue.split('-')[1]}}</p>
+										{{??}}
+										<p style="display: none;"><span>使用范围：</span>全品类</p>
+										{{?}}
+										<p style="margin-top: 0.234375rem;"><span>使用说明：</span>{{=data.coupon.couponName}}</p>
+										<p><span>有效期：</span>{{=data.coupon.availableDays}}天</p>
+									</div>
+								</li>
+								{{?}}
+								{{~}}
+							</ul>
+						</div>
+						<p>红包已存入账户<span id="tel"></span></p>
+						<a class="btn receive" href="http://{{=it.data.url}}">立即使用</a>
+					<!--红包已经抢光-->
+					{{?? it.data.packetStatus==3}}
+						<img src="../imgs/activity/02-01.png" class="notreceive-img"/>
+						<p >本次红包已经被抢光了，感谢您的参与！</p>
+						<a class="btn notreceive" href="../index.html">去购啦逛逛</a>
+					{{?}}
+				</div>
+				<div class="luck">
+					<img src="../imgs/activity/coupontitle.jpg" />
+					<ul>
+						{{~it.data.redPacketUserItemList:data:i}}
+						<li>
+							{{?data.userPhoto}}
+							<div class="head"><img src="{{=data.userPhoto}}"/></div>
+							{{??}}
+							<div class="head"><img src="../imgs/activity/549652434433779469.jpg"/></div>
+							{{?}}
+							<div class="info">
+								<p>{{=data.operateTime}}</p>
+								<p>{{=data.couponDesc}}</p>
+							</div>
+						</li>
+						{{~}}
+					</ul>
+				</div>
+				<div class="news">
+					<img src="../imgs/activity/coupontitle2.jpg" />
+					<ul>
+						{{~it.news.news:data:i}}
+						<li>{{=data}}</li>
+						{{~}}
+					</ul>
+				</div>
+			</script>
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+			(function(api,util,ajax){
+				var redPacketUserId = util.getUrlParams("redPacketUserId");
+				coupon('')
+				
+				$('.content').delegate('.unregistered','click',function(){
+					if($('.coupon input').val()==''){
+						alert('请输入您的手机号')
+						return false;
+					}
+					if(!(/^1[3|4|5|7|8]\d{9}$/.test($('.coupon input').val()))){
+						alert('手机号格式错误，请重新输入')
+						return false;
+					}
+					
+					ajax.post(api.baseServerUrl + "/redPacketActivtiy/openAuthority/getRpCoupon",{
+						"redPacketUserId": redPacketUserId,
+						"telPhone":$('.coupon input').val()
+					},function(data) {
+						coupon($('.coupon input').val())
+					})
+				
+				})
+				function coupon(telphone){
+					ajax.post(api.baseServerUrl + "/redPacketActivtiy/openAuthority/redPacketDetail",{
+						"redPacketUserId":redPacketUserId,"telphone":telphone
+					},function(data) {
+						if(data.packetStatus!=1){
+							$('.prompt').hide()
+						}
+						var activityRule=data.activity.activityRule.split(' ')
+						var news={}
+						news.news=activityRule
+						var obj={data:data,picUrl:api.picUrl,news:news};
+						util.render("#content",obj,".content");
+						$('.coupon ul').width(($('.coupon li').width()+5)*$('.coupon li').length)
+						if($('.coupon ul li').length==1){
+							$('.coupon ul').css('margin','0 auto')
+						}
+						shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.activity.shareTitle,data.activity.shareContent,"http://" + document.domain + "/activity/coupon.html?redPacketUserId="+data.id,"http://" + document.domain +api.picUrl + data.activity.sharePrint);
+						if(data.packetStatus==1){
+							ajax.post(api.baseServerUrl + "/redPacketActivtiy/openAuthority/userMobile",{
+								"redPacketUserId":redPacketUserId
+								},function(data) {
+									$('.content').find('#tel').html(data.substring(0,3)+"****"+data.substring(7,11));
+								})
+						}
+					})
+				}
+				
+					
+				
+				
+				
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>礼品接收</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/jieshoulipin.css?t=20161117&v4">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" href="/css/address/mobiscroll.ios.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/address/style.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/address/cityLayout.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/order/choice-time.css?t=20161117" />
+</head>
+<body>
+	<div class="body">
+	<div class="lipin">
+		<div class="lipin-content">
+		<div class="lipin-list">
+			
+			<ul>
+				
+			</ul>
+		</div>
+		<script id="lipin-list" type="dot/tmpl">
+			{{~it.children:data:i}}
+				{{~data.orderItems:goods:j}}
+					<li id="{{=goods.goodsId}}">
+						<img src="{{=picUrl}}{{=goods.goodsPhoto}}">
+						<div>
+							<h3>{{=goods.goodsName}}</h3>
+							{{?goods.goodsDesc}}<p>{{=goods.goodsDesc}}</p>{{?}}
+							<span>x<a class="goodsCount">{{=goods.goodsCount}}</a></span>
+						</div>
+						
+					</li>
+				{{~}}
+			{{~}}
+		</script>
+		<div class="bg"></div>
+		<div class="address-firm">
+			<div class="address-firm-title">
+				<p>是否确认提交收货信息？</p>
+			</div>
+			<div class="address-firm-list">
+				<p style="display:none"></p>
+				<p class="cancel">取消</p>
+				<p class="confirm">确定</p>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<div class="information">
+			
+			<div class="address-add" style="margin-bottom: 0">
+				<form action="" method="post">
+					<ul style="background: none;">
+						<li>
+							<span>收货人：</span><input type="text" class="inp" id="name"/><a class="del"></a>
+							<input type="hidden" id="addressId" value = "">
+							<div class="clear"></div>
+						</li>
+						<li>
+							<span>手机号码：</span><input type="text" class="inp" id="phone" maxlength="11"/><a class="del"></a>
+							<div class="clear"></div>
+						</li>
+						<li>
+							<span style="float: left;">所在地区：</span>
+							<div class="ziquxxli" style="position: relative;float: left;">
+								<div id="xinjlxaq" class="p15_0 fr shadds-r" contenteditable="true" style="position: relative;z-index: 2;">
+									<input style="line-height: 0.9375rem;" readonly="readonly" type="text" id="provinceName_1"  class="inputFocus proCityQueryAll proCitySelAll" placeholder="所在省市">
+									<input type="hidden" id="provinceName" readonly="readonly">
+									<input type="hidden" id="cityName" readonly="readonly">
+								</div>
+								<b>去选择</b>
+							</div>
+							<div class="clear"></div>
+						</li>
+						<li>
+							<span>详细地址：</span>
+							<textarea class="inp" id="address"></textarea><a class="del" style="top: 0.546875rem;"></a>
+							<div class="clear"></div>
+						</li>
+						<li>
+							<span class="fahuoshijian" style="width: 100%;">制定发货时间 <b id="time-select" style="float: right;font-family:PingFangSC-Regular;margin-right: 0.3125rem;font-weight: normal;color:#c7a994;">去选择</b></span>
+						</li>
+					</ul>
+				</form>
+				<div class="address-save"></div>
+				<div class="tishi"><p>温馨提示：崇明老母鸡配送仅支持市区，不支持区县配送。详细信息请联系客服010-57455124</p></div>
+			</div>
+		</div>
+		</div>
+	</div>
+	
+	
+	<!-- ==============================地址选择弹出层======================================== -->
+	<div class="provinceCityAll">
+		<div class="add_new_All">
+			<div class="tabs clearfix">
+				<ul class="">
+					<li class="li_add">
+						<a href="javascript:" class="current" tb="provinceAll">省份</a>
+					</li>
+					<li>
+						<a href="javascript:" tb="cityAll" id="cityAll">城市</a>
+					</li>
+				</ul>
+			</div>
+			<div class="con">
+				<div class="provinceAll invis">
+					<div class="pre">
+						<a>&lt;</a>
+					</div>
+					<div class="list">
+						<ul>
+	
+						</ul>
+					</div>
+					<div class="next">
+						<a class="can">&gt;</a>
+					</div>
+				</div>
+				<div class="cityAll invis">
+					<div class="pre">
+						<a>&lt;</a>
+					</div>
+					<div class="list">
+						<ul>
+	
+						</ul>
+					</div>
+					<div class="next">
+						<a class="can">&gt;</a>
+					</div>
+				</div>
+	
+			</div>
+		</div>
+	</div>
+	</div>
+	<div id="selectTime" style="width: 100%;"></div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/js/init-fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/public.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/queryAllProvinces.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryCities.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/gift/jieshoulipin.js?t=20161117"></script>
+</body>
+</html>

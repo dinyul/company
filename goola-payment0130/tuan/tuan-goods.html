@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好团</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/tuan/css/tuan-goods.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="goods">
+			
+		</div>
+		<script type="dot/tmpl" id="goods">
+			<img src="{{=it.picUrl}}{{=it.data.goodsPic}}" />
+			<div class="message">
+				<h3><a>{{=it.data.groupBuyingPeopleNumber}}人团</a>{{=it.data.goodsName}}</h3>
+				<p>¥<span>{{=(it.data.groupBuyingPrice)}}</span><span>¥{{=(it.data.preferentialPrice).toFixed(2)}}</span></p>
+				<a>已团<span>{{=it.data.saleCount}}</span>件</a>
+				<div class="icon"><img src="imgs/icon5.png"/></div>
+			</div>
+			<div class="clear"></div>
+		</script>
+		<div class="part1">
+			<p class="title">该商品正在进行中的拼团：</p>
+			<ul></ul>
+			<script type="dot/tmpl" id="part1">
+				{{?it.data.orderList.length>0}}
+					{{~it.data.orderList:data:i}}
+						<li>
+							<img src="{{=data.userPhoto}}" />
+							<h3>{{=data.wxName}}<span>剩余名额{{=data.remainPerson}}</span></h3>
+							<p>拼团还剩 <span class="settime tuan-settime" id="{{=data.remainIngTime+new Date().getTime()}}"></span></p>
+							{{?data.status==5}}
+							<a href="complete.html?activityId={{=data.activityId}}&goodsId={{=data.goodsId}}&groupBuyingOrderUserId={{=data.id}}">去参团</a>
+							{{??}}
+							<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=cantuan&id={{=data.id}}&activityId={{=data.activityId}}">去参团</a>
+							{{?}}
+						</li>
+					{{~}}
+				{{??}}
+				<img src="imgs/pintuan.png" />
+				<p>没有发起中的团，快去开团吧</p>
+				{{?}}
+			</script>
+		</div>
+		<div class="part2" style="display: none;">
+			<p class="title">看一看其他商品正在进行中的团：</p>
+			<ul></ul>
+			<script type="dot/tmpl" id="part2">
+				{{~it.data:data:i}}
+				<li>
+					<img src="{{=it.picUrl}}{{=data.goodsPic}}" />
+					<div class="message">
+						<h3>{{=data.goodsName}}</h3>
+						<p>¥<span>{{=(data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(data.preferentialPrice).toFixed(2)}}</span><span>已团<a>{{=data.saleCount}}</a>件</span></p>
+						<div>
+							<img src="{{=data.userPhoto}}" />
+							<h3><b>{{=data.wxName}}</b><span>剩余名额{{=data.remainPerson}}</span></h3>
+							<p>拼团还剩<span class="settime tuan-settime" id="{{=data.remainIngTime+new Date().getTime()}}"></span></p>
+							{{?data.status==5}}
+							<a href="complete.html?activityId={{=data.activityId}}&goodsId={{=data.goodsId}}&groupBuyingOrderUserId={{=data.id}}">去参团</a>
+							{{??}}
+							<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=cantuan&id={{=data.id}}&activityId={{=data.activityId}}&id={{=data.id}}">去参团</a>
+							{{?}}
+						</div>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{{~}}
+			</script>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script src="/tuan/js/tuan-goods.js"></script>
+</body>
+</html>

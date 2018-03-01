@@ -1,0 +1,179 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/distribution/fStatic/mui/js/echo.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/fStatic/mui/js/jquery.json.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<title>分享活动</title>
+		<meta charset="utf-8" />
+		<style>
+		.mui-card.widthall
+		{
+			margin: 0px;
+			border-radius: 0px;
+			box-shadow: 0 0px 0px;
+		}
+		.mui-card-content-inner
+		{
+			padding: 0px;
+		}
+		.mui-card.widthall.margin-line
+		{
+			margin-top: 12px;
+		}
+		.mui-card-content img
+		{
+			width: 100%;
+		}
+		.mui-checkbox input[type=checkbox], .mui-radio input[type=radio]
+		{
+			top: 7px;
+		}
+		.mui-checkbox.mui-left label, .mui-radio.mui-left label
+		{
+			padding-left: 43px;
+		}
+		.mui-checkbox input[type=checkbox]:checked:before, .mui-radio input[type=radio]:checked:before
+		{
+			color: #fa2f3e;
+		}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">推广分享</h1>
+			<p class="shareButton" style="width:80px;text-align:right;font-size: 17px;font-weight: 500;line-height: 44px;float: right;margin-bottom: 0;display: none;">分享</p>
+		</header>
+		<div class="mui-content">
+			
+		</div>
+		<script id="moduleTmpl" type="dot/tmpl">
+		{{~ it.data:data:i}}
+			
+
+				{{~ data.indexModuleActivityList:goods:j}}
+				<div class="mui-card widthall margin-line"  textType="{{=goods.type}}" goodsId="{{=goods.goodsId}}" goodsUrl="{{=goods.url}}">
+					<div class="mui-card-header mui-radio mui-left">
+						<label>{{=goods.name}}</label>
+						<input name="radio1" type="radio" id="radio1">
+					</div>
+					<div class="mui-card-content mui-card-media">
+						<img data-echo="{{=picUrl}}{{? data.viewStyle == 3}}{{=goods.shareImg}}{{??}}{{=goods.banner}}{{?}}" >
+					</div>
+					<div class="mui-card-footer mui-card-media">
+						<div class="mui-card-content-inner">
+							<p style="color: #333;">{{=goods.shareTitle}}</p>
+							<p>{{=goods.shareDesc}}</p>
+							<p style="display:none">{{=picUrl}}{{=goods.shareImg}}</p>
+						</div>
+					</div>
+				</div>
+				{{~}}
+
+		{{~}}
+		</script>
+		<script type="text/javascript">
+		echo.init({
+			offset: 0,
+			throttle:0,
+			unload: false,
+			callback: function (element, op) {
+			}
+		});
+
+		 $(function() {
+			(function(api, util, ajax){
+				
+				getPromotionInfo();
+				function getPromotionInfo() {
+					ajax.post(api.baseServerUrl + "/mod/getModules",{
+					},function(data) {
+						var obj = {data:data.rows,picUrl:api.picUrl};
+						util.render("#moduleTmpl",obj, ".mui-content");
+						
+						//处理选中第一个
+						$("input:radio").each(function (i){
+						if(i == 0){
+							$(this).attr("checked","true");
+							var banner = $(this).parent().parent();
+						    var p = $(this).parent().next().next().find('p');
+						    var title = p[0].innerHTML;
+						    var desc = p[1].innerHTML;
+							var shareUrl = "";
+						    if (banner.attr("textType") == 1) {
+								shareUrl = banner.attr("goodsUrl");
+								expandUrl = "?expandCode="+ expandCode;
+								if(shareUrl.indexOf("?") > 0){
+									expandUrl = "&expandCode="+ expandCode;
+								}
+								shareUrl = shareUrl + expandUrl;
+							} else {
+								shareUrl = "/shangpin/shangpinxiangqing.html?goodsId=" + banner.attr("goodsId")+ "&expandCode="+ expandCode;
+							}
+							var imageUrl = p[2].innerHTML;
+
+							shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,desc, "http://"+ document.domain + shareUrl,"http://"+ document.domain + imageUrl );
+						}
+						});
+						
+					});
+				}
+
+				var expandCode;
+				ajax.post(api.baseServerUrl + "/distribution/currentUser/",{}
+				,function(data) {
+					expandCode = data.expandCode;
+				});
+			
+				$(".mui-content").delegate(":radio","click",function(){
+					var banner = $(this).parent().parent();
+				    var p = $(this).parent().next().next().find('p');
+				    var title = p[0].innerHTML;
+				    var desc = p[1].innerHTML;
+					var shareUrl = "";
+					if (banner.attr("textType") == 1) {
+						shareUrl = banner.attr("goodsUrl");
+						expandUrl = "?expandCode="+ expandCode;
+						if(shareUrl.indexOf("?") > 0){
+							expandUrl = "&expandCode="+ expandCode;
+						}
+						shareUrl = shareUrl + expandUrl;
+					} else {
+						shareUrl = "/shangpin/shangpinxiangqing.html?goodsId=" + banner.attr("goodsId")+ "&expandCode="+ expandCode;
+					}
+					var imageUrl = p[2].innerHTML;
+
+					shareInfo(ajax, api.baseServerUrl, encodeURI(location.href.split('#')[0]),title,desc, "http://"+ document.domain + shareUrl,"http://"+ document.domain + imageUrl );
+				});
+				
+				
+				
+			})(goola.api, goola.util, goola.ajax)
+		 });
+		 
+		</script>
+	</body>
+</html>

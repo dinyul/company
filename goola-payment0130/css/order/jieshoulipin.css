@@ -1,0 +1,231 @@
+.lipin{
+	background: url(/imgs/gift/jieshou-bg.png?t=20161117&v1) no-repeat;
+	background-size: 100%;
+	height: 15.9375rem;
+	width: 100%;
+}
+.lipin-content{
+    padding-top: 2.71875rem
+}
+.lipin-list{
+	width: 7.6875rem;
+    margin: 0 auto;
+    height: 3.75rem;
+    overflow: auto;
+}
+.lipin-top{
+	width: 4.75rem;
+	height: 0.90625rem;
+	line-height: 0.90625rem;
+	border-bottom: 1px solid #999999;
+	border-top: 1px solid #999999;
+	text-align: center;
+	margin: 0 auto
+}
+.lipin-top p{
+	color: #fa2f3e;
+	font-size: 0.5rem
+}
+
+.lipin-list ul li{
+	margin-bottom: 0.3125rem;
+    height: 1.5625rem;
+}
+.lipin-list ul li img{
+	width: 1.5625rem;
+	margin-right: 0.46875rem;
+	height: 1.5625rem;
+	float: left;
+}
+.lipin-list ul li>div{
+	float: left;
+	width: 5.65625rem;
+	position: relative;
+	height: 1.5625rem
+}
+.lipin-list ul li h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.lipin-list ul li p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+    margin-top: 0.15625rem
+}
+.lipin-list ul li span{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	position: absolute;
+	right: 0;
+	bottom: 0
+}
+.information{
+	width: 7.8125rem;
+	margin: 1.40625rem auto 0
+}
+.information .lipin-top{
+	width: 4.78125rem
+}
+.information .lipin-top p{
+	color: #1b1b1b;
+	font-size: 0.4375rem
+}
+.address-add{
+	margin-top: 0.3125rem;
+}
+.address-add input,.address-add textarea{
+	background: #fff;
+}
+.address-add ul{
+	background: #fff;
+}
+.address-add ul li{
+    height: 0.9375rem;
+    line-height: 0.9375rem;
+}
+.address-add ul li:nth-child(4){
+	padding: 0;
+}
+.address-add ul li:nth-child(4) span{
+	float: left;
+}
+
+.address-add ul li span{
+	display: inline-block;
+	width: 2.15625rem;
+	font-size: 0.375rem;
+	color: #333333;
+}
+.address-add ul li input,.address-add ul li textarea{
+	width:4.6875rem;
+	border:0;
+	font-size: 0.375rem;
+	outline:none;
+	resize:none;
+	padding-right: 0.3125rem;
+	background: none
+}
+.address-add ul li a{
+	display: inline-block;
+	width: 0.25rem;
+	height: 0.25rem;
+	background: url(/imgs/qiehuandizhi/tianjiadizhi.png?t=20161117) no-repeat center center;
+	background-size: 100%;
+	right:2.265625rem;
+	top:0.5rem;
+	position: absolute;
+	 display: none; 
+
+}
+.address-add ul li textarea{
+	line-height: 0.9375rem;
+    height: 0.9375rem;
+}
+.address-add form>div{
+	margin-top: 0.3125rem;
+	background: #fff;
+	padding: 0 0.3125rem;
+	height: 1.09375rem;
+	line-height: 1.09375rem;
+	position: relative;
+}
+.address-add form>div p{
+	padding-left: 1rem;
+}
+.address-add form>div p span{
+	display: block;
+	background-repeat:no-repeat ;
+	background-size:100% ;
+	margin-right: 0.28125rem;
+	position: absolute;
+	top: 0.34375rem;
+	left: 0.34912rem;
+	line-height: 0;
+}
+.address-add form>div p span input{
+	display: inline-block;
+	width: 0.421875rem;
+    height: 0.421875rem;
+    opacity: 0;
+}
+.address-save{
+	width: 3.046875rem;
+    height: 1.25rem;
+	margin: 0.34375rem auto 0;
+}
+.tishi{
+	margin-top: 0.3125rem;
+	display: none;
+}
+.tishi p{
+	color: #fa2f3e;
+    line-height: 0.5625rem;
+}
+.address-save a{
+	font-size: 0.375rem;
+	color: #fff;
+}
+.address-firm{
+	position: fixed;
+	width: 7.8125rem;
+	height: 3.53125rem;
+	top: 50%;
+    left: 50%;
+    margin-left: -3.90625rem;
+    margin-top: -1.765625rem;
+	z-index: 99;
+	background:#fff;
+	border-radius:  0.15625rem;
+	display: none;
+}
+.address-firm .address-firm-title{
+	height: 2.265625rem;
+	line-height: 2.265625rem;
+	border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+}
+.address-firm .address-firm-list{
+	height: 1.21875rem;
+	line-height: 1.21875rem;
+}
+.address-firm .address-firm-list p{
+	text-align: center;
+	width: 50%;
+	float: left;
+	color:#fa2f3e;
+	box-sizing: border-box;
+}
+.address-firm .address-firm-list p:nth-child(2){
+	color:#999999;
+	border-right: 1px solid #e5e5e5;
+}
+.fahuoshijian{
+	background: url(/imgs/gift/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.ziquxxli{
+	
+}
+.ziquxxli b{
+	position: absolute;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	right: -0.546875rem;
+	top: 0;
+	line-height: 0.9375rem;
+	padding-right: 0.3125rem;
+	background: url(/imgs/gift/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem;
+	font-weight: normal;
+	z-index: 1
+}

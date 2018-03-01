@@ -1,0 +1,73 @@
+.purlist_list li{
+	height: 1.5625rem;
+	padding: 0 0.46875rem;
+	line-height: 1.5625rem;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+	background: #fff;
+	border-bottom: 0.03125rem solid #f5f5f5;
+	position: relative;
+}
+.purlist_list li span{
+	float: right;
+	margin-right: 0.78125rem;
+    color: #fa2f3e;
+}
+.purlist_list li a{
+	float: right;
+	background: url(/mobilerack/imgs/purchase/jiantou.png) no-repeat right center;
+	background-size: 0.25rem 0.435937rem;
+	position: absolute;
+	right: 0.46875rem;
+	height: 1.5625rem;
+	width: 0.3125rem
+}
+
+.purchase-search{
+	height: 1.03125rem;
+	padding: 0.171875rem 0.46875rem;
+	background: #fff
+}
+.purchase-search input{
+	border: 1px solid #CACACA;
+	border-radius: 0.09375rem;
+	width: 6.953125rem;
+	height: 1.03125rem;
+	display: block;
+	float: left;
+	line-height: 1.03125rem;
+	padding-left: 0.859375rem;
+	background:#F8F8F8 url(/imgs/search/search.png) no-repeat 0.328125rem center;
+	background-size: 0.375rem 0.375rem
+}
+.purchase-search p{
+	line-height: 1.03125rem;
+	float: right;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+}
+.apply-title{
+	height: 1.25rem;
+	text-align: center;
+	line-height: 1.25rem;
+	font-family: PingFangSC-Regular;
+	font-size: 0.4375rem;
+	color: #313131;
+	background: #fff
+}
+
+.none>img{
+	width: 4.59375rem;
+	height: 3.6875rem;
+	display: block;
+	margin: 0 auto 0.34375rem;
+	padding-top: 1.25rem
+}
+.none>p{
+	font-family:PingFangSC-Light;
+	font-size:0.375rem;
+	color:#999999;
+	text-align: center;
+}

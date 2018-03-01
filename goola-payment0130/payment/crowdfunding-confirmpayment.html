@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>确认支付</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/querenzhifu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="zhifu body">
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/crowdfunding/js/crowdfunding-confirmpayment.js?t=20161117&v1" ></script>
+		<script id="zhifuTmpl" type="dot/tmpl">
+			{{? it.dataStatus == 2}}
+				<div class="zhifu-top">
+					<p><span>订单状态：</span>订单已取消 <span style="margin-left: 0.75rem">订单编号：</span>{{=it.orderCode}}</p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{?? it.data.status == 4}} 
+				<div class="zhifu-top">
+					<p><span>订单状态：</span>订单已支付 <span style="margin-left: 0.75rem">订单编号：</span>{{=it.data.orderCode}}</p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{?? it.data.status == 1}}
+				<div class="zhifu-top">
+					<p><span>订单状态：</span>等待付款 <span style="margin-left: 0.5rem">众筹编号：</span>{{=it.data.code}}</p>
+					<p>订单已提交，请在<a id="time">30分钟00秒</a>内完成支付，超时自动取消</p>
+				</div>
+				<div class="zhifu-info">
+					<p>{{=it.data.receiverName}}<span>{{=it.data.receiverPhone}}</span></p>
+					<p>{{=it.data.receiverAddress}}</p>
+				</div>
+				<div class="zhifu-content">
+					<div class="business" id="shoppingList">
+						<div class="title">
+						<p>{{=it.data.goods.providerName}}</p>
+						</div>
+						<div class="good-info">
+							<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+							<div class="title1">
+								<p>{{=it.data.goods.goodsName}}</p>
+								<span>规格：{{=it.data.goods.specifications}}</span>
+							</div>
+							<div class="price"><p>¥{{=it.data.goods.preferentialPrice}}</p></div>
+							<div class="clear"></div>
+						</div>
+					</div>
+					<div class="info" style="background: #fff;">
+						<p>商品总价<span>¥{{=(it.data.price).toFixed(2)}}</span></p>
+						<p>运费（快递）<span>¥{{=(it.data.carriage).toFixed(2)}}</span></p>
+						<p>优惠券抵现<span>¥{{=(it.data.preferential).toFixed(2)}}</span></p>
+						
+					</div>
+					<div class="crowdfunding" style="background: #fff;">
+						<p>众筹金额<span>¥{{=(it.data.crowdPrice).toFixed(2)}}</span></p>
+					</div>
+					
+				</div>
+				<div class="pay">
+					<p>需付款<span>¥{{=(it.data.startPrice).toFixed(2)}}</span></p>
+				</div>
+				<div class="bottom">
+					<p id="{{=it.orderId}}">去付款</p>
+				</div>
+			{{?}}
+		</script>
+	</body>
+</html>

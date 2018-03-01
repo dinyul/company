@@ -1,0 +1,94 @@
+<!doctype html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>资料库</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/distribution/css/database.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="fanhui" style="display: none;">
+				<span id="fanhui"></span>
+				<p>资料库</p>
+			</div>
+			<div class="details">
+				
+			</div>
+			<script type="dot/tmpl" id="details">
+				<div class="user">
+					<img src="{{? it.data.dataSource==1}}{{=it.picUrl}}{{?}}{{=it.data.wxPhoto}}" />
+					<p>{{=it.data.wxName}}</p>
+					<span>{{=it.data.createDate}}</span>
+				</div>
+				<div class="message" id="{{=it.data.id}}">
+					<p class="title" style="font-size: 16.000000pt;font-weight: bold;margin: 0 0 32px 0;">{{=it.data.title}}</p>
+					<div class="info1">{{=it.data.content}}</div>
+					{{~ it.data.distributionMaterialPicturesList:data:i}}
+					<img src="{{=it.picUrl}}{{=data.picture }}" />
+					{{~}}
+					{{?it.data.isAdopt==1}}
+					<span class="adopted">已采纳<a>{{=it.data.adoptCount}}</a></span>
+					{{??}}
+					<span class="adopt">采纳<a>{{=it.data.adoptCount}}</a></span>
+					{{?}}
+				</div>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script>
+			(function(api,util,ajax){
+				
+				var distributionMaterialId=util.getUrlParams("id")
+				var type=util.getUrlParams('type')
+				if(type!=1){
+					$('.fanhui').show()
+				}
+				
+				ajax.post(api.baseServerUrl + "/distributionMaterial/selectMaterialById",{
+					"distributionMaterialId":distributionMaterialId
+				},function(data) {
+					var obj = {data:data,picUrl:api.picUrl}
+					util.render("#details", obj, ".details");
+					$('.info1 img').each(function(){
+						$(this).width($(this).width()/64+'rem')
+							   .height('auto')
+						       .css('max-width','9.375rem')
+					})
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data.title,Trim($('.info1').text(),"g"),"http://" + document.domain + "/distribution/data/data-details.html?id="+distributionMaterialId,"http://" + document.domain +"/distribution/imgs/111902551890689053.png");
+					
+				});
+				$('.details').delegate('.adopt','click',function(){
+					$('.database').find('.adopt').removeClass('adopted')
+					$(this).addClass('adopted')
+					ajax.post(api.baseServerUrl + "/distributionMaterial/saveMaterialAdopt",{
+						"distributionMaterialId":$(this).parent().attr('id')
+					},function(data) {
+						$('.details').find('.adopted').html("已采纳<a>"+(Number($('.details').find('.adopted').find('a').html())+1)+"</a>")
+						$('.details').find('.adopted').removeClass('adopt')
+					})
+					
+				})
+				$('#fanhui').click(function(){
+					window.location.href='database.html'
+				})
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好甄选</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/muji.css?t=20161117">
+		<style>
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="zhuanti-top">
+				<img class="lazy" data-original="../imgs/muji/muji_02.jpg?v2"/>
+				<div class="choice">
+					<span>请选择：</span>
+					<ul>
+						<li goods="1820" price='198' class="xuanze">一只装</li>
+						<li goods="1821" price='298'>两只装</li>
+					</ul>
+				</div>
+				<div class="price">¥<span>198</span></div>
+				<div class="buy"><img src="/imgs/muji/jiarugouwuche.jpg?t=20161117"></div>
+			</div>
+			<img class="lazy" data-original="../imgs/muji/muji_03.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_04.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_05.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_06.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_07.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_08.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_09.jpg?v2" />
+			<img class="lazy" data-original="../imgs/muji/muji_10.jpg?v2" />
+		</div>
+		<div class="nav"></div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			$(function() {
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 500
+				});
+				(function(api,util,ajax){
+					var title="甜言蜜语不如送礼，送礼就送崇明老母鸡-真正散养的绿色健康鸡";
+					var description="精选绿色散养崇明母鸡，温中益气、滋阴补气，一锅时光沉淀，释放浓浓爱意。"
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/muji-share.jpg");
+				})(goola.api,goola.util,goola.ajax)
+			});
+			$('.choice ul li').click(function(){
+					$('.choice ul li').removeClass('xuanze')
+					$(this).addClass('xuanze')
+					$('.price span').html($(this).attr('price'))
+				})
+		
+				$('.buy').click(function(){
+					var goodsId=$('.choice').find('.xuanze').attr('goods');
+					var goodsPrice=$('.choice').find('.xuanze').attr('price')
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.buy','click', addCart);
+				})
+			function addCart(event) {
+				var a=$(this).offset().top-$(document).scrollTop();
+				var offset = $('#selectedTotal').offset(), flyer = $('<img class="u-flyer" src="../imgs/shouye-gouwuche.png"/>');
+				var endTop=$('#selectedTotal').offset().top-$(document).scrollTop()
+				flyer.fly({
+				    start: {
+				        left: event.pageX,
+				        top: a
+				    },
+				    end: {
+				        left: offset.left,
+				        top: endTop,
+				        width: 0,
+				        height: 0
+				    }
+				});
+				}
+
+		</script>
+		
+	</body>
+</html>

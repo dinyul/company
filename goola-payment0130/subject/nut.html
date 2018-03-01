@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>新疆干果</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			body>a{
+				display: block;
+			}
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="nut-list" goodsId="1860">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1860">
+				<img class="lazy" data-original="../imgs/subject/nut/01.jpg" />
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1863">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1863">
+				<img class="lazy" data-original="../imgs/subject/nut/02.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1866">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1866">
+				<img class="lazy" data-original="../imgs/subject/nut/03.jpg" />
+			
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1865">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1865">
+				<img class="lazy" data-original="../imgs/subject/nut/04.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			
+			<div class="nut-list" goodsId="1861">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1861">
+				<img class="lazy" data-original="../imgs/subject/nut/06.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1862">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1862">
+				<img class="lazy" data-original="../imgs/subject/nut/07.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<img class="lazy" data-original="../imgs/subject/yimacha/yima_img-13.jpg?v1" />
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 800
+				});
+				var title="更好甄选-来自大漠的盛宴";
+				var description="选自优越产地的果实，带你感受大美新疆地道本土干果"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/nut/share.jpg");
+				$('.nut-buy').click(function(){
+					var goodsId=$(this).parent().attr('goodsId');
+					//var goodsPrice=$(this).parent().find('i').text()
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.nut-buy','click', addCart);
+				})
+				
+				
+				})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>移动货架</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=1710111601"/>
+		<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/list.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/rack-shopping-bottom.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="rack">
+				<div class="swiper-container">
+					<div class="swiper-wrapper banner">
+						
+					</div>
+					<div class="swiper-pagination"></div>
+				</div>
+				<script id="bannerTmpl" type="dot/tmpl">
+					{{~ it.data :data:i}}
+					{{~data.shelvesSaleBannerItemList:list:j}}
+						<div class="swiper-slide"><a href="{{=list.url}}"><img src="{{=picUrl}}{{=list.bannerPicture}}"/></a></div>
+					{{~}}
+					{{~}}
+				</script>
+				<div class="commonweal">
+					<p>已有<span></span>名捐赠者助力“爱角落·更好”<a href="/mobilerack/commonweal.html">去看看</a></p>
+				</div>
+				<div class="title">
+					<p><span></span></p>
+				</div>
+				<div class="modal"></div>
+				<script id="modal" type="dot/tmpl">
+					{{~it.data:data:i}}
+					{{~data.shelvesSaleSpecialItemList:list:j}}
+					<a href="{{=list.url}}"><img src="{{=picUrl}}{{=list.bannerPicture}}"/></a>
+					{{~}}
+					{{~}}
+				</script>
+				<div class="rack-btn">
+					<a class="btn"><img src="/mobilerack/imgs/scan_button.png"/></a>
+					<p>点击扫描商品的条形码</p>
+				</div>
+			</div>
+		</div>
+		<div class="bottom2">
+			<a href="javascript:;" class="shouye">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/menu1-1.png"/>
+			</a>
+			<a href="/payment/rack-shopping.html" class="gouwuche">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/shopcart1.png"/>
+				<div class="gwc" id="selectedTotal">
+					<span id="goodsCount"></span>
+				</div>
+			</a>
+			<a href="/mobilerack/gerenzhongxin2.html">
+				<img src="/imgs/payment/rack-shopping/gerenzhongxin2/icon4/my1.png"/>
+			</a>
+		</div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script src="/lib/jquery.fly.min.js?t=1710111601"></script>
+		<script src="/js/gouwuche/Operation.js?t=1710111601"></script>
+		<script src="/mobilerack/js/car.js?t=1710111601"></script>
+		<script src="/mobilerack/js/main.js?t=1710111601"></script>
+		<script src="/mobilerack/js/scanQRCode.js?t=1710111854"></script>
+		<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var shopId=util.getUrlParams("shopId")
+				setCookie("shopId", shopId);
+				$(".shouye").click(function(){
+					window.location.href="/mobilerack/mobilerack.html?shopId=" + shopId;
+				})
+				ajax.post(api.baseServerUrl + "/shop/getOpenId",{
+					},function(data) {
+					})
+				showBanner()
+				function showBanner(){
+					ajax.post(api.baseServerUrl + "/volunteer/shelvesSaleBanner/openAuthority/findList",{
+					},function(data) {
+						var obj={data:data,picUrl:api.picUrl};
+						util.render("#bannerTmpl",obj,".banner");
+						var mySwiper = new Swiper('.swiper-container', {
+								loop: true,
+								autoplay: 5000,
+								pagination: '.swiper-pagination',
+								paginationClickable :true,
+								autoplayDisableOnInteraction: false
+						})
+					});
+				}	
+				list()
+				function list(){
+					ajax.post(api.baseServerUrl + "/volunteer/shelvesSaleSpecial/openAuthority/findList",{
+					},function(data) {
+						var obj={data:data,picUrl:api.picUrl};
+						util.render("#modal",obj,".modal");
+						
+					});
+				}	
+				
+				ajax.post(api.baseServerUrl + "/publicBenefit/openAuthority/findPageVolunteerInfo",{
+					'pageNo':1,'pageSize':20
+				},function(data) {
+					$('.commonweal span').html(data.total)
+				})
+				
+				ajax.post(api.baseServerUrl + "/shop/getShopInfo",{shopId:shopId
+					},function(data) {
+						$('.title span').html(data.name+'店')
+					})
+				$('.btn').click(function(){
+					scanQRCode(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),shopId)
+				})
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

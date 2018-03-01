@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好团</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/tuan/css/my-tuan.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<nav>
+			<ul>
+				<li class="checked" id="1">未成团</li>
+				<li id="2">已成团</li>
+				<li id="3">拼团失败</li>
+			</ul>
+		</nav>
+		<div class="list">
+			<ul>
+				
+			</ul>
+			<script id="list" type="dot/tmpl">
+				{{?it.data}}
+				{{~it.data:data:i}}
+					<li{{?(data.payStatus==1 || it.type==2) && it.type!=3}} class="complete" id="{{=data.id}}" activityId="{{=data.activityId}}" goodsId="{{=data.goodsId}}"{{?}} >
+						{{?it.type==2}}
+						<p>{{=getFormatDate(data.finishedDate)}}</p>
+						{{?}}
+						<div>
+							<img src="{{=it.picUrl}}{{=data.goodsPic}}" />
+							{{?data.payStatus==0}}
+							<img src="imgs/icon16.png" class="payimg"/>
+							{{?}}
+							<div class="message">
+								<h3><a>{{=data.groupBuyingPeopleNumber}}人团</a>{{=data.goodsName}}</h3>
+								<p>¥<span>{{=(data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(data.preferentialPrice).toFixed(2)}}</span><span>已团<a>{{=data.saleCount}}</a>件</span></p>
+								{{?it.type==1}}
+									{{?data.payStatus==1}}
+									<a>剩余名额{{=data.remainPerson}}</a>
+									<p class="time">拼团还剩 <a class="settime tuan-settime my-tuan" id="{{=data.remainIngTime+new Date().getTime()}}"></a> 结束</p>
+									<div class="btn yaoqing" id="{{=data.id}}" activityId="{{=data.activityId}}" goodsId="{{=data.goodsId}}"><img src="imgs/icon2.png"/></div>
+									{{?? data.payStatus==0}}
+									<div class="pay-btn">
+										<a class="quxiao" orderUserId="{{=data.orderUserId}}"><img src="imgs/icon03.jpg"/></a>
+										<a class="zhifu" href="../payment/tuan-confirmpay.html?groupBuyingOrderUserId={{=data.orderUserId}}"><img src="imgs/icon05.jpg"/></a>
+									</div>
+									{{?}}
+								{{??it.type==2}}
+								<div class="btn ywc" orderId="{{=data.orderId}}"><img src="imgs/icon1.png"/></div>
+								<div class="icon"><img src="imgs/icon4.png"/></div>
+								{{??it.type==3}}
+								<a>&nbsp;</a>
+								<p class="time">拼团剩余时间 已结束</p>
+								<div class="icon"><img src="imgs/icon6.png"/></div>
+								{{?}}
+							</div>
+							<div class="clear"></div>
+						</div>
+					</li>
+				{{~}}
+				{{??}}
+				<img src="imgs/pintuan.png" />
+				<p>拼团列表为空，快去开团吧</p>
+				{{?}}
+			</script>
+		</div>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script src="/tuan/js/my-tuan.js"></script>
+</body>
+</html>

@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>排行榜</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/index.css">
+		<link rel="stylesheet" type="text/css" href="/distribution/css/rankinglist.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="rank">
+				<div class="ranktop">
+					
+				</div>
+				<script id="ranktop" type="dot/tmpl">
+					<h2>活动规则说明</h2>
+					<p>{{=decodeURI(it.decodeActivityDesc)}}</p>
+					<h4>TIME：{{=(it.activityStartTime).split(' ')[0]}}-{{=(it.activityEndTime).split(' ')[0]}}</h4>
+				</script>
+				<ul class="list"></ul>
+				<p class="none" style="display: none;text-align: center;line-height: 1.25rem;">没有更多数据了~</p>
+				<script id="list" type="dot/tmpl">
+					{{~it.data:data:i}}
+					<li>
+						<div class="left">
+							{{?data.rank==1 || data.rank==2 || data.rank==3}}
+							<img src="../imgs/rank-icon{{=data.rank}}.png" />
+							{{?}}
+							<p>NO.{{=data.rank}}</p>
+						</div>
+						<div class="name">
+							<h2>{{=data.orgName}}</h2>
+							<p>总销售额</p>
+						</div>
+						<div class="price">
+							<p>¥{{=(data.salePrice).toFixed(2)}}</p>
+						</div>
+					</li>
+					{{~}}
+				</script>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script type="text/javascript">
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/order/getEffectiveStatsActivity",{
+						
+				},function(data) {
+					console.log(data)
+					util.render("#ranktop", data, ".ranktop");
+				});
+				
+				
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				list(1,20)
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.database').find('li').length>=total){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+						
+					}
+				});
+				
+				
+				function list(pageNo,pageSize){
+					ajax.post(api.baseServerUrl + "/order/getOrgOrderSales",{
+						'pageNo':pageNo,'pageSize':pageSize
+					},function(data) {
+						total=data.total
+						pageTotal=parseInt(total/pageSize)+1
+						if( total<=20){
+							$('.none').show()
+						}
+						var obj = {data:data.rows,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#list').html());
+						var html = doTtmpl(obj);
+						$('.list').append(html)
+							
+					});
+				}
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

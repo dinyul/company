@@ -1,0 +1,156 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>为爱许愿</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/crowdfunding/css/my-crowdfunding.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div id="FontScroll" >
+			    <ul class="FontScroll-list">
+			    </ul>
+			</div>
+			<script type="dot/tmpl" id="FontScroll-list">
+				{{~ it :data:i}}
+				<li><p>{{=data.wechatName}}<span>完成了心愿,获得了{{=data.goodsName}}</span></p></li>
+				{{~}}
+			</script>
+			<div class="content" style="margin-bottom: 2.266667rem;"></div>
+			<script id="content" type="dot/tmpl">
+				<div class="content-top">
+					<div class="crowd-info">
+						<div class="left">
+							<img src="{{=it.data.wechatHead}}" />
+						</div>
+						<div class="right">
+							<p><a style="display: inline-block;width: 3.78125rem;height: 0.373333rem;line-height:0.373333rem;overflow: hidden;white-space: nowrap;text-overflow: ellipsis;">{{=it.data.userName}}</a><span>发起时间{{=(it.data.createDate).split(' ')[0]}}</span></p>
+							<p>{{=it.data.slogan}}</p>
+							
+						</div>
+						<div class="clear"></div>
+					</div>
+					<div id="crowd-shoppingList">
+						<div class="business">
+							<p>{{=it.data.goods.providerName}}</p>
+						</div>
+						<div class="good-info">
+							<a style="display: block;" href="../shangpin/shangpinxiangqing.html?goodsId={{=it.data.goods.goodsId}}">
+								<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+								<div class="title">
+									<p>{{=it.data.goods.goodsName}}</p>
+									<span>规格：{{=it.data.goods.specifications}}</span>
+								</div>
+								<div class="price"><p>¥{{=it.data.goods.preferentialPrice}}</p></div>
+								<div class="clear"></div>
+								<p style="position: absolute;bottom: 0.3125rem;right: 0.3125rem;color: #fa2f3e;">已付：¥{{=(it.data.startPrice+it.data.preferential).toFixed(2)}}</p>
+							</a>
+						</div>
+						
+					</div>
+				</div>
+				<div class="content-bottom">
+					<div class="jindu">
+						<div class="jindu-top">
+							{{? it.data.status == 2}}
+							<h2>心愿实现中</h2>
+							{{?it.data.status == 2 && it.data.leftDays=="心愿已完成"}}
+							<p>今天24点后心愿即将失败</p>
+							{{??}}
+							<p>{{=it.data.leftDays}}</p>
+							{{?}}
+							{{?? it.data.status == 4}}
+							<h2>心愿已实现</h2>
+							{{?? it.data.status == 5 || it.data.status == 6}}
+							<h2>心愿未完成</h2>
+							{{?}}
+						</div>
+						<div class="jindu-content" >
+							<div class="jindutiao"><div class="jindu-jieshu"></div></div>
+							<ul>
+								<li><p>已支持:<span>¥{{=(it.data.finishPrice).toFixed(2)}}</span></p></li>
+								<li><p>{{=it.data.finishPercent}}%</p></li>
+								<li><p>心愿价格:<span style="color: #1b1b1b;">¥{{=(it.data.crowdPrice).toFixed(2)}}</span></p></li>
+							</ul>
+						</div>
+					</div>
+					<div class="zhichi">
+						<div class="zhichi-top">
+							<h2>友情支持</h2>
+							<p>支持人数：{{=it.data.supportCount}}</p>
+						</div>
+						<ul>
+							{{~it.data.crowdfundingItemList :data:i}}
+							<li>
+								<div class="left">
+									<img src="{{=data.wechatHead}}" />
+									{{?data.type==2}}
+									<img src="../crowdfunding/imgs/my-wish/choukuan-icon.png" class="zc-icon"/>
+									{{?}}
+								</div>
+								<div class="right">
+									<p class="name">
+										<span style="float: left;display: inline-block;width: 3.515625rem;overflow: hidden;text-overflow: ellipsis;white-space: nowrap;">{{=data.wechatNickname}}</span>
+										{{? data.status==1}}
+										<span><a class="fukuan" id="{{=data.id}}" payable="{{=data.payable}}" code="{{=data.code}}">(待付款>)</a></span>
+										{{?}}
+										<span>
+										{{? data.type==1}}
+										支付
+										{{?? data.type==2}}
+										支持
+										{{?? data.type==3}}
+										帮TA砍价
+										{{?}}
+										<a>{{=(data.price).toFixed(2)}}元</a></span>	
+									</p>
+									<p class="liuyan"><span>{{?data.message}}{{=data.message}}{{??}}好友没有留言哦~{{?}}</span><span style="float: right;">{{=data.shortCreateDate}}</span></p>
+								</div>
+								<div class="clear"></div>
+							</li>
+							{{~}}
+						</ul>
+					</div>
+				</div>
+			</script>
+			<div class="danmu">
+				<ul>
+				</ul>
+			</div>
+			<script type="dot/tmpl" id="danmu">
+			{{~it.data:data:i}}
+				<li><div><img src="{{=data.wechatHead}}"/><p><span>{{=data.wechatName}}</span>{{=data.barrageContent}}</p></div></li>
+			{{~}}
+			</script>
+			<div class="crowdfunding-bottom" style="display: none;">
+				<a class="zaici" href="../crowdfunding/wish.html"><img src="/crowdfunding/imgs/my-wish/crowd.png"/></a>
+				<a class="kanjia"><img src="/crowdfunding/imgs/my-wish/kanjia.png"/></a>
+				<a class="bangmang"><img src="/crowdfunding/imgs/my-wish/bangmang.png"/></a>
+			</div>
+			<div class="crowdfunding-footer" style="display: none;">
+				<a class="home" href="../index.html"><img src="/crowdfunding/imgs/my-wish/crowd-home.png"/></a>
+				<a class="zaici" href="../crowdfunding/wish.html"><img src="/crowdfunding/imgs/my-wish/crowd.png"/></a>
+			</div>
+			<p class="jianyi">谢谢你的爱心，为TA减少了<span></span>元硬币</p>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/fontscroll.js?t=20161117&v2"></script>
+		<script type="text/javascript" src="/crowdfunding/js/crowdfunding-share.js"></script>
+		<script type="text/javascript" src="/crowdfunding/js/base.js"></script>
+	</body>
+
+</html>

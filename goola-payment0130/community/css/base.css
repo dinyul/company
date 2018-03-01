@@ -1,0 +1,68 @@
+.community-bottom{
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	height: 1.53125rem;
+	width: 100%;
+	background: #fff;
+	z-index: 5
+}
+.community-bottom li{
+	display: block;
+	float: left;
+	width: 20%;
+	height: 1.53125rem;
+	text-align: center;
+}
+.community-bottom li img{
+	width: 0.6875rem;
+	height: 0.6875rem;
+	display: block;
+	margin: 0.28125rem auto 0.15625rem
+}
+.community-bottom li a{
+	font-family:PingFangSC-Regular;
+	font-size:0.25rem;
+	color:#555555;
+	line-height:0.25rem;
+}
+
+.personal-logo a{
+	display: block;
+	background:#fa2f3e;
+	border-radius:0.078125rem;
+	width:6.25rem;
+	height:0.9375rem;
+	line-height: 0.9375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#ffffff;
+	text-align: center;
+	margin: 0.3125rem auto
+}
+
+.feature ul li h3{
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#333333;
+	line-height:0.3125rem;
+}
+.feature ul li h3 span{
+	color:#666666;
+	margin-left: 0.390625rem;
+	text-decoration: line-through;
+	float: none;
+}
+.feature ul li h4{
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#666666;
+}
+.feature ul li h4 span{
+	color: #fa2f3e
+}
+.feature ul li h4 b{
+	color: #fa2f3e;
+    font-size: 0.375rem;
+    line-height: 0.625rem
+}

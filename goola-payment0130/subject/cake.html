@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>午后甜点</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			body>a{
+				display: block;
+			}
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			
+			<div class="nut-list" goodsId="1993">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1993">
+				<img class="lazy" data-original="../imgs/subject/cake/02.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1989">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1989">
+				<img class="lazy" data-original="../imgs/subject/cake/03.jpg" />
+			
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1988">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1988">
+				<img class="lazy" data-original="../imgs/subject/cake/04.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1991">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1991">
+				<img class="lazy" data-original="../imgs/subject/cake/05.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1992">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1992">
+				<img class="lazy" data-original="../imgs/subject/cake/06.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<div class="nut-list" goodsId="1990">
+				<a href="../shangpin/shangpinxiangqing.html?goodsId=1990">
+				<img class="lazy" data-original="../imgs/subject/cake/07.jpg" />
+				
+				</a>
+				<div class="nut-buy"></div>
+			</div>
+			<img class="lazy" data-original="../imgs/subject/yimacha/yima_img-13.jpg?v1" />
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				$(".lazy").lazyload({
+					effect : "fadeIn",
+					threshold : 800
+				});
+				var title="更好甄选-日本顶级糕点师倾心制作美味";
+				var description="甄选进口原料，采用纯天然配方，每一道工序都辅以十足的耐心，成就了更好品质的蛋糕"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain + "/imgs/subject/cake/share.jpg");
+				$('.nut-buy').click(function(){
+					var goodsId=$(this).parent().attr('goodsId');
+					//var goodsPrice=$(this).parent().find('i').text()
+					addProductinCart(goodsId,0,0,1,-1)
+					$('body').delegate('.nut-buy','click', addCart);
+				})
+				
+				function addCart(event) {
+				var a=$(this).offset().top-$(document).scrollTop();
+				
+				var offset = $('#selectedTotal').offset(), flyer = $('<img class="u-flyer" src="../imgs/shouye-gouwuche.png"/>');
+				var endTop=$('#selectedTotal').offset().top-$(document).scrollTop()
+				
+				flyer.fly({
+				    start: {
+				        left: event.pageX,
+				        top: a
+				    },
+				    end: {
+				        left: offset.left,
+				        top: endTop,
+				        width: 0,
+				        height: 0
+				    }
+				});
+				}
+				})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>定位中</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<style>
+			.lo-logo{text-align: center;padding-top: 5.03125rem;position: relative;z-index: 5;}
+			.lo-logo img{width: 3.546875rem;height: 2.546875rem}
+			.lo-icon{text-align: center;position: relative;z-index: 4;margin-top: -0.9375rem;}
+			
+		</style>
+	</head>
+	<body style="background: #DDDDDD;">
+		<button id="scan" value="扫描">扫描</button>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29"></script>
+		<script>
+		(function(api, util, ajax){
+			$('#scan').click(function(){
+				alert('scan');
+				ajax.post(api.baseServerUrl + "/location/openAuthority/getLocationConfig",{
+					url:encodeURI(location.href.split('#')[0])
+				},function(data) {
+					wx.config({
+						debug: false,
+						appId: data.appid,
+						timestamp: data.timeStamp,
+						nonceStr: data.nonceStr,
+						signature: data.signature,
+						jsApiList: ['scanQRCode']
+					});
+					
+					wx.ready(function () {
+						wx.scanQRCode({
+						    needResult: 1, // 默认为0，扫描结果由微信处理，1则直接返回扫描结果，
+						    scanType: ["qrCode","barCode"], // 可以指定扫二维码还是一维码，默认二者都有
+						    success: function (res) {
+						    var result = res.resultStr; // 当needResult 为 1 时，扫码返回的结果
+						    alert('result:'+result);
+						}
+						});
+					});
+				});
+			})
+		  
+		  })(goola.api, goola.util, goola.ajax);
+		</script>
+	</body>
+</html>

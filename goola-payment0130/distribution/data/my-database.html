@@ -1,0 +1,154 @@
+<!doctype html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>我的资料库</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/distribution/css/database.css" />
+	</head>
+	<body>
+		<div class="body" style="margin-top: 44px;">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">我的资料库</h1>
+			</header>
+			<div class="content">
+				<div class="content1" style="display: none;">
+					<ul class="database" ></ul>
+					<img src="/distribution/imgs/bottom.jpg" class="none" style="display: none;"/>
+				</div>
+				<div class="noinfo" style="display: none;">
+					<p>您还没有添加过资料，快去添加吧</p>
+					<a href="add-data.html">点击添加资料</a>
+				</div>
+			</div>
+			<script type="dot/tmpl" id="content">
+					{{~ it.data:data:i}}
+					<li id="{{=data.id}}">
+						<div class="user">
+							<img src="{{? data.dataSource==1}}{{=it.picUrl}}{{?}}{{=data.wxPhoto}}" />
+							<p>{{=data.wxName}}</p>
+							<span class="adopt del" style="width: 1.25rem;">删除</span>
+						</div>
+						<div class="message {{?data.distributionMaterialPicturesList.length!=0}}img{{?}}">
+							<div class="left"> 
+								<p class="title">{{=data.title}}</p>
+								<div class="info">{{=data.content}}</div>
+							</div>
+							{{? data.distributionMaterialPicturesList.length!=0}}
+							<div class="right">
+								<img src="{{=it.picUrl}}{{=data.distributionMaterialPicturesList[0].picture}}" />
+								{{?(data.pictureCount-1)!=0}}
+								<a>+{{=(data.pictureCount)-1}}</a>
+								{{?}}
+							</div>
+							{{?}}
+						</div>
+					</li>
+					{{~}}
+				
+			</script>
+			<div class="bg"></div>
+			<div class="alert">
+				<div class="alert-top">
+					<p>确认要删除？</p>
+					<p>一经删除，将不可恢复</p>
+				</div>
+				<div class="alert-bottom">
+					<a class="cancel">取消</a>
+					<a class="confirm">确定</a>
+				</div>
+			</div>
+		</div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script>
+			(function(api,util,ajax){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				$('body').find('.app-top').hide()
+				list(1,20)
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.database').find('li').length>=total){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+					}
+				});
+				
+				function list(pageNo,pageSize){
+						ajax.post(api.baseServerUrl + "/distributionMaterial/distributionMaterialList",{
+							"isShowTotal":2,'pageNo':pageNo,'pageSize':pageSize
+						},function(data) {
+							total=data.total
+							pageTotal=parseInt(total/pageSize)+1
+							if( total==0){
+								$('.noinfo').show()
+							}else{
+								$('.content1').show()
+							}
+							var obj = {data:data.rows,picUrl:api.picUrl}
+							var doTtmpl = doT.template($('#content').html());
+							var html = doTtmpl(obj);
+							$('.database').append(html)
+							
+							for(var i=0;i<data.rows.length;i++){
+								$('#'+data.rows[i].id+'').find('.info').html($('#'+data.rows[i].id+'').find('.info').text())
+								$('#'+data.rows[i].id+'').find('.info').html($('#'+data.rows[i].id+'').find('.info').text())
+							}
+						});
+				}
+				
+				$('.content').delegate('.message','click',function(){
+					window.location.href="my-details.html?id="+$(this).parent().attr('id')
+				})
+				$('.content').delegate('.del','click',function(){
+					$('.bg').show()
+					$('.alert').show()
+					$(this).parent().parent().addClass('checked')
+				})
+				$('.cancel').click(function(){
+					$('.bg').hide()
+					$('.alert').hide()
+					$('.database li').removeClass('checked')
+				})
+				$('.confirm').click(function(){
+					$('.bg').hide()
+					$('.alert').hide()
+					ajax.post(api.baseServerUrl + "/distributionMaterial/deleteMaterial",{
+						"distributionMaterialId":$('.content').find('.checked').attr('id')
+					},function(data) {
+						$('.checked').remove()
+					});
+					
+					
+				})
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

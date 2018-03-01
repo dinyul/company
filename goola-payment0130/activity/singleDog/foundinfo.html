@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>单身狗</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/activity/singleDog/css/found.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="foundinfo">
+				
+				<div class="info">
+					<div class="title"></div>
+					<script id="title" type="dot/tmpl">
+						<img src="{{=it.wechatHead}}" />
+						<h2>{{=it.dogCircleName}}的狗圈</h2>
+						<p>目前已入住{{=it.participateNumber}}条单身狗</p>
+						<h3>单身狗王——{{=it.wechatName}}</h3>
+					</script>
+					<img class="icon1" src="/activity/singleDog/imgs/icon2.png"/>
+					<img class="dog" src="/activity/singleDog/imgs/icon3.png" />
+					<div class="talk">
+						<p><span>臣服吧！我的单身狗子民们</span></p>
+					</div>
+					<div class="content"></div>
+				</div>
+				<div class="message"></div>
+				<script id="message" type="dot/tmpl">
+					{{?it.participateNumber<=0}}
+						<div class="message1">
+							<img src="imgs/text1.png" />
+							<a class="yaoqing" id="yaoqing"><img src="imgs/yaoqing.png"/></a>
+						</div>
+					{{??}}
+						<div class="message2">
+							<a class="yaoqing" id="jiejiu"><img src="imgs/yaoqing1.png"/></a>
+							<div class="list">
+								<h2>狗圈记录</h2>
+								<table>
+									<thead>
+										<tr>
+											<td>头像</td>
+											<td>昵称</td>
+											<td>留言</td>
+										</tr>
+									</thead>
+									<tbody>
+										{{~it.singleDogItemList:data:i}}
+										<tr>
+											<td><img src="{{=data.wechatHead}}" /></td>
+											<td>{{=data.wechatName}}</td>
+											<td>{{?data.singleDeclaration}}{{=data.singleDeclaration}}{{??}}懒习惯了，活该单身{{?}}</td>
+										</tr>
+										{{~}}
+										
+									</tbody>
+								</table>
+								<p>当前只有{{=it.participateNumber}}条单身狗</p>
+							</div>
+						</div>
+					{{?}}
+				</script>
+				<div class="joinbottom">
+					<img src="/activity/singleDog/imgs/bottom1.png" />
+					<a href="../../index.html"><img src="/activity/singleDog/imgs/bottom2.png"/></a>
+				</div>
+				<div class="shareopen">
+					<img src="/activity/singleDog/imgs/shareopen.png" />
+					<a class="close"><img src="/activity/singleDog/imgs/close.png"/></a>
+				</div>
+			</div>	
+			<audio  id="myvideo" src="#" autoplay="autoplay"></audio>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/activity/singleDog/js/audio.js"></script>
+		<script>
+			(function(api, util, ajax){
+				
+				if(!isWeiXin()){
+					$('.shareopen').css('top','1.25rem')
+				}
+				
+				ajax.post(api.baseServerUrl + "/singleDog/openAuthority/joinList",{
+				},function(data) {
+					util.render("#title",data,".title")
+					util.render("#message",data,".message")
+					for(var i=0;i<data.singleDogItemList.length;i++){
+						var left,top
+						left=(Math.random()*7+1).toFixed(6);
+						top=(Math.random()*8+1).toFixed(6)
+						if(left<=4.1875 && top<=2.03125){
+							left=(Math.random()*7+1).toFixed(6);
+							top=(Math.random()*8+1).toFixed(6)
+						}
+						$('.content').append('<div class="dog'+i+'" left="'+left+'" style="display:none;left: '+left+'rem;top: '+top+'rem;">\
+							<p>'+data.singleDogItemList[i].wechatName+'</p>\
+							<img src="'+api.picUrl+data.singleDogItemList[i].singlePhoto+'" />\
+						</div>')
+						$('.content').find('.dog'+i).fadeIn(1000)
+					}
+					var title,dot
+					title="我建立了一个狗圈，单身狗快来找组织啊！"
+					dot="这里是单身狗聚集地，快来解救TA们吧。"
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,dot,"http://" + document.domain + "/activity/singleDog/share.html?id="+data.id,"http://" + document.domain +"/activity/singleDog/imgs/share.png");
+					$('.message').delegate('#yaoqing','click',function(){
+						$('.shareopen').show()
+					})
+					$('.message').delegate('#jiejiu','click',function(){
+						$('.shareopen').show()
+						title="我建立了一个狗圈，单身狗快来找组织啊！"
+						dot="我的朋友圈竟然已经有了"+data.participateNumber+"条单身狗，组织在呼唤你，快加入我的单身狗大军吧。"
+						shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,dot,"http://" + document.domain + "/activity/singleDog/share.html?id="+data.id,"http://" + document.domain +"/activity/singleDog/imgs/share.png");
+					})
+				})
+				$('.close').click(function(){
+					$('.shareopen').hide()
+				})
+				setInterval(function(){
+				 	$('.content').find('div').each(function(){
+				 		var b=Math.random().toFixed(2)
+						$(this).animate({left:Number($(this).attr('left'))-Number(b)+'rem'},500)
+						$(this).animate({left:Number($(this).attr('left'))+Number(b)+'rem'},500)
+					})
+				},1000)
+				
+				
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

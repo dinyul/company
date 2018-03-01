@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>结算</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/payment/jiesuan.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+</head>
+<body>
+	<div class="balance body">
+		<div class="address" id="addressInfo">
+			
+		</div>
+		<div class="commodity">
+			<div>
+				<div class="business">
+					<p>六容食品</p>
+				</div>
+				<ul>
+					<li>
+						<p>焦糖拿铁</p>
+						<p>¥3.5</p>
+						<p>x1</p>
+						<div class="clear"></div>
+					</li>
+					<li>
+						<p>坚果</p>
+						<p>¥3.5</p>
+						<p>x1</p>
+						<div class="clear"></div>
+					</li>
+				</ul>
+				<div class="message">
+					<input type="text" placeholder="选填：给商家留言" />
+				</div>
+			</div>
+		</div>
+		<div class="method">
+			<ul>
+				<li>
+					<p>配送方式</p>
+					<a href="../order/peisongfangshi.html"><p>快递  ¥10.0<span>></span></p></a>
+				</li>
+				<li>
+					<p>可用优惠劵</p>
+					<a><p>无可用<span>></span></p></a>
+				</li>
+				<li>
+					<p>积分可抵金额<span>￥2.0</span></p>
+					<a><p>去使用<span>></span></p></a>
+				</li>
+			</ul>
+		</div>
+		<div class="balance-total">
+			<p>共2件商品   合计：<span></span></p>
+		</div>
+		
+	</div>
+	<div class="bottom">
+		<a href="querenzhifu.html"><p>去结算</p></a>
+	</div> 
+	<script type="text/javascript" src="../js/wx_oid.js"  ></script>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="dot/tmpl" id="addressInfoTmpl">
+		{{? it}}
+			<div class="orderState" id="kdmfInfo">
+			<input type="hidden" id="checkFlag" value="0">
+			<ul>
+					<!-- 彩条 -->
+					<div class="l_dd_ct mt10"></div>
+					<!-- 地址 -->
+					<div class="l_dj_dz" id="address">
+						<div class="l_dd_c">
+							<p class="l_dj_p2 clearfix">
+								<i class="l_qr_i1 fl"></i>
+								<span class="fl" id="receiverName">{{=it.name}}</span>
+								<i class="l_dj_p2_i2 fl"></i>
+								<span class="fl" id="receiverTelphone">{{=it.phone}}</span>
+							</p>
+							<p class="l_dj_p4" id="receiverAddress">{{=it.address}}</p>
+						</div>
+						<a class="l_dd_jt fr"></a>
+					</div>
+					<!-- 彩条 -->
+					<div class="l_dd_ct"></div>
+			</ul>
+		</div>
+		{{??}}
+			<a href="../address/dizhiguanli.html">
+				<p>请选择收货地址  ></p>
+			</a>
+		{{?}}
+	</script>
+	<script type="text/javascript">
+
+		(function(api, util){
+			var addressId = util.getUrlParams("addressId");
+			getAddressInfo(addressId);
+			function getAddressInfo(addressId){
+				$.ajax({
+					type: "post",
+					url: api.baseServerUrl + "/suggestion/insertSuggestion",
+					dataType: "json",
+					data:{
+						"addressId":addressId
+					},
+					success:function (data){
+						if(data.code == "0"){
+							util.render("#addressInfoTmpl", data.data, "#addressInfo")
+						}else {
+							alert(data.message);
+						}
+					}
+				});
+			}
+			function getGoodsInfo(){
+				$.ajax({
+					type: "post",
+					url: api.baseServerUrl + "/suggestion/insertSuggestion",
+					dataType: "json",
+					data:{
+						"addressId":addressId
+					},
+					success:function (data){
+						if(data.code == "0"){
+							util.render("#addressInfoTmpl", data.data, "#addressInfo")
+						}else {
+							alert(data.message);
+						}
+					}
+				});
+			}
+			var title="更好甄选—更好·不贵"
+	var doc="种草全世界的好货"
+	shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+		})(goola.api, goola.util);
+	</script>
+</body>
+</html>

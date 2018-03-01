@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>代理中心</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/gerenzhongxin.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+		<link rel="stylesheet" type="text/css" href="/community/css/base.css" />
+	</head>
+	<body>
+		<div id="container" class="body">
+			<div class="personal" style="margin-bottom:2rem">
+				<div class="personal-top">
+					<div class="personal-top-content" style="background: url(/imgs/personal/userbg1.png);background-size: 100%;">
+						
+					</div>
+					<div class="personal-top-list">
+						<div class="title">
+							<a style="display: block;" href="order.html">
+								<p>我的订单<span>查看全部订单</span></p>
+							</a>
+						</div>
+						<ul id="allKindsCount">
+							
+						</ul>
+						<script id="allKindsCountTmpl" type="dot/tmpl">
+							<li id="2" style="background-image: url(/imgs/personal/ordericon1.jpg);">待付款{{?it.nopay>0}}<a>{{=it.nopay}}</a>{{?}}</li>
+							<li id="3" style="background-image: url(/imgs/personal/ordericon3.jpg);">待发货{{?it.nosend>0}}<a>{{=it.nosend}}</a>{{?}}</li>
+							<li id="4" style="background-image: url(/imgs/personal/ordericon4.jpg);">已发货{{?it.noget>0}}<a>{{=it.noget}}</a>{{?}}</li>
+							<li id="5" style="background-image: url(/imgs/personal/ordericon5.jpg);">待评价{{?it.noComment>0}}<a>{{=it.noComment}}</a>{{?}}</li>
+						</script>
+					</div>
+				</div>
+				<div class="personal-list">
+					<ul>
+						<li style="background-image: url(/community/imgs/icon1.jpg?t=20161117);">
+							<a id="fenxiao"><p>我的团队</p></a>
+						</li>
+						<li style="background-image: url(/community/imgs/icon2.jpg?t=20161117);">
+							<a id="fenxiao"><p>升级申请</p></a>
+						</li>
+						<li style="background-image: url(/community/imgs/icon3.jpg?t=20161117);">
+							<a id="fenxiao"><p>降级管理</p></a>
+						</li>
+						<li style="background-image: url(/community/imgs/icon4.jpg?t=20161117);">
+							<a id="fenxiao"><p>结算管理</p></a>
+						</li>
+						<li style="background-image: url(/community/imgs/icon5.jpg?t=20161117);">
+							<a href="authoriza.html"><p>授权书</p></a>
+						</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="personal-logo">
+					<p><span>大客户服务中心：</span>15351222294</p>
+					<a>退出登录</a>
+				</div>
+			</div>
+			
+			
+			<ul class="community-bottom">
+				<li onclick="window.location.href='/community/index.html'">
+					<img src="/community/imgs/home.png" />
+					<a>社群首页</a>
+				</li>
+				<li onclick="window.location.href='/community/fenlei/fenlei.html'">
+					<img src="/community/imgs/goods.png" />
+					<a>更好商品</a>
+				</li>
+				<li onclick="window.location.href='/community/about.html'">
+					<img src="/community/imgs/about.png" />
+					<a>关于社群</a>
+				</li>
+				<li onclick="window.location.href='/community/gouwuche/gouwuche.html'">
+					<img src="/community/imgs/car.png" />
+					<a>购物车</a>
+				</li>
+				<li onclick="window.location.href='/community/user-center.html'">
+					<img src="/community/imgs/center1.png" />
+					<a style="color:#fa2f3e;">代理中心</a>
+				</li>
+			</ul>
+		</div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script id="userInfoTmpl" type="dot/tmpl">
+			<img src="{{=it.photo}}">
+			<a style="background: #4EB9C4 ;width:  1.71875rem;text-align: center;padding: 0;">{{=it.gradeName}}</a>
+			<h2>{{=it.name}}</h2>
+			
+		</script>
+		<script >
+			(function(api, util, ajax){
+				getUserInfo();
+				function getUserInfo(){
+					ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/lowLevelUsers",{
+					},function(data) {
+						util.render("#userInfoTmpl", jQuery.parseJSON(data), ".personal-top-content");
+						$('#fenxiao').click(function(){
+							window.location.href="community.html"
+						})
+					});
+				}
+				allKindsCount()
+				function allKindsCount(){
+					ajax.post(api.baseServerUrl + "/order/allKindsCount",{
+					},function(data) {
+						util.render("#allKindsCountTmpl",data,"#allKindsCount")
+					})
+				}
+				
+				$('#allKindsCount').delegate('li','click',function(){
+					window.location.href="order.html?type="+$(this).attr('id')
+					
+					
+				})
+				var title="更好甄选新零售引流社群管理系统"
+				var doc="“更好甄选”是由软银中国与明星投资机构STAR.VC、长石资本、5100矿泉水联合投资企业旗下的生活品质新零售社群。母公司估值超10亿元"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/community/query.html","http://" + document.domain +"/imgs/community/share1.jpg");
+
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+		
+	</body>
+</html>

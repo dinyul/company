@@ -1,0 +1,77 @@
+.rack{
+	margin-bottom: 3.875rem
+}
+.rack .banner img{
+	display: block;
+	line-height: 0
+}
+.rack .commonweal{
+	background:#ffffff;
+	height:1.171875rem;
+	line-height: 1.171875rem;
+	padding: 0 0.296875rem 0 0.46875rem
+}
+.rack .commonweal p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#313131;
+}
+.rack .commonweal p span{
+	color:#d4aa70;
+}
+.rack .commonweal p a{
+	color:#d4aa70;
+	float: right;
+}
+.rack .title{
+	height: 1.71875rem;
+	padding: 0 0.9375rem
+}
+.rack .title p{
+	font-family:PingFangSC-Medium;
+	font-size:0.46875rem;
+	color:#313131;
+	line-height: 1.71875rem;
+	font-weight: bold;
+	text-align: center;
+	background: url(/mobilerack/imgs/line.png) no-repeat center center;
+	background-size: 100% 0.0625rem
+}
+.rack .title p span{
+	padding: 0 0.46875rem;
+    background: #F5F5F5;	
+}
+.rack .modal a{
+	display: block;
+	line-height: 0;
+	margin-bottom: 0.28125rem
+}
+.rack .modal a:last-of-type{
+	margin-bottom: 0
+}
+
+.rack .rack-btn{
+	background: #fffaf4;
+    width: 10rem;
+    height: 2.03125rem;
+    position: fixed;
+    left: 0;
+    bottom: 1.5rem;
+    padding-top: 0.3125rem;
+
+}
+.rack .rack-btn a{
+	display: block;
+    margin: 0 auto;
+    border-radius: 0.0625rem;
+    width: 7.03125rem;
+    height: 1.25rem;
+}
+.rack .rack-btn p{
+	text-align: center;
+    margin-top: 0.15625rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #878787;
+    line-height: 0.515625rem;
+}

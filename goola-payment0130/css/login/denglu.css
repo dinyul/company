@@ -1,0 +1,84 @@
+.login{
+	background: #fff;
+}
+.login input{
+	background: #fff;
+}
+.login .phone,.login .code,.login .yzm{
+	height: 0.625rem;
+	line-height: 0.625rem;
+	padding: 0.3125rem 0 0.3125rem 1.09375rem;
+	
+	
+}
+.login .phone input,.login .code input,.login .yzm input{
+	width: 3.90625rem;
+	outline: none;
+	border:0;
+	height: 0.625rem;
+	font-size: 0.375rem;
+} 
+.login .phone{
+	border-bottom: 1px solid #e5e5e5;
+	background: url(/imgs/login/denglu-phone.png?t=20161117) no-repeat 0.3125rem center;	
+	background-size: 0.53125rem 0.625rem;
+}
+.login .yzm{
+	border-bottom: 1px solid #e5e5e5;
+	position: relative;
+}
+.login .code,.login .yzm{
+	background: url(/imgs/login/denglu-code.png?t=20161117) no-repeat 0.3125rem center;
+	background-size: 0.53125rem 0.625rem;
+}
+.login .code input:last-child{
+	display: inline-block;
+	float: right;
+	width: 2.8125rem;
+	height: 0.625rem;
+	border-left: 1px solid #fa2f3e;
+	font-size: 0.375rem;
+	color: #fa2f3e;
+}
+.login .yzmtu{
+	display: inline-block;
+    position: absolute;
+    top: 0.34375rem;
+    left: 3.9375rem;
+}
+.login button{
+	border:0;
+	background: #fa2f3e;
+	font-size: 0.375rem;
+	color: #fff;
+	outline: none;
+}
+.login .crowdfunding-bottom{
+	width: 9.375rem;
+    text-align: center;
+    position: fixed;
+    bottom: 0;
+    padding: 0.3125rem
+}
+.login .crowdfunding-bottom p{
+	color: #fa2f3e;
+	font-size: 0.34375rem
+}
+.login .crowdfunding-bottom a{
+	float: left;
+	margin-top: 0.3125rem;
+	width: 4.0625rem;
+	height: 1.09375rem;
+	text-align: center;
+	display: block;
+	line-height: 1.09375rem;
+	background: #fa2f3e;
+	color: #fff;
+	border-radius: 0.15625rem;
+	font-size: 0.375rem;
+	margin-left: 0.3125rem
+}
+.login .crowdfunding-bottom a:last-child{
+	float: right;
+	margin-right: 0.3125rem
+}

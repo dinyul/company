@@ -1,0 +1,48 @@
+.info{
+	margin-top: 0.3125rem;
+	background:#FEFBCD;
+	padding: 0.3125rem;
+	position: relative;
+}
+.info .left{
+	width: 1.28125rem;
+	float: left;
+}
+.info .left img{
+	width: 1.03125rem;
+	height: 1.03125rem;
+	border-radius: 1.03125rem;
+	display: block;
+	margin: 0 auto 0.078125rem
+}
+.info .left p{
+	font-size: 0.3125rem;
+	color: #4a4a4a
+}
+.info .right{
+	float: right;
+	margin-left: 0.3125rem;
+	width: 7.5rem;
+}
+.info .right p{
+	line-height: 0.5rem;
+}
+.info .right span{
+	font-size: 0.28125rem;
+	color: #9e9e9e;
+	position: absolute;
+	bottom: 0.28125rem;
+	right: 0.625rem;
+}
+
+.payment{
+	height: 1.0625rem;
+	background:#fff;
+	padding: 0 0.3125rem;
+	line-height: 1.0625rem;
+	margin-top: 0.3125rem
+}
+.payment span{
+	float: right;
+	color: #fa2f3e;
+}

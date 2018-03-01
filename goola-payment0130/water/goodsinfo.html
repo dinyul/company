@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="goodsinfo"></div>
+			<script id="goodsinfo" type="dot/tmpl">
+				<div class="top">
+					<img src="{{=it.picUrl}}{{=it.data.cartPhoto}}"/>
+					<h2>{{=it.data.goodsName}}</h2>
+					<p>品牌：{{=it.data.brand}}   规格：{{=it.data.specifications}}</p>
+					<h3>¥{{=it.data.preferentialPrice}}</h3>
+				</div>
+				<ul>
+					<li>
+						<h3>桶装水价格：<span>¥{{=it.data.preferentialPrice}}</span></h3>
+						<div>
+							<p>数量：</p>
+							<div>
+								<span class="minus"></span>
+								<input class='amount waterCount' value="1" type="number" />
+								<span class="add"></span>
+							</div>
+						</div>
+					</li>
+					<li>
+						<h3>空桶押金：<span>¥{{=it.data.materialPreferentialPrice}}</span></h3>
+						<div>
+							<p>数量：</p>
+							<div>
+								<span class="minus"></span>
+								<input class='amount battlesCount' value="1" type="number" />
+								<span class="add"></span>
+							</div>
+						</div>
+					</li>
+				</ul>
+			</script>
+			<div class="bottom">
+				<p>立即购买</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var goodsId = util.getUrlParams("goodsId");
+				ajax.post(api.baseServerUrl + "/scm/getScmUserGoods",{
+					"goodsId":goodsId
+				},function(data) {
+					var obj={data:data,picUrl:api.picUrl}
+					util.render("#goodsinfo", obj, ".goodsinfo");
+				});
+				
+				$('.goodsinfo').delegate('.add','click',function(){
+					$(this).prev().val(Number($(this).prev().val())+1)
+				})
+				$('.goodsinfo').delegate('.minus','click',function(){
+					if(Number($(this).next().val())<=0){
+						return
+					}
+					$(this).next().val(Number($(this).next().val())-1)
+				})
+				$('.goodsinfo').delegate('.invoice a','click',function(){
+					$(this).toggleClass('checked')
+					if($(this).parent().parent().attr('id')==1){
+						$(this).parent().parent().attr('id','2')
+					}else{
+						$(this).parent().parent().attr('id','1')
+					}
+				})
+				$('.bottom').click(function(){
+					if($('.waterCount').val()<0 || $('.battlesCount').val()<0){
+						alert('数量不能少于0')
+						return false
+					}
+					
+					window.location.href="payment.html?goodsId="+goodsId+"&waterCount="+$('.waterCount').val()+"&battlesCount="+$('.battlesCount').val()
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

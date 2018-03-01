@@ -1,0 +1,31 @@
+.payment{
+	background: #fff;
+}
+.payment .payment-content{
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.84375rem 0.5rem 0.5rem 0.46875rem; 
+}
+
+.payment .payment-content h2{
+	text-align: center;
+	font-size: 0.5625rem;
+	margin-bottom: 0.34375rem;
+	color: #880022;
+}
+.payment .payment-content p{
+	line-height: 0.5625rem
+}
+.payment .payment-bottom{
+	padding: 0.25rem 1.5625rem
+}
+.payment .payment-bottom a{
+	display: block;
+	width: 2.9375rem;
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+	font-size:0.40625rem;
+	text-align: center;
+	color: #fff;
+	background: #880022;
+	border-radius: 0.15625rem;
+}

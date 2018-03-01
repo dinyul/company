@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-list" style="margin-bottom: 1.375rem;">
+				<div>
+					<h2 class="apply-title"></h2>
+					<div class="purchase-search">
+						<input placeholder="商品名称查询" />
+						<p>查询</p>
+					</div>
+				</div>
+				<ul class="goods"></ul>
+			</div>
+			<script id="purchase-list" type="dot/tmpl">
+				{{~it.data:data:j}}
+				{{~data.shopRefillSplitInfoGoodsList:goods:i}}
+				<li class="goodslist">
+					<img src="{{=it.picUrl}}{{=goods.goodsPic}}" />
+					<div class="message">
+						<h3><span>{{=goods.goodsName}}</span><a>¥{{=Number(goods.preferentialPrice).toFixed(2)}}</a></h3>
+						<p>规格：{{=goods.specifications}}</p>
+						<p>申请补货量：<span>{{=goods.adviceGoodsCount}}</span></p>
+						<p>出库量：<span>{{=goods.shopRefillTotalInfoGoods.outGoodsCount}}</span>{{?data.status==5}}<a>实际补货量：<span>{{=goods.realGoodsCount}}</span></a>{{?}}</p>
+						{{?data.status==7}}
+						<p>站点库存：{{=goods.stock}}</p>
+						{{?}}
+						{{?data.status==5}}
+						{{?goods.surplusGoodsCount==0 && goods.ullageGoodsCount==0}}
+						<p>本次货损：<span>无货损</span></p>
+						{{??goods.surplusGoodsCount==0 && goods.ullageGoodsCount!=0}}
+						<p>本次货损：<span>货损{{=goods.ullageGoodsCount}}</span></p>
+						{{??goods.surplusGoodsCount!=0 && goods.ullageGoodsCount==0}}
+						<p>本次货损：<span>盈余{{=goods.surplusGoodsCount}}</span></p>
+						{{?}}
+						{{?}}
+					</div>
+				</li>
+				{{~}}
+				{{~}}
+			</script>
+			<div class="bottom" style="background: #d4aa70;display: none;">
+				<p>确认出库</p>
+			</div>
+			<div class="purchase-bottom" style="display: none;">
+				<a class="nopass">审核不通过</a>
+				<a class="pass">审核通过</a>
+			</div>
+			<div class="purchase-list-open" style="display: none;">
+				<div>
+					<h2>请填写审核不通过原因</h2>
+					<textarea placeholder=""></textarea>
+					<p><a class="cancel">取消</a><a class="confirm">确定</a></p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/mobilerack/js/purchase-list.js"></script>
+	</body>
+</html>

@@ -1,0 +1,97 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>好米明细</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/haomi.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="record">
+				<nav>
+					<a class="checked" id="1">已结算</a>
+					<a id="0">申请中</a>
+					<a id="4">申请失败</a>
+				</nav>
+				<ul class="recordlist"></ul>
+				<script id="recordlist" type="dot/tmpl">
+					{{?it!=''}}
+					<li><p><span>申请时间</span></p><p><span>消耗好米</span></p><p><span>结算金额</span></p></li>
+					{{~it:data:i}}
+					<li><p>{{=(data.createDate)}}</p><p>{{=data.points}}好米</p><p>¥{{=Number(data.moneyValue).toFixed(2)}}</p></li>
+					{{~}}
+					{{??}}
+					<li><p><span>申请时间</span></p><p><span>消耗好米</span></p><p><span>结算金额</span></p></li>
+					<div class="none">
+						<img src="../imgs/record-kong.png" />
+						<p>提现记录空荡荡的</p>
+					</div>
+					{{?}}
+				</script>
+				<div class="bottom1" style="display: none;">
+					<p>身份信息与提现账户实名认证信息不一致，请重新填写</p>
+					<a href="info.html">修改身份信息</a>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var type = util.getUrlParams("type");
+				if(type==0){
+					$('nav a').removeClass('checked')
+					$('#'+type).addClass('checked')
+					recordList(type)
+				}else{
+					recordList(1)
+				}
+				
+				function recordList(status){
+					ajax.post(api.baseServerUrl + "/distribution/userPointsConversionAppList",{
+						"status":status
+					},function(data) {
+						if(status==4 && data!='' && data!=undefined && data!=null){
+							$('.bottom1').css('display','block')
+							$('.recordlist').css('margin-bottom','1.71875rem')
+						}else{
+							$('.recordlist').css('margin-bottom','0')
+							$('.bottom1').css('display','none')
+						}
+						if(data==''|| data==null|| data==undefined){
+							if(isWeiXin()){
+								$('.record ul').css('min-height',($(window).height()-90-4)/$(window).width()*10+'rem')
+							}else{
+								$('.record ul').css('min-height',($(window).height()-90-4-80)/$(window).width()*10+'rem')
+							}
+							
+							$('.recordlist').css('margin-bottom','0')
+						}
+						util.render("#recordlist", data, ".recordlist");
+					});
+				}
+				
+				$('nav a').click(function(){
+					$('nav a').removeClass('checked')
+					$(this).addClass('checked')
+					recordList($(this).attr('id'))
+				})
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

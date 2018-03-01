@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>添加地址</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117">
+	<link rel="stylesheet" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	<div class="address-add">
+		<form action="" method="post">
+			<ul>
+				<li>
+					<span>收货人：</span><input type="text" class="inp" /><a class="del"></a>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<span>手机号码：</span><input type="text" class="inp"/><a class="del"></a>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<span>所在地区：</span><input type="text" class="inp"/><a class="del"></a>
+					<div class="clear"></div>
+				</li>
+				<li>
+					<span>详细地址：</span>
+					<textarea class="inp"></textarea><a class="del" style="top: 0.546875rem;"></a>
+					<div class="clear"></div>
+				</li>
+			</ul>
+
+			<div>
+				<p><span class="default"><input type="radio" name="default"/></span>设为默认</p>
+			</div>
+		</form>
+	</div>
+	<div class="bottom">
+		<p>保存</p>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript">
+		$('.default input').click(function(){
+			$('.default').toggleClass('checked')
+		})
+		/*$('.inp').focus(function(){		
+				$(this).next().css('display','block')
+					
+		})
+
+		$('.inp').blur(function(){		
+				$(this).next().css('display','none')	
+		})*/
+		
+		$('.inp').keydown(function(){
+				$(this).next().css('display','block')
+		})
+		$('.del').click(function(){
+					$(this).prev().val('')
+					$(this).css('display','none')
+				})
+	</script>
+</body>
+</html>

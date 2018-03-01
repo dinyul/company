@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>站点库存</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+		<style>
+			.goods .goodslist .message a{
+				display: block;background: #D4AA70;width: 1.71875rem;height: 0.9375rem;position: absolute;right: 0.3125rem;
+    			bottom: 0;line-height: 0.9375rem;text-align: center;font-size: 0.375rem;color: #fff;border-radius: 0.125rem;
+			}
+			.purchase-list .top{
+				height: 1.328125rem;line-height: 1.34375rem;text-align: center;background: #D4AA70;z-index: 2;
+			}
+			.purchase-list .top p{
+				color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-list">
+				<div class="top"><p>扫码盘点</p></div>
+				<ul class="goods" style="padding-top: 1.328125rem;margin-bottom: 1.328125rem;"></ul>
+			</div>
+			<div class="bottom" style="background: #D4AA70">
+				<p>盘点记录</p>
+			</div>
+			<script id="purchase-list" type="dot/tmpl">
+				{{~it.data:goods:j}}
+				<li class="goodslist" id="{{=goods.goodsId}}">
+					<img src="{{=it.picUrl}}{{=goods.cartPhoto}}" />
+					<div class="message" style="position: relative;" goodsId="{{=goods.goodsId}}">
+						<h3><span>{{=goods.goodsName}}</span></h3>
+						<p>{{=goods.specifications}}</p>
+						<p>采购均价：<span>¥ {{=Number(goods.stockPrice).toFixed(2)}}</span></p>
+						<p>7日平均销量：<span>{{=goods.avgSalesCount}}</span></p>
+						<p>当前库存：<span class="stockcount">{{=goods.orgStockCount}}</span></p>
+						<a class="edit">编辑</a>
+					</div>
+				</li>
+				{{~}}
+			</script>
+			<div class="bg"></div>
+			<div class="goodsmanage"></div>
+			<script id="goodsmanage" type="dot/tmpl">
+				<a class="close"></a>
+				<div class="record" goodsId="{{=it.data.goodsId}}">
+					<ul class="list">
+						<li style="background:#fff;">
+							<img src="{{=it.picUrl}}{{=it.data.cartPhoto}}" />
+							<div>
+								<h2><span>{{=it.data.goodsName}}</span></h2>
+								<p>{{=it.data.specifications}}</p>
+								<p style="margin-top: 0.65625rem;">当前数量：<a>{{=it.data.repertoryCount}}</a></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="edit">
+				<p><span style="width: 2rem;">盘点数量：</span><input type="number" class="stock" value="{{=it.data.repertoryCount}}" /></p>
+				</div>
+				<div class="bottom" style="background:#d4aa70;position: initial;">
+					<p>保存</p>
+				</div>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.2.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+		(function(api,util,ajax,address){
+			var pageNo=1;
+			var total;
+			var pageTotal;
+			list(1,20)
+			function list(pageNo,pageSize){
+				ajax.post(api.mobileServerUrl+"/betterConvenience/orgStockGoodsList",{
+					"pageSize":pageSize,"pageNo":pageNo
+				},function(data){
+					total=data.total
+					pageTotal=parseInt(total/pageSize)+1
+					var obj={data:data.rows,picUrl:api.picUrl}
+					var doTtmpl = doT.template($('#purchase-list').html());
+					var html = doTtmpl(obj);
+					$('.goods').append(html)
+					
+				})
+			}
+			
+			$(window).scroll(function () {
+				var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+				if($(document.body).height()<=totalheight){
+					if($('.goods').find('li').length>=total){
+						//$('.none').show()
+						$(window).unbind('scroll')
+						return false
+					}
+					if(pageNo>=pageTotal){
+						//$('.none').show()
+						$(window).unbind('scroll')
+						return false
+					}
+					pageNo=pageNo+1
+					list(pageNo,20)
+					
+				}
+			});
+			
+			$('.bottom').click(function(){
+				window.location.href="/mobilerack/purchase/stock/list.html"
+			})
+			$('.goods').delegate('.edit','click',function(){
+				goodsMessage($(this).parent().attr('goodsId'),'')
+			})
+			$('.goodsmanage').delegate('.close','click',function(){
+					$('.bg').hide()
+					$('.goodsmanage').hide()
+					$('.goodsmanage').html('')
+				})
+			$('.goodsmanage').delegate('.bottom','click',function(){
+					editStock($(this).parent().find('.record').attr('goodsId'),$(this).parent().find('.stock').val())
+				})
+			function editStock(goodsId,repertoryCount){
+				ajax.post(api.mobileServerUrl+"/betterConvenience/editOrgGoodsStock",{
+						"goodsId":goodsId,"repertoryCount":repertoryCount
+					},function(data){
+						$('.bg').hide()
+						$('.goodsmanage').hide()
+						$('.goodsmanage').html('')
+						$('.goods').find('#'+goodsId).find('.stockcount').html(repertoryCount)
+					})
+			}
+			function goodsMessage(goodsId,goodsBarcode){
+				ajax.post(api.mobileServerUrl+"/betterConvenience/findOrgGoodsDetail",{
+					"goodsId":goodsId,"goodsBarcode":goodsBarcode
+				},function(data){
+					var obj = {data:data,picUrl:api.picUrl}
+					util.render("#goodsmanage", obj, ".goodsmanage");
+					$('.bg').show()
+					$('.goodsmanage').show()
+				})
+			}
+			$('.purchase-list .top').click(function(){
+				ajax.post(api.baseServerUrl + "/shop/getLocationConfig",{
+					url:encodeURI(location.href.split('#')[0].replace(/&/g,"|"))
+				},function(data) {
+					wx.config({
+						debug: false,
+						appId: data.appid,
+						timestamp: data.timeStamp,
+						nonceStr: data.nonceStr,
+						signature: data.signature,
+						jsApiList: ['scanQRCode']
+					});
+					wx.ready(function () {
+						wx.scanQRCode({ 
+						   needResult : 1, 
+						   scanType : [ "barCode" ], 
+						   success : function(res) { 
+						   
+						    var result = res.resultStr.split(',')[1]; 
+						    if(result!=undefined && result!=null && result!='' ){
+						    	if(result.length>6){
+							    	goodsMessage('',result)
+						    	}else{
+						    		alert('条形码识别失败，请重新扫描')
+						    	}
+						    }else{
+						    	alert('请扫描货架上商品的条形码')
+						    }
+						   
+						   }, 
+						   fail : function(res) { 
+						    console.log(res) 
+						    alert(JSON.stringify(res)); 
+						 
+						   } 
+						  			
+						});
+					})
+				})
+			})
+		})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

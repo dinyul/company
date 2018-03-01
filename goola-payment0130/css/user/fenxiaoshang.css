@@ -1,0 +1,90 @@
+.distributor{
+	margin-bottom: 1.40625rem;
+}
+.distributor .examine{
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	background:#F8EACE;
+	color: #fa2f3e;
+	padding: 0 0.3125rem;
+}
+.distributor .examine p span{
+	margin-left: 0.65625rem;
+}
+.distributor .examine p a{
+	display: inline-block;
+	width: 0.3125rem;
+	height: 0.3125rem;
+	float: right;
+	background: url(/imgs/fenxiao/fenxiao-delete.png?t=20161117) no-repeat center center;
+	background-size: 0.28125rem 0.28125rem;
+	position: relative;
+	top: 0.3125rem;
+	right: 0.125rem;
+}
+.distributor .introduce{
+	background: #fff;
+	margin-bottom: 0.3125rem;
+}
+.distributor .introduce-title{
+	border-bottom: 1px solid #e5e5e5;
+	height: 1.0625rem;
+	line-height: 1.0625rem;
+	padding: 0 0.3125rem;
+}
+.distributor .introduce-content ul li{
+	padding-left: 1.59375rem;
+	background-repeat: no-repeat;
+	background-position: 0.46875rem center;
+}
+.distributor .introduce-content ul li:first-child{
+	background-size: 0.703125rem 0.59375rem;
+	background-image: url(/imgs/fenxiao/fenxiao-jifenhuoqu.png?t=20161117);
+}
+.distributor .introduce-content ul li:last-child{
+	background-size: 0.546875rem 0.625rem;
+	background-image: url(/imgs/fenxiao/fenxiaoqian.png?t=20161117);
+}
+.distributor .introduce-content ul li div{
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0.46875rem 0 0.390625rem 0
+}
+.distributor .introduce-content ul li div p{
+	margin-bottom:0.1875rem 
+}
+.distributor .process{
+	background:#fff;
+	color: #3c3c3c;
+	text-align: center;
+	padding-bottom: 0.3125rem;
+}
+.distributor .process h2{
+	text-align: 0.46875rem;
+	
+	line-height: 1.0625rem;
+}
+.distributor .process div{
+	width: 7.78125rem;
+	border:1px #e5e5e5 dashed;
+	margin: 0 auto;
+}
+.distributor .process div p{
+	line-height: 1.0625rem;
+}
+.distributor .process img{
+	width: 0.421875rem;
+	height: 0.484375rem;
+	margin: 0.15625rem 0;
+}
+.distributor .process div span{
+	display: block;
+	font-size: 0.3125rem;
+	color: #bcbcbc;
+	width: 4.6875rem;
+	margin: 0 auto 0.125rem;
+	text-align: left;
+}
+
+.distributor .process div span:last-child{
+	margin-bottom: 0.25rem;
+}

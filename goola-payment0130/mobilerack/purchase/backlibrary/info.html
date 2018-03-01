@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-list" style="margin-bottom: 1.375rem;">
+				<div>
+					<h2 class="apply-title"></h2>
+					<div class="purchase-search">
+						<input placeholder="商品名称查询" />
+						<p>查询</p>
+					</div>
+				</div>
+				<ul class="goods"></ul>
+			</div>
+			<script id="purchase-list" type="dot/tmpl">
+				{{~it.data:goods:j}}
+				<li class="goodslist" style="border-bottom: 0;">
+					<img src="{{=it.picUrl}}{{=goods.cartPhoto}}" />
+					<div class="message">
+						<h3><span>{{=goods.goodsName}}</span><a>¥{{=Number(goods.price).toFixed(2)}}</a></h3>
+						<p>规格：{{=goods.specifications}}</p>
+						<p>货架在售量：<span>{{=goods.shopGoodsStock}}</span></p>
+						<p>申请回库量：<span>{{=goods.applyNum}}</span></p>
+						{{?it.status!=1}}
+						<p>实际回库量：<span>{{=goods.realBackNum}}</span></p>
+						{{?}}
+					</div>
+				</li>
+				{{?it.status!=1}}
+				<p style="background:#fff6e9;">本次货损：<span>
+					{{?goods.surplusNum==0 && goods.ulliageNum==0}}
+					无货损
+					{{??goods.surplusNum!=0 && goods.ulliageNum==0}}
+					盈余{{=goods.surplusNum}}
+					{{??goods.surplusNum==0 && goods.ulliageNum!=0}}
+					货损{{=goods.ulliageNum}}
+					{{?}}
+				</span></p>
+				{{?}}
+				{{~}}
+			</script>
+			<div class="purchase-bottom" style="display: none;">
+				<a class="nopass">审核不通过</a>
+				<a class="pass">审核通过</a>
+			</div>
+			<div class="purchase-list-open" style="display: none;">
+				<div>
+					<h2>请填写审核不通过原因</h2>
+					<textarea placeholder=""></textarea>
+					<p><a class="cancel">取消</a><a class="confirm">确定</a></p>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var id = util.getUrlParams("id");
+				var shopId=util.getUrlParams("shopId")
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				var goodsName=''
+				list(goodsName,1,20)
+				function list(goodsName,pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/shopWX/returnVoucher/returnVoucherDetailL",{
+						"id":id,"goodsName":goodsName,"pageSize":pageSize,"pageNo":pageNo
+					},function(data){
+						$('.apply-title').html(data.shopName)
+						total=data.dataList.total
+						pageTotal=parseInt(total/pageSize)+1
+						var obj={data:data.dataList.rows,picUrl:api.picUrl,status:data.status}
+						var doTtmpl = doT.template($('#purchase-list').html());
+						var html = doTtmpl(obj);
+						$('.goods').append(html)
+						if(data.status==1 && data.isOrg==0){
+							$('.purchase-bottom').show()
+						}
+					})
+				}
+				$(window).on('scroll', doSth)
+				
+				function doSth() {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.goods').find('li').length>=total){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						pageNo=pageNo+1
+						list(goodsName,pageNo,20)
+						
+					}
+				}
+				
+				
+				$('.purchase-search p').click(function(){
+					if($('.purchase-search input').val()!=''){
+						goodsName=$('.purchase-search input').val()
+						pageNo=1
+						$('.goods').html('')
+						list(goodsName,1,20)
+						$(window).on('scroll', doSth)
+					}
+				})
+				
+				$('.nopass').click(function(){
+					$('.purchase-list-open').show()
+				})
+				$('.pass').click(function(){
+					submit('',3)
+				})
+				$('.cancel').click(function(){
+					$('.purchase-list-open').hide()
+				})
+				$('.confirm').click(function(){
+					if($('textarea').val()==''){
+						alert('审核不通过原因不能为空')
+						return false;
+					}
+					submit($('textarea').val(),2)
+				})
+				
+				function submit(remarks,status){
+					ajax.post(api.mobileServerUrl+"/shopWX/returnVoucher/aditReturnVoucher",{
+						"id":id,"remarks":remarks,"status":status
+					},function(data){
+						window.location.href="/mobilerack/purchase/backlibrary/record.html?shopId="+shopId
+					})
+				}
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

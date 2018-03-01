@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>我的售后</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/dingdanxiangqing.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	
+		
+	<div class="body">
+		
+		<div class="details"></div>
+		<div class="reason">
+			<p>选择退货原因</p>
+			<select></select>
+			<script id="select" type="dot/tmpl">
+				<option selected="selected">请选择</option>
+				{{~it:data:i}}
+				 <option id="{{=data.refundType}}" value="{{=data.refundReason}}">{{=data.refundReason}}</option>
+				{{~}}
+			</script>
+			<textarea placeholder="在此填写问题描述"></textarea>
+			
+		</div>
+		<div class="details-bottom">
+			<a class="one">提交申请</a>
+		</div>
+		<div class="chargeopen">
+			<h2>申请退单</h2>
+			<p>提交申请后，客服将在1个工作日与您联系，并进行审核，是否继续？</p>
+			<a class="cancle">取消申请</a>
+			<a class="confirm">确定提交</a>
+		</div>
+		<div class="bg"></div>
+		
+		<a class="share" style="display: none;width: 2.84375rem;position: fixed;right: 1%;bottom: 9%"><img src="/imgs/activity/676528989524956002.png"/></a>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/js/init-fastclick.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/public.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/address/jquery.actionsheet-1.0.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/address/mobiscroll.scroller.zh-min.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryAllProvinces.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/address/queryCities.js?t=20161117"></script>
+	<script id="orderInfoTmpl" type="dot/tmpl">
+		<div class="information">
+			<ul>
+				<li><p>订单状态：
+					{{? it.serviceStatus == 1}}
+					<span>待付款</span>
+					{{?? it.serviceStatus == 6}}
+					<span>待发货</span>
+					{{?? it.serviceStatus == 2}}
+					<span>待收货</span>
+					{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 2}}
+					<span>待评价</span>
+					{{?? it.serviceStatus == 5 && it.isBuyerEvaluate == 1}}
+					<span>已评价</span>
+					{{?? it.serviceStatus == 8}}
+					<span>地址未确认</span>
+					{{?}}</p></li>
+				<li><p>订单编号：{{=it.orderCode}}</p></li>
+				<li><p>下单时间：{{=getFormatDate(it.createTime)}}</p></li>
+			</ul>
+		</div>
+		<ul class="charge">
+			{{~it.children:data:i}}
+			{{~data.orderItems:goods:j}}
+			<li>
+				<img src="/image/{{=goods.goodsPhoto}}" />
+				<div class="right">
+					<h3>{{=goods.goodsName}}</h3>
+					<p>x{{=goods.goodsCount}}</p>
+				</div>
+				<div class="clear"></div>
+			</li>
+			{{~}}
+			{{~}}
+		</ul>
+		
+	</script>
+	
+	
+	<script>
+	(function(api,util,ajax){
+		var orderId = util.getUrlParams("orderId");
+		var type=util.getUrlParams("type");
+		initOrder(orderId);
+		function initOrder(orderId) {
+			ajax.post(api.baseServerUrl + "/order/orderDetail",{
+				"orderId":orderId	
+			},function(data) {
+				util.render("#orderInfoTmpl", data, ".details");
+				
+			})
+		}
+		ajax.post(api.baseServerUrl + "/orderRefund/queryRefundReason",{
+				
+			},function(data) {
+				util.render("#select", data, "select");
+				
+			})
+		$('select').change(function(){
+           if($(this).val()=="其他"){
+           	$('textarea').css('display','block')
+           }else{
+           	$('textarea').css('display','none')
+           }
+        });
+        $('.details-bottom').click(function(){
+        	if($('select option:selected').val()=="请选择"){
+				alert('请选择退货原因')
+				return
+			}
+        	$('.chargeopen').show()
+        })
+         $('.cancle').click(function(){
+        	$('.chargeopen').hide()
+        })
+		$('.confirm').click(function(){
+			var refundReason=$('select option:selected').val()
+			if(refundReason=="其他"){
+				refundReason=$('textarea').val()
+			}
+			ajax.post(api.baseServerUrl + "/orderRefund/askFor",{
+				"orderId":orderId,
+				"refundReason":refundReason,
+				"orderType":1
+			},function(data) {
+				$('.chargeopen').hide()
+				window.location.href="../gerenzhongxin/gerenzhongxin.html"
+			})
+			
+		})
+		var title="甜言蜜语不如送礼"
+		var doc="自古真情留不住，总是套路得人心，点击了解更多套路。"
+		shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+	})(goola.api,goola.util,goola.ajax)
+	</script>
+</body>
+</html>

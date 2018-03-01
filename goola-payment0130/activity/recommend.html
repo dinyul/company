@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好甄选</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/activity/recommend.css">
+		<style>
+			a{
+				display: block;line-height: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="recommend"><ul></ul></div>
+			<script id="list" type="dot/tmpl">
+				{{~ it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					{{?getFormatDate(data.recommendDate).split(' ')[0] ==getFormatDate( new Date().getTime()).split(' ')[0]}}
+					<a><img src="/imgs/activity/recommend/new.png"/></a>
+					{{?}}
+					<p>{{=getFormatDate(data.recommendDate).split(' ')[0]}}</p>
+					<img src="{{=it.picUrl}}{{=data.recommendPicture}}"  />
+					<h3><span>{{=data.title}}</span><b>¥{{=(data.goodsDto.preferentialPrice)}}</b></h3>
+					{{?data.secondTitle}}
+					<h4>{{=data.secondTitle}}</h4>
+					{{?}}
+				</li>
+				{{~}}
+			</script>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				list(1,20)
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.database').find('li').length>=total){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+						
+					}
+				});
+				function list(pageNo,pageSize){
+					
+						ajax.post(api.baseServerUrl + "/everyDayRecommendGoods/openAuthority /getEveryDayRecommendGoodsListByPage",{
+							'pageNo':pageNo,'pageSize':pageSize
+						},function(data) {
+							total=data.total
+							pageTotal=parseInt(total/pageSize)+1
+							if( total==0){
+								$('.noinfo').show()
+							}else{
+								$('.content1').show()
+							}
+							var obj = {data:data.rows,picUrl:api.picUrl}
+							var doTtmpl = doT.template($('#list').html());
+							var html = doTtmpl(obj);
+							$('.recommend ul').append(html)
+							var title="更好甄选—更好·不贵"
+							var doc="种草全世界的好货"
+							shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+						});
+				}
+				$('.recommend ul').delegate('li','click',function(){
+					window.location.href="/shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+				})
+				
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+		
+	</body>
+</html>

@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="feature">
+				
+			</div>
+			<script id="subject" type="dot/tmpl">
+				{{?it.data.picture}}
+				<img src="{{=it.picUrl}}{{=it.data.picture}}" />
+				{{?}}
+				<div class="title">
+					<h2 style="font-size: 0.4375rem;color: #333;">{{=it.data.subjectName}}</h2>
+					<p style="font-size: 0.375rem;color: #cacaca;">{{=it.data.description}}</p>
+				</div>
+				<ul id="masonry">
+					
+					{{~it.data.activitySubjectGoodsItemList:data:i}}
+						<li class="box">
+							<a href="/shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}">
+								<img src="{{=it.picUrl}}{{=data.goods.cartPhoto}}" />
+								<div>
+									<h2>{{=data.goods.goodsName}}</h2>
+									<p>{{=data.goods.goodsDesc}}</p>
+									<h3>¥{{=(data.goods.preferentialPrice)}}<span>已售<b>{{=data.goods.salesCount}}</b>件</span></h3>
+								</div>
+							</a>
+						</li>
+					{{~}}
+					<div class="clear"></div>
+				</ul>
+			</script>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script src="/fenlei/featurePage/masonry-docs.min.js"></script>
+		<script>
+			(function(api,util,ajax){
+				var id = util.getUrlParams("id");
+				ajax.post(api.baseServerUrl +"/activitysubject/requireLocation/findActivitySubjectInfo",{
+					"id":id
+				}, function(data) {
+					$('title').html(data.subjectName)
+				    $('.app-top').remove()
+				    if(!isWeiXin()){
+				    	if( browser.versions.ios || browser.versions.android){
+							$('body').prepend('<div class="app-top">\
+								<p><a href="javascript:void(history.back())" style="display: block;"></a></p>\
+								<p>'+$('title').html()+'</p>\
+								<p class="shareButton" style="display:none">分享</p>\
+							</div>')
+							$('.body').addClass('app-content')
+						}
+				    }
+				    
+				    var obj = {data:data,picUrl:api.picUrl}
+					util.render("#subject",obj,'.feature');
+					
+					var $container = $('#masonry');
+					var right=0.125*($(window).width()/10)
+				    $container.imagesLoaded(function() {
+				        $container.masonry({
+				                itemSelector: '.box',
+				                gutter: right,
+				                isAnimated: false,
+				            });
+				    });
+					
+					var title=data.shareTitle;
+					var description=data.shareDesc
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,description,location.href,"http://"+ document.domain+api.picUrl+data.sharePicture );
+				});
+				
+				
+				
+			})(goola.api,goola.util,goola.ajax)
+			
+
+				
+		</script>
+		
+	</body>
+</html>

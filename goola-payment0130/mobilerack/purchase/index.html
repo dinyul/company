@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利进销存</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/index.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase">
+				<ul class="purchase-nav">
+					<li>
+						<a href="/mobilerack/purchase/replenish/list.html">
+							<img src="/mobilerack/imgs/purchase/index_icon1.png"/>补货
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=goodsmanage">
+							<img src="/mobilerack/imgs/purchase/index_icon2.png"/>商品管理
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/backlibrary/list.html">
+							<img src="/mobilerack/imgs/purchase/index_icon3.png"/>回库
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=sales1">
+							<img src="/mobilerack/imgs/purchase/index_icon4.png"/>消费记录
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=sales2">
+							<img src="/mobilerack/imgs/purchase/index_icon5.png"/>消费排行
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/shopmanage/shop.html">
+							<img src="/mobilerack/imgs/purchase/index_icon6.png"/>店铺管理
+						</a>
+					</li>
+					<div class="clear"></div>
+				</ul>
+				<ul class="purchase-list"></ul>
+				<script id="purchase-list" type="dot/tmpl">
+					{{?it.isOrg==1}}
+					<p>{{=it.orgName}}</p>
+					{{?}}
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=replenish-week&price={{=it.weekTotalRefilPrice}}">
+							<h2>本周补货</h2>
+							<h3><span>¥</span>{{=Number(it.weekTotalRefilPrice).toFixed(2)}}</h3>
+							<p>{{=it.weekTotalRefilTime}}次</p>
+						</a>
+					</li>
+					{{?it.isOrg==1}}
+					<li>
+						<a href="/mobilerack/purchase/stock/stock.html">
+							<h2>站点存货</h2>
+							<h3><span>¥</span>{{=Number(it.orgStockTotalPrice).toFixed(2)}}</h3>
+							<p>{{=it.orgStockTotalSku}}种</p>
+						</a>
+					</li>
+					{{?}}
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=sales-today&price={{=it.todaySellPrice}}">
+							<h2>今日销售</h2>
+							<h3><span>¥</span>{{=Number(it.todaySellPrice).toFixed(2)}}</h3>
+							<p>{{=it.todaySellCount}}笔</p>
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=salesgoods&price={{=it.totalShopGoodsPrice}}">
+							<h2>在售商品</h2>
+							<h3><span>¥</span>{{=Number(it.totalShopGoodsPrice).toFixed(2)}}</h3>
+							<p>{{=it.totalShopSkuCount}}种</p>
+						</a>
+					</li>
+					{{?it.isOrg==1}}
+					<li>
+						<a href="/mobilerack/purchase/goodslist/purchase.html">
+							<h2>本月采购</h2>
+							<h3><span>¥</span>{{=Number(it.monthTotalBuyInPrice).toFixed(2)}}</h3>
+							<p>{{=it.monthTotalBuyInTime}}次</p>
+						</a>
+					</li>
+					{{?}}
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=replenish-month&price={{=it.monthTotalRefilPrice}}">
+							<h2>本月补货</h2>
+							<h3><span>¥</span>{{=Number(it.monthTotalRefilPrice).toFixed(2)}}</h3>
+							<p>{{=it.monthTotalRefilTime}}次</p>
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=sales-month&price={{=it.monthSellPrice}}">
+							<h2>本月销售</h2>
+							<h3><span>¥</span>{{=Number(it.monthSellPrice).toFixed(2)}}</h3>
+							<p>{{=it.monthSellCount}}笔</p>
+						</a>
+					</li>
+					<li>
+						<a href="/mobilerack/purchase/checkrack.html?type=damage&price={{=it.monthTotalUllagePrice}}">
+							<h2>本月货损</h2>
+							<h3><span>¥</span>{{=Number(it.monthTotalUllagePrice).toFixed(2)}}</h3>
+							<p>{{=it.monthTotalUllageCount}}种</p>
+						</a>
+					</li>
+					<div class="clear"></div>
+				</script>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				ajax.post(api.mobileServerUrl+"/betterConvenience/frontPage",{
+					
+				},function(data){
+					util.render("#purchase-list", data, ".purchase-list");
+				})
+				
+				$('.none').click(function(){
+					alert('研发中，敬请期待')
+				})
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

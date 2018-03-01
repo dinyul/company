@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好便利</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="list">
+				<ul class="content"></ul>
+				<script type="dot/tmpl" id="content">
+					{{?it.data.length>0}}
+					{{~it.data:data:i}}
+					<li id="{{=data.id}}" shopId="{{=data.shopId}}">
+						<h3>{{=data.code}}</h3>
+						<h4>目标货架：{{=data.shopNames}}</h4>
+						<p>
+							{{?data.status==1}}
+							审核时间：
+							{{??data.status==2}}
+							出库时间：
+							{{??data.status==3}}
+							 补货时间：
+							{{??data.status==4}}
+							补货时间：
+							{{??data.status==5}}
+							完成时间：
+							{{??data.status==6}}
+							取消时间
+							{{??data.status==7}}
+							添加时间：
+							{{??data.status==8}}
+							审核时间：
+							{{?}}
+							{{=getFormatDate(data.updateDate)}}</p>
+						{{?data.status==1}}
+						<a status="{{=data.status}}">待出库</a>
+						{{??data.status==2}}
+						<a status="{{=data.status}}">待补货</a>
+						{{??data.status==3}}
+						<a status="{{=data.status}}">补货中</a>
+						{{??data.status==4}}
+						<a status="{{=data.status}}">已补货</a>
+						{{??data.status==5}}
+						<a status="{{=data.status}}">已完成</a>
+						{{??data.status==6}}
+						<a status="{{=data.status}}">已取消</a>
+						{{??data.status==7}}
+						<a status="{{=data.status}}">待审核</a>
+						{{??data.status==8}}
+						<h4>审核不通过原因：{{?data.remarks}}{{=data.remarks}}{{??}}无{{?}}</h4>
+						<a status="{{=data.status}}" style="color: #C53F40;">审核未通过 </a>
+						{{?}}
+					</li>
+					{{~}}
+					{{??}}
+					<img src="/mobilerack/imgs/purchase/kong.png" />
+					<p>亲，您还没有未完成的补货单哦~</p>
+					{{?}}
+				</script>
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				var shopId=util.getUrlParams("shopId")
+				
+				list(1,20)
+				$(window).scroll(function () {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.content').find('li').length>=total){
+							//$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).unbind('scroll')
+							return false
+						}
+						pageNo=pageNo+1
+						list(pageNo,20)
+						
+					}
+				});
+				function list(pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/shopWX/shopWXRefillTotalInfo/findRefillListByShopId",{
+						"shopId":shopId,"pageSize":pageSize,"pageNo":pageNo
+					},function(data){
+						total=data.total
+						pageTotal=parseInt(total/pageSize)+1
+						if( total==0){
+							$('.noinfo').show()
+						}else{
+							$('.content1').show()
+						}
+						var obj = {data:data.rows}
+						var doTtmpl = doT.template($('#content').html());
+						var html = doTtmpl(obj);
+						$('.content').append(html)
+					})
+				}
+				
+				$('.content').delegate('li','click',function(){
+					var status=$(this).find('a').attr('status')
+					if(status==8){
+						window.location.href="/mobilerack/purchase/replenish/apply.html?shopId="+$(this).attr('shopId')+"&refillId="+$(this).attr('id')
+					}else if(status==2 || status==3){
+						window.location.href="/mobilerack/purchase/replenish/purchase-confirm.html?id="+$(this).attr('id')+"&shopId="+$(this).attr('shopId')
+					}else{
+						window.location.href="/mobilerack/purchase/replenish/purchase-list.html?id="+$(this).attr('id')+"&shopId="+$(this).attr('shopId')
+					}
+				})
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>我的名片</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/distribution/css/busines-card.css" />
+	</head>
+	<body>
+		<div class="body" style="margin-top: 44px;">
+			<header class="mui-bar mui-bar-nav">
+				<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+				<h1 class="mui-title">我的名片</h1>
+			</header>
+			<div class="content">
+				
+			</div>
+			<script type="dot/tmpl" id="content">
+			{{? it.data}}
+				<div class="buscard" style="padding-top: 0.546875rem;">
+					<div>
+						<img src="{{=it.picUrl}}{{=it.data.userCardImg}}" />
+						<p class="tishi">温馨提示：长按图片保存名片到手机相册</p>
+					</div>
+					<a href="add-card.html">修改名片</a>
+				</div>
+			{{??}}
+				<div class="no-card">
+					<p>您还未添加电子名片哦</p>
+					<a href="add-card.html">点击添加名片</a>
+				</div>
+			{{?}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script>
+			(function(api,util,ajax){
+				$('body').find('.app-top').hide()
+				$('body').css('background','#fff')
+				ajax.post(api.baseServerUrl + "/userCard/selectUserCard",{
+				},function(data) {
+					var obj = {data:data,picUrl:api.picUrl}
+					util.render("#content", obj, ".content");
+				});
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

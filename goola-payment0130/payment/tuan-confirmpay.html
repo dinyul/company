@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>确认支付</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/querenzhifu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="zhifu body">
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/tuan/js/tuan-confirmpay.js" ></script>
+		<script id="zhifuTmpl" type="dot/tmpl">
+			{{? it.dataStatus == 2}}
+				<div class="zhifu-top">
+					<p style="overflow: hidden;"><a style="float: left;color:#4a4a4a"><span>订单状态：</span>订单已取消 </a><a style="float: right;color:#4a4a4a"><span>订单编号：</span>{{=it.orderCode}}</a></p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{?? it.serviceStatus == 1}} 
+				<div class="zhifu-top">
+					<p style="overflow: hidden;"><a style="float: left;color:#4a4a4a"><span>订单状态：</span>订单已支付</a><a style="float: right;color:#4a4a4a"><span>订单编号：</span>{{=it.orderCode}}</a></p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{??}}
+				<div class="zhifu-top">
+					<p style="margin-bottom: 0;">订单已提交，请在<a id="time">30分钟00秒</a>内完成支付，超时自动取消</p>
+				</div>
+				<div class="zhifu-info">
+				{{? it.receiverName}}
+					<p>{{=it.receiverName}}<span>{{=it.receiverPhone}}</span></p>
+					<p>{{=it.receiverAddress}}</p>
+			    {{?}}
+			    	
+				</div>
+				<div class="zhifu-content" style="margin-top: 0.34375rem;">
+					
+					<div class="time" style="background: #fff;padding-left: 0.34375rem;">
+						<p>下单时间：{{=getFormatDate(it.createTime)}}</p>
+					</div>
+					
+					<div style="background: #fff; margin-top: 0.3125rem;">
+						<div class="business">
+							<!-- <div class="title" style="padding-left: 0.34375rem;">
+							<p>{{=it.goods.providerName}}</p>
+							</div> -->
+							<div class="list" style="padding:0 0.34375rem;">
+								<p><span>{{=it.goods.goodsName}}{{?it.goods.goodsLabel}}<a class="biaoqian">{{=it.goods.goodsLabel}}</a>{{?}}</span><span>¥{{=(it.groupBuyingPrice).toFixed(2)}}</span><span>x1</span></p>
+							</div>
+						</div>
+						{{? it.choosedSendTime}}
+						<div class="fahuo-time">
+							<p>{{?it.deliverType==1}}发货时间{{??it.deliverType==2 && it.orgDeliverType==1}}送货时间{{??it.deliverType==2 && it.orgDeliverType==2}}自提时间{{?}}<span>{{=getFormatDate(it.choosedSendTime).split(' ')[0]}}</span></p>
+						</div>
+						{{?}}
+						{{?it.deliverType==2 && it.orgDeliverType==2}}
+						<div class="ziti">
+							<p>门店地址：{{=it.orgName}}<span>{{=it.orgPhone}}</span></p>
+							<p>{{=it.orgAddress}}</p>
+						</div>
+						{{?}}
+					</div>
+					
+					<div class="info" style="background: #fff;">
+						<p>商品总价<span>¥{{=(it.groupBuyingPrice).toFixed(2)}}</span></p>
+						<p>余额支付<span>-¥{{=(it.pointsPreferentialPrice)}}</span></p>
+						<p>运费（快递）<span>¥{{=(it.carriage).toFixed(2)}}</span></p>
+					</div>
+					
+				</div>
+				<div class="pay">
+						<p>需付款<span>¥{{=(it.paidPrice).toFixed(2)}}</span></p>
+					</div>
+				<div class="bottom">
+					<p id="{{=it.orderId}}" onclick="_hmt.push(['_trackEvent', '支付', 'click', '拼团订单'])">去付款</p>
+				</div>
+			{{?}}
+		</script>
+	</body>
+</html>

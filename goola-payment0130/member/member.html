@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>会员中心</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/member/member.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="member"></div>
+			<script id="member" type="dot/tmpl">
+				<div class="member-top">
+					<div class="top-content">
+						<div class="user">
+							<img id="photo"/>
+							<p id="name"></p>
+						</div>
+						<div class="persent">
+							<ul>
+								{{~it.levelList:data:i}}
+								<li class="persentlist" growValue="{{=data.growValue}}">
+									<div></div>
+									<a></a>
+									<p>{{=data.levelName}}<br/><span>({{=data.growValue}})</span></p>
+								</li>
+								{{~}}
+								<div class="clear"></div>
+							</ul>
+						</div>
+						<div class="total">
+							<a href="GrowthValue.html" style="display: block;">
+								<p>成长值：{{=it.growValue.growRuleValue}}<span>{{=it.growValue.message}}</span></p>
+							</a>
+						</div>
+					</div>
+				</div>
+				<div class="member-total">
+					<a style="display: block;" href="haomi.html">
+						<p style="float: left;">好米余额：<span>{{=it.userPoints.efficientPoints}}</span></p>
+					</a>
+				</div>
+			</script>
+			<img src="/imgs/member/member.png" />
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				
+				
+				function getUserInfo(){
+					ajax.post(api.baseServerUrl + "/user/getUserInfo",{
+					},function(data) {
+						console.log(data)
+						$('#name').html(data.name)
+						$('#photo').attr('src',data.photo)
+					});
+				}
+				
+				
+				ajax.post(api.baseServerUrl + "/userTask/getUserLevelInfo",{
+					
+				},function(data) {
+					util.render("#member",data,".member")
+					getUserInfo();
+					$('.persentlist').eq(1).css('width',(7.515625-0.28125)/($('.persentlist').length-1)-0.28125+'rem')
+					$('.persentlist').each(function(){
+						if(Number($(this).attr('growValue'))>0){
+							if(data.growValue.growRuleValue<=Number($(this).prev().attr('growValue'))){
+								$(this).find('div').css('width','0%')
+							}else if(data.growValue.growRuleValue<Number($(this).attr('growValue')) && data.growValue.growRuleValue>Number($(this).prev().attr('growValue'))){
+								$(this).find('div').css('width',(Number(data.growValue.growRuleValue)-Number($(this).prev().attr('growValue')))/(Number($(this).attr('growValue'))-Number($(this).prev().attr('growValue')))*100+'%')
+							}else if(data.growValue.growRuleValue>=Number($(this).attr('growValue'))){
+								$(this).find('div').css('width','100%').css('border-radius','0')
+								$(this).find('a').css('background','#fff')
+							}
+						}
+					})
+				})
+						
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,136 @@
+.moren,.songli,.rankinglist,.water{
+	background: #fff
+}
+.payment .payment-content{
+	padding: 0.78125rem 0 0.78125rem 2.765625rem; 
+}
+.payment .payment-content img{
+	width: 1.234375rem;
+	height: 1.25rem;
+	float: left;
+	margin-right: 0.46875rem
+}
+.payment .payment-content h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.53125rem;
+	color:#fa2f3e;
+	font-weight: bold;
+}
+.payment .payment-content p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#fa2f3e;
+	margin-top: 0.40625rem
+}
+.payment .payment-bottom{
+	padding: 0.46875rem 0.3125rem
+}
+.payment .payment-bottom p{
+	margin-bottom: 0.9375rem;
+	text-align: center;
+}
+.payment .payment-bottom a{
+	display: block;
+	background:#fa2f3e;
+	border-radius:0.078125rem;
+	width:3.75rem;
+	height:0.9375rem;
+	line-height: 0.9375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	text-align: center;
+	color: #fff;
+}
+.payment .payment-bottom a:first-of-type{
+	background:#1b1a1f;
+}
+.coupon{
+	background: rgba(0,0,0,0.4);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	z-index: 100
+}
+.coupon-content{
+	width: 9.046875rem;
+	height: 14.65625rem;
+	background-size: 100%;
+	background-repeat: no-repeat;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	margin-left: -4.523438rem;
+	margin-top: -7.328125rem
+}
+.coupon .close{
+	display: block;
+	width: 0.9375rem;
+	height: 0.9375rem;
+	position: absolute;
+	right: 0;
+	top: 0
+}
+.coupon .share{
+	display: block;
+	width: 6.75rem;
+	height: 1.328125rem;
+	position: absolute;
+	left: 50%;
+	margin-left: -3.375rem;
+	bottom: 1.0rem
+}
+.coupon .couponlist{
+	width: 6.734375rem;
+	height: 5.8125rem;  
+	overflow: auto;
+	margin: 5.6875rem auto 0
+}
+.coupon .couponlist li{
+	height: 1.78125rem;
+	margin-bottom: 0.15625rem;
+	background: url(/imgs/activity/couponli1.jpg) no-repeat;
+	background-size: 100%;
+}
+.coupon .couponlist li .left{
+	float: left;
+	width: 1.640625rem;
+	height: 1.484375rem;
+	margin: 0.15625rem 0 0 0.25rem;
+	overflow: hidden;
+}
+.coupon .couponlist li .left p{
+	font-size: 0.9375rem;
+	color: #fff;
+	line-height: 1.484375rem;
+	height: 1.484375rem;
+	text-align: center;
+}
+.coupon .couponlist li .left p span{
+	font-size: 0.5rem;
+}
+.coupon .couponlist li .right{
+	float: left;
+	margin:0.3125rem 0 0 0.21875rem
+}
+.coupon .couponlist li .right p{
+	margin-bottom: 0.15625rem;
+	font-size: 0.25rem
+}
+.coupon .couponlist li .right p span{
+	display: inline-block;
+	width: 1.34375rem;
+	color: #999;
+	float: left;
+}
+.rankinglist{
+	margin-top: 0.28125rem;
+}
+.rankinglist .title{
+	padding: 0.46875rem  0.34375rem
+}
+.rankinglist .title a{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+}

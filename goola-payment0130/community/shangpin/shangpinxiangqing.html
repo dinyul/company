@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>商品详情</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/shangpin/shangpin.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 998;}
+	</style>
+</head>
+<body>
+	
+	<div class="details body">
+		<a href="../index.html" id="shouye"></a>
+		<div id="detailsFirst">
+			<div class="swiper-container"></div>
+			
+			<div class="details-one"></div>
+		</div>
+		
+		
+		
+		
+		<!--商品详情/规格参数-->	
+		<div class="message">
+			<div class="message-content"></div>
+			<div class="news">
+				<img src="/imgs/shangpin/bottom.jpg"  style="display: block;"/>
+				<img src="/imgs/logo-bottom.jpg" id="logo-bottom" style="display: block;"/>
+			</div>
+		</div>
+		
+		<!--底部加入购物车-->
+		<div class="bottom" >
+			<div class="gwc" id="end" >
+				<div class="num" id="selectedTotal"></div>
+			</div>
+			<p class="addgwc">加入购物车</p>
+			<p class="payment1">立即购买</p>
+		</div>
+		
+		<!--底部点击划出-->
+		<div id="bottom-slider" style="display: none;">
+			<div class="bg"></div>
+			<div class="bottom-slide">
+				<div class="bottom-slide1"></div>
+				<div class="bottom-slide-confirm1">
+					<div class="gwc" id="end" >
+						<div class="num selectedTotal1" id="selectedTotal"></div>
+					</div>
+					<p class="bottom-slide-confirm">加入购物车</p>
+					<p class="bottom-slide-payment">立即购买</p>
+				</div>
+			</div>
+			
+		</div>
+		<!--底部加入购物车-->
+		
+	</div>
+		
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script src="/lib/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script src="/community/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/community/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/community/js/gouwuche/main.js?t=20161117"></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script type="text/javascript" src='/community/js/gouwuche/shangpin.js?t=20161117&v2'></script>
+	<script id="swiper-container" type="dot/tmpl">
+		<div class="swiper-wrapper">
+			{{~ it.data.photo:data:i}}
+				<div class="swiper-slide"><img src="{{=picUrl}}{{=data}}" /></div>
+			{{~}}
+		</div>
+		<div class="swiper-pagination"></div>
+	</script>
+	
+	
+	<script id="leftsidebar_box_dl" type="dot/tmpl">
+		<!--商品详情标题-->
+		<div class="details-title">
+			<p class="introduce">
+				{{? it.data.goods.goodsLabel}}
+				<span class="biaoqian">{{=it.data.goods.goodsLabel}}</span>
+				{{?}}
+				{{=it.data.goods.goodsName}}
+			</p>
+			{{?it.data.goods.goodsDesc}}
+			<p class="goodsDesc">{{=it.data.goods.goodsDesc}}</p>
+			{{?}}
+			<p class="cost">¥<span>{{=(it.data.goods.distributionPrice).toFixed(2)}}</span><a>{{=(it.data.goods.specificationsShowStr).split(',')[0].split('：')[1]}}</a></p>
+			<p style="text-align: center;margin-top: 0.3125rem;font-family: PingFangSC-Regular;font-size: 0.3125rem;color: #666;">零售价：<span style="text-decoration: line-through;">¥{{=(it.data.goods.preferentialPrice).toFixed(2)}}</span>&nbsp;&nbsp;佣金：<span style="color: #ff334c;">¥</span><b style="font-size: 0.375rem;color: #ff334c;">{{=(it.data.goods.distributionProfit).toFixed(2)}}</b></p>
+		</div>
+		<!--选择口味-->
+		{{? it.data.ifSelectFlag}}
+			<div class="choice">
+				<p>选择  {{=it.data.type1}}&nbsp;{{=it.data.type2}}</p>
+			</div>
+		{{?}}
+		{{?it.data.goods.showTitle}}
+		<div class="details-tuijian">
+			<p>推荐理由</p>
+			<span>{{=(it.data.goods.showTitle).replace(/<.*?>/ig,"")}}</span>
+		</div>
+		{{?}}
+	</script>
+	
+	
+	
+	<script type="dot/tmpl" id="message">
+		
+		{{? it.data.descPhotos}}
+			<div class="suggest message-show" style="display: block;">
+				{{~ it.data.descPhotos:data:i}}
+				<img class="lazy" data-original="{{=it.picUrl}}{{=data}}" /> 
+				{{~}}
+			</div>
+		{{?}}
+		
+		
+	</script>
+	
+	<script type="dot/tmpl" id="bottom-slide">
+		{{? it.data.ifSelectFlag}}
+				<div class="cancel"></div>
+				<div class="bottom-slide-content">
+				<div class="bottom-slide-title">
+					<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}">
+					<div class="bottom-slide-title-describe">
+						<p>{{=it.data.goods.goodsName}}</p>
+						<h3>¥<span>{{=(it.data.goods.preferentialPrice).toFixed(2)}}</span></h3>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="bottom-slide-choice a">
+					<p>
+						{{=it.data.type1}}
+					</p>
+					<div>
+						{{ for(var key in it.data.typeInfo) { }}
+						<a class="noselected">{{=key}}</a>
+						{{}}}
+					</div>
+				</div>
+				<div class="bottom-slide-choice b">
+					<p>
+						{{=it.data.type2}}
+					</p>
+					{{ var t=-1;for(var key in it.data.typeInfo) { t++;}}
+					<div id="{{=t}}" style="display:none">
+						{{ for(var key2 in it.data.typeInfo[key]) { }}
+						<a id="{{=it.data.typeInfo[key][key2].goods.goodsId}}" preferentialPrice="{{=it.data.typeInfo[key][key2].goods.preferentialPrice}}" class="noselected">{{=key2}}</a>
+						{{}}}
+					</div>
+					{{}}}
+				</div>
+				{{ for(var key in it.data.typeInfo) { }}
+					{{ for(var key2 in it.data.typeInfo[key]) { }}
+					<div class="bottom-slide-num" style="display:none" id="bottom{{=it.data.typeInfo[key][key2].goods.goodsId}}" repertoryCount="{{=it.data.typeInfo[key][key2].goods.repertoryCount}}">
+						<p>数量</p>
+						<p>{{?it.data.typeInfo[key][key2].goods.goodsSource==1}}{{?it.data.typeInfo[key][key2].goods.repertoryCount != -1}}库存：{{=it.data.typeInfo[key][key2].goods.repertoryCount}}{{?}}{{?}}&nbsp;&nbsp;&nbsp;
+							<a class="slide-btn">
+								<span class="minus"></span>
+								<span class='amount'>1</span>
+								<span class="add"></span>
+							</a>
+						</p>	
+						<div class="clear"></div>
+					</div>
+					{{}}}
+				{{}}}
+				</div>
+		{{?}}
+	</script>
+	
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>我的心愿</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" href="/css/base.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/order.css?t=20161117">
+</head>
+<body>
+	
+	<div class="order body">
+		<div class="order-list" id="orderInfo" style="margin-top: 0;">
+			
+		</div>
+		<div class="order-none" style="text-align: center;display: none;">
+				<img src="/crowdfunding/imgs/my-crowdfunding.png?t=20161117" style="width: 6.21875rem;height: 4.671875rem;"/>
+				<p style="display: block;font-size: 0.375rem ;margin-top: 0.78125rem;">您还没有心愿，<a style="color: #fa2f3e;" href="wish.html">快去许愿吧></a></p>
+			</div>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/crowdfunding/js/crowdfunding-order.js?t=20161117&v1" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="dot/tmpl" id="orderInfoTmpl">
+		{{~it.data :data:i}}
+			<div class="order-content" id="{{=data.id}}">
+				<div class="order-details" id="{{=data.status}}">
+				<div class="order-number">
+					<p>心愿单号：{{=data.code}}
+					{{? data.status == 1}}
+					<span>等待付款</span>
+					{{?? data.status == 2}}
+					<span>心愿中</span>
+					{{?? data.status == 3}}
+					<span>心愿已取消</span>
+					{{?? data.status == 4}}
+					<span>心愿成功</span>
+					{{?? data.status == 5}}
+					<span>心愿未完成</span>
+					{{?? data.status == 4 && data.orderStatus == 6}}
+					<span>心愿成功-待发货</span>
+					{{?? data.status == 4 && data.orderStatus == 2}}
+					<span>心愿成功-待收货</span>
+					{{?? data.status == 4 && data.orderStatus == 4}}
+					<span>心愿成功-待评价</span>
+					{{?? data.status == 4 && data.orderStatus == 5}}
+					<span>心愿成功-已评价</span>
+					{{?? data.status == 6}}
+					<span>申请退款</span>
+					{{?? data.status == 7}}
+					<span>退款成功</span>
+					{{?? data.status == 8}}
+					<span>退款中</span>
+					{{?? data.status == 9}}
+					<span>退款中</span>
+					{{?}}
+					</p>
+				</div>
+					<ul>
+						<div class="title">
+							<p><a>{{=data.goods.providerName}}</a></p>
+						</div>
+							<li>
+								<table>
+									<tr>
+										<td><img src="{{=it.picUrl}}{{=data.goods.cartPhoto}}"></td>
+										<td><p>{{=data.goods.goodsName}}</p></td>
+										<td><span>x{{=data.goodsCount}}</span></td>
+									</tr>
+								</table>
+							</li>
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="order-payment" id="{{=data.id}}">
+					<p>实付款：¥{{=(data.startPrice).toFixed(2)}}</p>
+					{{? data.status == 1}}
+					<a class="order-confirm" href="../payment/crowdfunding-confirmpayment.html?crowdfundingId={{=data.id}}">去支付</a>
+					<a class="order-cancel offOrder">取消心愿</a>
+					{{?? data. status == 2}}
+					<a class="order-confirm share" href="../payment/my-crowdfunding.html?crowdfundingId={{=data.id}}">分享心愿</a>
+					{{?? data.status == 4}}
+					<a class="order-confirm" href="../order/dingdanxiangqing.html?orderId={{=data.orderId}}">查看订单</a>
+					{{?}}
+				</div>
+			</div>
+		{{~}}
+			
+	</script>
+
+</body>
+</html>

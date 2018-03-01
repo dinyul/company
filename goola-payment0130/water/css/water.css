@@ -1,0 +1,822 @@
+/*分类列表*/
+.watertop{
+	padding-top: 0.28125rem;
+}
+.watertop p{
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	padding-left: 0.34375rem;
+	background: #fff;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+	font-weight: bold;
+}
+.watertop ul{
+	margin-top: 0.0625rem;
+	background: #fff;
+	height: 1.828125rem;
+	padding-left: 0.859375rem
+}
+.watertop ul li{
+	float: left;
+	width: 1.25rem;
+	height: 0.625rem;
+	padding-top: 1.203125rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#525252;
+	margin-right: 1.09375rem;
+	background-repeat: no-repeat;
+	background-position: center 0.375rem;
+	background-size: 0.859375rem 0.625rem 
+}
+.watertop ul li:last-child{
+	margin-right: 0
+}
+.waterlist{
+	margin-top: 0.28125rem;
+}
+.waterlist li{
+	height: 1.34375rem;
+	margin-bottom: 0.0625rem;
+	background:#fff url(/imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+    background-size: 0.15625rem 0.3125rem;
+}
+.waterlist li a{
+	display: block;
+}
+.waterlist li p{
+	line-height: 1.34375rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#b9b9b9;
+	background-size: 0.625rem 0.625rem;
+	background-repeat: no-repeat;
+	background-position: 0.328125rem center;
+	padding-left: 1.375rem;
+}
+
+/*充值 商品列表*/
+.goodslist{
+	padding: 0.46875rem 0.5625rem 0;
+}
+.goodslist li{
+	float: left;
+	width: 4.0625rem;
+	margin: 0 0.75rem 1.171875rem 0;
+	text-align: center;
+}
+.goodslist li:nth-of-type(2n){
+	margin-right: 0
+}
+.goodslist li img{
+	width: 4.0625rem;
+	height: 4.0625rem;
+}
+.goodslist li h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#323232;
+	overflow: hidden;
+	text-overflow:ellipsis;
+	white-space: nowrap;
+	line-height: 0.46875rem;
+	margin-top: 0.421875rem;
+	font-weight: bold;
+}
+.goodslist li p{
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#9b9b9b;
+	margin-top: 0.109375rem;
+}
+.goodslist li h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.5625rem;
+	color:#fa2f3e;
+	margin-top: 0.15625rem;
+	font-weight: bold;
+}
+/*个人信息*/
+.userinfo>p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#9b9b9b;
+	line-height:0.4375rem;
+	padding: 0.46875rem 0 0.15625rem 1.0rem;
+	background-repeat: no-repeat;
+	background-position: 0.34375rem 0.46875rem;
+	background-size: 0.4375rem 0.4375rem
+}
+.userinfo ul{
+	background: #fff;
+	padding: 0 0.34375rem;
+}
+.userinfo ul li{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height: 0.4375rem;
+	padding: 0.46875rem 0;
+	border-bottom: 2px solid #eee
+}
+/*商品购买页*/
+.goodsinfo{
+	margin-bottom: 1.25rem
+}
+.goodsinfo .top{
+	text-align: center;
+	background: #fff;
+	padding-bottom: 0.46875rem
+}
+.goodsinfo .top h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#323232;
+	font-weight: bold;
+	margin-top: 0.390625rem
+}
+.goodsinfo .top p{
+	font-family:PingFangSC-Regular;
+	font-size:0.34375rem;
+	color:#9b9b9b;
+	margin-top: 0.15625rem
+}
+.goodsinfo .top h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.5625rem;
+	color:#fa2f3e;
+	margin-top: 0.15625rem;
+	font-weight: bold;
+}
+.goodsinfo ul{
+	padding: 0 0.34375rem;
+	background: #fff;
+	margin-top: 0.0625rem
+}
+.goodsinfo ul li{
+	padding: 0.46875rem 0.53125rem;
+	border-bottom: 2px solid #eee;
+}
+.goodsinfo ul li:last-child{
+	border-bottom: 0
+}
+.goodsinfo ul li h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.goodsinfo ul li h3 span{
+	color:#fa2f3e;
+}
+.goodsinfo ul li>div{
+	height: 0.84375rem;
+	margin-top: 0.28125rem
+}
+.goodsinfo ul li>div p{
+	line-height: 0.84375rem;
+	float: left;
+	width: 1.28125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+}
+.goodsinfo ul li>div div{
+	float: right;
+	width: 3.84375rem;
+	height: 0.84375rem;
+    background: url(/imgs/shangpin/add-min.png?t=20161117) no-repeat center center;
+    background-size: 3.84375rem 0.84375rem;
+}
+.goodsinfo ul li>div div span{
+	width: 1.015625rem;
+    height: 0.84375rem;
+    
+    display: block;
+    float: left;
+}
+.goodsinfo ul li>div div .minus{
+	background: url(/imgs/shangpin/gouwuchemin.png?t=20161117) no-repeat center center;
+    background-size: 0.375rem 0.375rem;
+}
+.goodsinfo ul li>div div input{
+	width: 1.75rem;
+	height: 0.84375rem;
+	border:0;
+	display: block;
+	float: left;
+	background:none;
+	text-align: center;
+	line-height: 0.84375rem
+}	
+.goodsinfo ul li>div div .add{
+	background: url(/imgs/shangpin/gouwucheadd.png?t=20161117) no-repeat center center;
+    background-size: 0.375rem 0.375rem;
+}
+.goodsinfo .invoice{
+	margin-top: 0.0625rem;
+	height: 1.34375rem;
+	background:#fff url(/water/imgs/icon8.png) no-repeat 0.34375rem;
+	background-size: 0.4375rem 0.40625rem;
+	display: none;
+}
+.goodsinfo .invoice p{
+	line-height: 1.34375rem;
+	padding-left:1.0rem;
+	font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    font-weight: bold;
+}
+.goodsinfo .invoice p a{
+	display: inline-block;
+	width: 1.125rem;
+	height: 1.34375rem;
+	float: right;
+	background: url(/imgs/gouwuche/gouwuche-meixuan.png) no-repeat center center;
+	background-size: 0.46875rem 0.46875rem	
+}
+.goodsinfo .invoice p .checked{
+	background: url(/imgs/gouwuche/gouwuche-yixuan.png) no-repeat center center;
+	background-size: 0.46875rem 0.46875rem	
+}
+/*去支付页面*/
+.payment .top{
+	background:#4a4a4a;
+	padding: 0.46875rem 0.34375rem;
+}
+.payment .top li{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	margin-bottom: 0.5625rem;
+}
+.payment .top li:last-child{
+	margin-bottom: 0
+}
+.payment .top li a{
+	font-size: 0.375rem
+}
+.payment .top li span{
+	margin-left: 0.46875rem
+}
+.goods{
+	background: #fff;
+	padding: 0.328125rem 0.375rem;
+	margin-top: 0.0625rem;
+	height: 3.125rem
+}
+.goods img{
+	width: 3.125rem;
+	height: 3.125rem;
+	float: left;
+	margin-right: 0.46875rem;
+}
+.goods h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	line-height: 0.625rem;
+	margin-bottom: 0.03125rem;
+}
+.goods p{
+	margin-top: 0.15625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+}
+.payment .list{
+	margin-top: 0.0625rem;
+	background: #fff;
+	margin-bottom: 1.328125rem
+}
+.payment .list li{
+	height: 1.34375rem;
+	line-height: 1.34375rem;
+	border-bottom: 2px solid #eee;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	width: 9.3125rem;
+	margin: 0 auto
+}
+.payment .list li:last-of-type{
+	border-bottom: 0
+}
+.payment .list li span{
+	float: right;
+	margin-left: 0.46875rem;
+}
+.payment .list li span:last-of-type{
+	color:#fa2f3e;
+}
+.payment .list>p{
+	height: 1.34375rem;
+	line-height: 1.34375rem;
+	padding:0 0.34375rem 0 1.015625rem;
+	font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    font-weight: bold;
+    background:#fff url(/water/imgs/icon8.png) no-repeat 0.34375rem;
+	background-size: 0.4375rem 0.40625rem;
+	border-top: 0.0625rem solid #F1EDEE;
+	display: none;
+}
+.payment .list>p span{
+	float: right;
+	color:#c7a994
+}
+.payment .payment-bottom{
+	background:#ffffff;
+	width:10.0rem;
+	height:1.328125rem;
+	position: fixed;
+	bottom: 0;
+}
+.payment .payment-bottom p{
+	width: 5.234375rem;
+	float: left;
+	padding-left: 0.34375rem;
+	line-height: 1.328125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.payment .payment-bottom p span{
+	color:#fa2f3e;
+	font-weight: bold;
+}
+.payment .payment-bottom a{
+	background:#fa2f3e;
+	width:4.421875rem;
+	height:1.328125rem;
+	float: right;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#ffffff;
+	line-height: 1.328125rem;
+	text-align: center;
+}
+/*充值记录页面*/
+.record{
+	padding-top: 0.28125rem;
+}
+.record>li{
+	margin-bottom: 0.28125rem;
+	position: relative;
+}
+.record>li>p{
+	height: 1.40625rem;
+	background: #fff;
+	padding:0 0.34375rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height: 1.40625rem
+}
+.record>li>p span{
+	float: right;
+	font-family:PingFangSC-Medium;
+	font-weight: bold;
+}
+.record .goods{
+	margin:0.03125rem 0;
+}
+.record ul{
+	background: #fff;
+	padding: 0 0.34375rem;
+}
+.record ul li{
+	height: 1.40625rem;
+	border-bottom: 2px solid #eee;
+	line-height: 1.40625rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.record ul li:last-child{
+	border-bottom:0
+}
+.record ul li a{
+	margin-left: 0.46875rem;
+}
+.record ul li span{
+	float: right;
+	color:#9b9b9b;
+}
+.record>li>h3{
+	height: 1.40625rem;
+	margin-top: 0.046875rem;
+	line-height: 1.40625rem;
+	padding-left: 0.375rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	background: #fff
+}
+.record>li>h3 span{
+	color:#9b9b9b;
+	font-weight: bold;
+}
+.record>li>a{
+	display: block;
+	position: absolute;
+	background:#ffffff;
+	border:1px solid #fa2f3e;
+	border-radius:0.0625rem;
+	width:1.53125rem;
+	height:0.71875rem;
+	right: 0.34375rem;
+	bottom: 0.328125rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#fa2f3e;
+	text-align: center;
+	line-height: 0.71875rem
+}
+/*余额查询页面*/
+.balance{
+	margin-bottom: 1.328125rem
+}
+.balance ul li{
+	position: relative;
+}
+.balance ul li span{
+	color:#4a4a4a;
+}
+.balance ul li span a{
+	color:#fa2f3e;
+	margin-right: 0.15625rem;
+	margin-left: 0
+}
+.balance ul li>a{
+	display: block;
+	position: absolute;
+	background:#c7a994;
+	border-radius:0.0625rem;
+	width:1.875rem;
+	height:0.734375rem;
+	line-height: 0.734375rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#ffffff;
+	right: 0;
+	top: 0.3125rem;
+	text-align: center;
+	font-weight: normal;
+}
+/*确认支付页*/
+.zhifu-top h3{
+	top: 0.609375rem
+}
+.zhifu-info{
+	margin-top: 0.0625rem
+}
+.zhifu-info h3{
+	margin-bottom: 0.328125rem;
+	font-family:PingFangSC-Medium;
+	font-size:24px;
+	color:#4a4a4a;
+	font-weight: bold;
+}
+.zhifu-info p:first-of-type{
+	font-weight: normal;
+}
+.payment .confirm-total h3{
+	height: 1.40625rem;
+	margin-top: 0.0625rem;
+	line-height: 1.40625rem;
+	background: #fff;
+	padding: 0 0.34375rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.confirmpay .confirm-total h3 span{
+	color:#fa2f3e;
+	float: right;
+	font-weight: bold;
+}
+.confirmpay{
+	margin-bottom: 1.328125rem
+}
+.confirmpay .list{
+	margin-bottom: 0
+}
+/*订单列表*/
+.order nav{
+	height: 1.40625rem;
+	background: #fff;
+	padding-left: 0.859375rem;
+}
+.order nav li{
+	float: left;
+	padding: 0 0.171875rem;
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	margin-right: 0.9375rem;
+}
+.order nav li:last-child{
+	margin-right: 0
+}
+.order nav .checked{
+	color:#c7a994;
+	background: url(/imgs/order/line.png) no-repeat left bottom;
+	background-size: 100% 0.0625rem;
+}
+.order .orderlist{
+	margin-top: 0.28125rem;
+}
+.order .orderlist li{
+	margin-bottom: 0.0625rem;
+	background: #fff;
+}
+.order .orderlist li .top{
+	height: 1.96875rem;
+	padding: 0 0.34375rem;
+	border-bottom: 2px solid #eee
+}
+.order .orderlist li .top h3{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height:0.421875rem;
+	padding-top: 0.515625rem;
+}
+.order .orderlist li .top h3 span{
+	font-family:PingFangSC-Medium;
+	color:#fa2f3e;
+	float: right;
+	font-weight: bold;
+}
+.order .orderlist li .top p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#9b9b9b;
+	margin-top: 0.265625rem
+}
+.order .orderlist li .goods{
+	border-bottom: 2px solid #eee;
+	position: relative;
+}
+.order .orderlist li .goods a{
+	line-height: 3.125rem;
+    position: absolute;
+    right: 0.375rem;
+    top: 0;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+}
+.order .orderlist li .ol-bottom{
+	height: 1.40625rem;
+	position: relative;
+	padding: 0 0.34375rem
+}
+.order .orderlist li .ol-bottom p{
+	padding-left: 0.015625rem;
+	line-height: 1.40625rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+}
+.order .orderlist li .ol-bottom p span{
+	color:#fa2f3e;
+	font-weight: bold;
+}
+.order .orderlist li .ol-bottom a{
+	display: block;
+	position: absolute;
+	background:#ffffff;
+	border:1px solid #c7a994;
+	border-radius:0.0625rem;
+	width:1.953125rem;
+	height:0.71875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#c7a994;
+	line-height:0.71875rem;
+	text-align: center;
+	right: 0.34375rem;
+	top: 0.34375rem
+}
+.order .orderlist li .ol-bottom .cancel{
+	border:1px solid #9b9b9b;
+	color:#9b9b9b;
+}
+.order .orderlist li .ol-bottom .recharge{
+	border:1px solid #fa2f3e;
+	color:#fa2f3e;
+}
+/*一键叫水*/
+.o_order{
+	padding-top: 0.28125rem;
+	margin-bottom: 1.328125rem
+}
+.o_order ul{
+	padding: 0 0.34375rem;
+	margin-top: 0.0625rem;
+	background:#fff;
+}
+.o_order ul li{
+	height: 1.34375rem;
+	border-bottom: 2px solid #eee;
+	font-family:PingFangSC-Medium;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	line-height: 1.34375rem;
+	font-weight: bold;
+	position: relative;
+}
+.o_order ul li>span{
+	color: #fa2f3e
+}
+.o_order ul li:last-child{
+	border-bottom: 0
+}
+.o_order ul li>a{
+	display: block;
+	background:#fa2f3e;
+	border-radius:0.0625rem;
+	width:1.875rem;
+	height:0.734375rem;
+	float: right;
+	line-height: 0.734375rem;
+	text-align: center;
+	color: #fff;
+	font-weight: normal;
+	margin-top: 0.3125rem;
+}
+.o_order ul li>div{
+	float: right;
+	width: 3.84375rem;
+	height: 0.84375rem;
+    background: url(/imgs/shangpin/add-min.png?t=20161117) no-repeat center center;
+    background-size: 3.84375rem 0.84375rem;
+    margin-top: 0.28125rem
+}
+.o_order ul li>div span{
+	width: 1.015625rem;
+    height: 0.84375rem;
+    
+    display: block;
+    float: left;
+}
+.o_order ul li>div .minus{
+	background: url(/imgs/shangpin/gouwuchemin.png?t=20161117) no-repeat center center;
+    background-size: 0.375rem 0.375rem;
+}
+.o_order ul li>div input{
+	width: 1.75rem;
+	height: 0.84375rem;
+	border:0;
+	display: block;
+	float: left;
+	background:none;
+	text-align: center;
+	line-height: 0.84375rem;
+	padding: 0;
+	margin: 0;
+	font-family:PingFangSC-Medium;
+	font-size:0.421875rem;
+	color:#c7a994;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	transition:none;
+}	
+.o_order ul li>div .add{
+	background: url(/imgs/shangpin/gouwucheadd.png?t=20161117) no-repeat center center;
+    background-size: 0.375rem 0.375rem;
+}
+.o_order ul li>input{
+	width: 3.90625rem;
+	height: 1.34375rem;
+	border:0;
+	position: absolute;
+	right: 0;
+	top: 0;
+	padding:0 0.3125rem 0 0;
+	background:#fff url(/imgs/shangpin/jiantou.png) no-repeat right center;
+    background-size: 0.15625rem 0.3125rem;
+    font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#b9b9b9;
+	font-weight: normal;
+	text-align: right;
+	outline: none;
+	margin: 0;
+	line-height: 1.34375rem;
+	box-shadow:none;
+	-webkit-box-shadow:none;
+	transition:none;
+	opacity: 0;
+	-webkit-tap-highlight-color: rgba(255, 255, 255, 0); 
+    -webkit-user-select: none;
+    -moz-user-focus: none;
+    -moz-user-select: none;
+    -webkit-appearance:none;
+}
+.o_order ul li>p{
+	padding:0 0.3125rem 0 0;
+	background:#fff url(/imgs/shangpin/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem;
+	float: right;
+	width: 3.90625rem;
+	text-align: right;
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#b9b9b9;
+	font-weight: normal;
+	text-align: right;
+}
+.o_order_bottom{
+	background:#c7a994;
+}
+
+.address-firm{
+	position: fixed;
+	width: 7.8125rem;
+	height: 3.53125rem;
+	top: 50%;
+	left: 50%;
+	margin-left:-3.90625rem;
+	margin-top: -1.765625rem;
+	z-index: 99;
+	background:#fff;
+	border-radius:  0.15625rem;
+	display: none;
+}
+.address-firm .address-firm-title{
+	height: 2.265625rem;
+	line-height: 2.265625rem;
+	border-bottom: 1px solid #e5e5e5;
+	text-align: center;
+}
+.address-firm .address-firm-title p{
+	line-height: 0.703125rem;
+    padding-top: 0.640625rem;
+}
+.address-firm .address-firm-list{
+	height: 1.21875rem;
+	line-height: 1.21875rem;
+}
+.address-firm .address-firm-list p{
+	text-align: center;
+	width: 50%;
+	float: left;
+	color:#fa2f3e;
+	box-sizing: border-box;
+}
+.address-firm .address-firm-list p:nth-child(2){
+	color:#999999;
+	border-right: 1px solid #e5e5e5;
+}
+
+.slider{
+	width: 9.375rem;
+	position: fixed;
+	left: 0;
+	bottom: 0;
+	background: #fff;
+	z-index: 99;
+	
+	padding: 0 0.3125rem;
+	display: none;
+}
+.slider a{
+	float: right;
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	display: block;
+	text-align: center;
+	width: 1.40625rem;
+	font-size: 0.34375rem;
+}
+.slider .sliconfirm{
+	color: #fa2f3e
+}
+.slider ul{
+	border-top: 2px solid #eee;
+	height: 6.40625rem;
+	overflow: auto;
+}
+.slider ul li{
+	height: 1.25rem;
+	line-height: 1.25rem;
+	text-align: center;
+	border-bottom: 2px solid #eee;
+	font-size: 0.375rem
+}
+.slider ul .checked{
+	color: #fa2f3e
+}

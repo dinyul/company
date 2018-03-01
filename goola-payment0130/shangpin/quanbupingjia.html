@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>评价</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/shangpin/quanbupingjia.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	<script src="/lib/bt.js?t=20161117"></script>
+</head>
+<body>
+	
+	<div class="pingjia-content body">
+		<div class="hd_nav">
+			<div class="select" id="all">全部评价<span class="all"></span></div>
+			<div id="chase">追加评价<span class="chase"></span></div>
+		</div>
+		<ul></ul>
+	</div>
+	<div class="footer-logo">
+		<img src="/imgs/logo-bottom.jpg" id="logo-bottom" style="display: block"/>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="dot/tmpl" id="pingjiaTmpl">		
+				{{~it:data:i}}
+					<li>
+						<h2>
+							<img src="{{?data.photo}}
+										{{=data.photo}}
+									  {{??}}
+									  	http://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTJvVusaGiaHqNR6fycfzhE1OjUmTiaVIgATV8zqL9J3RZxsicdhGYqh1voBBxWnjT44vZibqWqLUAtIPg/0
+									  {{?}}" style="border-radius: 50%;" />
+							<span>{{=data.userName}}</span>
+							<span class='date'>{{=data.uptime}}</span>
+						</h2>
+						{{? data.evaluateResult==0}}
+							<p class="pf">评分：   <span></span><span></span><span></span><span></span><span></span></p>
+						{{?? data.evaluateResult==1}}
+							<p class="pf">评分：   <span class='btn'></span><span></span><span></span><span></span><span></span></p>
+						{{?? data.evaluateResult==2}}
+							<p class="pf">评分：   <span class='btn'></span><span class='btn'></span><span></span><span></span><span></span></p>
+						{{?? data.evaluateResult==3}}
+							<p class="pf">评分：   <span class='btn'></span><span class='btn'></span><span class='btn'></span><span></span><span></span></p>
+						{{?? data.evaluateResult==4}}
+							<p class="pf">评分：   <span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span><span></span></p>
+						{{??}}
+							<p class="pf">评分：   <span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span><span class='btn'></span></p>
+						{{?}}
+						{{? data.evaluateContent!=""}}
+						<p class="evaluate_content evaluate_content1">{{=data.evaluateContent}}</p>
+						{{?}}
+						{{?data.appendEvaluateList && data.appendEvaluateList.length}}
+							{{~data.appendEvaluateList:item:index}}
+							<h2 class="chase_evaluate_title">{{=item.desc}}</h2>
+							<p class="evaluate_content">{{=item.evaluateContent}}</p>
+							{{~}}
+						{{?}}
+						
+					</li>
+				{{~}}		
+		</script>
+		<script type="text/javascript">
+
+			(function(api,util,ajax){
+				var goodsId = util.getUrlParams("goodsId");
+				var evaluateData = {};
+				ajax.post(api.baseServerUrl + "/goods/queryEvaluates",{
+					"goodsId":goodsId
+				},function(data) {
+					evaluateData.all = data.list
+					util.render("#pingjiaTmpl", data.list, ".pingjia-content ul");
+					$(".all").html("("+data.count+")")
+					$(".chase").html("("+data.appendCount+")")
+				})
+				ajax.post(api.baseServerUrl + "/goods/queryEvaluates",{
+					"goodsId":goodsId,
+					"isAppend":true
+				},function(data) {
+					if(data){
+						evaluateData.chase = data.list
+					}
+				})
+				console.log(evaluateData)
+
+				$(".pingjia-content").on("click",".hd_nav>div",function(){
+					$(this).addClass("select").siblings().removeClass();
+					var renderData = ($(this).attr("id") == "all") ? evaluateData.all : evaluateData.chase;
+					util.render("#pingjiaTmpl", renderData, ".pingjia-content ul");
+				})
+			
+			})(goola.api,goola.util,goola.ajax)
+			
+		</script>
+	</body>
+</html>

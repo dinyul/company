@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>单身狗</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/activity/singleDog/css/found.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="join">
+				<div class="info">
+					<div class="title"></div>
+					<script id="title" type="dot/tmpl">
+						<img src="{{=it.wechatHead}}" />
+						<h2>{{=it.dogCircleName}}的狗圈</h2>
+						<p>目前已入住{{=it.participateNumber}}条单身狗</p>
+						<h3>单身狗王——{{=it.wechatName}}</h3>
+					</script>
+					<img class="icon1" src="/activity/singleDog/imgs/icon2.png"/>
+					<img class="dog" src="/activity/singleDog/imgs/icon3.png" />
+					<div class="talk">
+						<p><span>臣服吧！我的单身狗子民们</span></p>
+					</div>
+					<div class="content"></div>
+				</div>
+				<div class="declaration">
+					<p>留下你的待解放宣言（可留联系方式，或许就有人看上你哦）</p>
+					<textarea placeholder="我是王大锤，开着拖拉机，皇家全球限量款，价值几万亿日元，联系方式：wanbaiwan"></textarea>
+					<a class="joinmessage"><img src="/activity/singleDog/imgs/join1.png"/></a>
+					<a class="joinnomessage"><img src="/activity/singleDog/imgs/join2.png"/></a>
+					<div class="clear"></div>
+				</div>
+				
+			</div>	
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var id=util.getUrlParams('id')
+				
+				ajax.post(api.baseServerUrl + "/singleDog/openAuthority/joinList",{
+					'id':id
+				},function(data) {
+					util.render("#title",data,".title")
+					for(var i=0;i<data.singleDogItemList.length;i++){
+						var left,top
+						left=(Math.random()*7+1).toFixed(6);
+						top=(Math.random()*8+1).toFixed(6)
+						if(left<=4.1875 && top<=2.03125){
+							left=(Math.random()*7+1).toFixed(6);
+							top=(Math.random()*8+1).toFixed(6)
+						}
+						$('.content').append('<div class="dog'+i+'" left="'+left+'" style="display:none;left: '+left+'rem;top: '+top+'rem;">\
+							<p>'+data.singleDogItemList[i].wechatName+'</p>\
+							<img src="'+api.picUrl+data.singleDogItemList[i].singlePhoto+'" />\
+						</div>')
+						$('.content').find('.dog'+i).fadeIn(1000)
+					}
+				})
+				setInterval(function(){
+				 	$('.content').find('div').each(function(){
+				 		var b=Math.random().toFixed(2)
+						$(this).animate({left:Number($(this).attr('left'))-Number(b)+'rem'},500)
+						$(this).animate({left:Number($(this).attr('left'))+Number(b)+'rem'},500)
+					})
+				},1000)
+				$('.joinmessage').click(function(){
+					submit($('textarea').val())
+				})
+				$('.joinnomessage').click(function(){
+					submit('')
+				})
+				$('.declaration textarea').keyup(function(){
+					if(getByteLen($('.message textarea').val())>50){
+						alert('最多输入50个汉字宣言')
+						$('.declaration textarea').val($('.declaration textarea').val().substring(0,$('.declaration textarea').val().length-1))
+					}
+				})
+				function submit(singleDeclaration){
+					
+					ajax.post(api.baseServerUrl + "/singleDog/openAuthority/joinSingleDog",{
+						"id":id,"singleDeclaration":singleDeclaration
+					},function(data) {
+						window.location.href="joininfo.html?id="+id
+						
+					})
+				}
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

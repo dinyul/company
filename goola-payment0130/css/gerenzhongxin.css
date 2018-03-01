@@ -1,0 +1,179 @@
+
+.personal .personal-top-content{
+	padding: 0.65625rem 0;
+}
+.personal .personal-top-content>img{
+	width: 1.90625rem;
+    height: 1.90625rem;
+    padding: 0.0625rem;
+    background: #fff;
+    border-radius: 100%;
+    overflow: hidden;
+    margin: 0 auto;
+    display: block;
+}
+.personal .personal-top-content>h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#ffffff;
+	margin-top: 0.28125rem;
+	text-align: center;
+}
+
+.personal .personal-top-content>a{
+	display: block;
+	background-repeat: no-repeat;
+	background-position: 0.84375rem center;
+	background-image:url(../../imgs/member/jiantou-bai.png);
+	background-size: 0.109375rem 0.21875rem;
+	border-radius:0.070312rem;
+	width:0.953125rem;
+	height:0.421875rem;
+	line-height: 0.421875rem;
+	margin: 0.28125rem auto 0;
+	padding-left: 0.171875rem;
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#ffffff;
+}
+.personal .personal-top-content ul{
+	margin-top: 0.546875rem;
+}
+.personal .personal-top-content ul li{
+	float: left;
+	width: 3.203125rem;
+}
+.personal .personal-top-content ul li a{
+	display: block;
+}
+.personal .personal-top-content ul li:nth-of-type(2){
+	width: 3.59375rem
+}
+.personal .personal-top-content ul li p{
+	text-align: center;
+	color: #fff
+}
+.personal .personal-top-content ul li p:first-child{
+	height: 0.46875rem;
+	line-height: 0.46875rem;
+	border-right: 2px solid #fff;
+	margin-bottom: 0.21875rem
+}
+.personal .personal-top-content ul li:nth-of-type(3) p:first-child{
+	border-right: 0
+}
+.personal .personal-top-content>p{
+	border: 1px solid #ffffff;
+    border-radius: 1.5625rem;
+    width: 1.828125rem;
+    height: 0.59375rem;
+    margin-top: 0.625rem;
+    margin: 0.625rem auto 0;
+    text-align: center;
+    line-height: 0.59375rem;
+}
+.personal .personal-top-content>p a{
+	color: #fff
+}
+.personal .personal-top-list .title{
+	background: #fff;
+	margin-bottom: 0.0625rem;
+	padding: 0 0.34375rem;
+	height: 1.40625rem
+}
+.personal .personal-top-list .title p{
+	height: 1.40625rem;
+	line-height: 1.40625rem;
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+}
+.personal .personal-top-list .title p span{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#b9b9b9;
+	float: right;
+	padding-right: 0.3125rem;
+	background:url(../../imgs/shangpin/jiantou.png) no-repeat right center;
+	background-size: 0.15625rem 0.3125rem
+}
+.personal .personal-top-list ul{
+	height: 1.828125rem;
+	background: #fff;
+	padding: 0 0.3125rem
+}
+.personal .personal-top-list li{
+	float: left;
+	width: 1.875rem;
+	text-align: center;
+	padding: 1.203125rem 0 0.328125rem 0;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#525252;
+	background-repeat:no-repeat;
+	background-size: 0.78125rem 0.78125rem;
+	background-position: center 0.359375rem;
+	position: relative; 
+}
+.personal .personal-top-list li a{
+	position: absolute;
+	background:#fa2f3e;
+	border-radius: 100%;
+	height: 0.34375rem;
+	line-height: 0.34375rem;
+	min-width: 0.34375rem;
+	text-align: center;
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#ffffff;
+	right: 0.40625rem;
+    top: 0.359375rem;
+}
+
+
+.personal .personal-list{
+	margin:0.3125rem 0; 
+}
+.personal .personal-list ul li{
+	background-repeat:no-repeat;
+	background-size: 0.78125rem 0.78125rem;
+	background-position: 0.34375rem center; 
+	margin-bottom: 0.0625rem;
+	height: 1.34375rem;
+	background-color:#fff;
+}
+.personal .personal-list ul li a{
+	display: block;
+}
+.personal .personal-list ul li p{
+	padding-left: 1.375rem;
+	height: 1.34375rem;
+	line-height: 1.34375rem;
+	background:url(../../imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+	background-size: 0.15625rem 0.3125rem
+}
+
+.personal-logo{
+	width: 100%;
+	text-align: center;
+	margin-bottom: 1.40625rem;
+}
+.personal-logo p span{
+	color: #bcbcbc;
+}
+.personal-logo img{
+	width: 100%;
+	margin: 0 0 -0.125rem 0;
+}
+.rankinglist{
+	background: #fff
+}
+.rankinglist .title{
+	padding: 0.46875rem 0 0 0.34375rem
+}
+.rankinglist .title a{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#c7a994;
+
+}

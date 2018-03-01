@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>单身狗</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/activity/singleDog/css/found.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="share">
+				<h2>尊敬的单身狗达令您好确定要加入<span></span>的狗圈么？</h2>
+				<a class="join"><img src="/activity/singleDog/imgs/share1.png"/></a>
+				<a><img src="/activity/singleDog/imgs/share2.png"/></a>
+			</div>
+				
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var id=util.getUrlParams('id')
+				ajax.post(api.baseServerUrl + "/singleDog/openAuthority/ifJoinSingleDog",{
+					"id":id
+				},function(data) {
+					if(data==2){
+						window.location.href="joininfo.html?id="+id
+					}else if(data==3){
+						window.location.href="foundinfo.html"
+					}
+				})
+				ajax.post(api.baseServerUrl + "/singleDog/openAuthority/joinList",{
+					'id':id
+				},function(data) {
+					$('.share h2 span').html(data.wechatName)
+				})
+				$('.join').click(function(){
+					window.location.href='join.html?id='+id
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

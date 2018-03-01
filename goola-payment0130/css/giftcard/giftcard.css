@@ -1,0 +1,295 @@
+/*礼品卡*/
+.gifts-cards{
+	width: 100%;
+	height: 15.9375rem;
+	position: absolute;
+	left: 0;
+	background: url(/imgs/giftcard/gift-bg1.jpg) no-repeat;
+	background-size: 100% 15.9375rem;
+}
+.gifts-title{
+	padding: 0 0.3125rem;
+	margin-top: 0.28125rem;
+	position: relative;
+}
+.gifts-title .logo{
+	width: 1.625rem;
+	float: left;
+}
+.gifts-title .title{
+	width: 7.5rem;
+	margin:0.390625rem 0 0 0.1875rem
+}
+.gifts-title p{
+	font-size: 0.40625rem;
+    color: #fff;
+    position: absolute;
+    left: 2.625rem;
+    top: 0.65625rem;
+}
+.gifts-content{
+	padding: 0 0.3125rem;
+	margin-top: 6.328125rem;
+	position: relative;
+}
+.gifts-content a{
+	font-size: 0.40625rem;
+    color: #fff;
+    position: absolute;
+    top: 4.9375rem;
+    left: 3.375rem;
+    width: 3.28125rem;
+    display: block;
+    text-align: center;
+    font-weight: bold;
+}
+.gifts-content .foryou{
+	width: 3.71875rem;
+    position: absolute;
+    left: 3.125rem;
+    top: 0.90625rem;
+}
+.gifts-content h3{
+	font-family:PingFangSC-Medium;
+	font-size:0.5625rem;
+	color:#4a4a4a;
+	margin-top: 0.671875rem;
+	text-align: center;
+	font-weight: bold;
+}
+.gifts-content div{
+	width: 80%;
+    margin: 0 auto;
+}
+.gifts-content div p{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	text-align: center;
+	font-weight: bold;
+}
+.gifts-content div p span{
+	color: #FA2F3E
+}
+.gifts-zhufu{
+	width: 7.03125rem;
+    margin: 2.828125rem auto 0;
+}
+.gifts-zhufu-data{
+	
+}
+.gifts-zhufu-data p{
+	font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#4a4a4a;
+	margin-top: 0.28125rem;
+	text-align: center;
+}
+.gifts-zhufu-title{
+	
+}
+.gifts-zhufu-title h2{
+	font-family:PingFangSC-Medium;
+	font-size:0.4375rem;
+	color:#4a4a4a;
+	font-weight: bold;
+	padding-bottom: 0.1875rem;
+	border-bottom: 2px solid #4a4a4a;
+	text-align: center;
+	line-height: 0.46875rem
+}
+.gifts-zhufu-touxiang{
+	width: 1.59375rem;
+	height: 1.59375rem;
+	position: absolute;
+	top: 0.15625rem;
+	left:0.75rem;
+}
+
+
+.gifts-cards-content{
+	padding: 0 0.3125rem;
+	margin-top: -0.078125rem;
+}
+.gifts-cards-content h2{
+	text-align: left;
+	line-height: 0.984375rem;
+	font-size: 0.453125rem;
+	padding-top: 0.0625rem;
+	font-weight: normal;
+	height:0.984375rem ;
+	text-indent: 2em
+}
+.gifts-cards-content p{
+	text-align: right;
+	height: 0.9375rem;
+	line-height: 0.9375rem
+}
+.gifts-cards-content a{
+	color: #fa2f3e;
+	text-align: right;
+	font-size: 0.375rem;
+	margin-top: 0.9375rem;
+	display: block;
+}
+.gifts-bottom{
+	margin: 0.546875rem auto;
+}
+.gifts-bottom a,#fanhui2{
+	position: absolute;
+    top: 13.046875rem;
+    left: 3.59375rem;
+    width: 2.8125rem;
+    height: 0.9375rem;
+    background: #fa2f3e;
+    box-shadow: 0 0.15625rem 0.15625rem 0 rgba(74,74,74,0.50);
+    border-radius: 0.0625rem;
+    line-height: 0.9375rem;
+    text-align: center;
+    font-family:PingFangSC-Regular;
+	font-size:0.375rem;
+	color:#ffffff;
+}
+.gifts-img{
+	height:6.25rem
+}
+#yijieshou{
+	padding: 0 0.859375rem;
+}
+
+
+.xin{
+	width:9.375rem ;
+	height: 7.578125rem;
+	background: url(/imgs/giftcard/791025342842733841.png?t=20161117) no-repeat 0 0.734375rem;
+	background-size: 100%;
+	position: relative;
+}
+.xin>img{
+	position: absolute;
+    bottom: 0.0625rem;
+}
+.xin .gift-logo{
+	position: absolute;
+    width: 6.71875rem;
+    bottom: 0.71875rem;
+    left: 50%;
+    margin-left: -3.359375rem;
+}
+
+.xinzhi{
+	width: 8.984375rem;
+	height: 4.53125rem;
+	margin:0 auto;
+	background: url(/imgs/giftcard/805366745484962054.png?t=20161117) no-repeat;
+	background-size: 100%;
+	position: absolute;
+	bottom: 3.03125rem;
+	left: 0.234375rem;
+	animation: myfirst 2s;
+	-moz-animation: myfirst 2s;	/* Firefox */
+	-webkit-animation: myfirst 2s;	/* Safari 和 Chrome */
+	-o-animation: myfirst 2s;	
+}
+.xinzhi div{
+	width: 90%;
+	margin: 0 auto
+}
+.share-btn{
+	background: rgba(0,0,0,0.5);
+	position: fixed;
+	width: 100%;
+	height: 100%;
+	top: 0;
+}
+.share-btn img{
+	width: 7.03125rem;
+	position: absolute;
+	right: 0.3125rem
+}
+.share-btn a{
+	display: block;
+	width: 3.125rem;
+	height: 0.96875rem;
+	background: #fa2f3e;
+	color: #fff;
+	line-height: 0.96875rem;
+	text-align: center;
+	border-radius: 0.15625rem;
+	font-size: 0.4375rem;
+	position: absolute;
+	top: 2.03125rem;
+	left: 50%;
+	margin-left: -1.5625rem
+}
+.yijieimg{
+	position: absolute;
+   top: 27%;
+    right: 13%;
+    width: 2.296875rem;
+    display: none; 
+}
+@keyframes myfirst
+{
+from {height: 0;}
+to {height: 4.53125rem;}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+from {height: 0;}
+to {height: 4.53125rem;}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+from {height: 0;}
+to {height: 4.53125rem;}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+from {height: 0;}
+to {height: 4.53125rem;}
+}
+/*送礼弹窗*/
+.giftopen{
+	position: fixed;
+	top: 28%;
+	width: 8.59375rem;
+	left: 50%;
+	margin-left: -4.296875rem;
+	background: #fff;
+	border-radius: 0.15625rem;
+	display: none;
+	z-index: 99;
+}
+.giftopen p{
+	padding: 0.78125rem 0.46875rem 0;
+	line-height: 0.5625rem
+}
+.giftopen-btn{
+	padding: 0 0.46875rem;
+	margin-top: 0.46875rem
+}
+.giftopen-btn input{
+	float: left;
+	width: 0.46875rem;
+	height: 0.46875rem;
+	margin-right: 0.15625rem
+}
+.giftopen-btn span{
+	font-size: 0.375rem;
+}
+.giftopen-close{
+	display: block;
+	width: 4.0625rem;
+	height: 1.09375rem;
+	margin: 0.46875rem auto 0.546875rem;
+	background: #fa2f3e;
+	color: #fff;
+	line-height: 1.09375rem;
+	text-align: center;
+	font-size: 0.375rem;
+	border-radius: 0.125rem
+}

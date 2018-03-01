@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好团</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/tuan/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+		.refrensh{position: fixed;bottom: 0;width: 100%;height: 2.666667rem;z-index: 999;}
+		.refrensh img{width: 1.333333rem;height: 1.333333rem;margin-left: 43%;margin-top: 1.333333rem;}
+		.mineGroup{width: 1.625rem;height: 1.40625rem;position: fixed;right: 0;bottom: 130px;z-index: 555;background-image: url(/tuan/imgs/a.png);background-size:100% 100%;border-radius:5px;overflow: hidden;}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="tuan">
+			<a href="my-tuan.html" class="mineGroup">
+			</a>
+			<nav>
+				<ul></ul>
+				<script type="dot/tmpl" id="nav">
+					<li class="checked">全部</li>
+					{{~it:data:i}}
+					<li id="{{=data.categoryId}}">{{=data.categoryName}}</li>
+					{{~}}
+				</script>
+			</nav>
+			<div class="content">
+				<img src="" class="tuan-banner"/>
+				<div class="t-title">
+					<div class="checked">
+						<a class="a1" id="1">商品列表</a>
+					</div>
+					<div>
+						<a class="a2" id="2">发起中的团</a>
+					</div>
+					<a href="rule.html">查看规则</a>
+				</div>
+				<div class="list">
+					<ul class="list1" ></ul>
+					<script type="dot/tmpl" id="list1">
+						{{?it.data.length>0}}
+						{{~it.data:data:i}}
+						<li>
+							<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=kaituan&activityId={{=data.activityId}}">
+							<img src="{{=it.picUrl}}{{=data.exhibitionPic}}" />
+							</a>
+							<div class="message">
+								<h3>{{=data.goodsName}}</h3>
+								<p>¥<span>{{=(data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(data.preferentialPrice).toFixed(2)}}</span><span>已团<a>{{=data.salesCount}}</a>件</span></p>
+								<div class="btn">
+									<a>{{=data.groupBuyingPeopleNumber}}人团</a>
+									<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=kaituan&activityId={{=data.activityId}}">去开团</a>
+								</div>
+							</div>
+							{{?data.endTime}}
+							<div class="time">
+								<p>活动剩余时间：<span class="settime settime1" id="{{=data.endTime}}"></span></p>
+							</div>
+							{{?}}
+						</li>
+						{{~}}
+						{{??}}
+						<div style="padding: 1rem 0;">
+							<img src="../imgs/empty.png" style="display: block;width: 3.3125rem;height: 2.046875rem;margin: 0 auto;"/>
+							<p style="text-align: center;margin-top: 0.5rem;">活动未开始</p>
+						</div>
+						
+						{{?}}
+					</script>
+					<ul class="list2" style="display: none;"></ul>
+					<script type="dot/tmpl" id="list2">
+						{{?it.data.length>0}}
+						{{~it.data:data:i}}
+						<li activityId="{{=data.activityId}}">
+							<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}"><img src="{{=it.picUrl}}{{=data.goodsPic}}" /></a>
+							<div class="message">
+								<h3>{{=data.goodsName}}</h3>
+								<p>¥<span>{{=(data.groupBuyingPrice).toFixed(2)}}</span><span>¥{{=(data.preferentialPrice).toFixed(2)}}</span><span>已团<a>{{=data.saleCount}}</a>件</span></p>
+								<div>
+									<img src="{{=data.userPhoto}}" />
+									<h3><b>{{=data.wxName}}</b><span>剩余名额{{=data.remainPerson}}</span></h3>
+									<p>拼团还剩 <span class="settime tuan-settime" id="{{=data.remainIngTime+new Date().getTime()}}"></span></p>
+									{{?data.status==5}}
+									<a href="complete.html?activityId={{=data.activityId}}&goodsId={{=data.goodsId}}&groupBuyingOrderUserId={{=data.id}}">去参团</a>
+									{{??}}
+									<a href="../shangpin/shangpinxiangqing.html?goodsId={{=data.goodsId}}&tuan=cantuan&id={{=data.id}}&activityId={{=data.activityId}}">去参团</a>
+									{{?}}
+								</div>
+							</div>
+							<div class="clear"></div>
+						</li>
+						{{~}}
+						{{??}}
+						<img src="imgs/pintuan.png" />
+						<p>没有发起中的团，快去开团吧</p>
+						{{?}}
+					</script>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="refrensh">
+		<img src="/imgs/refrensh.gif" alt="">
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script src="/tuan/js/index.js"></script>
+</body>
+</html>

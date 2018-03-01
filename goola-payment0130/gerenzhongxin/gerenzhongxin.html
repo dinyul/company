@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>个人中心</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/gerenzhongxin.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+	</head>
+	<body>
+		<div id="container" class="body">
+			<div class="personal">
+				<div class="personal-top">
+					<div class="personal-top-content">
+						
+					</div>
+					<div class="personal-top-list">
+						<div class="title">
+							<a style="display: block;" href="../order/wodedingdan.html">
+								<p>我的订单<span>查看全部订单</span></p>
+							</a>
+						</div>
+						<ul id="allKindsCount">
+							
+						</ul>
+						<script id="allKindsCountTmpl" type="dot/tmpl">
+							<li id="2" style="background-image: url(/imgs/personal/ordericon1.jpg);">待付款{{?it.nopay>0}}<a>{{=it.nopay}}</a>{{?}}</li>
+							<li id="6" style="background-image: url(/imgs/personal/ordericon2.jpg);">已付款{{?it.noAddress>0}}<a>{{=it.noAddress}}</a>{{?}}</li>
+							<!--<li id="3" style="background-image: url(/imgs/personal/ordericon3.jpg);">待发货{{?it.nosend>0}}<a>{{=it.nosend}}</a>{{?}}</li>-->
+							<li id="4" style="background-image: url(/imgs/personal/ordericon4.jpg);">已发货{{?it.noget>0}}<a>{{=it.noget}}</a>{{?}}</li>
+							<li id="5" style="background-image: url(/imgs/personal/ordericon5.jpg);">待评价{{?it.noComment>0}}<a>{{=it.noComment}}</a>{{?}}</li>
+							<li id="chargeback" style="background-image: url(/imgs/personal/ordericon6.png);background-size: 0.65625rem">我的售后</li>
+						</script>
+					</div>
+				</div>
+				<div class="personal-list">
+					<ul>
+						<li style="background-image: url(/imgs/personal/icon11.png);">
+							<a href="javascript:;" onclick="kefu();">
+								<p>客服中心</p>
+							</a>
+						</li>
+						<li style="background-image: url(/imgs/personal/icon2.jpg?t=20161117);">
+							<a href="../member/member.html">
+								<p>会员成长</p>
+							</a>
+						</li>
+						<li class="water" style="display: none;background-image: url(/water/imgs/icon1.png);background-size: 0.625rem;">
+							<a href="../water/list.html">
+								<p>桶装水</p>
+							</a>
+						</li>
+						<li style="background-image: url(/imgs/personal/icon1.jpg?t=20161117);">
+							<a id="fenxiao">
+								<p>事业合伙人</p>
+							</a>
+						</li>
+						<li style="background-image: url(/imgs/personal/icon9.png?t=20161117);">
+							<a href="../shop/shopinterest.html">
+								<p>关注店铺</p>
+							</a>
+						</li>
+						<li style="background-image: url(/imgs/personal/icon3.jpg?t=20161117);">
+							<a href="../address/dizhiguanli.html">
+								<p>我的地址</p>
+							</a>
+						</li>
+						<li style="background-image: url(/imgs/personal/icon5.jpg?t=20161117);">
+							<a href="../tuan/my-tuan.html">
+								<p>我的拼团</p>
+							</a>
+						</li>
+						<!--<li style="background-image: url(/imgs/personal/icon6.jpg?t=20161117);">
+							<a href="../crowdfunding/crowdfunding-order.html">
+								<p>我的心愿</p>
+							</a>
+						</li>-->
+						<div class="clear"></div>
+					</ul>
+				</div>
+				<div class="rankinglist" style="display: none;">
+					<div class="title">
+						<a>更好推荐</a>
+					</div>
+					<ul class="list"></ul>	
+				</div>
+			</div>
+			
+			<script type="dot/tmpl" id="list">
+				{{~it.data:data:i}}
+					<li goodsId="{{=data.goodsId}}">
+						<div class="goodslist">
+							<div class="goodsimg">
+								<img src="{{=it.picUrl}}{{=data.cartPhoto}}"/>
+							</div>
+							<h3>{{=data.goodsName}}</h3>
+							<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+							<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+						</div>
+					</li>
+				{{~}}
+			</script>
+			<div class="personal-logo">
+				<img src="/imgs/logo-bottom.jpg" id="logo-bottom"/>
+			</div>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script id="userInfoTmpl" type="dot/tmpl">
+			<img src="{{=it.photo}}">
+			{{?it.userLevel.levelType==1}}
+			<a style="background-color: #4EB9C4 ;" href="../member/member.html">{{=it.userLevel.levelName}}</a>
+			{{??it.userLevel.levelType==2}}
+			<a style="background-color: #EBA000 ;" href="../member/member.html">{{=it.userLevel.levelName}}</a>
+			{{??it.userLevel.levelType==3}}
+			<a style="background-color: #D5180A ;" href="../member/member.html">{{=it.userLevel.levelName}}</a>
+			{{??it.userLevel.levelType==4}}
+			<a style="background-color: #c800ff ;" href="../member/member.html">{{=it.userLevel.levelName}}</a>
+			{{?}}
+			<h2>{{=it.name}}</h2>
+			<ul>
+				<li>
+					<a href="../member/GrowthValue.html">
+						<p>{{=it.growValue}}</p>
+						<p>成长值</p>
+					</a>
+				</li>
+				<li>
+					<a href="../member/haomi.html">
+						<p>{{=it.points}}</p>
+						<p>好米余额（元）</p>
+					</a>
+				</li>
+				<li>
+					<a href="../user/youhuizhan.html">
+						<p>{{=it.userCouponCount}}</p>
+						<p>优惠券</p>
+					</a>
+				</li>
+				<div class="clear"></div>
+			</ul>
+			<p><a href="../payment/recharge.html">去充值</a></p>
+		</script>
+		<script >
+			(function(api, util, ajax){
+				getUserInfo();
+				function getUserInfo(){
+					ajax.post(api.baseServerUrl + "/user/getUserInfo",{
+					},function(data) {
+						$('.personal-top-content').css('background','url(../imgs/personal/userbg'+data.userLevel.levelType+'.png) no-repeat')
+												  .css('background-size','100%')
+						util.render("#userInfoTmpl", data, ".personal-top-content");
+						if(data.isScmUser==1){
+							$('.water').show()
+						}
+						
+						var expandCode = $.cookie('goola_wx_d_expand_code');
+						$('#fenxiao').click(function(){
+							
+								if(data.distributionUser) {
+									window.location.href = "../distribution/userCenter.html";
+								} else {
+									window.location.href = "../distribution/introduce.html?expandCode="+expandCode;
+								}
+							
+							
+						})
+					});
+				}
+				allKindsCount()
+				function allKindsCount(){
+					ajax.post(api.baseServerUrl + "/order/allKindsCount",{
+					},function(data) {
+						util.render("#allKindsCountTmpl",data,"#allKindsCount")
+					})
+				}
+				
+				$('#allKindsCount').delegate('li','click',function(){
+					if($(this).attr('id')=="chargeback"){
+						window.location.href="../order/chargeback.html"
+					}else{
+						window.location.href="../order/wodedingdan.html?type="+$(this).attr('id')
+					}
+					
+				})
+				rankinglist()
+				function rankinglist(){
+					ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+						
+					},function(data) {
+						if(data!='' && data!=undefined && data!=null && data.length!=0){
+							$('.rankinglist').show()
+							var obj = {data:data,picUrl:api.picUrl}
+							util.render("#list",obj,".rankinglist .list")
+							$('.rankinglist li').click(function(){
+								window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+							})
+						}
+						
+					})
+				}
+				
+				
+				var title="更好甄选—更好·不贵"
+				var doc="种草全世界的好货"
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+		<script type='text/javascript'>
+			(function(m, ei, q, i, a, j, s) {
+				m[i] = m[i] || function() {
+					(m[i].a = m[i].a || []).push(arguments)
+				};
+				j = ei.createElement(q),
+					s = ei.getElementsByTagName(q)[0];
+				j.async = true;
+				j.charset = 'UTF-8';
+				j.src = 'https://static.meiqia.com/dist/meiqia.js?_=t';
+				s.parentNode.insertBefore(j, s);
+			})(window, document, 'script', '_MEIQIA');
+			_MEIQIA('entId', 97425);
+			
+			_MEIQIA('withoutBtn');
+			
+			function kefu(){
+				_MEIQIA('showPanel');
+			}
+		</script>
+		
+	</body>
+</html>

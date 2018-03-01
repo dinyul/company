@@ -1,0 +1,117 @@
+.com-nav{
+	background: #fff;
+}
+.com-nav li{
+	width: 25%;
+	text-align: center;
+	float: left;
+}
+.com-nav li p{
+	font-family:PingFangSC-Regular;
+	font-size:0.3125rem;
+	color:#333333;
+	margin:0.3125rem 0; 
+	line-height: 0.3125rem;
+}
+.recommend-content a h3{
+	font-family: PingFangSC-Regular;
+    font-size: 0.28125rem;
+    color: #333333;
+    letter-spacing: 0;
+    line-height: 0.3125rem;
+    margin: 0.46875rem 0;
+    padding: 0 0.46875rem;
+}
+.recommend-content a>div{
+	padding: 0 0.46875rem;
+	padding-bottom: 0.46875rem
+}
+.recommend-content a>div p{
+	float: left;
+	font-family: PingFangSC-Regular;
+    font-size: 0.28125rem;
+    color: #666666;
+    letter-spacing: 0;
+    line-height: 0.3125rem;
+    margin-right: 0.3125rem
+}
+.recommend-content a>div p:first-of-type{
+	color: #333333;
+}
+.recommend-content a>div p:nth-of-type(2) span{
+	text-decoration:line-through;
+}
+.recommend-content a>div p:nth-of-type(3) span{
+	color:#fa2f3e;
+}
+.recommend-content a>div p:nth-of-type(3) b{
+	color:#fa2f3e;
+	font-size: 0.375rem
+}
+.emption{
+	display: block;
+    width: 0.90625rem;
+    position: absolute;
+    right: 0.46875rem;
+    bottom: 0.40625rem;
+    text-align: center;
+}
+.scroll ul li{
+	width:2.46875rem;
+	text-align: center;
+}
+.scroll ul li img{
+	width: 2.46875rem;
+	height: 2.46875rem
+}
+.scroll ul li p{
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#666666;
+	line-height:0.3125rem;
+}
+.scroll ul li p:first-of-type{
+	color: #333333;
+	margin-bottom: 0.09375rem
+}
+.scroll ul li p:nth-of-type(2) span{
+	text-decoration: line-through;
+}
+.scroll ul li p:nth-of-type(3) span{
+	color: #fa2f3e;
+}
+.scroll ul li p:nth-of-type(3) b{
+	color: #fa2f3e;
+	font-size: 0.375rem;
+	line-height: 0.625rem
+}
+
+
+.fenlei-content-list ul li h2{
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#000000;
+	line-height:0.375rem;
+	margin-bottom: 0.375rem
+}
+.fenlei-content-list ul li h3{
+	font-family:PingFangSC-Regular;
+	font-size:0.28125rem;
+	color:#666666;
+	line-height:0.3125rem;
+	margin-bottom: 0.09375rem
+}
+.fenlei-content-list ul li h3:first-of-type{
+	color:#333333;
+}
+.fenlei-content-list ul li h3:nth-of-type(2) span{
+	text-decoration: line-through;
+}
+.fenlei-content-list ul li h3:nth-of-type(3) span{
+	color: #fa2f3e;
+}
+.fenlei-content-list ul li h3:nth-of-type(3) b{
+	color: #fa2f3e;
+	font-size: 0.375rem;
+	line-height: 0.625rem
+}

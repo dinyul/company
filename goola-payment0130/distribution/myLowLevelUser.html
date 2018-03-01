@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<title>下级合伙人</title>
+		<meta charset="utf-8" />
+		<style>
+		    .mui-bar-text {
+			    font-size: 13px;
+			    font-weight: 400;
+			    line-height: 1.42;
+			    position: relative;
+			    display: inline-block;
+			    padding: 3px 0px;
+		    }	
+		</style>
+		<script type="text/javascript">
+		var page ={'pageSize':20,'total':0,'pageNo': 1};
+		(function(api, util, ajax){
+		var url = api.baseServerUrl + '/distribution/lowLevelUsers';
+		mui.init({
+			pullRefresh : {
+				container:"#refreshContainer",//下拉刷新容器标识，querySelector能定位的css选择器均可，比如：id、.class等
+				up : {
+					height:50,//可选,默认50.触发下拉刷新拖动距离,
+				    contentrefresh : "正在加载...",//可选，正在加载状态时，上拉加载控件上显示的标题内容
+			        contentnomore:'没有更多数据了',//可选，请求完毕若没有更多数据时显示的提醒内容；
+					callback : function() {
+						ajax.post(url,
+							page
+						,function(data) {
+							if (data && data.rows) {
+								page.total = data.total;
+								page.pageNo = page.pageNo + 1;
+								var table = document.body.querySelector('.mui-table-view');
+								var cells = document.body.querySelectorAll('.mui-table-view-cell');
+								for (var i = 0, len = data.rows.length; i < len; i++) {
+									var li = document.createElement('li');
+									li.className = 'mui-table-view-cell';
+									li.innerHTML = li.innerHTML + '<div>';
+									
+									li.innerHTML = li.innerHTML + '<div style="float:left">微信号:' + data.rows[i].wxName + '</div>';
+									li.innerHTML = li.innerHTML + '</div>';
+									
+									li.innerHTML = li.innerHTML + '<br/>';
+									li.innerHTML = li.innerHTML + '手机号:' + data.rows[i].telphone;
+									li.innerHTML = li.innerHTML + '<br/>';
+									li.innerHTML = li.innerHTML + '<div>';
+									li.innerHTML = li.innerHTML + '<div style="float:left">推广人数:' + data.rows[i].totalPeople + '</div>';
+									li.innerHTML = li.innerHTML + '<div style="float:right">推广金额:￥' + data.rows[i].totalPrice + '</div>';
+									li.innerHTML = li.innerHTML + '</div>';
+									//下拉刷新，新纪录插到最前面；
+									table.appendChild(li);
+								}
+							}
+							mui('#refreshContainer').pullRefresh().endPullupToRefresh((page.pageNo-1)*page.pageSize >= page.total);
+						},function(returnData){
+							mui.alert(returnData.message);
+						});						
+			 		}
+				},
+				down : {
+					height:50,//可选,默认50.触发下拉刷新拖动距离,
+					contentdown : "下拉可以刷新",//可选，在下拉可刷新状态时，下拉刷新控件上显示的标题内容
+					contentover : "释放立即刷新",//可选，在释放可刷新状态时，下拉刷新控件上显示的标题内容
+					contentrefresh : "正在刷新...",//可选，正在刷新状态时，下拉刷新控件上显示的标题内容
+					callback : function() {
+						if ((page.pageNo-1)*page.pageSize >= page.total) {
+							mui('#refreshContainer').pullRefresh().refresh(true);
+						}
+						page.pageNo=1;
+						var table = document.body.querySelector('.mui-table-view');
+						var cells = document.body.querySelectorAll('.mui-table-view-cell');
+						table.innerHTML = "";
+						mui('#refreshContainer').pullRefresh().endPullupToRefresh((page.pageNo-1)*page.pageSize >= page.total);
+						mui('#refreshContainer').pullRefresh().pullupLoading();
+			 		}
+				}
+			}
+		});
+		if (mui.os.plus) {
+			mui.plusReady(function() {
+				setTimeout(function() {
+					mui('#refreshContainer').pullRefresh().pullupLoading();
+				}, 1000);
+
+			});
+		} else {
+			mui.ready(function() {
+				mui('#refreshContainer').pullRefresh().pullupLoading();
+			});
+		}
+
+		$(function(){
+			var url = api.baseServerUrl + "/distribution/lowLevelUsersCount/";
+			ajax.post(url,{
+			},function(data) {
+				$("#totalPeople").html("人数:" + data.totalPeople);
+				$("#expandPeople").html("推广人数:" + data.expandPeople);
+				$("#totalPrice").html("推广金额:" +　data.totalPrice);
+			})
+		})
+	})(goola.api, goola.util, goola.ajax)
+	</script>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">下级合伙人</h1>
+		</header>
+		<nav class="mui-bar mui-bar-tab">
+ 			<span class="mui-bar-text" style="font-size:16px;">合计： </span>
+			<br/>
+			<span id="totalPeople" class="mui-bar-text" style="width: 30%;"></span>
+ 			<span id="expandPeople" class="mui-bar-text" style="width: 30%;"></span> 
+ 			<span id="totalPrice" class="mui-bar-text" style="width: 40%;"></span>
+ 		</nav> 
+		<div id="refreshContainer" class="mui-content mui-scroll-wrapper margin-line">
+			<div class="mui-scroll">
+				<!--数据列表-->
+				<ul class="mui-table-view mui-table-view-chevron">
+					
+				</ul>
+			</div>
+		</div>
+	</body>
+</html>
+
+

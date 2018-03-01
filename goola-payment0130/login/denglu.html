@@ -1,0 +1,61 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>登录</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/login/denglu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="fanhui">
+				<span id="fanhui"></span>
+				<p>登录</p>
+			</div>
+			<div class="login">
+					<div style="padding:0 0.3125rem">
+						<div class="phone">
+							<input type="text" required="required" placeholder="请输入手机号" name="phone" />
+						</div>
+						<!-- 
+						<div class="yzm">
+							<input type="text"  name="captcha"  id="captcha" class="yzm1" placeholder="验证码" />
+							<span class="yzmtu"  id="idcode">
+								<img alt="验证码" style="cursor: hand" title="换一张" id="captchaimg"  />
+							</span>
+						</div>
+						-->
+						<div class="code">
+							<input type="text" required="required"  placeholder="请输入验证码" name='code'/>
+							<input type="button" value="获取验证码" required="required"/>
+						</div>
+					</div>
+					<div class="bottom" style="display: none;">
+						<button>登录</button>
+					</div>
+					<div class="crowdfunding-bottom" style="display: none;">
+						<p>*直接付款不需要登录，支付后无法获得赠送优惠券哦~</p>
+						<a class="fukuan">直接付款</a>
+						<a class="denglu">登录</a>
+					</div>
+			</div>
+		</div>
+		<script id="yzm" type="dot/tmpl">
+			<input type="text"  name="captcha"  id="captcha" class="yzm1" placeholder="验证码" />
+			<span class="yzmtu">
+				<img alt="验证码" style="cursor: hand" title="换一张" id="captchaimg" src="{{=data.src}}"  onclick="javascript:login_refreshCaptcha();"/>
+			</span>
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/login/denglu.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		
+	</body>
+</html>

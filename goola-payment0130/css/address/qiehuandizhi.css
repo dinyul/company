@@ -1,0 +1,111 @@
+.change .change-top{
+	background: #fff;
+	margin-bottom: 0.3125rem;
+	height: 1.078125rem;
+	line-height: 1.078125rem;
+	border-bottom: 1px solid #e5e5e5;
+	padding: 0 0.3125rem;
+}
+.change .change-top p{
+	font-size: 0.34375rem;
+	padding-left: 0.625rem;
+	background: url(/imgs/qiehuandizhi/dizhi-Pointer.png?t=20161117) no-repeat left center;
+	background-size: 0.3125rem 0.40625rem;
+	color: #bcbcbc;
+}
+.change .change-top p span{
+	color: #3c3c3c;
+	float: right;
+}
+.change .list{
+	background: #fff;
+	margin-bottom: 2.96875rem;
+}
+
+.change .list table tr{
+	border-bottom: 1px solid #e5e5e5;
+	font-size: 0.34375rem;
+}
+.change .list table tr td{
+	padding: 0.3125rem 0;
+}
+.change .list table tr td h2{
+	font-weight: normal;
+	font-size: 0.40625rem;
+}
+.change .list table tr td p{
+	color: #bcbcbc;
+	margin-top: 0.15625rem;
+}
+
+.change .list table tr td:first-child{
+	padding-left: 0.3125rem;
+	width: 7.65625rem;
+}
+.change .list table tr td:last-child{
+	width: 1.71875rem;
+	padding-right: 0.3125rem;
+	text-align: right;
+}
+.change .list-bottom{
+	text-align: center;
+	font-size: 0.3125rem;
+	color: #fa2f3e;
+	height: 1.09375rem;
+	line-height: 1.09375rem
+}
+.change .more{
+	width: 1.875rem;
+	height: 0.78125rem;
+	border-radius: 0.125rem;
+	background: #C0C0C0;
+	text-align: center;
+	line-height: 0.78125rem;
+	color:#fff;
+	position: fixed;
+	bottom: 0.625rem;
+	left: 50%;
+	margin-left: -0.9375rem;
+	z-index: 2;
+}
+.change .more p{
+	font-size: 0.3125rem;
+}
+.change .more-show{
+	background: #fff;
+	position: fixed;
+	bottom: 0;
+	z-index: 9;
+	width: 100%;
+	display: none;
+}
+.change .more-show-list{
+	height: 4.6875rem;
+	margin: 0.78125rem 0;
+	background: url(/imgs/qiehuandizhi/qiehuandizhi.png?t=20161117) no-repeat left center;
+	background-size: 10.0rem 0.96875rem;
+	overflow: hidden;
+}
+.change .more-show-list ul li{
+	height: 0.9375rem;
+	line-height: 0.9375rem;
+	text-align: center;
+	font-size: 0.40625rem;
+	color: #9e9e9e;
+}
+.change .more-show-btn{
+	height: 1.25rem;
+	line-height: 1.25rem;
+	border-top: 1px solid #e5e5e5;
+}
+.change .more-show-btn p{
+	width: 50%;
+	box-sizing:border-box;
+	border-right: 1px solid #e5e5e5;
+	float: left;
+	text-align: center;
+	font-size: 0.40625rem;
+}
+.change .more-show-btn .cancel{
+	color: #9e9e9e;
+}

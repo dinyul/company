@@ -1,0 +1,147 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>支付成功</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/zhifuchenggong.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+		<style>
+			.commonweal{
+				padding: 0.140625rem 0.46875rem;
+			    font-family: PingFangSC-Regular;
+			    font-size: 0.3125rem;
+			    line-height: 0.46875rem;
+			    color: #8D8D8D;
+			    background: #fffaf3;
+			}
+			.commonweal span{
+				color:#D4AA70;
+			}
+			#activity{
+				display: none;margin-top: 0.28125rem;padding: 0.3125rem 0;background: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="payment body">
+			<div class="moren">
+				<div class="payment-content" style="padding-left: 0;padding-top:0.3125rem;text-align: center;">
+					<img src="/mobilerack/imgs/zhifuchenggong.png?t=20161117" style="width: 1.25rem;height: 1.25rem;float: none;margin: 0 0 0.3125rem 0;"/>
+					<h2 style="font-family: PingFangSC-Regular;font-size: 0.5rem;color: #313131;line-height: 0.5rem;text-align: center;font-weight: normal;">支付成功</h2>
+					<p style="margin-top: 0.15625rem;font-family: PingFangSC-Regular;font-size: 0.3125rem;color: #8d8d8d;line-height: 0.3125rem;">请及时取走您购买的商品</p>
+				</div>
+				<h3 class="commonweal"></h3>
+				<script id="commonweal" type="dot/tmpl">
+					{{?it}}感谢您助力“爱角落·更好”公益项目，您的{{=it}}{{?}}
+				</script>
+			</div>
+			<div class="payment-bottom">
+					<p style="color:#9b9b9b;display: none;" class="haomi"></p>
+					<a class="scanQRCode" style="float:left;margin-left: 0.5rem;background: #c53f40;">继续购物</a>
+					<a href="../index.html"  style="float:right; margin-right: 0.5rem;background: #d4aa70;">去更好商城</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<a id="activity"></a>
+			<script id="activityifo" type="dot/tmpl">
+				<img src="{{=it.picUrl}}{{=it.data.picture}}" style="display: block;"/>
+			</script>
+			<div class="rankinglist" style="display: none;" >
+				<div class="title" style="text-align: center;">
+					<a style="font-family: PingFangSC-Regular;font-size: 0.5625rem;color: #555555;">更好甄选商品推荐</a>
+				</div>
+				<ul class="list"></ul>	
+			</div>
+		</div>
+		
+		<script type="dot/tmpl" id="list">
+			{{~it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					<div class="goodslist">
+						<div class="goodsimg" style="padding-top: 0;">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}"/>
+						</div>
+						<h3>{{=data.goodsName}}</h3>
+						<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+						<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+					</div>
+				</li>
+			{{~}}
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/mobilerack/js/car.js?t=20161117"></script>
+		<script src="/mobilerack/js/main.js?t=20161117"></script>
+		<script src="/mobilerack/js/scanQRCode.js"></script>
+		<script>
+		(function(api,util,ajax){
+			var shopId=util.getUrlParams("shopId")
+			var orderId=util.getUrlParams("orderId")
+			ajax.post(api.baseServerUrl + "/shelvesOrder/openAuthority/getVolunteerTips",{
+				"orderId":orderId	
+			},function(data) {
+				util.render("#commonweal",data, ".commonweal");
+			},function(data){
+				
+			})
+			//广告
+			ajax.post(api.baseServerUrl + "/advertise/openAuthority/get",{
+			},function(data) {
+				if(data!='' && data!=undefined && data!=null){
+					$('#activity').css('display','block')
+				}
+				var obj={data:data,picUrl:api.picUrl}
+				util.render("#activityifo",obj, "#activity");
+				
+				$('#activity').click(function(){
+					if(data.type==2){
+						window.location.href=data.url
+					}else if(data.type==1){
+						ajax.post(api.baseServerUrl + "/user/openAuthority/isLogin",{
+						},function(data) {
+							window.location.href="/index.html"
+						},function(returnData){
+							window.location.href="/login/denglu.html?type=rack"
+						});
+					}
+				})
+			})
+			
+			$(".scanQRCode").click(function(){
+				scanQRCode(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),shopId)
+			})
+			
+			rankinglist()
+			function rankinglist(){
+				ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+					
+				},function(data) {
+					if(data!='' && data!=undefined && data!=null && data.length!=0){
+						$('.rankinglist').show()
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#list",obj,".rankinglist .list")
+						$('.rankinglist li').click(function(){
+							window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+						})
+					}
+					
+				})
+			}
+				
+		})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

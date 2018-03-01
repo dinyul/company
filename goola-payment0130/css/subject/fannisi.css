@@ -1,0 +1,50 @@
+.fns-top{
+	width: 100%;
+	overflow-y: hidden;
+	overflow-x:auto;
+}
+.fns-top ul{
+	background: #fff;
+	height: 1.65625rem;
+	padding: 0.53125rem 0.25rem 0.46875rem;
+	margin-bottom: 0.0625rem;
+	width: 12.65625rem;
+	
+}
+.fns-top ul li{
+	width: 3.0rem;
+	height: 1.65625rem;
+	margin-right: 0.21875rem;
+	float: left;
+}
+.fns-top ul li:last-child{
+	margin-right: 0;
+}
+.fns-top ul li a{
+	display: block;
+}
+#fns-zt,#fns-bz,#fns-zd{
+	margin-top: 0.0625rem;
+	background: #F5F5F5
+}
+.fns-title{
+	height: 3.171875rem;
+	background: #F9F9F9
+}
+.fns-title img{
+	height: 3.171875rem;
+}
+.fns-list li{
+	background: #fff;
+	position: relative;
+}
+
+.fns-list li .buy{
+	width: 1.125rem;
+	height: 1.140625rem;
+	line-height: 1.140625rem;
+	text-align: center;
+	position: absolute;
+	right: 0.15625rem;
+    bottom: 0.15625rem;
+}

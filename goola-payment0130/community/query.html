@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>更好甄选社群系统</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/community/css/community.css">
+		<link rel="stylesheet" type="text/css" href="/community/css/base.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="query">
+				<img src="/imgs/community/banner.jpg" />
+				<div class="inquiry">
+					<h2>代理授权查询</h2>
+					<input type="text" placeholder="请输入手机号" />
+					<p class="chaxun">查询</p>
+				</div>
+				<div class="service">
+					<p>大客户服务中心：15351222294</p>
+				</div>
+				<ul class="community-bottom">
+					<li onclick="window.location.href='/community/index.html'">
+						<img src="/community/imgs/home.png" />
+						<a>社群首页</a>
+					</li>
+					<li onclick="window.location.href='/community/fenlei/fenlei.html'">
+						<img src="/community/imgs/goods.png" />
+						<a>更好商品</a>
+					</li>
+					<li onclick="window.location.href='/community/about.html'">
+						<img src="/community/imgs/about.png" />
+						<a>关于社群</a>
+					</li>
+					<li onclick="window.location.href='/community/gouwuche/gouwuche.html'">
+						<img src="/community/imgs/car.png" />
+						<a>购物车</a>
+					</li>
+					<li onclick="window.location.href='/community/user-center.html'">
+						<img src="/community/imgs/center.png" />
+						<a>代理中心</a>
+					</li>
+				</ul>
+			</div>
+			<div class="query-open">
+				<div></div>
+			</div>
+			<script id="query-open" type="dot/tmpl">
+				{{?it}}
+				<h2>代理商信息</h2>
+				{{?it.photo}}
+				<img src="{{=it.photo}}" />
+				{{??}}
+				<img src="../imgs/community/no-photo.png" />
+				{{?}}
+				<p>{{=it.name}}{{?it.gradeName}}<a>{{=it.gradeName}}</a>{{?}}</p>
+				<a class="close"><img src="../imgs/community/del.png"/></a>
+				{{??}}
+				<h2>代理商信息</h2>
+				<img src="../imgs/community/no-info.png" />
+				<p>无此用户信息</p>
+				<a class="close"><img src="../imgs/community/del.png"/></a>
+				{{?}}
+			</script>
+			<script id="query-open1" type="dot/tmpl">
+				<h2>代理商信息</h2>
+				<img src="../imgs/community/no-info.png" />
+				<p>无此用户信息</p>
+				<a class="close"><img src="../imgs/community/del.png"/></a>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript"  src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		
+		<script type="text/javascript">
+		(function(api, util,ajax){
+			$('.chaxun').click(function(){
+				if(!(/^1[3|4|5|7|8]\d{9}$/.test($('.inquiry input').val()))){
+					alert("请输入合法的手机号码");
+					$('.code input:button').css('color','#fa2f3e')
+					return false;
+				}
+				ajax.post(api.baseServerUrl + "/distributionSellTeamOffline/qualificationQuery",{
+					"telphone":$('.inquiry input').val()
+				},function(data) {
+					util.render("#query-open",data,".query-open div");
+					$('.query-open').css('display','block')
+				},function(returnData){
+					util.render("#query-open1",returnData,".query-open div");
+					$('.query-open').css('display','block')
+				});
+			})
+			$('.query-open').delegate('.close','click',function(){
+				$('.query-open').css('display','none')
+			})
+			
+			var title="更好甄选新零售引流社群管理系统"
+			var doc="“更好甄选”是由软银中国与明星投资机构STAR.VC、长石资本、5100矿泉水联合投资企业旗下的生活品质新零售社群。母公司估值超10亿元"
+			shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/community/query.html","http://" + document.domain +"/imgs/community/share1.jpg");
+		})(goola.api, goola.util,goola.ajax)
+	    </script>
+
+	    	
+	</body>
+</html>

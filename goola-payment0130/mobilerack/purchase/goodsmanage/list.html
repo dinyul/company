@@ -1,0 +1,224 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>商品管理</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-search">
+				<input placeholder="商品名称查询" />
+				<p>查询</p>
+			</div>
+			<div class="record recordlist" style="margin-bottom: 1.328125rem;">
+				<ul class="list" style="background: #F5F5F5;">
+				</ul>
+			</div>
+			<div class="bottom checkgoods" style="background:#d4aa70;display: none;">
+				<p>查看已下架商品</p>
+			</div>
+			<div class="bg"></div>
+			<div class="goodsmanage"></div>
+			<script id="goodsmanage" type="dot/tmpl">
+				<a class="close"></a>
+				<div class="record goodslist" goodsId="{{=it.data.shopGoods.goods.goodsId}}" id="{{=it.data.shopGoods.id}}">
+					<ul class="list">
+						<li style="background:#fff;">
+							<img src="{{=it.picUrl}}{{=it.data.shopGoods.goods.cartPhoto}}" />
+							<div>
+								<h2><span>{{=it.data.shopGoods.goods.goodsName}}</span><a>¥{{=(it.data.shopGoods.preferentialPrice).toFixed(2)}}</a></h2>
+								<p>{{=it.data.shopGoods.goods.specifications}}</p>
+								<p style="margin-top: 0.65625rem;">7日平均销量：<a>{{=it.data.shopGoods.weekAvg}}</a></p>
+							</div>
+						</li>
+					</ul>
+				</div>
+				<div class="edit">
+				{{?it.status==1}}
+				<p><span>售价：¥</span><input type="number" class="preferentialPrice" {{?it.data.isOrg==1}}readonly="readonly"{{?}}value="{{=(it.data.shopGoods.preferentialPrice).toFixed(2)}}" /></p>
+				{{?}}
+				<p><span>数量：</span><input type="number" class="stock" value="{{=it.data.shopGoods.stock}}" /></p>
+				</div>
+				<div class="bottom" style="background:#d4aa70;position: initial;">
+					<p>保存</p>
+				</div>
+			</script>
+			<script id="record" type="dot/tmpl">
+				
+					{{~it.data.dataList:items:j}}
+					<div id="{{=items.id}}" goodsId="{{=items.goods.goodsId}}" class="rows">
+						<li style="background:#fff;">
+							<img src="{{=it.picUrl}}{{=items.goods.cartPhoto}}" />
+							<div>
+								<h2><span>{{=items.goods.goodsName}}</span><a class="preferentialPrice">¥{{?items.preferentialPrice}}{{=(items.preferentialPrice).toFixed(2)}}{{??}}{{=items.preferentialPrice}}{{?}}</a></h2>
+								<p>{{=items.goods.specifications}}</p>
+								{{?it.status==1}}
+								<p style="margin-top: 0.65625rem;">7日平均销量：<a>{{=items.weekAvg}}</a><span class="stock">在售：<a>{{=items.stock}}</a></span></p>
+								{{?}}
+							</div>
+						</li>
+						<div class="list-bottom">
+							{{?it.status==1}}
+							{{?it.data.isOrg==0}}
+							<a class="xiajia">下架</a>
+							<a class="goodsedit">编辑</a>
+							{{??it.data.isOrg==1}}
+							<a class="goodsedit" style="float: none;margin: 0 auto;">编辑</a>
+							{{?}}
+							{{??it.status==0}}
+							{{?it.data.isOrg==0}}
+							<a class="shangjia">上架</a>
+							<a class="goodsedit">编辑</a>
+							{{??it.data.isOrg==1}}
+							<a class="goodsedit" style="float: none;margin: 0 auto;">编辑</a>
+							{{?}}
+							{{?}}
+						</div>
+					</div>
+					{{~}}
+				
+			</script>
+		</div>
+		<div class="address-firm">
+			<div class="address-firm-title">
+				<p></p>
+			</div>
+			<div class="address-firm-list">
+				<p style="display:none"></p>
+				<p class="cancel">取消</p>
+				<p class="confirm">确定</p>
+				<div class="clear"></div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var pageNo=1,pageSize=20;
+				var total;
+				var pageTotal;
+				var shopId=util.getUrlParams("shopId")
+				var status=1
+				record('',status,pageNo,20)
+				$('.purchase-search p').click(function(){
+					$('.recordlist ul').html('')
+					record($('.purchase-search input').val(),status)
+					
+				})
+				
+				
+				function record(goodsName,status,pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/findShopGoodsList",{
+						"shopId":shopId,"goodsName":goodsName,"status":status
+					},function(data){
+						
+						var obj = {data:data,picUrl:api.picUrl,status:status}
+						var doTtmpl = doT.template($('#record').html());
+						var html = doTtmpl(obj);
+						$('.recordlist ul').append(html)
+						if(status==0){
+							$('.checkgoods').hide()
+						}else if(status==1){
+							$('.checkgoods').show()
+						}
+					})
+				}
+				$('.recordlist').delegate('.goodsedit','click',function(){
+					goodsEdit($(this).parent().parent().attr('id'),$(this).parent().parent().attr('goodsId'))
+					
+				})
+				
+				$('.goodsmanage').delegate('.close','click',function(){
+					$('.bg').hide()
+					$('.goodsmanage').hide()
+					$('.goodsmanage').html('')
+				})
+				$('.recordlist').delegate('.shangjia','click',function(){
+					$('.address-firm-title p').html('是否上架该商品')
+					$('.bg').show()
+					$('.address-firm').show()
+					$('.address-firm').attr('id',$(this).parent().parent().attr('id'))
+										.attr("status",'1')
+										.attr('goodsId',$(this).parent().parent().attr('goodsId'))
+				})
+				$('.recordlist').delegate('.xiajia','click',function(){
+					$('.address-firm-title p').html('是否下架该商品')
+					$('.bg').show()
+					$('.address-firm').show()
+					$('.address-firm').attr('id',$(this).parent().parent().attr('id'))
+										.attr("status",'0')
+										.attr('goodsId',$(this).parent().parent().attr('goodsId'))
+				})
+				$('.address-firm').delegate('.cancel','click',function(){
+					$('.bg').hide()
+					$('.address-firm').hide()
+				})
+				$('.address-firm').delegate('.confirm','click',function(){
+					shelf($(this).parent().parent().attr('id'),$(this).parent().parent().attr('status'),$(this).parent().parent().attr('goodsId'))
+				})
+				$('.goodsmanage').delegate('.bottom','click',function(){
+					saveInfo($(this).parent().find('.preferentialPrice').val(),$(this).parent().find('.stock').val(),$(this).parent().find('.goodslist').attr('goodsId'),$(this).parent().find('.goodslist').attr('id'))
+				})
+				
+				/*商品上下架*/
+				function shelf(id,status,goodsId){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/upOrDownShelves",{
+						"id":id,"status":status,"shopId":shopId,"goodsId":goodsId
+					},function(data){
+						$('.bg').hide()
+						$('.address-firm').hide()
+						$('.recordlist').find('#'+id).remove()
+						//record($('.purchase-search input').val(),status)
+					})
+				}
+				/*商品编辑保存*/
+				function saveInfo(preferentialPrice,stock,goodsId,id){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/editBetterConvenienceGoods",{
+						"preferentialPrice":preferentialPrice,"stock":stock,"shopId":shopId,"goodsId":goodsId
+					},function(data){
+						$('.bg').hide()
+						$('.goodsmanage').hide()
+						$('.goodsmanage').html('')
+						if(preferentialPrice!=undefined){
+							$('.recordlist').find('#'+id).find('.preferentialPrice').html('¥'+preferentialPrice)
+						}
+						$('.recordlist').find('#'+id).find('.stock a').html(stock)
+						//record($('.purchase-search input').val(),status)
+					})
+				}
+				/*商品详情*/
+				function goodsEdit(id,goodsId){
+					ajax.post(api.mobileServerUrl+"/betterConvenience/findShopGoodsById",{
+						"id":id,"goodsId":goodsId
+					},function(data){
+						var obj = {data:data,picUrl:api.picUrl,status:status}
+						util.render("#goodsmanage", obj, ".goodsmanage");
+						$('.bg').show()
+						$('.goodsmanage').show()
+					})
+				}
+				$('.checkgoods').click(function(){
+					status=0
+					$('.recordlist ul').html('')
+					record($('.purchase-search input').val(),status,pageNo,20)
+					$(window).on('scroll', doSth)
+				})
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

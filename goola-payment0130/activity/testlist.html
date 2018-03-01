@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>吃货</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/activity/test.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="content testlist">
+				<ul>
+					<li id="2107" classify="shuiguo"><img src="/imgs/activity/test/btn2107.png"/></li>
+					<li id="2109" classify="shuiguo"><img src="/imgs/activity/test/btn2109.png"/></li>
+					<li id="2102" classify="shuiguo"><img src="/imgs/activity/test/btn2102.png"/></li>
+					<li id="1976" classify="shuiguo"><img src="/imgs/activity/test/btn1976.png"/></li>
+					<li id="2110" classify="shuiguo"><img src="/imgs/activity/test/btn2110.png"/></li>
+					<li id="1860" classify="ganguo"><img src="/imgs/activity/test/btn1860.png"/></li>
+					<li id="1866" classify="ganguo"><img src="/imgs/activity/test/btn1866.png"/></li>
+					<li id="1862" classify="ganguo"><img src="/imgs/activity/test/btn1862.png"/></li>
+					<li id="1863" classify="ganguo"><img src="/imgs/activity/test/btn1863.png"/></li>
+					<li id="1865" classify="ganguo"><img src="/imgs/activity/test/btn1865.png"/></li>
+					<li id="2012" classify="luwei"><img src="/imgs/activity/test/btn2012.png"/></li>
+					<li id="2020" classify="luwei"><img src="/imgs/activity/test/btn2020.png"/></li>
+					<li id="2085" classify="luwei"><img src="/imgs/activity/test/btn2085.png"/></li>
+					<li id="2022" classify="luwei"><img src="/imgs/activity/test/btn2022.png"/></li>
+					<li id="2083" classify="luwei"><img src="/imgs/activity/test/btn2083.png"/></li>
+				</ul>
+				<div class="test-btn">
+					<img src="/imgs/activity/test/test-btn1.png"/>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+			(function(api,util,ajax){
+				
+				ajax.post(api.baseServerUrl + "/foodie/openAuthority/ifJoin",{
+						"creatorId":undefined
+					},function(data) {
+						
+					},function(data) {
+						
+					})
+				
+				$('.content .test-btn').click(function(){
+					if($('.content ul').find('.checked').length<5){
+						alert('需要选择5个商品哦')
+						return false
+					}
+					var arr=[],goodsId='',title=''
+					$('.content ul').find('.checked').each(function(){
+						arr.push($(this).attr('classify'))
+						goodsId=goodsId+$(this).attr('id')+','
+					})
+					goodsId=goodsId.substring(0,goodsId.length-1)
+					var map = {};
+					for(var i = 0; i < arr.length; i++){
+						var ai = arr[i];
+						if(!map[ai]){
+						map[ai] = 1;
+						}else{
+						map[ai]++;
+						}
+					}
+					if(map["shuiguo"]==5){
+						title='罗曼蒂克的吃货'
+					}else if(map["ganguo"]==5){
+						title='断舍离的吃货'
+					}else if(map["luwei"]==5){
+						title='锲而不舍的吃货'
+					}else if(map["shuiguo"]==3 || map["shuiguo"]==4){
+						title='颜值爆表的吃货'
+					}else if(map["ganguo"]==3 || map["ganguo"]==4){
+						title='外表高冷、内心逗比的吃货'
+					}else if(map["luwei"]==3 || map["luwei"]==4){
+						title='胆识过人的吃货'
+					}else {
+						title='博爱睿智的吃货'
+					}
+					
+					ajax.post(api.baseServerUrl + "/foodie/openAuthority/join",{
+						"foodieMarks":goodsId,"foodieTitle":title
+					},function(data) {
+						window.location.href="testresult.html?id="+data
+					})
+					
+					
+				})
+				$('.content ul li').click(function(){
+					
+					if($(this).hasClass('checked')){
+						$(this).removeClass('checked').find('.checkedimg').remove()
+					}else{
+						if($('.content ul').find('.checked').length==5){
+							alert('最多能选5个商品')
+							return false
+						}
+						$(this).addClass('checked').append('<img class="checkedimg" src="../imgs/activity/test/checked.png"/>')
+					}
+					
+				})
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

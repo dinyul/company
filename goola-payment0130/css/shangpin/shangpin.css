@@ -1,0 +1,1396 @@
+.details {
+    background: #F1EDEE;
+}
+
+.details #shouye {
+    display: block;
+    width: 0.78125rem;
+    height: 0.78125rem;
+    border-radius: 0.78125rem;
+    background: rgba(210, 210, 210, 0.9) url(/imgs/nav1-hui.png?t=20161117) no-repeat center center;
+    background-size: 70%;
+    position: fixed;
+    top: 0.15625rem;
+    left: 0.15625rem;
+    z-index: 9999;
+}
+
+.details .details-title {
+    padding: 0.78125rem 0.34375rem;
+    background: #fff;
+}
+
+.details .details-title .introduce {
+    font-family: PingFangSC-Medium;
+    font-size: 0.703125rem;
+    color: #333333;
+    line-height: 0.84375rem;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.details .details-title .goodsDesc {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #8e8e8e;
+    line-height: 0.40625rem;
+    padding-top: 0.359375rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.details .details-title .biaoqian {
+    display: inline-block;
+    background: #fa2f3e;
+    border-radius: 0.8rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.265625rem;
+    line-height: 0.265625rem;
+    color: #ffffff;
+    padding: 0.0625rem 0.109375rem 0.046875rem;
+    margin-right: 0.3125rem;
+    font-weight: normal;
+}
+
+.details .details-title .cost {
+    margin-top: 0.359375rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.703125rem;
+    color: #ff334c;
+    line-height: 0.703125rem;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+}
+
+.details .details-title .cost span {
+    margin-left: 0.171875rem
+}
+
+.details .details-title .cost a {
+    border: 1px solid #c7a994;
+    border-radius: 0.03125rem;
+    line-height: 0.25rem;
+    color: #c7a994;
+    font-size: 0.25rem;
+    position: absolute;
+    margin-left: 0.0625rem;
+    padding: 0.03125rem 0.09375rem
+}
+
+.details .details-title .price {
+    color: #9e9e9e;
+    text-decoration: line-through;
+    line-height: 0.859375rem;
+}
+
+.details .details-title .info {
+    font-size: 0.28125rem;
+    color: #bcbcbc;
+    line-height: 0.40625rem;
+    padding-bottom: 0.3125rem
+}
+
+.evaluate,
+.message,
+.collocation {
+    background: #fff;
+    margin-top: 0.1125rem;
+}
+
+.details .goods-activity{
+    height: 1.34375rem;
+    font-size: 0.375rem;
+    font-family: PingFangSC-Regular;
+    color: #d4aa70;
+    text-align: center;
+    line-height: 1.34375rem;
+    background: #fff;
+    margin-bottom: 0.1125rem;
+}
+
+.details .choice {
+    background: #fff url(/imgs/shangpin/canshuicon.png) no-repeat 0.34375rem center;
+    background-size: 0.59375rem 0.5625rem
+}
+
+.details .choice p {
+    padding-left: 1.375rem;
+    height: 1.34375rem;
+    line-height: 1.34375rem;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+    background-size: 0.15625rem 0.3125rem
+}
+
+.details .choice span {
+    float: right;
+    display: inline-block;
+    width: 0.203125rem;
+    height: 0.34375rem;
+    background: url(/imgs/shangpin/shangpinxiangqing-more.png?t=20161117) no-repeat;
+    background-size: 100%;
+    position: relative;
+    top: 0.375rem;
+    right: 0.0rem;
+}
+
+.details .details-tuijian {
+    margin-top: 0.0625rem;
+    background: #fff url(/imgs/shangpin/tuijianicon.png) no-repeat 0.34375rem 0.375rem;
+    background-size: 0.59375rem 0.5625rem
+}
+
+.details .details-tuijian p {
+    padding-left: 1.375rem;
+    height: 1.34375rem;
+    line-height: 1.34375rem;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+    background-size: 0.15625rem 0.3125rem
+}
+
+.details .details-tuijian span {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #9b9b9b;
+    line-height: 0.53125rem;
+    display: block;
+    padding: 0 0.34375rem 0.46875rem 1.375rem;
+}
+
+.details .evaluate .evaluate-title {
+    margin-top: 0.0625rem;
+    height: 1.34375rem;
+    background: #fff url(/imgs/shangpin/xinyuanicon.png) no-repeat 0.34375rem center;
+    background-size: 0.609375rem 0.53125rem;
+    border-bottom: 2px solid #ededed
+}
+
+.details .evaluate .evaluate-title p {
+    padding-left: 1.375rem;
+    height: 1.34375rem;
+    line-height: 1.34375rem;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+    background-size: 0.15625rem 0.3125rem;
+}
+
+.details .evaluate .evaluate-title p span {
+    float: right;
+    margin-right: 0.8125rem;
+    color: #c7a994;
+}
+
+.details .evaluate .evaluate-list ul li {
+    border-bottom: 1px solid #E5E5E5;
+    padding: 0.15625rem 0.3125rem 0 0.3125rem;
+}
+
+.details .evaluate .evaluate-list ul li:last-child {
+    border-bottom: 0;
+}
+
+.details .evaluate .evaluate-list ul li p {
+    line-height: 0.6rem;
+    ;
+}
+
+.details .evaluate .evaluate-list ul li p:nth-child(2) {
+    font-size: 0.3125rem;
+}
+
+.details .evaluate .evaluate-list ul li p:nth-child(2) span {
+    display: inline-block;
+    width: 0.3125rem;
+    height: 0.28125rem;
+    background: url(/imgs/shangpin/shangpinxaingqing-xing-hui.png?t=20161117) no-repeat;
+    background-size: 100%;
+    margin-right: 0.125rem;
+}
+
+.details .evaluate .evaluate-list ul li p:nth-child(2) .btn {
+    background: url(/imgs/shangpin/shangpinxaingqing-xing-huang.png?t=20161117) no-repeat;
+    background-size: 100%;
+}
+
+.details .message-title {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.details .message-title ul {
+    width: 100%;
+    height: 1.0625rem;
+    background: url(/imgs/shangpin/shangpinxiangqing-l_12.png?t=20161117) no-repeat center center;
+    background-size: 1px 0.6875rem
+}
+
+.details .message-title ul li {
+    width: 50%;
+    float: left;
+    box-sizing: border-box;
+    margin: 0.171875rem 0;
+    text-align: center;
+}
+
+.details .message-title ul li a {
+    font-size: 0.375rem;
+    padding: 0.1875rem 0 0.1875rem 0;
+    display: inline-block;
+    border-bottom: 2px solid #fff;
+}
+
+.details .parameter ul {
+    padding: 0 0.3125rem 0 0.359375rem;
+}
+
+.details .parameter ul li {
+    height: 1.0625rem;
+    line-height: 1.0625rem;
+    border-bottom: 1px solid #E5E5E5;
+    width: 100%;
+}
+
+.details .parameter ul li:last-child {
+    border-bottom: 0;
+}
+
+.details .parameter ul li p {
+    overflow: hidden;
+    width: 100%;
+    height: 1.0625rem;
+    text-overflow: ellipsis;
+    white-space: nowrap
+}
+
+.details .parameter ul li p span {
+    display: inline-block;
+    width: 2.65625rem;
+    color: #9e9e9e;
+}
+
+.details .suggest {
+    margin-top: 1px;
+}
+
+.details .message {
+    position: relative;
+    margin-bottom: 1.25rem;
+}
+
+.details .parameter,
+.details .suggest {
+    display: none;
+    width: 100%;
+    background: #fff;
+    line-height: 0;
+}
+
+.bottom {
+    width: 100%;
+    height: 1.328125rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 10;
+    border-top: 1px solid #ededed
+}
+
+.bottom .back {
+    background: #fff;
+}
+
+.bottom .back a {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #313131;
+}
+
+.bottom .addgwc {
+    width: 3.28125rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: center;
+    background: #1b1a1f;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+}
+
+.bottom .customer_service {
+    display: block;
+    width: 1.71875rem;
+    height: 100%;
+    background: #fff;
+    float: left;
+    position:relative;
+    border-left: 1px solid #eee;
+    box-sizing: border-box;
+}
+
+.bottom .customer_service img{
+    width: .78125rem;
+    height: .78125rem;
+    margin: .3125rem;
+}
+
+.bottom .payment1 {
+    background: #fa2f3e;
+    width: 3.28125rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+}
+
+.bottom .addgwc_gray {
+    width: 3.28125rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: center;
+    background: #CACACA;;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+}
+
+.bottom .payment1_gray {
+    background: #CACACA;
+    width: 3.28125rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+}
+
+.gwc {
+    width: 1.71875rem;
+    height: 1.328125rem;
+    background: #fff url(/imgs/shangpin/gouwuche.png) no-repeat 0.453125rem 0.40625rem;
+    background-size: 0.65625rem 0.609375rem;
+    float: left;
+    position: relative;
+}
+
+.gwc .num {
+    min-width: 0.34375rem;
+    height: 0.359375rem;
+    border-radius: 0.34375rem;
+    background: #fa2f3e;
+    position: absolute;
+    top: 0.34375rem;
+    left: 0.953125rem;
+    line-height: 0.359375rem;
+    text-align: center;
+    color: #fff;
+    font-family: PingFangSC-Regular;
+    font-size: 0.25rem;
+}
+
+.details .bottom-slide {
+    width: 100%;
+    background: #fff;
+    position: fixed;
+    bottom: 0;
+    z-index: 999;
+    display: none;
+}
+
+.details .bottom-slide .bottom-slide-content {
+    padding: 0 0.34375rem
+}
+
+.details .bottom-slide .cancel {
+    position: absolute;
+    width: 0.78125rem;
+    height: 0.78125rem;
+    background: url(/imgs/shangpin/shangpinxaingqing-cha@2x.png?t=20161117) no-repeat right top;
+    background-size: 0.3125rem;
+    right: 0.375rem;
+    top: 0.359375rem;
+}
+
+.details .bottom-slide-title {
+    border-bottom: 1px solid #E5E5E5;
+}
+
+.details .bottom-slide-num {
+    border-top: 1px solid #E5E5E5;
+}
+
+.details .bottom-slide-title img {
+    float: left;
+    width: 3.03125rem;
+    height: 3.03125rem;
+    margin: -0.9375rem 0.515625rem 0.3125rem 0;
+    border: 0.046875rem solid #c7a994;
+    border-radius: 0.078125rem;
+}
+
+.details .bottom-slide-title .bottom-slide-title-describe {
+    float: left;
+}
+
+.details .bottom-slide-title p {
+    width: 4.78125rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    margin-top: 0.28125rem;
+    line-height: 0.5rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+}
+
+.details .bottom-slide-title h3 {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #fa2f3e;
+    line-height: 0.375rem;
+    margin-top: 0.265625rem;
+}
+
+.details .bottom-slide-title h3 span {
+    font-family: PingFangSC-Medium;
+    font-size: 0.5rem;
+    line-height: 0.5rem;
+    margin-left: 0.078125rem
+}
+
+.details .bottom-slide-choice p {
+    font-family: PingFangSC-Regular;
+    font-size: 0.390625rem;
+    color: #4a4a4a;
+    line-height: 0.390625rem;
+    padding-bottom: 0.453125rem;
+}
+
+.details .bottom-slide-choice div {
+    margin-bottom: 0.34375rem;
+}
+
+.details .bottom-slide-choice a {
+    display: inline-block;
+    border: 1px solid #9b9b9b;
+    border-radius: 0.078125rem;
+    padding: 0 0.3125rem;
+    height: 0.734375rem;
+    text-align: center;
+    line-height: 0.734375rem;
+    margin: 0 0.46875rem 0.46875rem 0;
+    font-family: PingFangSC-Light;
+    font-size: 0.390625rem;
+    color: #9b9b9b;
+}
+
+.details .bottom-slide-choice .noselected {
+    color: #9b9b9b;
+    background: #fff;
+    border: 1px solid #9b9b9b
+}
+
+.details .bottom-slide-choice .selected {
+    color: #fff;
+    background: #c7a994;
+    border: 1px solid #c7a994
+}
+
+.details .bottom-time {
+    margin-top: 0.171875rem
+}
+
+.details .bottom-time p {
+    font-family: PingFangSC-Regular;
+    font-size: 0.390625rem;
+    color: #9b9b9b;
+    position: relative;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat 3.53125rem 0;
+    background-size: 0.15625rem 0.3125rem
+}
+
+.details .bottom-slide-num p {
+    float: left;
+    line-height: 1.25rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.390625rem;
+    color: #4a4a4a;
+}
+
+.details .bottom-slide-num p:nth-of-type(2) {
+    float: right;
+}
+
+.details .bottom-slide-num .slide-btn {
+    display: inline-block;
+    width: 3.78125rem;
+    background: url(/imgs/shangpin/add-min.png?t=20161117) no-repeat center center;
+    background-size: 3.84375rem 0.84375rem;
+    padding: 0 0.03125rem
+}
+
+.details .bottom-slide-num p span {
+    display: inline-block;
+    text-align: center;
+    float: left;
+}
+
+.details .bottom-slide-num p .minus,
+.details .bottom-slide-num p .add {
+    width: 1.015625rem;
+    height: 0.68125rem;
+    position: relative;
+    top: 0.25rem;
+    float: left;
+}
+
+.details .bottom-slide-num p .minus {
+    background: url(/imgs/shangpin/gouwuchemin.png?t=20161117) no-repeat center center;
+    background-size: 0.36rem 0.375rem;
+}
+
+.details .bottom-slide-num p .add {
+    background: url(/imgs/shangpin/gouwucheadd.png?t=20161117) no-repeat center center;
+    background-size: 0.36rem 0.375rem;
+}
+
+.details .bottom-slide-num p .amount {
+    width: 1.75rem;
+}
+
+.details .bottom-slide-confirm1 {
+    border-top: 1px solid #ededed;
+    height: 1.328125rem;
+}
+
+.details .bottom-slide-confirm {
+    width: 4.140625rem;
+    float: left;
+    height: 1.328125rem;
+    text-align: center;
+    background: #1b1a1f;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+    line-height: 1.328125rem
+}
+
+.details .bottom-slide-payment {
+    background: #fa2f3e;
+    width: 4.140625rem;
+    float: left;
+    height: 1.328125rem;
+    line-height: 1.328125rem;
+    text-align: center;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #fff;
+}
+
+.bg {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    z-index: 15;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    display: none;
+}
+
+
+/*众筹*/
+
+.crowdfunding {
+    margin-top: 0.0625rem;
+    height: 1.34375rem;
+    background: #fff url(/imgs/shangpin/xinyuanicon.png) no-repeat 0.34375rem center;
+    background-size: 0.609375rem 0.53125rem
+}
+
+.crowdfunding p {
+    padding-left: 1.375rem;
+    height: 1.34375rem;
+    line-height: 1.34375rem;
+    background: url(/imgs/shangpin/jiantou.png) no-repeat 9.5rem center;
+    background-size: 0.15625rem 0.3125rem
+}
+
+.crowdfunding>p span {
+    float: right;
+    padding-right: 0.34375rem;
+    background: url(/imgs/shouye-xiangyou.png?t=20) no-repeat right center;
+    background-size: 0.203125rem 0.21875rem;
+}
+
+.crowdfunding>p span a {
+    color: #fa2f3e
+}
+
+.crowdfunding ul {
+    margin-top: 0.40625rem
+}
+
+.crowdfunding ul li {
+    float: left;
+}
+
+.crowdfunding ul li img {
+    width: 0.625rem;
+    height: 0.625rem;
+    float: left;
+    margin: 0.046875rem 0.125rem 0 0;
+}
+
+.crowdfunding ul li p {
+    font-size: 0.28125rem;
+    color: #9e9e9e;
+    line-height: 0.375rem;
+    width: 1.40625rem;
+    float: left;
+}
+
+.bottom-crowdfunding {
+    height: 1.09375rem;
+    background: rgba(0, 0, 0, 0.4);
+    padding: 0.28125rem 0;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+.bottom-crowdfunding a {
+    display: inline-block;
+    width: 3.78125rem;
+    height: 1.09375rem;
+    line-height: 1.09375rem;
+    text-align: center;
+    color: #fff;
+    font-size: 0.375rem;
+    float: left;
+    border-radius: 0.15625rem;
+}
+
+.bottom-crowdfunding .gwc {
+    display: none;
+}
+
+
+/*新闻列表*/
+
+.news ul {
+    padding-bottom: 0.390625rem
+}
+
+.news ul li {
+    margin-bottom: 1.0rem;
+    padding: 0 0.71875rem;
+}
+
+.news ul li:last-child {
+    margin-bottom: 0
+}
+
+.news ul li a {
+    display: block;
+}
+
+.news ul li img {
+    width: 8.5625rem;
+    height: 3.71875rem
+}
+
+.news ul li p {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #323232;
+    width: 8.5625rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    margin-top: 0.3125rem;
+    line-height: 0.4375rem;
+}
+
+
+/*精品搭配*/
+
+.collocation .collocation-title {
+    margin-top: 0.0625rem;
+    height: 1.34375rem;
+    background: #fff url(/imgs/shangpin/dapeiicon.png) no-repeat 0.34375rem center;
+    background-size: 0.609375rem 0.53125rem;
+    border-bottom: 2px solid #ededed;
+}
+
+.collocation .collocation-title p {
+    padding-left: 1.375rem;
+    height: 1.34375rem;
+    line-height: 1.34375rem;
+}
+
+.collocation ul {
+    padding-bottom: 0.46875rem
+}
+
+.collocation ul li {
+    margin-bottom: 0.46875rem;
+    position: relative;
+}
+
+.collocation ul li:last-child {
+    margin-bottom: 0
+}
+
+.collocation ul li h3 {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #fa2f3e;
+    margin-left: 5.4375rem
+}
+
+.collocation ul li h3 span {
+    font-family: PingFangSC-Medium;
+    font-size: 0.5rem;
+    margin-left: 0.078125rem;
+    font-weight: bold;
+}
+
+.collocation ul li .collocation-addcard {
+    display: block;
+    width: 0.65625rem;
+    height: 0.65625rem;
+    position: absolute;
+    bottom: 0;
+    right: 0.34375rem
+}
+
+
+/*限时抢购*/
+
+.seckill {
+    height: 1.5625rem;
+    background: #f22127;
+    position: relative;
+    margin-top: -0.03125rem
+}
+
+.seckill p {
+    color: #fff
+}
+
+.seckill>div {
+    float: left;
+}
+
+.seckill>img {
+    width: 1.140625rem;
+    height: 1.234375rem;
+    position: absolute;
+    top: 0.203125rem;
+    left: 0.328125rem;
+    z-index: 6;
+}
+
+.seckill .sk-price {
+    margin-top: 0.59375rem;
+    padding-left: 1.515625rem;
+}
+
+.seckill .sk-price p a {
+    padding-left: 0.234375rem;
+    font-size: 0.625rem
+}
+
+.seckill .sk-price p span {
+    font-size: 0.875rem;
+    font-weight: bolder;
+    font-family: -webkit-body;
+    margin-left: 0.078125rem
+}
+
+.seckill .sk-left {
+    margin: 1.03125rem 0 0 0.15625rem;
+}
+
+.seckill .sk-left p {
+    font-size: 0.34375rem;
+    text-decoration: line-through;
+    color: #fff;
+}
+
+.seckill .sk-left p a {
+    margin-left: 0.15625rem
+}
+
+.seckill .sk-time {
+    width: 2.3125rem;
+    text-align: center;
+    float: right;
+    margin-top: 0.125rem
+}
+
+.seckill .sk-time p:first-child {
+    font-size: 0.28125rem;
+    margin: 0.3125rem 0
+}
+
+.seckill .sk-time p:last-child {
+    font-size: 0.3125rem;
+    font-weight: bold;
+    letter-spacing: 0.0625rem
+}
+
+
+/*拼团页面*/
+
+.tuan-bottom {
+    height: 1.40625rem;
+    width: 100%;
+    position: fixed;
+    bottom: -0.015625rem;
+    left: 0;
+    z-index: 5;
+    background: #fff;
+    border-top: 1px solid #ededed
+}
+
+.tuan-bottom a {
+    font-family: PingFangSC-Medium;
+    font-size: 0.40625rem;
+    color: #ffffff;
+    display: block;
+    float: left;
+    text-align: center;
+}
+
+.tuan-bottom .customer_service {
+    margin: 0;
+    padding: 0;
+    display: block;
+    width: 1.71875rem;
+    height: 100%;
+    background: #fff;
+    float: left;
+    position:relative;
+    border-left: 1px solid #eee;
+    box-sizing: border-box;
+}
+
+.tuan-bottom .customer_service img{
+    width: .78125rem;
+    height: .78125rem;
+    margin: .3125rem;
+}
+
+.cantuan a {
+    line-height: 1.40625rem;
+}
+
+.kaituan a {
+    line-height: 0.5625rem;
+    padding: 0.1875rem 0;
+}
+
+.tuan-bottom a:nth-of-type(2) {
+    width: 3.28125rem;
+    background: #4a4a4a;
+}
+
+.tuan-bottom a:last-of-type {
+    background: #fa2f3e;
+    width: 3.28125rem;
+}
+
+.tuan-details {
+    padding: 0.34375rem 0.34375rem 0.48125rem 0.34375rem;
+    background: #fff;
+}
+
+.tuan-details h2 {
+    font-family: PingFangSC-Medium;
+    font-size: 0.703125rem;
+    color: #333333;
+    line-height: 0.78125rem;
+    text-align: center;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.tuan-details .goodsDesc {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #8e8e8e;
+    line-height: 0.40625rem;
+    margin-top: 0.359375rem;
+    text-align: center;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.tuan-details .price {
+    font-family: PingFangSC-Medium;
+    font-size: 0.703125rem;
+    color: #ff334c;
+    height: 0.703125rem;
+    line-height: 0.703125rem;
+    text-align: center;
+    padding-top: 0.390625rem;
+    font-weight: bold;
+}
+
+.tuan-details .price a:first-of-type {
+    height: .4rem;
+    line-height: .4rem;
+    padding: .04rem .15rem 0 .15rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.25rem;
+    color: #ffffff;
+    background: #c7a994;
+    border-radius: 1.0rem;
+    margin-right: 0.625rem;
+    font-weight: normal;
+    position: relative;
+    top: -.1rem;
+}
+
+.tuan-details .price a:last-of-type {
+    font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #9b9b9b;
+    line-height: 0.3125rem;
+    margin-left: 0.625rem;
+    font-weight: normal;
+    position: relative;
+    top: -.1rem;
+}
+
+.tuan-details .price a:last-of-type span {
+    color: #fa2f3e;
+}
+
+.tuan-details .price>span {
+    margin-left: 0.171875rem
+}
+
+.tuan-details .time {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    text-align: center;
+    padding-top: 0.503125rem
+}
+
+.tuan-content {
+    background: #fff;
+    margin-top: 0.140625rem;
+    padding: 0 0.3125rem
+}
+
+.tuan-content .tc-top {
+    padding: 0.58125rem 0.03125rem 0.58125rem 0.03125rem;
+    border-bottom: 0.03125rem solid #eeeeee;
+}
+
+.tuan-content .tc-top ul {
+    margin: 0 auto;
+    width: 4.21875rem
+}
+
+.tuan-content .tc-top ul li {
+    float: left;
+    width: 1.1875rem;
+    height: 1.1875rem;
+    margin-right: 0.328125rem;
+    position: relative;
+    background: url(/tuan/imgs/touxiang.jpg) no-repeat;
+    background-size: 100%;
+}
+
+.tuan-content .tc-top ul li>img {
+    border-radius: 1.1875rem;
+    overflow: hidden;
+    width: 1.1875rem;
+    height: 1.1875rem;
+}
+
+.tuan-content .tc-top ul li:last-of-type {
+    margin-right: 0
+}
+
+.tuan-content .tc-top ul li a {
+    display: block;
+    width: 0.796875rem;
+    height: 0.359375rem;
+    position: absolute;
+    left: 0.703125rem;
+    top: 0
+}
+
+.tuan-content .tc-top h3 {
+    font-family: PingFangSC-Medium;
+    font-size: 0.4375rem;
+    color: #4a4a4a;
+    line-height: 0.5625rem;
+    text-align: center;
+    margin: 0.328125rem 0 0.765625rem 0;
+    font-weight: bold;
+}
+
+.tuan-content .tc-top h3 span {
+    display: inline-block;
+    background: #4a4a4a;
+    border-radius: 0.078125rem;
+    width: 0.65625rem;
+    height: 0.5625rem;
+    margin: 0 0.140625rem;
+    color: #ffffff;
+}
+
+.tuan-content .tc-top p {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #c7a994;
+    line-height: 0.375rem;
+    text-align: center;
+}
+
+.tuan-content .tc-top p img {
+    width: 0.359375rem;
+    height: 0.34375rem;
+    margin-right: 0.15625rem;
+    position: relative;
+    top: 0.03125rem;
+}
+
+.tuan-content .tc-top b {
+    font-weight: normal;
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #c7a994;
+    line-height: 0.375rem;
+}
+
+.tuan-content .tc-top b a {
+    font-size: 0.3125rem;
+    color: #9b9b9b;
+    float: right;
+    padding-right: 0.3125rem;
+    background: url(/tuan/imgs/icon10.png) no-repeat right center;
+    background-size: 0.15625rem 0.3125rem
+}
+
+.tuan-content .tc-bottom {
+    padding-top: 0.484375rem;
+}
+
+.tuan-content .tc-bottom h3 {
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    line-height: 0.375rem;
+}
+
+.tuan-content .tc-bottom h3 a {
+    font-size: 0.3125rem;
+    color: #9b9b9b;
+    float: right;
+    padding-left: 0.84375rem;
+    background: url(/tuan/imgs/1.jpg) no-repeat 0.328125rem center;
+    background-size: 0.3125rem;
+    border-left: 1px solid #000;
+}
+
+.tuan-content .tc-bottom p {
+    margin-top: 0.53125rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.3125rem;
+    color: #9b9b9b;
+    line-height: 0.6125rem;
+}
+
+.tuan-content .tc-bottom p span {
+    display: inline-block;
+    width: 0.3125rem;
+    height: 0.3125rem;
+    background: url(/tuan/imgs/icon10.png) no-repeat center center;
+    background-size: 0.15625rem 0.3125rem;
+    margin: 0 0.453125rem;
+    position: relative;
+    top: 0.03125rem;
+}
+
+.details .bottom-time-choice {
+    position: fixed;
+    width: 100%;
+    background: #fff;
+    left: 0;
+    bottom: 0;
+    z-index: 99
+}
+
+.details .bottom-time-choice>div {
+    padding: 0 0.34375rem;
+}
+
+.details .bottom-time-choice>div>p {
+    font-family: PingFangSC-Regular;
+    font-size: 0.390625rem;
+    color: #4a4a4a;
+    padding: 0.59375rem 0;
+    border-bottom: 0.046875rem solid #bbbbbb;
+}
+
+.details .bottom-time-choice>div ul {
+    max-height: 283px;
+    padding: 0.828125rem 0 0;
+    overflow: auto;
+}
+
+.details .bottom-time-choice>div ul li {
+    font-family: PingFangSC-Regular;
+    font-size: 0.390625rem;
+    color: #9b9b9b;
+    line-height: 0.390625rem;
+    text-align: center;
+    margin-bottom: 0.609375rem
+}
+
+.details .bottom-time-choice a {
+    display: inline-block;
+    float: left;
+    width: 5.0rem;
+    height: 1.34375rem;
+    text-align: center;
+    line-height: 1.34375rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #ffffff;
+    margin: 0;
+    border: 0;
+    background: #1b1a1f;
+    border-radius: 0
+}
+
+.details .bottom-time-choice a:last-of-type {
+    background: #fa2f3e;
+}
+
+.shareinfo-bg {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 999
+}
+
+.shareinfo-bg img {
+    width: 9.171875rem;
+    height: 3.765625rem;
+    margin-left: 0.375rem
+}
+
+.shareinfo-bg a {
+    display: block;
+    background: #fa2f3e;
+    border-radius: 0.078125rem;
+    width: 3.75rem;
+    height: 0.9375rem;
+    margin: 0.890625rem auto 0;
+    text-align: center;
+    line-height: 0.9375rem;
+    font-family: PingFangSC-Medium;
+    font-size: 0.375rem;
+    color: #ffffff;
+}
+
+
+/*店铺*/
+
+.shopadmin {
+    margin-top: 0.3125rem;
+    background: #fff;
+    height: 1.109375rem;
+    padding: 0.234375rem 0.34375rem;
+}
+
+.shopadmin img {
+    background: #d8d8d8;
+    box-shadow: 0 0.03125rem 0.0625rem 0 rgba(0, 0, 0, 0.25);
+    border-radius: 0.0625rem;
+    width: 1.109375rem;
+    height: 1.109375rem;
+    float: left;
+    margin-right: 0.3125rem
+}
+
+.shopadmin p {
+    line-height: 1.109375rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #4a4a4a;
+    float: left;
+}
+
+.shopadmin a {
+    display: block;
+    float: right;
+    background: #c7a994 url(/tuan/imgs/icon9.png) no-repeat 1.859375rem center;
+    background-size: 0.15625rem 0.3125rem;
+    border-radius: 0.0625rem;
+    width: 2.015625rem;
+    height: 0.640625rem;
+    margin-top: 0.234375rem;
+    line-height: 0.640625rem;
+    padding-left: 0.203125rem;
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #ffffff;
+}
+
+
+/* 组合商品 */
+
+.details .details-title-zuhe {
+    padding: 0.4rem 0.34375rem 0.3rem 0.34375rem;
+    background: #fff;
+    border-bottom: .1125rem solid #f5f5f5;
+}
+
+.details .details-title-zuhe .introduce {
+    font-family: PingFangSC-Regular;
+    color: #424242;
+    line-height: 0.653375rem;
+    text-align: left;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    margin-bottom: .21572rem;
+}
+.details .details-title-zuhe .goodsDesc{
+    font-family: PingFangSC-Regular;
+    font-size: 0.375rem;
+    color: #8e8e8e;
+    line-height: 0.50625rem;
+}
+.details .details-title-zuhe .introduce p {
+    font-size: 0.5125rem;
+    font-weight: bold;
+    color: #424242;
+}
+
+.details .details-title-zuhe .cost {
+    margin: 0.219375rem 0 0.199375rem 0;
+    font-family: PingFangSC-Medium;
+    font-size: 0.703125rem;
+    color: #c53f40;
+    line-height: 0.703125rem;
+    text-align: left;
+    font-weight: bold;
+    position: relative;
+    top: 2px;
+}
+
+.details .details-title-zuhe .cost span {
+    margin-left: 0.171875rem
+}
+
+.details .details-title-zuhe .cost a {
+    border: 1px solid #d4aa70;
+    border-radius: 0.08125rem;
+    line-height: 0.25rem;
+    color: #c7a994;
+    font-size: 0.25rem;
+    position: absolute;
+    margin-left: 0.1625rem;
+    padding: 0.09725rem;
+    top: 0.115267rem;
+}
+
+.details .details-title-zuhe .oldPrice {
+    font-family: PingFangSC-Regular;
+    color: #8d8d8d;
+    font-size: 0.3546874rem;
+    line-height: 0.759375rem;
+    position: relative;
+}
+
+.details .details-title-zuhe .oldPrice span {
+    text-decoration: line-through;
+}
+
+.seckill .stock{
+    display: none;
+}
+
+.stock{
+    position: absolute;
+    right: 0;
+    top: 0;
+    color: #8D8D8D;
+    font-size: 0.3546874rem;
+    font-weight: normal;
+}
+
+.dhslh {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.slh{
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+
+.chase_evaluate_title,.evaluate_content{
+	font-family: PingFangSC-Regular;
+	font-size: .32rem;
+	color: #313131;
+	line-height: .32rem;
+	margin: 0;
+}
+
+.chase_evaluate_title{
+	color: #c53f40;
+}
+
+.evaluate_content{
+	padding: .1333rem 0;
+	line-height: .4rem;
+}
+
+.evaluate_content1{
+    padding-top: 0;
+    padding-bottom: .15rem;
+}
+
+.pf{
+
+}

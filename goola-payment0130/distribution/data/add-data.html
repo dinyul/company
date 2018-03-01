@@ -1,0 +1,62 @@
+<!doctype html>
+	<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>添加资料</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/distribution/css/add-data.css" />
+	</head>
+	<body>
+		<div class="body" style="margin-top: 44px; overflow: hidden;" >
+			<div class="fanhui" style="position: fixed; top: 0;left:0;width: 100%;background: #fff;z-index: 99;height: 44px;line-height: 44px;">
+				<span id="fanhui" style="height: 44px;background:none;padding-left: 10px;position: fixed; top: 0;left:0;"><a href="javascript:void(history.back())" style="display: inline-block;float: left;width: 3rem;"></a></span>
+				<p style="font-size: 17px;font-weight: 500;overflow: hidden;">添加资料</p>
+			</div>
+			<form  id="form" method="post" enctype="multipart/form-data"> 
+				<div class="add-data">
+					<div class="title">
+						<input placeholder="标题是必填项，限制30个汉字" name="title" required="required" />
+						<div class="del"><img src="/distribution/imgs/369932153258440427.png"/></div>
+					</div>
+					<div class="content">
+						<textarea id="area" name="content" placeholder="正文是必填项，限制1000个汉字" required="required"></textarea>
+						<div class="add-pic">
+							<a><img src="/distribution/imgs/918611288430651714.png"/></a>
+							<p>还能输入<span>1000</span>个字</p>
+						</div>
+						<div class="z_photo">
+				        	<div class="photo"></div>
+				            <div class="z_file z_file1">
+				                <input type="file"  name="file" accept="image/*"/>
+				            </div>
+				            <div class="z_file z_file2">
+				                <input type="file" name="file" accept="image/*" />
+				            </div>
+				            <div class="z_file z_file3">
+				                <input type="file" name="file" accept="image/*" />
+				            </div>
+				        </div>
+					</div>
+				</div>
+				<input type="hidden" id="data" name="dataSource" value="2"/>
+				<div class="add-bottom">
+					<input type="button" value="确认添加" />
+				</div>
+			</form>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/distribution/js/jquery.form.min.js"></script>
+		<script type="text/javascript" src="/distribution/js/add-data.js"></script>
+	</body>
+</html>

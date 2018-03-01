@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>热销排行</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/search/rankinglist.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	<div class="body">
+		<div class="search">
+			<p>请输入商品名称</p>
+		</div>
+		<ul class="list"></ul>
+		<script type="dot/tmpl" id="list">
+			{{~it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					<div class="goodslist">
+						<div class="icon"><img src="../imgs/search/{{=(i+1)}}.png"/></div>
+						<div class="goodsimg"><img src="{{=it.picUrl}}{{=data.cartPhoto}}"/></div>
+						<div class="message">
+							<h2>{{=data.goodsName}}</h2>
+							<b>{{=data.goodsDesc}}</b>
+							<p><a>¥</a>{{=(data.preferentialPrice).toFixed(2)}}<span>已售出<a>{{=data.salesCount}}</a>件</span></p>
+						</div>
+					</div>
+					<a class="addcard">立即购买</a>
+				</li>
+			{{~}}
+		</script>
+		<div class="footer">
+			<div class="footer-logo">
+				<img src="/imgs/logo-bottom.jpg" id="logo-bottom"/>
+			</div>
+			<div class="nav"></div>
+			
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script>
+		(function(api, util, ajax){
+			$('.search').click(function(){
+				window.location.href="search.html"
+			})
+			
+			rankinglist()
+			function rankinglist(){
+				ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+					
+				},function(data) {
+					var obj = {data:data,picUrl:api.picUrl}
+					util.render("#list",obj,".list")
+				})
+			}
+			$('.list').delegate('.goodslist','click',function(){
+				window.location.href="../../shangpin/shangpinxiangqing.html?goodsId="+$(this).parent().attr('goodsId')
+			})
+			$('.list').delegate('.addcard','click', addCart);
+			$('.list').delegate('.addcard','click',function(){
+				addProductinCart($(this).parent().attr('goodsId'),0,0,1,-1)	
+			})
+		})(goola.api, goola.util, goola.ajax);
+	</script>
+</body>
+</html>

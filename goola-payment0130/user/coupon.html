@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>代金券</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/user/coupon.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="coupon">
+				<div class="exchange">
+					<input type="text" placeholder="输入代金券号" id="code"/>
+					<a id="exchange">立即领取</a>
+				</div>
+				<div class="success" style="display: none;">
+					
+				</div>
+				<script id="success" type="dot/tmpl">
+					<h2>领取成功！</h2>
+					<div>
+						<h3>{{=it.data}}</h3>
+						<h4>代金券</h4>
+						<h5>代金券号：{{=it.code}}</h5>
+						<p>领取时间<span>{{=it.time}}</span></p>
+					</div>
+				</script>
+				<div class="info">
+					<div>
+						<h2>使用方法</h2>
+						<p>快递员揽件时使用，<br/>1.刮开条码输入减免密码。2.展示给快递员即可减免。</p>
+					</div>
+					<div>
+						<h2>活动规则</h2>
+						<p>每张优惠券仅限使用 1 次，优惠券领取后，需当场向快递员出示有效。</p>
+					</div>
+				</div>
+			</div>
+			
+
+
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript"  src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript">
+		(function(api, util,ajax){
+			
+			$('#exchange').click(function(){
+				var code=$('#code').val()
+				if(code==""){
+					alert("请输入兑换码！");
+					return;
+				}
+				
+				ajax.post(api.baseServerUrl + "/promotion/convertCoupon",{
+					code:code
+				},function(data) {
+					var obj = {data:data.preferentialPrice,code:code,time:getFormatDate(new Date())}
+					util.render("#success",obj,".success")
+					$('.exchange').css('display','none')
+					$('.success').css('display','block')
+				});
+			})
+			var title="更好甄选—更好·不贵"
+			var doc="种草全世界的好货"
+			shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+		})(goola.api, goola.util,goola.ajax)
+	    </script>
+
+	    	
+	</body>
+</html>

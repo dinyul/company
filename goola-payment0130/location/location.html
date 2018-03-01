@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>定位中</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<style>
+			.lo-logo{text-align: center;padding-top: 5.03125rem;position: relative;z-index: 5;}
+			.lo-logo img{width: 3.546875rem;height: 2.546875rem}
+			.lo-icon{text-align: center;position: relative;z-index: 4;margin-top: -0.9375rem;}
+			
+		</style>
+	</head>
+	<body style="background: #DDDDDD;">
+		<div class="lo-logo">
+			<img src="/imgs/location/logo.png" />
+		</div>
+		<div class="lo-icon">
+			<div><img src="/imgs/location/Loding.gif"/></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.2.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29"></script>
+		<script>
+		(function(api, util, ajax){
+		if(document.referrer!=undefined && document.referrer!=null && document.referrer!= ''){
+        	setCookie('link',document.referrer);
+       }
+		//setCookie('orgId',3)
+		if(isWeiXin()){
+			locationPoint()
+			setTimeout(href,10000)
+		}else{
+			if(browser.versions.ios || browser.versions.android){
+				
+				if(getCookie('goola_app_latitude')=='4.9E-324' && getCookie('goola_app_longitude')=='4.9E-324'){
+				 	gaode()
+				}else if(getCookie('goola_app_latitude')==undefined || getCookie('goola_app_latitude')==null || getCookie('goola_app_latitude')==''){
+					gaode()
+				}else if(getCookie('goola_app_longitude')==undefined || getCookie('goola_app_longitude')==null || getCookie('goola_app_longitude')==''){
+					gaode()
+				}else{
+					AMap.convertFrom(
+						[getCookie('goola_app_longitude'),getCookie('goola_app_latitude')],
+						'baidu',
+						function(status,result){
+							setCookie('lat',result.locations[0].lat)
+					        setCookie('lng',result.locations[0].lng)
+					        setCookie('orgId',3)
+					        setCookie('refresh','true',2/24/60)
+					        setCookie('adr','')
+					        setCookie('shopLocation',1)
+					        if(getCookie('firstLat')==null || getCookie('firstLat')==undefined || getCookie('firstLat')==''){
+					        	setCookie('firstLat',result.locations[0].lat)
+					        	setCookie('firstLng',result.locations[0].lng)
+					        }
+					        window._hmt && window._hmt.push(['_trackEvent',"定位", '自动定位']);
+					        if(document.referrer!=undefined && document.referrer!=null && document.referrer!= ''){
+					        	window.location.href = document.referrer ;
+					        }else{
+					        	window.location.href = '../index.html'
+					        }
+						}
+					)
+				}
+			}else{
+				gaode()
+			}
+			
+		}
+		
+		function href(){
+
+			var shield = document.createElement("DIV");
+			shield.className  = "alert-bg";
+			shield.style.display = "block";
+			var alertFram = document.createElement("DIV");
+			alertFram.className  = "goola-alert";
+			var alertInfo = '<div class="goola-alert-title">\
+						<table style="width:100%;height:100%;text-align:center"><tr><td><p>无法获取您的定位信息，请选择收货地址进行定位</p></td></tr></table>\
+					</div>\
+					<div class="goola-alert-list">\
+						<p style="display:none"></p>\
+						<p class="closeAlert">确定</p>\
+						<div class="clear"></div>\
+					</div>';
+			alertFram.innerHTML = alertInfo
+			document.body.appendChild(alertFram);
+		    document.body.appendChild(shield);
+			$('body').find('.closeAlert').click(function(){
+				window.location.href="position.html"
+				
+			})
+			
+		}
+		function locationPoint() {
+			
+				ajax.post(api.baseServerUrl + "/location/openAuthority/getLocationConfig",{
+					url:encodeURI(location.href.split('#')[0])
+				},function(data) {
+					wx.config({
+						debug: false,
+						appId: data.appid,
+						timestamp: data.timeStamp,
+						nonceStr: data.nonceStr,
+						signature: data.signature,
+						jsApiList: ['getLocation']
+					});
+					
+					wx.ready(function () {
+					//	7.2 获取当前地理位置
+						wx.getLocation({
+							type: 'gcj02', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+							success: function (res) {
+							//根据定位信息获取网点
+								setCookie('lat',res.latitude)
+						        setCookie('lng',res.longitude)
+						        setCookie('orgId',3)
+						        setCookie('refresh','true',2/24/60)
+						        setCookie('adr','')
+						        setCookie('shopLocation',1)
+						        if(getCookie('firstLat')==null || getCookie('firstLat')==undefined || getCookie('firstLat')==''){
+						        	setCookie('firstLat',res.latitude)
+						        	setCookie('firstLng',res.longitude)
+						        }
+						        window.location.href = document.referrer;
+						        window._hmt && window._hmt.push(['_trackEvent',"定位", '自动定位']);
+							},
+							cancel: function (res) {
+								//定位失败 
+								setCookie('orgId','')
+						    	alert('无法获取您的定位信息，请选择收货地址进行定位','/location/position.html')
+
+							}
+						});
+					});
+				});
+			
+			
+		}
+		function gaode(){
+			var map, geolocation;
+		    //加载地图，调用浏览器定位服务
+		    map = new AMap.Map('container', {
+		        resizeEnable: true
+		    });
+		    map.plugin('AMap.Geolocation', function() {
+		        geolocation = new AMap.Geolocation({
+		            enableHighAccuracy: true,//是否使用高精度定位，默认:true
+		            timeout: 10000,          //超过10秒后停止定位，默认：无穷大
+		            buttonOffset: new AMap.Pixel(10, 20),//定位按钮与设置的停靠位置的偏移量，默认：Pixel(10, 20)
+		            zoomToAccuracy: true,      //定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
+		            buttonPosition:'RB'
+		        });
+		        map.addControl(geolocation);
+		        geolocation.getCurrentPosition();
+		        AMap.event.addListener(geolocation, 'complete', onComplete);//返回定位信息
+		        AMap.event.addListener(geolocation, 'error', onError);      //返回定位出错信息
+		    });
+		    //解析定位结果
+		    function onComplete(data) {
+		        setCookie('lat',data.position.getLat())
+		        setCookie('lng',data.position.getLng())
+		        setCookie('orgId',3)
+		        setCookie('refresh','true',2/24/60)
+		        setCookie('adr','')
+		        setCookie('shopLocation',1)
+		        if(getCookie('firstLat')==null || getCookie('firstLat')==undefined || getCookie('firstLat')==''){
+		        	setCookie('firstLat',data.position.getLat())
+		        	setCookie('firstLng',data.position.getLng())
+		        }
+		        window.location.href = document.referrer;
+		        window._hmt && window._hmt.push(['_trackEvent',"定位", '自动定位']);
+		    }
+		    //解析定位错误信息
+		    function onError(data) {
+		        setCookie('orgId','')
+				alert('无法获取您的定位信息，请选择收货地址进行定位','/location/position.html')
+		    }
+		}
+		
+		  })(goola.api, goola.util, goola.ajax);
+		</script>
+	</body>
+</html>

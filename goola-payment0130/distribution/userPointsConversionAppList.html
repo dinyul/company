@@ -1,0 +1,160 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<title>我的积分</title>
+		<meta charset="utf-8" />
+		<style>
+			.mui-card .mui-control-content {
+				padding: 10px;
+			}
+			.mui-control-content {
+				height: 600px;
+				min-height: 400px;
+			}
+			.img-class
+			{
+				margin-top: 20%;
+			}
+			.l1
+			{
+				left: 0;
+				width: 40%;
+			}
+			.l2
+			{
+				left: 40%;
+				width: 30%;
+			}
+			.l3
+			{
+				left: 70%;
+				width: 30%;
+			}
+			.content
+			{
+				margin-top: 0;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">提现记录</h1>
+		</header>
+		<div class="mui-content">
+			<div id="slider" class="mui-slider">
+				<div id="segmentedControl" class="mui-slider-indicator mui-segmented-control mui-segmented-control-inverted mui-segmented-control-primary totop">
+					<a class="mui-control-item  color" href="#completeStatus2">
+						已结算
+					</a>
+					<a class="mui-control-item  mui-active color border-right" href="#completeStatus0">
+						申请中
+					</a>
+				</div>
+				<div id="sliderProgressBar" class="mui-slider-progress-bar mui-col-xs-6"></div>
+				<div class="mui-slider-group">
+					<div id="completeStatus2" class="mui-slider-item mui-control-content">
+						<div id="scroll1" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view margin-line">
+									 <li class="mui-table-view-cell">
+									 1
+									 	<span class="mui-btn mui-text l1">结算时间</span>
+										<span class="mui-btn mui-text l2">提现积分</span>
+										<span class="mui-btn mui-text l3">结算金额</span>
+									 </li>
+								 </ul>
+								 <div class="line"></div>
+								 <ul class="mui-table-view">
+								 </ul>
+							</div>
+						</div>
+					</div>
+					<div id="completeStatus0" class="mui-slider-item mui-control-content mui-active">
+						<div id="scroll2" class="mui-scroll-wrapper">
+							<div class="mui-scroll">
+								<ul class="mui-table-view margin-line">
+									 <li class="mui-table-view-cell">
+									 1
+									 	<span class="mui-btn mui-text l1">申请时间</span>
+										<span class="mui-btn mui-text l2">提现积分</span>
+										<span class="mui-btn mui-text l3">预计结算金额</span>
+									 </li>
+								 </ul>
+								 <div class="line"></div>
+								  <ul class="mui-table-view">
+								 </ul>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		<script>
+			mui.init({
+				swipeBack: false
+			});
+			(function($) {
+				(function(api, util, ajax){
+				$('.mui-scroll-wrapper').scroll({
+					indicators: true //是否显示滚动条
+				});
+				var status = "0";
+				ajaxRequestStatus(status, 1);
+				document.getElementById('slider').addEventListener('slide', function(e) {
+					if (e.detail.slideNumber === 0) {
+						status = "2";
+					} else if (e.detail.slideNumber === 1) {
+						status = "0";
+					}
+					ajaxRequestStatus(status, e.detail.slideNumber);
+				});
+			
+			
+				function ajaxRequestStatus(status, slideNumber){
+					ajax.post(api.baseServerUrl + "/distribution/userPointsConversionAppList",
+					{status:status},function(data){
+						var html = '';
+						for(var i=0; i<data.length; i++)  
+						{   
+							 html = html + "<li class=\"mui-table-view-cell\">1";
+							 if(slideNumber === 0){
+								 html = html + "<span class=\"mui-btn mui-text l1\">"+data[i].completeDate.substring(0,16)+"</span>";
+							 }else{
+								 html = html + "<span class=\"mui-btn mui-text l1\">"+data[i].createDate.substring(0,16)+"</span>";
+							 }
+							 html = html + "<span class=\"mui-btn mui-text l2\">"+data[i].points+"</span>";
+							 html = html + "<span class=\"mui-btn mui-text l3\">"+data[i].userPointsConversionApplicationPayDetail.payMoney+"</span>";
+							 html = html + "</li>";
+						}
+						document.getElementById('completeStatus' + status).querySelectorAll('.mui-table-view')[1].innerHTML = html;
+					});
+				}
+				})(goola.api, goola.util, goola.ajax)
+			})(mui);
+			
+		</script>
+	</body>
+</html>

@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="userinfo">
+				
+			</div>
+			<script id="userinfo" type="dot/tmpl">
+				<p style="background-image: url(imgs/icon7.png);">用户信息</p>
+				<ul>
+					<li>公司名称：{{=it.customName}}</li>
+					<li>联系人：{{=it.contactPerson}}</li>
+					<li>联系方式：{{=it.shopUserPhone}}</li>
+					<li>详细地址：{{=it.provinceName}}{{=it.cityName}}{{=it.districtName}}{{=it.contactAddress}}</li>
+				</ul>
+				<p style="background-image: url(imgs/icon6.png);">公司信息</p>
+				<ul>
+					<li>纳税人识别号：{{=it.taxpayerId}}</li>
+					<li>公司开户行：{{=it.openBank}}</li>
+					<li>公司账号：{{=it.companyAccount}}</li>
+				</ul>
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				ajax.post(api.baseServerUrl + "/scm/getScmUser",{
+					
+				},function(data) {
+					
+					util.render("#userinfo", data, ".userinfo");
+					
+				});
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

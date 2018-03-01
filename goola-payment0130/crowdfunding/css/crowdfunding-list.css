@@ -1,0 +1,185 @@
+
+.message{
+	margin-top: 0.3125rem;
+	background: #fff;
+	padding: 0.3125rem;
+	position: relative;
+}
+.message p{
+	line-height: 0.46875rem;
+	font-size: 0.3125rem
+}
+.message a{
+	font-size: 0.3125rem;
+	color: #fa2f3e;
+	position: absolute;
+	background: url(/crowdfunding/imgs/haoyouzhifu-Arrow@2x.png?t=20161117) no-repeat right center;
+	background-size: 0.1875rem 0.203125rem;
+	padding-right:0.234375rem; 
+	right: 0.3125rem;
+    bottom: 0.375rem;
+}
+.crowdfunding-list{
+	margin-top: -0.03125rem;
+}
+.crowdfunding-list ul{
+	margin-top: 0.3125rem
+}
+.crowdfunding-list ul li{
+	background: #fff;
+	position: relative;
+	width: 9.375rem;
+	margin: 0 auto  0.3125rem;
+	border-radius: 0.3125rem;
+	overflow: hidden;
+	box-shadow: 0 2px 1px #ccc;
+}
+.crowdfunding-list ul li:last-child{
+	margin-bottom: 0
+}
+.crowdfunding-list .info{
+	padding: 0 0.3125rem
+}
+.crowdfunding-list .info h2{
+	line-height: 0.65625rem;
+	font-size: 0.375rem;
+	color:#1B1B1B
+}
+.crowdfunding-list .info>p{
+	color: #bcbcbc;
+	font-size: 0.28125rem;
+}
+.crowdfunding-list .price{
+	margin-top: 0.46875rem;
+	padding-bottom: 0.546875rem
+}
+.crowdfunding-list .price p{
+	color: #fa2f3e;
+	font-size: 0.375rem;
+}
+.crowdfunding-list .price a{
+	font-weight: bold;
+	font-size: 0.40625rem;
+}
+.crowdfunding-list .price span{
+	font-size: 0.5625rem
+}
+.crowdfunding-list .btn{
+	min-width: 2.066667rem;
+	height: 1.013333rem;
+	position: absolute;
+	right: 0.3125rem;
+	bottom: 0.34375rem;
+} 
+.crowdfunding-list .btn p{
+	color: #fff;
+	line-height: 1.013333rem;
+    text-align: right;
+    font-weight: bold;
+    font-size: 0.32rem;
+    padding:0 0.2rem 0 0.266667rem;
+   
+}
+.crowdfunding-list .btn p span{
+	display:inline-block;
+	width: 0.213333rem;
+	height: 0.346667rem;
+	background: url(/crowdfunding/imgs/right.png) no-repeat;
+    background-size: 0.213333rem 0.346667rem;
+    margin-left: 0.133333rem;
+    position: relative;
+    top: 0.053333rem
+}
+.crowdfunding-list .zhongchouzhong{
+	background: url(/crowdfunding/imgs/icon-xuyuan.png?t=20161117) no-repeat;
+	background-size: 100% 1.013333rem;
+}
+.crowdfunding-list .yijieshu{
+	background: url(/crowdfunding/imgs/icon-xuyuan.png?t=20161117) no-repeat;
+	background-size: 100% 1.013333rem;
+}
+.crowdfunding-list .ico{
+	width: 1.859375rem;
+	height: 0.765625rem;
+	position: absolute;
+	top: 0.3125rem;
+	right: 0.3125rem;
+	background: url(/crowdfunding/imgs/zhongchouliebiao-yinzhang@2x.png?t=20161117) no-repeat;
+	background-size: 100%; 
+}
+.crowdfunding-list .ico p{
+	font-size: 0.28125rem;
+	color: #fff;
+	position: absolute;
+	top: 0.234375rem;
+    left: 0.203125rem;
+}
+.crowdfunding-list .more{
+	background: #fff;
+	padding: 0.3125rem 0;
+	text-align: center;
+}
+.crowdfunding-list .more img{
+	width: 1.59375rem;
+	height: 0.546875rem
+}
+.logo-bottom{
+	text-align: center;
+	padding: 0.53125rem 0 2.0rem
+}
+.logo-bottom img{
+	width: 5.453125rem;
+	height: 0.875rem
+}
+.content{
+	margin-bottom: 2.36rem
+}
+.nav .my-crowdfunding{
+	width: 2.666667rem;
+	height:2.066667rem ;
+	display: block;
+	background: url(/crowdfunding/imgs/icon-list.png?t=20161117) no-repeat;
+	background-size: 100%;
+	color: #fff;
+	font-size: 0.375rem;
+	line-height: 1.09375rem;
+	text-align: center;
+	border-radius: 0.125rem;
+	top: 0.09375rem;
+}
+#FontScroll{
+	height:1.09375rem;
+	line-height:1.09375rem;
+	overflow:hidden;
+	margin:0 auto;
+	background: rgba(256,256,256,0.9);
+	padding: 0 0.3125rem 0 0.533333rem;
+	position: relative;
+}
+#FontScroll>span{
+	position: absolute;
+	color: #fa2f3e;
+	padding-left: 0.78125rem;
+	background: url(/crowdfunding/imgs/wish/wish-scroll.png) no-repeat left center;
+	background-size: 0.5rem;
+	font-size: 0.375rem;
+	left: 0.359375rem;
+	display: block;
+	width: 0.5rem;
+	height: 1.09375rem;
+}
+#FontScroll li{
+	height: 1.09375rem;
+	overflow: hidden;
+}
+#FontScroll li p{
+	color: #fa2f3e;
+	width: 8.484375rem;
+	height: 1.09375rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+#FontScroll li p span{
+	color: #9F9F9F
+}

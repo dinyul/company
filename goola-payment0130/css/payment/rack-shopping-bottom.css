@@ -1,0 +1,59 @@
+html,body{
+	font-size:50.5%;
+	/*58.59375*/
+}
+
+
+.bottom2{
+    width: 100%;
+    height: 1.5rem;
+    position: fixed;
+    bottom: 0;
+    background: #ffffff;
+}
+
+.bottom2 .gouwuche{
+	margin:0 2.9rem 0 ;
+	margin-top: 0.3rem;
+}
+.bottom2 .shouye{
+	margin-left: 0.4rem;
+}
+
+.bottom2 a{
+    margin-top: 0.3rem;
+    width: 1.13rem;
+    float: left;
+    text-align: center;
+}
+
+.bottom2 a img{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.bottom2 a span{
+    font-size: 0.234rem;
+    color: #4a4a4a;
+    height: 0.5rem;
+    line-height: 0.6rem;
+    float: left;
+    width: 100%;
+    text-align: center;
+}
+
+.bottom2 .gouwuche .gwc span {
+	min-width: 0.4rem;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 50%;
+    background: #fa2f3e;
+    position: absolute;
+    top: 0.1rem;
+    left: 5.125rem;
+    line-height: 0.4rem;
+    text-align: center;
+    color: #fff;
+    font-family: PingFangSC-Regular;
+    font-size: 0.25rem;
+}

@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>确认支付</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/querenzhifu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="zhifu body">
+			
+		</div>
+		
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/order/confirmPay.js?t=20161117" ></script>
+		<script id="zhifuTmpl" type="dot/tmpl">
+			{{? it.dataStatus == 2}}
+				<div class="zhifu-top">
+					<p>订单状态：订单已取消</p> 
+					<p>订单编号：{{=it.orderCode}}</p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{?? it.serviceStatus != 1}} 
+				<div class="zhifu-top">
+					<p>订单状态：订单已支付</p> 
+					<p>订单编号：{{=it.orderCode}}</p>
+				</div>
+				<div class="l_gou_bottom clearfix" id="qgg_2">
+					<div class="l_gou_bottom5 fl" onclick="window.location.href='../index.html'">
+						再逛逛
+					</div>
+				</div>
+			{{??}}
+				<div class="zhifu-top">
+					<p>订单状态：<span>等待付款</span></p>
+					<p>订单编号：{{=it.orderCode}}</p>
+					<h3>剩余支付时间<br/><a id="time">30分钟00秒</a></h3>
+				</div>
+				<div class="zhifu-info">
+				{{? it.receiverName}}
+					<p>{{=it.receiverName}}<span>{{=it.receierPhone}}</span></p>
+					<p>{{=it.receiverAddress}}</p>
+					{{?it.identityCard && it.foreignOrder==1}}
+					<p>{{=it.identityCard}}</p>
+					{{?}}
+			    {{?}}
+			    	
+				</div>
+				<div class="zhifu-content">
+					
+					<div class="time" style="background: #fff;display: none;">
+						<p>下单时间：{{=getFormatDate(it.createTime)}}</p>
+					</div>
+					{{~it.children:data:i}}
+					<div style="background: #fff; margin-top: 0.28125rem;padding: 0 0.34375rem;">
+						<div class="business">
+							/*
+							<div class="title">
+							<a {{?data.providerIsShop==1}}href="../shop/shop.html?providerId={{=data.providerId}}"{{?}} style="display: block;">
+								<p {{?data.providerIsShop==1}}style="background-image: url(/imgs/gouwuche/gouwuche-dianpu1.png?t=20161117);"{{?}}>{{=data.providerName}}</p>
+							</a>
+							</div>
+							*/
+							<div class="list">
+								{{~data.orderItems:goods:j}}
+								<p><span>{{=goods.goodsName}}{{? goods.goodsLabel}}<a class="biaoqian">{{=goods.goodsLabel}}</a>{{?}}</span><span>¥{{=(goods.goodsPrice).toFixed(2)}}</span><span>x{{=goods.goodsCount}}</span></p>
+								{{~}}
+							</div>
+						</div>
+						{{? data.orderType==7}}
+						<div class="fahuo-time">
+							<p>收货时间<span>{{=(data.deliveryTime).split(' ')[0]}}</span></p>
+						</div>
+						{{??}}
+						{{? data.choosedSendTime}}
+						<div class="fahuo-time">
+							<p>{{?data.deliverType==1}}发货时间{{??data.deliverType==2 && data.orgDeliverType==1}}送货时间{{??data.deliverType==2 && data.orgDeliverType==2}}自提时间{{?}}<span>{{=getFormatDate(data.choosedSendTime).split(' ')[0]}}</span></p>
+						</div>
+						{{?}}
+						{{?}}
+						{{?data.deliverType==2 && data.orgDeliverType==2}}
+						<div class="ziti">
+							<p>门店地址：{{=data.orgName}}<span>{{=data.orgPhone}}</span></p>
+							<p>{{=data.orgAddress}}</p>
+						</div>
+						{{?}}
+					</div>
+					{{~}}
+					<div class="info" style="background: #fff;">
+						
+						{{? it.fullSetRebate && it.fullSetRebate >0}}
+						<p>商品总价<span>¥{{=(it.oriOrderPrice+it.fullSetRebate).toFixed(2)}}</span></p>
+						<p>满减活动<span>-¥{{=it.fullSetRebate.toFixed(2)}}</span></p>
+						{{??}}
+						<p>商品总价<span>¥{{=(it.oriOrderPrice).toFixed(2)}}</span></p>
+						{{?}}						
+						<p>余额支付<span>-¥{{?it.pointsPreferentialPrice}}{{=(it.pointsPreferentialPrice.toFixed(2))}}{{??}}0{{?}}</span></p>
+						<p>优惠<span>-¥{{?it.couponPreferentialPrice}}{{=(it.couponPreferentialPrice).toFixed(2)}}{{??}}0{{?}}</span></p>
+						<p>运费（快递）<span>¥{{=(it.carriage).toFixed(2)}}</span></p>
+					</div>
+					
+				</div>
+				<div class="pay">
+						<p>需付款<span>¥{{=(it.orderPrice).toFixed(2)}}</span></p>
+					</div>
+				<div class="bottom">
+					<p id="{{=it.orderId}}"  onclick="_hmt.push(['_trackEvent', '支付', 'click', '普通订单'])">去付款</p>
+				</div>
+			{{?}}
+		</script>
+	</body>
+</html>

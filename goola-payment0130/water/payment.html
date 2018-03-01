@@ -1,0 +1,86 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>桶装水</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="payment">
+				<ul class="top"></ul>
+				<script id="top" type="dot/tmpl">
+					<li>公司名称：<a>{{=it.customName}}</a></li>
+					<li>客户信息：{{=it.contactPerson}}<span>{{=it.shopUserPhone}}</span></li>
+					<li>详细地址：{{=it.provinceName}}{{=it.cityName}}{{=it.districtName}}{{=it.contactAddress}}</li>
+				</script>
+				<div class="goods"></div>
+				<script id="goods" type="dot/tmpl">
+					<img src="{{=it.picUrl}}{{=it.data.cartPhoto}}" />
+					<h2>{{=it.data.goodsName}}</h2>
+					<p>品牌：{{=it.data.brand}}</p>
+					<p>规格：{{=it.data.specifications}}</p>
+				</script>
+				<ul class="list"></ul>
+				<script id="list" type="dot/tmpl">
+					<li>桶装水<span>X{{=it.waterCount}}</span><span>¥{{=it.data.preferentialPrice}}</span></li>
+					<li>空桶押金<span>X{{=it.battlesCount}}</span><span>¥{{=it.data.materialPreferentialPrice}}</span></li>
+					<p>是否开具发票<span>{{?it.invoice==1}}已开{{??}}未开{{?}}</span></p>
+				</script>
+				<div class="payment-bottom"></div>
+				<script id="payment-bottom" type="dot/tmpl">
+					<p>总计：<span>¥{{=((it.waterCount)*(it.data.preferentialPrice)+(it.battlesCount)*(it.data.materialPreferentialPrice)).toFixed(2)}}</span></p>
+					<a>去支付</a>
+				</script>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var goodsId = util.getUrlParams("goodsId");
+				var waterCount = util.getUrlParams("waterCount");
+				var battlesCount = util.getUrlParams("battlesCount");
+				
+				ajax.post(api.baseServerUrl + "/scm/getScmUser",{
+					
+				},function(data) {
+					util.render("#top", data, ".top");
+				});
+				ajax.post(api.baseServerUrl + "/scm/getScmUserGoods",{
+					"goodsId":goodsId
+				},function(data) {
+					var obj={data:data, picUrl:api.picUrl,waterCount:waterCount,battlesCount:battlesCount}
+					util.render("#goods", obj, ".goods");
+					util.render("#list", obj, ".list");
+					util.render("#payment-bottom", obj, ".payment-bottom");
+				});
+				$('.payment-bottom').delegate('a','click',function(){
+					ajax.post(api.baseServerUrl + "/scm/charge",{
+					"goodsId":goodsId,"waterCount":waterCount,
+					"battlesCount":battlesCount
+					},function(data) {
+						window.location.href="../payment/water-confirmpay.html?customChargeLogId="+data.customChargeLogId
+						
+					});
+				})
+				
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

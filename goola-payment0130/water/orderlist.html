@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>订单管理</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/water/css/water.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+	</head>
+	<body>
+		<div class="body">
+			<div class="order">
+				<nav>
+					<li id="1" class="checked">全部</li>
+					<li id="3">待发货</li>
+					<li id="4">待收货</li>
+					<li id="5">已收货</li>
+				</nav>
+				<ul class="orderlist"></ul>
+				<script id="orderlist" type="dot/tmpl">
+					{{~it.data:data:i}}
+					<li id="{{=data.orderId}}">
+						<div class="top">
+							<h3>订单号：{{=data.orderCode}}
+								{{?data.serviceStatus==6}}
+								<span>待发货</span>
+								{{??data.serviceStatus==2}}
+								<span>待收货</span>
+								{{??data.serviceStatus==5}}
+								<span style="color:#c7a994;">已收货</span>
+								{{?}}
+							</h3>
+							<p>预约送水时间：{{=data.deliveryTime}}</p>
+						</div>
+						{{~data.orderItems:goods:j}}
+						<div class="goods">
+							<img src="{{=it.picUrl}}{{=goods.goodsPhoto}}" />
+							<h2>{{=goods.goodsName}}</h2>
+							<p>品牌：{{=goods.brand}}</p>
+							<p>规格：{{=goods.specifications}}</p>
+							<a>X{{=goods.goodsCount}}</a>
+						</div>
+						{{~}}
+						{{?data.serviceStatus==6 && data.isShowCancelOrder==1}}
+							<div class="ol-bottom">
+							<a class="quxiao">取消订单</a>
+							</div>
+						{{??data.serviceStatus==2}}
+							{{?data.deliverCount}}
+							<div class="ol-bottom">
+							<p>实际到水数：<span>{{=data.deliverCount}}</span></p>
+							</div>
+							{{?}}
+							<a class="shouhuo" style="display: none;">确认收货</a>
+						{{??data.serviceStatus==5}}
+							{{?data.deliverCount}}
+							<div class="ol-bottom">
+							<p>实际到水数：<span>{{=data.deliverCount}}</span></p>
+							</div>
+							{{?}}
+							<a class="recharge" href="goodslist.html" style="display: none;">去充值</a>
+						{{?}}
+						
+					</li>
+					{{~}}
+				</script>
+				
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				var type = util.getUrlParams("type");
+				if(type!=null && type!=undefined && type!=''){
+					orderList(type)
+					$('nav li').removeClass('checked')
+					$('#'+type).addClass('checked')
+				}else{
+					orderList(1)
+				}
+				
+				function orderList(type){
+					ajax.post(api.baseServerUrl + "/scm/getScmOrderList",{
+						"status":type
+					},function(data) {
+						var obj={data:data.rows,picUrl:api.picUrl}
+						util.render("#orderlist", obj, ".orderlist");
+					});
+				}
+				$('nav li').click(function(){
+					$('nav li').removeClass('checked')
+					$(this).addClass('checked')
+					orderList($(this).attr('id'))
+					type=$(this).attr('id')
+				})
+				
+				$('.orderlist').delegate('.quxiao','click',function(){
+					open('是否确认取消送水订单','cancelScmOrder',$(this).parent().parent().attr('id'))
+					$(this).attr('id','cancelScmOrder')
+				})
+				$('.orderlist').delegate('.shouhuo','click',function(){
+					open('是否确认收货','completeScmOrder',$(this).parent().parent().attr('id'))
+					$(this).attr('id','completeScmOrder')
+				})
+				function open(message,method,childOrderId){
+					$('body').append('<div class="bg" style="display:block"></div>\
+					<div class="address-firm">\
+					<div class="address-firm-title">\
+						<p>'+message+'</p>\
+					</div>\
+					<div class="address-firm-list">\
+						<p style="display:none"></p>\
+						<p class="cancel">取消</p>\
+						<p class="confirm" method="'+method+'" childOrderId="'+childOrderId+'">确定</p>\
+						<div class="clear"></div>\
+					</div>\
+				</div>')
+				}
+				$('body').delegate('.cancel','click',function(){
+					$('body').find('.bg').remove()
+					$('body').find('.address-firm').remove()
+				})
+				$('body').delegate('.confirm','click',function(){
+					var childOrderId=$(this).attr('childOrderId')
+					ajax.post(api.baseServerUrl + "/scm/"+$(this).attr('method'),{
+						"childOrderId":$(this).attr('childOrderId')
+					},function(data) {
+						$('body').find('.bg').remove()
+						$('body').find('.address-firm').remove()
+						$('#'+childOrderId).remove()
+					});
+					
+				})
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>接收成功</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/payment/zhifuchenggong.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/search/result.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="payment">
+				<div class="payment-content">
+					<h2><img src="/imgs/zhifu/zhifuchenggong.png?t=20161117"/>接收成功</h2>
+					<p>感谢您使用更好甄选！ </p>
+				</div>
+				<div class="payment-bottom">
+					<!--<a  style="float:left" id="chakan">查看订单</a>-->
+					<a href="../index.html"  style="margin: 0 auto">去更好逛逛</a>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<div class="rankinglist" style="display: none;">
+				<div class="title">
+					<a>更好推荐</a>
+				</div>
+				<ul class="list"></ul>	
+			</div>
+			<script type="dot/tmpl" id="list">
+			{{~it.data:data:i}}
+				<li goodsId="{{=data.goodsId}}">
+					<div class="goodslist">
+						<div class="goodsimg">
+							<img src="{{=it.picUrl}}{{=data.cartPhoto}}"/>
+						</div>
+						<h3>{{=data.goodsName}}</h3>
+						<b>{{?data.goodsDesc}}{{=data.goodsDesc}}{{?}}</b>
+						<p>¥{{=(data.preferentialPrice).toFixed(2)}}<!--<span>已售出<a style="display: inline;">{{=data.salesCount}}</a>件</span>--></p>
+					</div>
+				</li>
+			{{~}}
+		</script>
+			<div id="shareGiftcard"></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script>
+		(function(api,util,ajax){
+			rankinglist()
+			function rankinglist(){
+				ajax.post(api.baseServerUrl + "/goodsRank/openAuthority/openRecommentList",{
+					
+				},function(data) {
+					if(data!='' && data!=undefined && data!=null && data.length!=0){
+						$('.rankinglist').show()
+						var obj = {data:data,picUrl:api.picUrl}
+						util.render("#list",obj,".rankinglist .list")
+						$('.rankinglist li').click(function(){
+							window.location.href="../shangpin/shangpinxiangqing.html?goodsId="+$(this).attr('goodsId')
+						})
+					}
+					
+				})
+			}
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+		
+	</body>
+</html>

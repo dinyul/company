@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>购物车</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/gouwuche.css?t=20161117&v1" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/address/dizhiguanli.css?t=20161117&v1" />	
+		<link rel="stylesheet" type="text/css" href="/css/address/style.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/address/cityLayout.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/giftcard/giftcard.css?t=20161117&v10" />
+		<link rel="stylesheet" type="text/css" href="/css/order/choice-time.css?t=20161117" />
+		
+	</head>
+	<body>
+		<div class="body">
+			<div id="page2" class="balance">
+				<div class="balance">
+					<div class="address" id="addressInfo" >
+						
+					</div>
+					<div id="shoppingList">
+						
+					</div>
+					<div class="method" style="margin-top: 0;">
+						<ul>
+							<li class="jifen">
+								<p class="pointsMoneyValue">积分可抵金额<span></span></p>
+								<a><img src="/imgs/payment/jiesuan2/icon2/617871071494316514.png"/></a>
+							</li>
+						</ul>
+					</div>
+					<div class="bg"></div>
+					<div id="integral">
+						<p>请输入本次要抵现的积分</p>
+						<div class="integral-choice">
+							<input type="number" /> <span></span>
+							<p style="display: none;">您的可用积分不足</p>
+						</div>
+						<div class="integral-btn"><a class="integral-cancle">取消</a><a class="integral-config">确认提交</a></div>
+					</div>
+					<!--<div class="balance-total">
+						<p>共1件商品 合计：<span></span></p>
+					</div>-->
+					<script id="shoppingListTmpl" type="dot/tmpl">
+						<div class="commodity">
+							<div>
+								<!-- <div class="business" >
+									<p>{{=it.data.goods.providerName}}</p>
+								</div> -->
+								<ul>
+									<li class="goodsId"   isBatchOrder="2" >
+										<img src="{{=it.picUrl}}{{=it.data.goods.cartPhoto}}" />
+										<div class="dis-content">
+											<h3>{{=it.data.goods.goodsName}}</h3>
+											<p>规格:{{=it.data.goods.specShowStr}}</p>
+											<p style="text-decoration: line-through;">原价：¥ {{=(it.data.goods.preferentialPrice).toFixed(2)}}</p>
+											<p><span>¥ {{=(it.data.groupBuyingPrice).toFixed(2)}}</span></p>
+											<p style="position: absolute;right: 0;bottom: 0;">x<span class="goodsCount">1</span></p>
+										</div>
+										<div class="clear"></div>
+									</li>
+									
+								</ul>
+								<div class="message">
+									<p style="display:none"></p>
+									<input type="text" placeholder="选填：给商家留言" />
+								</div>
+								<div class="select " style="border-bottom: 1px solid #e5e5e5;">
+									<p>配送方式</p>
+									
+									<a><p class="mode-select">快递&nbsp;快递费 ¥ {{?it.data.carriage}}{{=(it.data.carriage).toFixed(2)}}{{??}}0{{?}}</p></a>
+									
+								</div>
+								
+							</div>
+						</div>
+					</script>
+
+					<script id="tmsTmpl" type="dot/tmpl">
+						<p>配送方式</p>
+						<a>
+							<p>快递 ¥{{=(it).toFixed(2)}}</p>
+						</a>
+					</script>
+					
+					<!--<script id="orderPriceTmpl" type="dot/tmpl">
+						<p>共{{=it.count}}件商品 合计：<span>¥{{=(it.price).toFixed(2)}}</span></p>
+					</script>-->
+					<script type="dot/tmpl" id="addressInfoTmpl">
+						{{? it && it.isUse==1}}
+						<p>{{=it.name}}
+							<span>{{=it.phone}}</span>
+						</p>
+						<p>{{=it.provinceName}}{{=it.cityName}}{{=it.address}}</p>
+						{{??}}
+						<a style="display: block;">
+							<p style="line-height: 1.375rem;">请选择收货地址 ></p>
+						</a>
+						{{?}}
+					</script>
+				</div>
+				<div class="bottom">
+					<div class="balance-total"><p>共1件商品 合计：<span></span></p></div>
+					<a class="bottom-one" onclick="_hmt.push(['_trackEvent', '用户结算', 'click', '拼团订单'])"><p>去结算</p></a>
+				</div>
+			</div>
+			<div id="selectAddressList"></div>
+			<div id="selectGiftcard"></div>
+			<div id="selectTime"></div>
+			<div id="selectMode"></div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/layer.js?t=20161117"></script>
+		<script type="text/javascript" src="http://webapi.amap.com/maps?v=1.3&key=b4ad70349fb06a421c2840238dc61b29&plugin=AMap.Autocomplete"></script>
+		<script type="text/javascript" src="/tuan/js/payment.js"></script>
+	</body>
+
+</html>

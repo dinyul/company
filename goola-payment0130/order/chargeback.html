@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="utf-8" />
+	<title>我的售后</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<meta name="format-detection" content="telephone=no">
+	<meta http-equiv="x-rim-auto-match" content="none">
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/css/order/order.css?t=20161117">
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+</head>
+<body>
+	
+	<div class="order body chargeback">
+		
+		<div class="order-list" id="orderInfo">
+			
+		</div>
+		<div class="bg"></div>
+		<div class="xiugaishijian">
+			<p>请选择发货时间</p>
+			<b class="shijian"></b>
+			<input type="date"  />
+			<a class="queding">确定</a>
+		</div>
+	</div>
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/order/chargeback.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	
+	<script type="dot/tmpl" id="orderInfoTmpl">
+		{{?it.data}}
+		{{~it.data :data:i}}
+			<div class="order-content">
+				<div class="order-details">
+					<div class="order-number">
+						<p>售后单号：{{=data.orderCode}}<br/><span>申请时间：{{=data.createDate}}</span></p>
+						{{? data.orderStatus == 7}}
+						<a>状态：<span style="color:#ff9e36;">退款中</span></a>
+						{{?? data.orderStatus == 6}}
+						<a>状态：<span style="color:#fa2f3e;">待审核</span></a>
+						{{?? data.orderStatus == 8}}
+						<a>状态：<span style="color:#7ed321;">已完成</span></a>
+						{{?? data.orderStatus == 9}}
+						<a>状态：<span style="color:#ff9e36;">审核不通过</span></a>
+						{{?}}
+						
+					</div>
+					{{~data.itemList:provider:j}}
+					<ul>
+						<div class="title xiangqing">
+							<p><a>子订单号：{{=provider.orderCode}}</a></p>
+						</div>
+						{{~provider.orderItemList:goods:k}}
+						<a style="display: block;" href="../shangpin/shangpinxiangqing.html?goodsId={{=goods.goodsId}}">
+							<li class="xiangqing">
+								<img src="{{=it.picUrl}}{{=goods.cartPhoto}}">
+								<div>
+									<h3>{{=goods.goodsName}}</h3>
+									<span style="float: left;text-align: left;width: 5.65625rem;margin-top: 2.125rem;font-weight: bold;">x{{=goods.goodsCount}}</span>
+								</div>
+								
+							</li>
+						</a>
+						{{~}}
+						<div class="clear"></div>
+					</ul>
+					{{~}}
+				</div>
+				
+			</div>
+		{{~}}
+		{{??}}
+			<img src="../imgs/chargeback/icon1.png" style="display: block;width: 3.3125rem;margin: 0 auto 0.75125rem;padding-top: 3.71875rem;"/>
+			<p style="font-family:PingFangSC-Medium;font-size:0.4375rem;color:#4a4a4a;text-align: center;">还没有申请中的售后单哦</p>
+		{{?}}
+	</script>
+
+</body>
+</html>

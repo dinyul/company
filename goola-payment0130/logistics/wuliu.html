@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>物流信息</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/logistics/wuliu.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		
+		<div class="express body" id="logistics">
+			<div class="express-top">
+			</div>
+			<div class="express-info">
+				
+			</div>
+			<div class="express-logo">
+				<img src="/imgs/wuliu/wuliu-www.gtexpress.cn.png?t=20161117" >
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script id="logisticsTop" type="dot/tmpl">
+			{{? it.data}}
+			{{? it.data.carrierCode}}
+				<img style="border-radius:50%" src="http://ms.gtexpress.cn/images/expresslogo/{{=it.data.carrierCode}}.png"">
+			{{??}}
+				<img style="border-radius:50%" src="../imgs/wuliu/img.png">
+			{{?}}
+			<p>状态：<span>
+				{{? it.data.status == 1 || it.data.status == null}}
+					商品出库
+				{{?? it.data.status > 1 && it.data.status < 6 }}
+					配送中
+				{{?? it.data.status == 6}}
+					已签收
+				{{??}}
+					商品出库
+				{{?}}
+					</span>
+			</p>
+			<p>单号：<span id="danhao">{{=it.expressNumber}}</span></p>
+			<p>地址：<span>{{=it.address}}</span></p>
+			{{?}}
+
+		</script>
+		<script id="logisticsInfo" type="dot/tmpl">
+			
+			<div class="express-info-top">
+				<p>本数据由<span>指尖快递</span>提供</p>
+			</div>
+			<div class="express-info-content" id="logisticsContent">
+				{{? it.data.data.length}}
+				<div class="has-info">
+					<ul>
+						
+						{{~it.data.data :data:i}}
+						<li>
+							<img src="../imgs/wuliu/wuliu-yuan1_05_03.png">
+							<div style="margin-left:-0.15625rem">
+								<span>{{=data.time}}</span>
+								<p>{{=data.content}}</p>
+							</div>
+						</li>
+						{{~}}
+					</ul>
+				</div>
+				{{??}}
+				<div class="no-info">
+					<img src="../imgs/wuliu/wuliu-huisemao.png">
+					<p>还没有快递信息哦</p>
+				</div>
+				{{?}}
+			</div>
+			
+		</script>
+
+	<script type="text/javascript">
+		(function(api, util, ajax){
+			var address = decodeURI(util.getUrlParams("address"));
+			var expressCode = $.trim(decodeURI(util.getUrlParams("expressCode")));
+			var key=util.getUrlParams("key")
+			if (!expressCode || expressCode=='undefined') {
+				var obj = {data:{status:null,data:[]},expressNumber:expressCode,address:address}
+				util.render("#logisticsTop", obj, ".express-top");
+				util.render("#logisticsInfo", obj, ".express-info");
+				$('.express-top').find('#danhao').html('无运单号')
+				$('.express-info-content').find('li:first-child img').attr('src','../imgs/wuliu/wuliu-iconfont.png')
+			}else if(key!=undefined&&key!=''&&key!=null){
+				getGiftLogisticsInfo(expressCode)
+			}else {
+				getLogisticsInfo(expressCode);
+			}
+			function getLogisticsInfo(expressCode){
+				ajax.post(api.baseServerUrl + "/order/findExpress",{
+					expressNumber:expressCode
+				},function(data){
+					var obj = {data:data,expressNumber:expressCode,address:address}
+					util.render("#logisticsTop", obj, ".express-top");
+					util.render("#logisticsInfo", obj, ".express-info");
+					$('.express-info-content').find('li:first-child img').attr('src','../imgs/wuliu/wuliu-iconfont.png')
+				},function(returnData){
+					var obj = {data:{status:null,data:[]},expressNumber:expressCode,address:address}
+					util.render("#logisticsTop", obj, ".express-top");
+					util.render("#logisticsInfo", obj, ".express-info");
+					$('.express-info-content').find('li:first-child img').attr('src','../imgs/wuliu/wuliu-iconfont.png')
+				})
+			}
+			
+			function getGiftLogisticsInfo(expressCode){
+				ajax.post(api.baseServerUrl + "/giftOrder/findExpress",{
+					expressNumber:expressCode,"key":key
+				},function(data){
+					var obj = {data:data,expressNumber:expressCode,address:address}
+					util.render("#logisticsTop", obj, ".express-top");
+					util.render("#logisticsInfo", obj, ".express-info");
+					$('.express-info-content').find('li:first-child img').attr('src','../imgs/wuliu/wuliu-iconfont.png')
+				},function(returnData){
+					var obj = {data:{status:null,data:[]},expressNumber:expressCode,address:address}
+					util.render("#logisticsTop", obj, ".express-top");
+					util.render("#logisticsInfo", obj, ".express-info");
+					$('.express-info-content').find('li:first-child img').attr('src','../imgs/wuliu/wuliu-iconfont.png')
+				})
+			}
+			
+			
+		})(goola.api, goola.util, goola.ajax);
+		</script>
+	</body>
+</html>

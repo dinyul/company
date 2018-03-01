@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>新手教程</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/distribution/css/handbook.css">
+	</head>
+	<body>
+		<div class="body">
+			<div class="handbook">
+				<a href="data/database.html" class="btn">
+					<p>事业合伙人</p>
+					<h3>谈论专区</h3>
+				</a>
+				<div class="top">
+					<h2 class="title"><img src="/distribution/imgs/handbook1.png" />推广办法</h2>
+					<ul>
+						<li style="background-image: url(/distribution/imgs/handbook-icon1.png);">
+							<h2>分享商城二维码</h2>
+							<p>进入首页-推广商品，选择商品并点击“二维码推广”，长按商品二维码图片，可以直接转发给好友，或保存二维码图片到手机后发布到朋友圈</p>
+						</li>
+						<li style="background-image: url(/distribution/imgs/handbook-icon2.png);">
+							<h2>分享商品链接</h2>
+							<p>进入首页-推广商品，选择商品并点击“微信推广”，按页面引导点击右上角，发送给朋友或分享到朋友圈</p>
+						</li>
+						<li style="background-image: url(/distribution/imgs/handbook-icon3.png);">
+							<h2>分享商品列表页</h2>
+							<p>进入首页-推广商品，再商品列表页直接点击右上角，发送给朋友或分享到朋友</p>
+						</li>
+					</ul>
+				</div>
+				<ul class="list">
+					<li>
+						<h2 class="title"><img src="/distribution/imgs/handbook2.png" />团队说明</h2>
+						<p><a>1.发展个人团队</a><br />我的团队-邀请加入，点击后即可弹出个人团队的二维码图片。非事业合伙人扫描后注册即城市个人的下级事业合伙人，并加入我的团队。</p>
+						<p><a>2.团队的好处</a><br />我的团队下所有的下级事业合伙人，推广成功后产生的收益，作为上级都可以享受二级收益</p>
+					</li>
+					<li>
+						<h2 class="title"><img src="/distribution/imgs/handbook2.png" />收益说明</h2>
+						<p>1.买家通过事业合伙人推广的链接购买，即为事业事业合伙人的一级收益</p>
+						<p>2.买家通过事业合伙人下级团队成员的推广链接购买，即为事业合伙人的二级收益</p>
+						<p>3.事业合伙人如果通过其他事业合伙人的推广链接购买，则推广链接拥有者事业合伙人以及其上级获得收益，购买者事业合伙人以及其上级不获得收益</p>
+						<p>4.事业合伙人进行消费，无论是否包含个人推广信息，本人不获得分佣，以其上级作为末级事业合伙人进行一级分佣</p>
+						<p>5.用户在事业合伙人的推广链接下完成购买后，则该用户下次主动从商城进行购买，仍计算该事业合伙人的分佣，次数不限。直到该用户在其他事业合伙人的推广链接下完成订单为止</p>
+						<p>6.使用优惠券的订单、拼团订单、使用积分的订单以及其他特殊订单，收益计算均按实际订单成交价进行计算</p>
+					</li>
+				</ul>
+				<ul class="list">
+					<li>
+						<h2 class="title"><img src="/distribution/imgs/handbook2.png" />结算说明</h2>
+						<p>1.事业合伙人的收益在买家订单在已完成之前，属于未结算收益，不计入账户余额，不可提现</p>
+						<p>2.事业合伙人的收益在买家订单在确认收货或系统自动完成后，计入账户余额，可提现</p>
+					</li>
+					<li>
+						<h2 class="title"><img src="/distribution/imgs/handbook3.png" />其他说明</h2>
+						<p>1.事业合伙人、地区团队的任何问题和申请，请联系微信号：gh-15321626712</p>
+						<p>2.所有内容最终解释权归本商城所有</p>
+					</li>
+				</ul>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script>
+			(function(api, util, ajax){
+				if(isWeiXin()){
+					$('.btn').css('top','0.46875rem')
+				}else{
+					$('.btn').css('top','1.71875rem')
+				}
+			})(goola.api, goola.util, goola.ajax)
+		</script>
+	</body>
+</html>

@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8" />
+	<title>更好团</title>
+	<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+	<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+	<link rel="stylesheet" type="text/css" href="/tuan/css/index.css" />
+	<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+	<style>
+		.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 9999;}
+	</style>
+</head>
+<body>
+	<div class="body">
+		<div class="rule">
+			<img src="/tuan/imgs/images/img_02.jpg" />
+			<img src="/tuan/imgs/images/img_03.jpg" />
+			<img src="/tuan/imgs/images/img_04.jpg" />
+			<img src="/tuan/imgs/images/img_05.jpg" />
+			<img src="/tuan/imgs/images/img_06.jpg" />
+			<ul>
+				
+			</ul>
+			<script id="ul" type="dot/tmpl">
+				{{~it.news:data:i}}
+				<li>{{=data}}</li>
+				{{~}}
+			</script>
+		</div>
+	</div>
+	
+	<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+	<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+	<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+	<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+	<script src="/js/jquery_cookie.js?t=20161117"></script>
+	<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+	<script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117" ></script>
+	<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+	<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+	<script src="/js/gouwuche/car.js?t=20161117"></script>
+	<script src="/js/gouwuche/main.js?t=20161117"></script>	
+	<script>
+		(function(api, util, ajax){
+			ajax.post(api.baseServerUrl + "/gb/requireLocation/qureyGroupBuying",{
+				"lat":getCookie('lat'),"lng":getCookie('lng'),"locationType":1
+			},function(data) {
+				var list=data[0].activityDesc.split('；')	
+				var news={}
+				news.news=list
+				util.render("#ul",news,"ul")
+				shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),data[0].shareTitle,data[0].shareContent,location.href,"http://"+ document.domain +api.picUrl + data[0].sharePicture);
+			});
+		})(goola.api, goola.util, goola.ajax);
+	</script>
+</body>
+</html>

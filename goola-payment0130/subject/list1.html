@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title></title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/subject/subject.css?t=20161117">
+		<style>
+			.list a{
+				display: block;line-height: 0;
+				margin-bottom: 0.28125rem;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="body" style="margin-bottom: 1.328125rem;">
+			<div class="list"></div>
+			<script id="list" type="dot/tmpl">
+				{{?it.data.picture}}
+				<a><img src="{{=it.picUrl}}{{=it.data.picture}}"/></a>
+				{{?}}
+				{{~it.data.singleList:data:i}}
+				<a href="{{=data.link}}"><img src="{{=it.picUrl}}{{=data.banner}}"/></a>
+				{{~}}
+			</script>
+		</div>
+		<div class="nav"></div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script>
+			(function(api,util,ajax){
+				var id=util.getUrlParams("id")
+				ajax.post(api.baseServerUrl + "/activitysubject/openAuthority/findSingleColumnSubjects",{
+							"id":id
+				},function(data) {
+					$('title').html(data.subjectName)
+					 $('.app-top').remove()
+					if(!isWeiXin()){
+				    	if( browser.versions.ios || browser.versions.android){
+							$('body').prepend('<div class="app-top">\
+								<p><a href="javascript:void(history.back())" style="display: block;"></a></p>\
+								<p>'+data.subjectName+'</p>\
+								<p class="shareButton" style="display:none">分享</p>\
+							</div>')
+							$('.body').addClass('app-content')
+						}
+				    }
+					var obj = {data:data,picUrl:api.picUrl};
+					util.render("#list",obj, ".list")
+					var title=data.shareTitle
+					var doc=data.shareDesc
+					shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,location.href,"http://" + document.domain +api.picUrl+data.sharePicture);
+				});
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+		
+	</body>
+</html>

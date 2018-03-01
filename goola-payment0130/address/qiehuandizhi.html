@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>切换地址</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/address/qiehuandizhi.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+		<link rel="stylesheet" href="/css/address/LArea.css?t=20161117">
+		<link rel="stylesheet" href="/css/address/mobiscroll.ios.css?t=20161117" />
+	</head>
+	<body>
+		<div class="change body" >
+			<div class="change-top">
+				<p>请选择离您最近的大厦<span>跳过</span></p>
+			</div>
+			
+				<div class="list">
+				<table id="default">
+						
+				</table>
+				<table id="orgList">
+				</table>
+				<div class="list-bottom">点触查看更多服务点</div>
+			</div>
+			
+			<div class="more" id="cqhcity">
+				<p id="moreCitys">更多城市</p>
+			</div>
+			
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/address/jquery.actionsheet-1.0.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/address/mobiscroll.scroller.zh-min.js?t=20161117" ></script>
+		<script id="defaultOrg" type="dot/tmpl">
+			{{? it != null}}
+				<tr class="org" id="{{=it.orgId}}">
+					<td>
+						<h2>{{=it.orgName}}</h2>
+						<p>{{=it.orgAddress}}</p>
+					</td>
+					<td>
+						<p>全国配送</p>
+					</td>
+				</tr>
+			{{?}}
+		</script>
+		<script id="orgListDoT" type="dot/tmpl">
+			{{~it :data:i}}
+				<tr class="org" id="{{=data.orgId}}">
+					<td>
+						<h2>{{=data.orgName}}</h2>
+						<p>{{=data.districtName}}{{=data.orgAddress}}</p>
+					</td>
+					<td>
+					{{? data.distance != 0}}
+						<p>{{=distanceFormat(data.distance)}}</p>
+					{{?}}
+					</td>
+				</tr>
+			{{~}}
+		</script>
+
+<script type="text/javascript">
+	
+
+
+	(function(api, util, ajax){
+		$('.list-bottom').hide();
+		var cutCity;//当前城市
+		var arrs = new Array();
+		//获取购啦商城全球店信息
+		getGoolaGlobalShop();
+		//获取开通网点的城市
+		getOpenCityName();
+		
+		locationPoint();
+		$('.list-bottom').click(function(){
+			getOpenCityOrganization(cutCity);
+			$('.list-bottom').hide();
+		})
+		
+		//获取购啦商城全球店信息
+		function getGoolaGlobalShop(){
+			ajax.post(api.baseServerUrl + "/organization/getGoolaGlobalShop",{
+			},function(data) {
+				util.render("#defaultOrg", data, "#default");
+			});
+		}
+		
+		//获取开通网点的城市
+		function getOpenCityName(){
+			ajax.post(api.baseServerUrl + "/organization/getOpenCitys",{
+			},function(data) {
+				$.each(data,function(i, n){
+					if(null != n){
+						arrs.push(n.cityName);
+					}
+				});
+			});
+		}
+		
+		function locationPoint() {
+			if (isWeiXin()) {
+				ajax.post(api.baseServerUrl + "/location/getLocationConfig",{
+					url:encodeURI(location.href.split('#')[0])
+				},function(data) {
+					wx.config({
+						debug: false,
+						appId: data.appid,
+						timestamp: data.timeStamp,
+						nonceStr: data.nonceStr,
+						signature: data.signature,
+						jsApiList: ['getLocation']
+					});
+					
+					wx.ready(function () {
+					//	7.2 获取当前地理位置
+						wx.getLocation({
+							type: 'wgs84', // 默认为wgs84的gps坐标，如果要返回直接给openLocation用的火星坐标，可传入'gcj02'
+							success: function (res) {
+							//根据定位信息获取网点
+								getServicePoint(res.latitude,res.longitude,1);
+							},
+							cancel: function (res) {
+								//定位失败 
+							}
+						});
+					});
+				});
+			} else {
+				getServicePoint(getCookie("goola_app_latitude"),getCookie("goola_app_longitude"));
+			}	
+			
+		}
+		function getServicePoint(latitude, longitude, type){
+			ajax.post(api.baseServerUrl + "/location/getLatLng",{
+				"latitude":latitude,"longitude":longitude,"count":3,type:type
+			},function(data) {
+				console.log(data)
+				util.render("#orgListDoT", data, "#orgList");
+				cutCity = data[0].cityName;
+				$('.list-bottom').show()
+			},function(returnData) {
+				console.log(returnData)
+			})
+		}
+		
+		//更具城市名称，获取机构信息
+		function getOpenCityOrganization(cName){
+			//当前城市
+			cutCity = cName;
+			ajax.post(api.baseServerUrl + "/organization/getOpenCityOrganization",{
+				"cityName":cName
+			},function(data) {
+				util.render("#orgListDoT", data, "#orgList");
+			})
+		}
+		var hzd=$(document).height();
+		    $('.wrrap-qhdz').css('min-height',hzd);
+		   $('.morezz').click(function(){
+		        $('.golaqq').removeClass('mt10');
+		        $('.morezz').css('display','none');
+		        getOpenCityOrganization(cutCity);
+		        
+		   });
+		   /* 滚轮 */
+            $.mobiscroll.setDefaults({
+                lang:'zh',
+                display:'bottom',
+                fixedWidth:400,
+                theme:'ios'
+            });
+            //解析滚轮中数组为0的值显示为空 并组合字符串 函数
+            var showValue = function(arr){
+                var str = "";
+                if(arr instanceof Array){
+                    for(var i in arr){
+                        str = str + (parseInt(arr[i]) == 0 ? "" : arr[i]);
+                    }
+                }
+                return str;
+            };
+		//滚轮
+		
+		$('#cqhcity').mobiscroll().range({
+		    theme: 'mobiscroll',
+		    lang: 'zh',
+		    display: 'bottom',
+		    controls: ['calendar', 'time'],
+		    defaultValue: [ new Date(2013, 6, 12), new Date(2013, 6, 18, 23, 59) ],
+		    startInput: '#startDate',
+		    endInput: '#endDate'
+		});
+				
+		//加载等待动画
+		/*layer.open({
+		    type: 2,
+		    content: '购小啦正在寻找你的位置…',
+		    shadeClose:false
+		});
+		t=setTimeout("closeWin()",5000);*/
+	})(goola.api, goola.util, goola.ajax);
+	
+	//距离转换
+	function distanceFormat(num){
+		num = num.toFixed(0);
+		var str = "";
+		if(Number(num)>=1000 && Number(num)<10000){
+			str=(Number(num)/1000).toFixed(1)+"km"
+		}else if(Number(num)>10000){
+			str="大于10km";
+		}else{
+			str = num+"m";
+		}
+		return str;
+	}
+		/*
+	function closeWin(){
+		window.location.href="<%=basePath %>wx_fhl_new/index.action?openId=${openId}&orgId=20";
+// 		layer.open({
+// 		    content: '定位失败，请手动切换城市!',
+// 		    btn: ['确认'],
+// 		    shadeClose: false,
+// 		    yes: function(){
+// 		        layer.closeAll();
+// 		        $("#cqhcity").click();
+// 		    }, no: function(){
+// 		        layer.open({content: '你选择了取消', time: 1});
+// 		    }
+// 		});
+	}*/
+	
+	$('.change-top p span').click(function(){
+		$.cookie('orgId', 20, { path: '/' }); 
+		window.location.href='../index.html?orgId=20';
+	})
+	$(document).ready(function(){
+		$('.list').delegate('.org','click',function(){
+			$.cookie('orgId', $(this).attr('id'), { path: '/' }); 
+			window.location.href='../index.html?orgId='+$(this).attr('id');
+		})
+	})
+	
+	
+	
+</script>
+	</body>
+</html>

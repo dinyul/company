@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>补货申请</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/replenish.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div style="width: 100%;position: fixed;border-bottom:1px solid #e5e5e5;">
+				<h2 class="apply-title"></h2>
+				<div class="purchase-search">
+					<input placeholder="商品名称查询" />
+					<p>查询</p>
+				</div>
+			</div>
+			<ul class="apply-list" style="padding-top: 2.625rem;margin-bottom: 1.328125rem;"></ul>
+			<script id="apply-list" type="dot/tmpl">
+				{{?it.data && it.data.length>0}}
+				{{~it.data:list:i}}
+				{{~it.items:items:j}}
+				{{?list.goods.goodsId==items.GoodsId}}
+				<li id="{{=list.goods.goodsId}}">
+					<img src="{{=it.picUrl}}{{=list.goods.cartPhoto}}" />
+					<div>
+						<h2><a>{{=list.goods.goodsName}}</a><span>¥{{=(list.preferentialPrice).toFixed(2)}}</span></h2>
+						<p>{{=list.goods.specShowStr}}</p>
+						<p>站点库存：<a class="kucun">{{=list.reportoryCount}}</a></p>
+						<p>7日平均销量：<a>{{=list.weekAvg}}</a><span>货架在售量：<a>{{=list.stock}}</a></span></p>
+						<h5>申请补货量：
+							<a goodsId="{{=list.goods.goodsId}}">
+								<span class="minus"></span>
+								<input type="text" value="{{?items.GoodsCount}}{{=items.GoodsCount}}{{??}}0{{?}}" id="num"/>
+								<span class="add"></span>
+							</a>
+						</h5>
+					</div>
+					<div class="clear"></div>
+				</li>
+				{{?}}
+				{{~}}
+				{{~}}
+				{{??}}
+				<div class="none">
+					<img src="/mobilerack/imgs/purchase/kong.png" />
+					<p>当前站点没有可补货的商品哦</p>
+				</div>
+				{{?}}
+			</script>
+			<div class="bottom" style="background: #D4AA70;display: none;">
+				<p>提交补货申请</p>
+			</div>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/mobilerack/js/purchase.js"></script>
+		<script>
+			(function(api,util,ajax,address){
+				
+				var shopId=util.getUrlParams("shopId")
+				var refillId=''
+				var carHelper = new CartHelper(shopId,"apply");
+				if(util.getUrlParams("refillId")!=undefined &&util.getUrlParams("refillId")!=''&&util.getUrlParams("refillId")!=null){
+					refillId=util.getUrlParams("refillId")
+				}
+				var goodsName=''
+				list(goodsName)
+				function list(goodsName){
+					ajax.post(api.mobileServerUrl+"/shopWX/shopWXRefillTotalInfo/findShopGoodsByShopId",{
+						"shopId":shopId,"goodsName":goodsName
+					},function(data){
+						if(data.total>0){
+							$('.apply-title').html(data.rows[0].sysShop.name)
+							$('.bottom').show()
+						}
+						for(var i=0; i<data.rows.length; i++){
+							carHelper.Add(data.rows[i].goods.goodsId,0,0)
+						}
+						var car = carHelper.Read();
+						var items = car.Items;
+						var obj = {data:data.rows,picUrl:api.picUrl,items:items}
+						var doTtmpl = doT.template($('#apply-list').html());
+						var html = doTtmpl(obj);
+						$('.apply-list').append(html)
+					})
+				}
+				
+				
+				
+				$('.purchase-search p').click(function(){
+					goodsName=$('.purchase-search input').val()
+					$('.apply-list').html('')
+					list(goodsName)
+				})
+				$('.apply-list').delegate('.add','click',function(){
+					if(Number($(this).prev().val())>=Number($(this).parent().parent().parent().find('.kucun').html())){
+						alert('申请补货量不能大于站点库存')
+						return false
+					}
+					$(this).prev().val(Number($(this).prev().val())+1)
+					ChangeGoodsCount($(this).parent().attr('goodsId'),$(this).prev().val(),0)
+				})
+				$('.apply-list').delegate('.minus','click',function(){
+					if(Number($(this).next().val())<=0){
+						alert('申请补货量不能小于0')
+						return false
+					}
+					$(this).next().val(Number($(this).next().val())-1)
+					ChangeGoodsCount($(this).parent().attr('goodsId'),$(this).next().val(),'')
+				})
+				
+				$('.apply-list').delegate('#num','input propertychange',function(){
+					if($(this).val()!='' && !(/^\d+$/g.test($(this).val()))){
+						alert('申请补货量只能为正整数')
+						return false
+					}
+					if($(this).val()!='' && (Number($(this).val())>Number($(this).parent().parent().parent().find('.kucun').html()))){
+						alert('申请补货量不能大于站点库存')
+						$(this).val($(this).parent().parent().parent().find('.kucun').html())
+					}
+					if($(this).val()!='' && Number($(this).val())<0){
+						alert('申请补货量不能小于0')
+						$(this).val('0')
+					}
+					ChangeGoodsCount($(this).parent().attr('goodsId'),$(this).val(),0)
+				})
+				function ChangeGoodsCount(goodsId,count,count1){
+					var carHelper = new CartHelper(shopId,"apply");
+					carHelper.ChangeGoodsCount(goodsId,count,count1);
+				}
+				$('.bottom').click(function(){
+					var goods=new Array()
+					var goodsIds=""
+					$('.apply-list').find('li').each(function(){
+						var obj = new Object();
+						if(Number($(this).find('#num').val())!=0){
+							obj.goodsId =$(this).attr('id');
+							obj.adviceGoodsCount = $(this).find('#num').val();
+							goods.push(obj);
+						}
+						goodsIds = goodsIds + $(this).attr('id')+",";
+					})
+					
+					if(goods.length==0){
+						alert('当前补货申请总量为0，请重新确认')
+						return false;
+					}
+					goodsIds=goodsIds.substring(0,goodsIds.length-1)
+					ajax.post(api.mobileServerUrl + "/shopWX/shopWXRefillTotalInfo/createOrUpdateRefill",{
+						"refillId":refillId,
+						"sysShopIds":shopId,
+						"goods":JSON.stringify(goods)
+					},function(data){
+						alert('已提交补货申请')
+						delCartGods(goodsIds)
+						window.location.href="/mobilerack/purchase/replenish/record.html?shopId="+shopId
+					})
+					
+				})
+				function delCartGods(ids){
+					var idArr = new Array();
+					idArr = ids.split(",");
+					var carHelper = new CartHelper(shopId,"apply");
+					for(var i=0;i<idArr.length;i++){
+						carHelper.Del(idArr[i]);
+					}
+				}
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

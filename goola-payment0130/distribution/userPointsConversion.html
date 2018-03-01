@@ -1,0 +1,186 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta name="renderer" content="webkit">
+		<meta name="viewport" content="width=device-width, initial-scale=1,maximum-scale=1, user-scalable=no">
+		<meta http-equiv="X-UA-Compatible" content="IE=8,IE=9,IE=10" />
+		<meta http-equiv="Expires" content="0">
+		<meta http-equiv="Cache-Control" content="no-cache">
+		<meta http-equiv="Cache-Control" content="no-store">
+		<meta name="format-detection" content="telephone=no" />
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="apple-mobile-web-app-status-bar-style" content="black">
+		<link href="/distribution/fStatic/mui/css/mui.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<link href="/distribution/fStatic/mui/css_my/app.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/fStatic/mui/js/mui.min.js?t=20161117" type="text/javascript"></script>
+		<link href="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.css?t=20161117" type="text/css" rel="stylesheet" />
+		<script src="/distribution/static/jquery/jquery-1.8.3.min.js?t=20161117" type="text/javascript"></script>
+		<script src="/distribution/static/jquery-validation/1.11.0/jquery.validate.min.js?t=20161117" type="text/javascript"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/flexible.js"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<title>我的积分</title>
+		<meta charset="utf-8" />
+		<style>
+			#usePointsInput {
+				width:40%;
+			}
+			.mui-content-padded
+			{
+				padding: 10px 20px 30px 20px;
+				margin: 0px;
+				color: #fff;
+			}
+			.mui-btn-orange
+			{
+				color: #fff;
+	            border: 1px solid #fa2f3e;
+		    	background-color: #fa2f3e;
+		    	margin-top: 30px;
+		    	padding: 10px 0px;
+			}
+		</style>
+	</head>
+	<body>
+		<header class="mui-bar mui-bar-nav">
+			<a class="mui-action-back mui-icon mui-icon-left-nav mui-pull-left"></a>
+			<h1 class="mui-title">积分兑换</h1>
+		</header>
+		<div class="mui-content">
+			<div class="mui-content-padded" style="background-color:#fa2f3e">
+				<div id="pointsMoneyRate" style="float:right;font-size:10px"></div>
+				<br/>
+				<div id="efficientPoints"><span style="font-size:32px;"></span></div>
+				<span id="efficientPointsMoneyValue" style="font-size: 10px;border-radius: 5px;background-color: #fa2f3e;padding: 3px 6px;"></span>
+				<br/>
+				<div id="rules" style="font-size:15px;"></div>
+				<div style="float:right;font-size:10px"><a href="./userPointsConversionAppList.html" style="color:#fff">查看提现记录</a></div>
+			</div>
+			<div id="conversion" style="font-size:15px;">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-cell">
+						<label>请输入本次要提现的积分</label>
+					</li>
+					<li class="mui-table-view-cell">
+						<input id='usePointsInput' type="text" class="mui-input-clear mui-input-short"
+									 placeholder="请输入积分" onInput="validate();">
+						<span style="color:grey">积分</span>
+						<div id="tip" style="font-size: 10px;border-radius: 5px;;padding: 2px 6px;color:red;"></div>
+						<div id="payMoney" style="font-size: 15px;border-radius: 5px;;padding: 2px 6px;"></div>
+					</li>
+				</ul>
+				<div id="payMoney"></div>
+				<div class="mui-content-padded button">
+					<button id='commit' class="mui-btn mui-btn-block mui-btn-orange" >确认申请</button>
+				</div>
+			</div>
+		</div>
+		<script type="text/javascript">
+		var efficientPoints = "";
+		var efficientPointsMoneyValue = "";
+		var pointsMoneyRate = "";
+		var minConversionMoney = "";
+		//显示扣除手续费
+		var costRate = "";
+		(function(api, util, ajax){
+			
+			
+			initInfo();
+			function initInfo() {
+				ajax.post(api.baseServerUrl + "/distribution/userPointsConversion",{
+				},function(data) {
+					$("#efficientPoints span").html("<span style=\"font-size:17px;\">可用积分</span>" + data.efficientPoints);
+					efficientPoints = data.efficientPoints;
+					$("#efficientPointsMoneyValue").html("可提现金额为￥" + data.efficientPointsMoneyValue.toFixed(2));
+					efficientPointsMoneyValue = data.efficientPointsMoneyValue.toFixed(2);
+					minConversionMoney = data.minConversionMoney;
+					pointsMoneyRate = data.POINTS_MONEY_RATE;
+					costRate = data.costRate;
+					var pointsMoneyRateHTML = "积分兑换比例";
+					if(pointsMoneyRate > 1){
+						pointsMoneyRateHTML = pointsMoneyRateHTML + parseInt(pointsMoneyRate) + ":1";
+					}else{
+						pointsMoneyRateHTML = pointsMoneyRateHTML + "1:" + pointsMoneyRate;
+					}
+					$('#pointsMoneyRate').html(pointsMoneyRateHTML);
+					
+					//显示最低消费不足
+					var expenseRule = data.expenseRule;
+					var expenseSum = data.expenseSum;
+					var expenseRuleHTML = "";
+					if(expenseRule != '' && expenseRule > 0){  //当月最低消费要求
+						//校验是否符合提现要求
+						expenseRule = parseFloat(expenseRule);
+						expenseSum = parseFloat(expenseSum);
+						if(expenseRule > expenseSum){
+							expenseRuleHTML = "您本月消费金额为：￥"+expenseSum.toFixed(2)+",不可提现<br/>距离提现要求还有￥"+(expenseRule - expenseSum).toFixed(2);
+							$('#rules').html(expenseRuleHTML);
+							$("#conversion").hide();
+						}
+					}
+				})
+				
+			}
+			
+		
+			$("#commit").click(function(){ 
+				if(validate('commit')){
+					ajax.post(api.baseServerUrl + "/distribution/userPointsConversionApp",{
+					usePoints:$("#usePointsInput").val()
+					},function(data){
+						window.location.href = "./userPointsConversionAppList.html";
+					});
+				}
+			});
+			
+		})(goola.api, goola.util, goola.ajax)
+		function validate(action){
+			//清空提示信息
+			$("#tip").html('');
+			$("#payMoney").html('');
+			
+			
+			var ex = /^\d+$/;
+			var usePoints = $("#usePointsInput").val();
+			var usePointsMoneyValue = usePoints/pointsMoneyRate;
+			usePointsMoneyValue = parseFloat(usePointsMoneyValue);
+			
+			if(action == 'commit'){
+				if(!ex.test(usePoints) || usePoints <= 0){
+					mui.alert('请输入正确的兑换积分数额');
+					return false;
+				}
+			}
+			if(usePoints > efficientPoints){
+				if(action == 'commit'){
+					mui.alert('可用积分不足，请重新输入');
+				}else{
+					$("#payMoney").html('可用积分不足');
+				}
+				return false;
+			}
+		
+			minConversionMoney = parseFloat(minConversionMoney);
+			if(usePointsMoneyValue < minConversionMoney){
+				$("#tip").html('单次提现金额不能小于￥'+minConversionMoney.toFixed(2));
+				return false;
+			}
+			
+			
+			var costHTML = "实际到账金额为<font color=\"red\">￥"; 
+			if(costRate != '' && costRate > 0){
+				usePointsMoneyValue = usePointsMoneyValue*(1-costRate);
+				costHTML = "扣除"+costRate*100+"%手续费，"+costHTML;
+			}
+			costHTML = costHTML + usePointsMoneyValue.toFixed(2)+"</font>";
+			$("#payMoney").html(costHTML);
+			
+			return true;
+		}
+		</script>
+	</body>
+</html>

@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>商品详情</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+    <link rel="stylesheet" href="/css/flex.css?t=20161117" />
+    <link rel="stylesheet" type="text/css" href="/css/shangpin/shangpin.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/swiper-3.3.1.min.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+    <link rel="stylesheet" type="text/css" href="/css/shangpin/specification.css?t=20161117">
+</head>
+
+<body>
+
+    <div class="select-area body"></div>
+
+    <div class="bottom bottom_specification">
+        <div class="gwc back" id="end">
+            <a href="javascript:void(history.back())">返回</a>
+        </div>
+        <p class="addgwc"></p>
+        <p class="payment1"></p>
+    </div>
+    <script id="zuhe-select" type="dot/tmpl">
+        {{?it.comboGoods}}
+            {{~it.comboGoods:value:index}}
+            <div class="choise">
+                <dl>
+                    <dt><img src='{{=it.picUrl}}{{=value.goods.cartPhoto}}'></dt>
+                    <dd>
+                        <p class="slh">{{=value.goods.goodsName}}</p>
+                        {{? value.ifSelectFlag}}
+                            <div class="specs">
+                                <span>已选：</span>
+                                {{? value.type1}}
+                                <span class="type1">粉色</span>
+                                {{?}}
+                                {{? value.type2}}
+                                <span class="type2"></span>
+                                {{?}}
+                            </div>
+                            <div class="stockElement">
+                                <span>库存：</span>
+                                <span class="stocks"></span>
+                            </div>
+                        {{??}}
+                            <div class="stockElement">
+                                <span>库存：{{?value.goods.repertoryTotalNum}}{{=value.goods.repertoryTotalNum}}{{??}}0{{?}}</span>
+                                <span class="stocks"></span>
+                            </div>
+                        {{?}}
+                        
+                    </dd>
+                </dl>
+                {{? value.ifSelectFlag}}
+                <div class="spec">
+                    <p class="specTitle">{{=value.type1}}</p>
+                    <ul class="relation">
+                        {{ for(var key in value.typeInfo){}}
+                        <li>{{=key}}</li>
+                        {{}}}
+                    </ul>
+                </div>
+                <div class="spec">
+                    <p class="specTitle">{{=value.type2}}</p>
+                    {{ for(var key in value.typeInfo){}}
+                    <ul class="goolasId" style="display:none">
+                        {{ for(var k in value.typeInfo[key]){}}
+                        <li id="{{=value.typeInfo[key][k].goods.goodsId}}" data-stock="{{= value.typeInfo[key][k].goods.repertoryNum}}" data-imgpath="{{=it.picUrl}}{{= value.typeInfo[key][k].goods.cartPhoto}}">{{=value.typeInfo[key][k].key}}</li>
+                        {{}}}
+                    </ul>
+                    {{}}}
+                </div>
+                {{?}}
+
+            </div>
+            {{~}}
+        {{??}}
+        <div class="choise">
+            <dl>
+                <dt><img src='{{=it.picUrl}}{{=it.goods.cartPhoto}}'></dt>
+                <dd>
+                    <p class="dhslh">{{=it.goods.goodsName}}</p>
+                    <div class="specs">
+                        <span>已选：</span>
+                        {{? it.type1}}
+                        <span class="type1">粉色</span>
+                        {{?}}
+                        {{? it.type2}}
+                        <span class="type2"></span>
+                        {{?}}
+                    </div>
+                    <div class="stockElement">
+                        <span>库存：</span>
+                        <span class="stocks">{{= it.goods.repertoryTotalNum}}</span>
+                    </div>
+                    <div class="price"></div>
+                </dd>
+            </dl>
+            <div class="spec">
+                <p class="specTitle">{{=it.type1}}</p>
+                <ul class="relation">
+                    {{ for(var key in it.typeInfo){}}
+                    <li>{{=key}}</li>
+                    {{}}}
+                </ul>
+            </div>
+            <div class="spec">
+                <p class="specTitle">{{=it.type2}}</p>
+                {{ for(var key in it.typeInfo){}}
+                <ul class="goolasId" style="display:none">
+                    {{ for(var k in it.typeInfo[key]){}}
+                    <li id="{{=it.typeInfo[key][k].goods.goodsId}}" data-stock="{{= it.typeInfo[key][k].goods.repertoryNum}}" data-imgpath="{{=it.picUrl}}{{= it.typeInfo[key][k].goods.cartPhoto}}" data-price="{{=it.typeInfo[key][k].goods.preferentialPrice}}" {{? it.typeInfo[key][k].groupBuyingPrice}} data-ptprice="{{=it.typeInfo[key][k].groupBuyingPrice}}"{{?}}>{{=it.typeInfo[key][k].key}}</li>
+                    {{}}}
+                </ul>
+                {{}}}
+            </div>
+        </div>
+        {{?}}
+        <div class="bottom-slide-num">
+            <p class="specTitle">数量</p>
+            <p>&nbsp;&nbsp;&nbsp;
+                <a class="slide-btn">
+                    <span class="minus"></span>
+                    <span class='amount'>1</span>
+                    <span class="add"></span>
+                </a>
+            </p>
+            <div class="clear"></div>
+        </div>
+    </script>
+    <script type="text/javascript" src="/lib/flexible.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.api.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.util.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/goola.ajax.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/swiper-3.3.1.min.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jquery_cookie.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/loadimg.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/gouwuche/Operation.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/gouwuche/car.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/gouwuche/main.js?t=20161117"></script>
+    <script type="text/javascript" src="/lib/jquery.fly.min.js?t=20161117"></script>
+    <script type="text/javascript" src="/js/shangpin/specification.js?t=20161117"></script>
+
+
+</body>
+
+</html>

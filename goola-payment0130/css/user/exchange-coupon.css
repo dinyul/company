@@ -1,0 +1,243 @@
+#FontScroll{
+	height: 1.09375rem;
+	line-height:1.09375rem;
+	overflow:hidden;
+	margin:0 auto;
+	background: #f8eace;
+	padding: 0 0.3125rem 0 2.890625rem;
+	position: relative;
+}
+#FontScroll span{
+	position: absolute;
+	color: #fa2f3e;
+	line-height:1.09375rem;
+	padding-left: 0.78125rem;
+	background: url(/imgs/youhuima/youhuizhan-icon.png?t=20161117) no-repeat left center;
+	background-size: 0.515625rem;
+	font-size: 0.375rem;
+	left: 0.3125rem;
+}
+#FontScroll li{
+	height: 1.09375rem;
+}
+#FontScroll li p{
+	width: 6.796875rem;
+	height: 1.09375rem;
+	line-height: 1.09375rem;
+	overflow: hidden;
+	text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.beijing{
+	height: 22.71875rem;
+	background: url(/imgs/youhuima/youhuima-bg.jpg?t=20161117) no-repeat;
+	background-size: cover;
+}
+
+.content{
+	position: absolute;
+	top: 1.25rem;
+	background: url(/imgs/youhuima/youhuima-bg1.jpg?t=20161117);
+}
+.coupon-title{
+	margin-top: 0.65625rem;
+	text-align: center;
+}
+.coupon-title img:first-child{
+	width: 2.6875rem;
+}
+.coupon-title img:last-child{
+	width: 7.703125rem;
+	margin-top: 0.1875rem
+}
+.coupon-choice{
+	margin-top: 1.0625rem;
+	padding: 0 0.3125rem
+}
+.coupon-choice>p{
+	padding-left: 0.359375rem;
+}
+.coupon-choice ul{
+	margin-top: 0.25rem;
+	overflow: hidden;
+}
+.coupon-choice ul li{
+	float: left;
+	margin: 0 0 0.296875rem 0.296875rem;
+	width: 4.21875rem;
+	height: 1.5625rem;
+	border:1px solid #fa2f3e;
+	border-radius: 0.15625rem;
+}
+.coupon-choice ul .checked{
+	background: url(/imgs/youhuima/checked.png?t=20161117) no-repeat 97% 92%;
+    background-size: 0.46875rem 0.375rem;
+}
+
+.coupon-choice ul li .left{
+	display: block;
+	float: left;
+	width: 1.640625rem;
+	height: 1.5625rem;
+	text-align: center;
+	line-height: 1.5625rem;
+	color: #fa2f3e;
+	overflow: hidden;
+	font-size: 0.5625rem;
+	font-weight: bold;
+	letter-spacing: 0.046875rem;
+}
+.coupon-choice ul li .left span{
+	font-size: 0.390625rem;
+}
+.coupon-choice ul li .right{
+	float: left;
+	height: 1.5625rem;
+	width: 2.578125rem;
+	background: url(/imgs/youhuima/youhuizhan-line.png?t=20161117) no-repeat left center;
+	background-size: 0.828125rem 0.046875rem
+}
+.coupon-choice ul li .right h3{
+	font-size: 0.375rem;
+	color: #fa2f3e;
+	font-weight: bold;
+	height: 0.78125rem;
+	line-height: 0.78125rem
+}
+.coupon-choice ul li .right p{
+	font-size: 0.34375rem;
+	color: #fa2f3e;
+	height: 0.78125rem;
+	line-height: 0.78125rem
+}
+.coupon-info{
+	padding:0 0.609375rem 0 0.640625rem;
+	margin-top: 0.625rem;
+	font-size: 0.375rem;
+	position: relative;
+}
+.coupon-info p{
+	margin-bottom: 0.03125rem
+}
+.coupon-info input{
+	background: #fff;
+	height: 1.25rem;
+	padding:0 0.34375rem;
+	margin-top: 0.234375rem;
+	border:0;
+	outline: none;
+	font-size: 0.375rem
+}
+.coupon-info .name, .coupon-info .phone{
+	width: 8.0625rem;
+}
+.coupon-info .mail, .coupon-info .code{
+	width: 4.3125rem
+}
+.yzmtu{
+	display: block;
+	width: 3.4375rem;
+	background: #fff;
+	height: 1.25rem;
+	position: absolute;
+	bottom: 1.703125rem;
+	right: 0.609375rem;
+	text-align: center;
+	line-height: 1.125rem
+}
+.yzmtu img{
+	width: 1.875rem;
+	height: 0.71875rem;
+	vertical-align: middle;
+}
+.coupon-info a{
+	width: 3.75rem;
+	height: 1.09375rem;
+	background: #fa2f3e;
+	color: #fff;
+	font-size: 0.375rem;
+	text-align: center;
+	line-height: 1.09375rem;
+	display: block;
+	margin: 0.625rem auto;
+	border-radius: 0.15625rem;
+}
+.illustrate{
+	width: 9.375rem;
+	border-radius: 0.3125rem;
+	background: rgba(0,0,0,0.1);
+	margin: 0.4375rem auto 0;
+	padding-bottom: 0.125rem;
+}
+.illustrate h2{
+	color: #fa2f3e;
+	font-size: 0.4375rem;
+	text-align: center;
+	padding-top: 0.25rem;
+}
+.illustrate ul{
+	margin-top: 0.28125rem;
+	padding-left: 0.234375rem;
+}
+.illustrate ul li{
+	font-size: 0.3125rem;
+	color: #1b1b1b;
+	margin-bottom: 0.234375rem;
+	padding-left: 0.234375rem;
+	background: url(/imgs/youhuima/youhuizhan-list.png?t=20161117) no-repeat left center;
+	background-size:0.109375rem 0.109375rem ;
+}
+.info-config,.success-config,.phone-config{
+	width: 7.8125rem;
+	height: 3.53125rem;
+	border-radius: 0.3125rem;
+	background: #fff;
+	position: fixed;
+	top: 5.59375rem;
+	left:1.078125rem;
+}
+.config-title{
+	height: 2.25rem;
+	padding:0 0.40625rem;
+	text-align: center;
+	border-bottom: 1px solid #e5e5e5
+}
+.info-config,.phone-config,.success-config{
+	display: none;
+	z-index: 99;
+}
+.info-config p,.phone-config p,.success-config p{
+	font-size: 0.40625rem;
+	line-height: 0.65625rem
+}
+.info-config .config-title p,.success-config .config-title p{
+	padding-top: 0.9375rem
+}
+.phone-config .config-title p{
+	padding-top: 0.5rem
+}
+.phone-config a{
+	line-height: 1.21875rem;
+	color: #fa2f3e;
+	font-size: 0.5rem;
+}
+.phone-config .config-bottom{
+	text-align: center;
+}
+.info-config .config-bottom a,.success-config .config-bottom a{
+	display: inline-block;
+	width: 49%;
+	text-align: center;
+	line-height: 1.21875rem;
+	color: #fa2f3e;
+	font-size: 0.5rem;
+	float: left;
+}
+.info-config .config-bottom a:first-child,.success-config .config-bottom a:first-child{
+	border-right: 1px solid #e5e5e5;
+	color: #c6c6c6;
+}
+.footer-logo{
+	width: 100%;
+	margin: 0.625rem auto 0;
+}

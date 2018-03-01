@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>吃货</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/activity/test.css">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">
+	</head>
+	<body>
+		<div class="body">
+			<div class="testshare">
+				<div class="test-btn">
+					<img src="/imgs/activity/test/test-btn.png"/>
+				</div>
+			</div>	
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/jweixin-1.0.0.js"></script>
+		<script>
+			(function(api,util,ajax){
+				var creatorId=util.getUrlParams('id')
+				ajax.post(api.baseServerUrl + "/foodie/openAuthority/ifJoin",{
+						"creatorId":creatorId
+				},function(data) {
+					if(data==1){
+						$('.test-btn').click(function(){
+							window.location.href="testSharelist.html?id="+creatorId
+						})
+					}else if(data==3){
+						window.location.href="testshareresult.html?id="+creatorId
+					}else if(data==2){
+						window.location.href="testresult.html?id="+creatorId
+					}
+					
+				})
+				
+				
+				
+			})(goola.api,goola.util,goola.ajax)
+		</script>
+	</body>
+</html>

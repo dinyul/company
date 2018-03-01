@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>分类</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/layer.css?t=20161117"/>
+		<link rel="stylesheet" type="text/css" href="/css/fenlei.css?t=20161117">
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117">	
+		<link rel="stylesheet" type="text/css" href="/community/css/base.css" />
+		<link rel="stylesheet" type="text/css" href="/community/css/index.css" />
+		<style>
+			.u-flyer {display: block;width: 50px;height: 50px;border-radius: 50px;position: fixed;z-index: 998;}
+		</style>
+	</head>
+	<body style="background: #fff;">
+		<div class="body">
+			<div id="container">
+				<div class="search">
+					<p></p>
+				</div>
+				<input type="hidden" id = "backFlag" value = 1>
+				<input type="hidden" id="currMenuCategoryId" value="65">
+				<div class="fenlei">
+					<ul class="leftsidebar_box"></ul>
+					<div class="fenlei-content">
+						<div class="fenlei-content-list" id="wrapper">
+								
+						</div>
+					</div>
+					<div class="clear"></div>
+				</div>
+				
+			</div>
+		</div>
+		<ul class="community-bottom">
+			<li onclick="window.location.href='/community/index.html'">
+				<img src="/community/imgs/home.png" />
+				<a>社群首页</a>
+			</li>
+			<li onclick="window.location.href='/community/fenlei/fenlei.html'">
+				<img src="/community/imgs/goods1.png" />
+				<a style="color:#fa2f3e;">更好商品</a>
+			</li>
+			<li onclick="window.location.href='/community/about.html'">
+				<img src="/community/imgs/about.png" />
+				<a>关于社群</a>
+			</li>
+			<li onclick="window.location.href='/community/gouwuche/gouwuche.html'">
+				<img src="/community/imgs/car.png" />
+				<a>购物车</a>
+			</li>
+			<li onclick="window.location.href='/community/user-center.html'">
+				<img src="/community/imgs/center.png" />
+				<a>代理中心</a>
+			</li>
+		</ul>
+		
+		<script id="ly_item" type="dot/tmpl">
+			{{~it.data:data:i}}
+			<p>{{=data.categoryName}}</p>
+			<ul>
+			{{~data.goodsList:data:j}}
+			<li id="{{=data.goodsId}}">
+				<div class="product" style="width: 100%;">
+					<img class="lazy" data-original="{{=it.picUrl}}{{=data.cartPhoto}}">
+					<h2 class="goodsName">{{=data.goodsName}}</h3>
+					<h3 class="salesCount" style="margin-top: 0.15625rem;">供货价：<span>¥{{=(data.distributionPrice).toFixed(2)}}</span></h3>
+					<h3 class="preferentialPrice" price="{{=data.price}}">零售价：<span>¥{{=(data.preferentialPrice).toFixed(2)}}</span></h3>
+					<h3>佣金：<span>¥</span><b>{{=Number(data.distributionProfit).toFixed(2)}}</b></h3>
+					<p class="repertoryCount" style="display: none;">{{=data.repertoryCount}}</p>
+				</div>
+				<div class="num" style="display: none;"></div>
+				<h6 class="clear"></h6>
+			</li>
+			{{~}}
+			</ul>
+			{{~}}
+		</script>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=20161117"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/js/jquery_cookie.js?t=20161117"></script>
+		<script src="/lib/loadimg.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script src="/community/js/gouwuche/Operation.js?t=20161117"></script>
+		<script src="/community/js/gouwuche/car.js?t=20161117"></script>
+		<script src="/community/js/gouwuche/main.js?t=20161117"></script>
+		<script src="/lib/jquery.fly.min.js?t=20161117"></script>
+		<script type="text/javascript" src="/community/js/gouwuche/fenlei.js?t=20161117"></script>
+		<script id="leftsidebar_box_dl" type="dot/tmpl">
+			<li categoryId="" class="water" style="display: none;"><p>桶装水</p></li> 
+			{{~ it:data:i}}
+				<li categoryId="{{=data.categoryId}}"><p>{{=data.categoryName}}</p></li> 
+			{{~}}
+		</script>
+		<script>
+			$('.leftsidebar_box').css('min-height',$(window).height()/64-1.40625+'rem')	
+		</script>
+	</body>
+</html>

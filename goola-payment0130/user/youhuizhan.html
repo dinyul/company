@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>我的优惠站</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<meta name="format-detection" content="telephone=no">
+		<meta http-equiv="x-rim-auto-match" content="none">
+		<link rel="stylesheet" href="/css/flex.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=20161117" />
+		<link rel="stylesheet" type="text/css" href="/css/user/youhuizhan.css?t=20161117&v1">
+	</head>
+	<body>
+		
+		<div class="coupon body">
+			<div class="coupon-nav">
+				<p class="checked" id="1">可使用</p>
+				<p id="2">已使用</p>
+				<P id="3">已失效</P>
+				<div class="clear"></div>
+			</div>
+			<div class="coupon-convert">
+				<form>
+					<input type="text" placeholder="请输入优惠劵兑换码" id="code"/>
+					<div id="exchange">兑换</div>
+					<div class="clear"></div>
+				</form>
+			</div>
+			<ul class="use none" id="couponInfo1">
+				
+			</ul>
+			
+			<ul class="used none" id="couponInfo2">
+			
+			</ul>
+			<ul class="invalid none" id="couponInfo3">
+			</ul>
+			
+
+
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=20161117"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js?t=20161117" ></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=20161117"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script type="text/javascript" src="/js/goola.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=20161117" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=20161117" ></script>
+		<script type="text/javascript"  src="/lib/jweixin-1.0.0.js?t=20161117"></script>
+		<script id="couponTmpl" type="dot/tmpl">
+			{{?it.data.length>0}}
+			{{~it.data:data:i}}
+			<li>
+				<div class="left">
+					<h3>¥<span>{{=data.preferentialPrice}}</span></h3>
+					{{?data.limitPrice}}
+					<p>满{{=data.limitPrice}}使用</p>
+					{{??}}
+					<p>满0元使用</p>
+					{{?}}
+				</div>
+				<div class="right">
+					<h3>{{=data.couponName}}</h3>
+					{{?data.categoryName}}
+					<p>1、限{{=data.categoryName}}</p>
+					{{??}}
+					<p>1、无限制</p>
+					{{?}}
+					<p>2、有效期至：{{=data.endTime}}</a></p>
+					{{?data.couponSystem==1}}
+					<p>3、更好甄选商城可用</p>
+					{{??data.couponSystem==2}}
+					<p>3、更好便利可用</p>
+					{{??data.couponSystem==3}}
+					<p>3、全平台可用</p>
+					{{?}}
+					
+				</div>
+				<div class="btn" >
+					{{?it.type==1}}
+						<a id="usecoupon" couponSystem="{{=data.couponSystem}}">立即<br/>使用</a>
+					{{??it.type==2}}
+					<img src="../imgs/personal/youhuizhan-icon2.png" />
+					{{??it.type==3}}
+					<img src="../imgs/personal/youhuizhan-icon1.png" />
+					{{?}}
+				</div>
+				<div class="clear"></div>
+			</li>
+			{{~}}
+			{{??}}
+			<img src="../imgs/personal/youhui.png" />
+			<p>优惠券空荡荡的</p>
+			{{?}}
+		</script>
+		<script type="text/javascript">
+		(function(api, util,ajax){
+			
+			getCouponInfo(1);
+			$('.coupon-nav p').each(function(i) {
+			   $(this).click(function(){
+					$('.coupon-nav p').removeClass('checked');
+					$(this).addClass('checked');
+					$('.coupon ul').css('display','none');
+					$('.coupon ul').eq(i).css('display','block');
+					getCouponInfo(i+1);
+				}); 		                   
+			});
+			//得到毫秒数
+			function getMyDate(str){  
+				var oDate = new Date(str),  
+				oYear = oDate.getFullYear(),  
+				oMonth = oDate.getMonth()+1,  
+				oDay = oDate.getDate(),  
+				oTime = oYear +'.'+ getzf(oMonth) +'.'+ getzf(oDay);//最后拼接时间  
+				return oTime;  
+			};  
+			//补0操作  
+			function getzf(num){  
+				if(parseInt(num) < 10){  
+					num = '0'+num;  
+				}  
+				return num;  
+			}  
+			function getCouponInfo(type) {
+				ajax.post(api.baseServerUrl + "/promotion/queryCouponByUserId",{
+					type:type
+				},function(data) {
+					var obj={data:data.rows, type: type}
+					util.render("#couponTmpl", obj, "#couponInfo"+type);
+					$(".none").css('height','')
+								.css('background','')
+					if(data.rows.length<=0){
+						$("#couponInfo"+type+"").css('height',$(window).height()-$(".use").offset().top)
+								.css('background','#fff')
+					}
+				});
+			}
+			
+			$('#exchange').click(function(){
+				var code=$('#code').val()
+				if(code==""){
+					alert("请输入兑换码！");
+					return;
+				}
+				ajax.post(api.baseServerUrl + "/promotion/convertCoupon",{
+					code:code
+				},function(data) {
+					if(data.preferentialPrice==500){
+						window.location.href="../gerenzhongxin/gerenzhongxin.html"
+					}else{
+						 window.location.reload()
+					}
+					
+				});
+			})
+			$('#couponInfo1').delegate('.btn','click',function(){
+				if($(this).find('a').attr('couponSystem')==2){
+					window.location.href="/mobilerack/mobilerack-shop.html"
+				}else if($(this).find('a').attr('couponSystem')==1){
+					window.location.href="/index.html"
+				}else if($(this).find('a').attr('couponSystem')==3){
+					if(util.getUrlParams("type")==1){
+						window.location.href="/mobilerack/mobilerack-shop.html"
+					}else{
+						window.location.href="/index.html"
+					}
+				}
+			})
+			
+			var title="更好甄选—更好·不贵"
+			var doc="种草全世界的好货"
+			shareInfo(ajax, api.baseServerUrl, location.href.split('#')[0].replace(/&/g,"|"),title,doc,"http://" + document.domain + "/index.html","http://" + document.domain +"/imgs/shouye-share.png");
+		})(goola.api, goola.util,goola.ajax)
+	    </script>
+
+	    	
+	</body>
+</html>

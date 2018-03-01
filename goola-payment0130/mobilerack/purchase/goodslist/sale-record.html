@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>销售记录</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css?t=1710111601" />
+		<link rel="stylesheet" type="text/css" href="/css/base.css?t=1710111601">
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/list.css" />
+		<link rel="stylesheet" type="text/css" href="/mobilerack/css/purchase/sales.css" />
+	</head>
+	<body>
+		<div class="body">
+			<div class="purchase-search">
+				<input placeholder="商品名称查询" />
+				<p>查询</p>
+			</div>
+			<div class="record"></div>
+			<script id="record" type="dot/tmpl">
+				{{?it.data.length>0}}
+				{{~it.data:data:i}}
+				<ul class="list">
+					<h2>{{=data.shopName}}</h2>
+					{{~data.orderItems:items:j}}
+					<li>
+						<img src="{{=it.picUrl}}{{=items.goodsPhoto}}" />
+						<div>
+							<h2>{{=items.goodsName}}</h2>
+							<p>{{=items.specifications}}</p>
+							<p>数量：{{=items.goodsCount}}</p>
+							<h3>¥{{?items.goodsPrice}}{{=(items.goodsPrice).toFixed(2)}}{{??}}0.00{{?}}</h3>
+						</div>
+					</li>
+					{{~}}
+					<p>{{=getFormatDate(data.payTime)}}<span>合计：<a>¥{{?data.orderPrice}}{{=(data.orderPrice).toFixed(2)}}{{??}}0.00{{?}}</a></span></p>
+				</ul>
+				{{~}}
+				{{??}}
+				<div class="none">
+					<img src="/mobilerack/imgs/purchase/kong.png" />
+					<p>当前还没有消费记录哦</p>
+				</div>
+				{{?}}
+			</script>
+		</div>
+		<script type="text/javascript" src="/lib/flexible.js?t=1710111601"  ></script>
+		<script src="/lib/jquery-1.12.3.js?t=1710111601"></script>
+		<script type="text/javascript" src="/lib/doT/1.0.3/doT.min.js?t=1710111601"></script>
+		<script src="/js/jquery_cookie.js?t=1710111601"></script>
+		<script src="/lib/loadimg.js?t=1710111601"></script>
+		<script src="/lib/jweixin-1.0.0.js?t=1710111601"></script>
+		<script type="text/javascript" src="/js/goola.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.api.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.util.js?t=1710111601" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js?t=1710111601" ></script>
+		<script>
+			(function(api,util,ajax,address){
+				var pageNo=1;
+				var total;
+				var pageTotal;
+				var shopId=util.getUrlParams("shopId")
+				var type=util.getUrlParams("type")
+				var url
+				if(type=="sales-month"){
+					url="/betterConvenience/monthSaleRecord"
+				}else if(type=="sales-today"){
+					url="/betterConvenience/todaySaleRecord"
+				}
+				
+				record('',1,20)
+				$('.purchase-search p').click(function(){
+					pageNo=1
+					$('.record').html('')
+					record($('.purchase-search input').val(),1,20)
+					$(window).on('scroll', doSth)
+				})
+				$(window).on('scroll', doSth)
+				function doSth() {
+					var totalheight=parseFloat($(window).height()+$(window).scrollTop())
+					if($(document.body).height()<=totalheight){
+						if($('.record').find('ul').length>=total){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						if(pageNo>=pageTotal){
+							//$('.none').show()
+							$(window).off('scroll', doSth);
+							return false
+						}
+						pageNo=pageNo+1
+						record($('.purchase-search input').val(),pageNo,20)
+					}
+				}
+				function record(goodsName,pageNo,pageSize){
+					ajax.post(api.mobileServerUrl+url,{
+						"shopId":shopId,"goodsName":goodsName,"pageSize":pageSize,"pageNo":pageNo
+					},function(data){
+						total=data.total
+						pageTotal=parseInt(total/pageSize)+1
+						if( total==0){
+							$('.noinfo').show()
+						}else{
+							$('.content1').show()
+						}
+						var obj = {data:data.rows,picUrl:api.picUrl}
+						var doTtmpl = doT.template($('#record').html());
+						var html = doTtmpl(obj);
+						$('.record').append(html)
+					})
+				}
+				
+			})(goola.api,goola.util,goola.ajax,goola.address);
+		</script>
+	</body>
+</html>

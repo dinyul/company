@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<title>登录</title>
+		<meta name="viewport" content="initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,width=device-width" />
+		<link rel="stylesheet" href="/css/flex.css" />
+	</head>
+	<body>
+		<script type="text/javascript" src="/lib/flexible.js"  ></script>
+		<script type="text/javascript" src="/lib/jquery-1.12.3.js" ></script>
+		<script type="text/javascript" src="/js/goola.js" ></script>
+		<script type="text/javascript" src="/js/goola.api.js" ></script>
+		<script type="text/javascript" src="/js/goola.util.js" ></script>
+		<script type="text/javascript" src="/js/goola.ajax.js" ></script>
+		<script type="text/javascript" src="/js/jquery_cookie.js" ></script>
+	</body>
+	<script type="text/javascript">
+	(function(api, util, ajax){
+		ajax.post(api.rootUrl + "/wechatOauth/loginRedirect",{
+			url:util.getUrlParams('url')
+		},function(data) {
+			window.location.href = data;
+		})
+	})(goola.api, goola.util, goola.ajax)
+	</script>
+</html>
